@@ -1,0 +1,74 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/** @var $this Enterprise_Rma_Block_Return_Tracking */
+?>
+<?php if ($this->getErrorMessage()): ?>
+<tr class="data-table-row">
+    <td colspan="3">
+        <ul class="messages">
+             <li class="error-msg"><?php echo $this->escapeHtml($this->getErrorMessage()) ?></li>
+        </ul>
+    </td>
+</tr>
+<?php endif ?>
+<?php foreach ($this->getTrackingNumbers() as $number): ?>
+<tr class="data-table-row">
+    <td><?php echo $this->escapeHtml($number->getCarrierTitle()) ?></td>
+    <td>
+        <a
+            href="<?php echo $this->helper('enterprise_rma')->getTrackingPopupUrlBySalesModel($number) ?>"
+            target="_blank"
+            title="<?php echo $this->escapeHtml($number->getTrackNumber()) ?>">
+                <?php echo $this->escapeHtml($number->getTrackNumber()) ?>
+        </a>
+    </td>
+    <td>
+        <?php if(!$number->getIsAdmin() && $this->isPrintShippingLabelAllowed()): ?>
+            <a href="javascript://" onclick="deleteTrackNumber(<?php echo $number->getEntityId()?>)">
+                <?php echo $this->__('Delete') ?>
+            </a>
+        <?php endif ?>
+    </td>
+</tr>
+<?php endforeach ?>
+<script type="text/javascript">
+//<![CDATA[
+    function deleteTrackNumber(number) {
+        if (confirm("<?php echo $this->__('Are you sure you want to delete this tracking information?') ?>")){
+            new Ajax.Updater('track-info-tbody', '<?php echo $this->getDeleteLabelUrl() ?>', {
+                onCreate: function() { $('ajax_loader').show() },
+                onComplete: function() {
+                    $('ajax_loader').hide();
+                    decorateTable('track-info-table');
+                },
+                parameters : {number: number}
+            });
+        }
+        return false;
+    }
+//]]>
+</script>

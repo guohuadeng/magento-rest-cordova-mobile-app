@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="footer">
+            <block type="aw_mobile2/page_footer_link" name="aw_mobile2.page.footer.link"/>
+        </reference>
+    </default>
+</layout>

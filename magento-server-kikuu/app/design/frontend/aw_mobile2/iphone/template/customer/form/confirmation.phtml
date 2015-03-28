@@ -1,0 +1,49 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="account-info">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="" class="form" method="post" id="form-validate">
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__('Retrieve your confirmation link here') ?></h2>
+            <p><?php echo $this->__('Please enter your email below and we\'ll send you confirmation link for it.') ?></p>
+            <p class="form__field form__field--required">
+                <label for="email" class="form__label form__label--required"><?php echo $this->__('Email Address') ?></label>
+                <input type="email" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>">
+            </p><!-- .form__field -->
+        </div>
+        <p class="form__submit-wrapper">
+            <span class="required">
+                <?php echo $this->__('Required Fields') ?>
+            </span>
+            <button type="submit" title="<?php echo $this->__('Submit') ?>" class="form__submit button"><?php echo $this->__('Submit') ?></button>
+        </p><!-- .form__submit-wrapper -->
+    </form>
+    <script type="text/javascript">
+        //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        //]]>
+    </script>
+</div>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="contacts" ifconfig="contacts/contacts/enabled"><label>Contact Us</label><url>contacts</url><title>Contact Us</title><prepare>true</prepare></action>
+        </reference>
+    </default>
+
+    <contacts_index_index translate="label">
+        <label>Contact Us Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>contacts/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="contactForm" template="contacts/form.phtml"/>
+        </reference>
+    </contacts_index_index>
+</layout>

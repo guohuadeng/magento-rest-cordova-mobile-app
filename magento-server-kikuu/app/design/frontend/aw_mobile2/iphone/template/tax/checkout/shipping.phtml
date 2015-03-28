@@ -1,0 +1,61 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php if ($this->displayBoth()):?>
+    <tr class="shopping-cart-summary__row">
+        <td class="shopping-cart-summary__name" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->getExcludeTaxLabel() ?>
+        </td>
+        <td class="shopping-cart-summary__price">
+            <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+        </td>
+    </tr>
+    <tr class="shopping-cart-summary__row">
+        <td class="shopping-cart-summary__name" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->getIncludeTaxLabel() ?>
+        </td>
+        <td class="shopping-cart-summary__price">
+            <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+        </td>
+    </tr>
+<?php elseif($this->displayIncludeTax()) : ?>
+    <tr class="shopping-cart-summary__row">
+        <td class="shopping-cart-summary__name" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->getTotal()->getTitle() ?>
+        </td>
+        <td class="shopping-cart-summary__price">
+            <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+        </td>
+    </tr>
+<?php else:?>
+    <tr class="shopping-cart-summary__row">
+        <td class="shopping-cart-summary__name" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->getTotal()->getTitle() ?>
+        </td>
+        <td class="shopping-cart-summary__price">
+            <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+        </td>
+    </tr>
+<?php endif;?>

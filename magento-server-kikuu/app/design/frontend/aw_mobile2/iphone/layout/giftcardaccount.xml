@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="checkout.cart">
+            <block type="enterprise_giftcardaccount/checkout_cart_giftcardaccount" template="giftcardaccount/cart/block.phtml" name="checkout.cart.giftcardaccount" as="giftcards" />
+        </reference>
+    </default>
+
+    <enterprise_giftcardaccount_cart_check translate="label">
+        <label>Gift Card Balance Check Form</label>
+        <reference name="content">
+            <block type="enterprise_giftcardaccount/check" template="giftcardaccount/cart/check.phtml" name="check">
+                <block type="enterprise_giftcardaccount/check" template="giftcardaccount/check.phtml" name="check.result" as="check_result"/>
+            </block>
+        </reference>
+    </enterprise_giftcardaccount_cart_check>
+
+    <enterprise_giftcardaccount_cart_quickcheck>
+        <block type="enterprise_giftcardaccount/check" template="giftcardaccount/check.phtml" name="root"/>
+    </enterprise_giftcardaccount_cart_quickcheck>
+
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" />
+        </reference>
+    </sales_order_view>
+    <sales_order_print>
+        <reference name="order_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" after="-"/>
+        </reference>
+    </sales_order_print>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" after="-"/>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" />
+        </reference>
+    </sales_order_invoice>
+
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" />
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" />
+        </reference>
+    </sales_order_creditmemo>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_giftcardaccount/sales_order_giftcards" name="giftcards" template="giftcardaccount/order/giftcards.phtml" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+
+    <checkout_onepage_paymentmethod>
+        <reference name="checkout.onepage.payment.methods.scripts">
+            <block type="enterprise_giftcardaccount/checkout_onepage_payment_additional" template="giftcardaccount/onepage/payment/scripts.phtml" name="giftcardaccount_scripts" />
+        </reference>
+        <reference name="checkout.onepage.payment.methods.additional">
+            <block type="enterprise_giftcardaccount/checkout_onepage_payment_additional" template="giftcardaccount/onepage/payment/additional.phtml" name="giftcardaccount_additional" />
+        </reference>
+    </checkout_onepage_paymentmethod>
+
+    <enterprise_giftcardaccount_customer_index translate="label">
+        <label>Customer My Account Gift Card Check Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Gift Card</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_giftcardaccount/account_redeem" name="redeem" template="giftcardaccount/account/redeem.phtml" />
+        </reference>
+    </enterprise_giftcardaccount_customer_index>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="enterprise_giftcardaccount">
+                <name>enterprise_giftcardaccount</name>
+                <path>enterprise_giftcardaccount/customer/</path>
+                <label>Gift Card</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <enterprise_customerbalance_info_index>
+        <reference name="customerbalance.wrapper">
+            <block type="enterprise_giftcardaccount/account_redeem" name="redeem" template="giftcardaccount/account/redeem_link.phtml" after="balance" />
+        </reference>
+    </enterprise_customerbalance_info_index>
+</layout>

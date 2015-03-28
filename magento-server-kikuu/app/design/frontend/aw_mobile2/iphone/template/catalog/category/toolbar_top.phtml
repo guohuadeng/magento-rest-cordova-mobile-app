@@ -1,0 +1,75 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$_category  = $this->getCategory();
+$_helper    = $this->helper('catalog/output');
+$menuTitle = $this->getMenuTitle();
+if (is_object($_category)) {
+    $menuTitle = $_helper->categoryAttribute($_category, $_category->getName(), 'name');
+}
+?>
+<?php if($this->canShowBlock()):?>
+<a id="top_toolbar_navigation_link" href="javascript:void(0);" class="category-filter__action category-filter__action--direction js-open-panel"></a>
+<nav id="top_toolbar_navigation" class="nav_iphone panel panel--from-bottom sorting">
+    <header class="panel-nav">
+        <button class="panel-nav__action panel-nav__action--left panel-nav__action--back js-catalog-nav-back" data-default-label="<?php echo $this->__("Back");?>">
+            <span class="panel-nav__action-label"><?php echo $this->__("Back");?></span>
+        </button>
+        <button class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel" type="button">
+        </button>
+        <h2 class="panel-nav__title" data-default-title="<?php echo $this->__('Sort By');?>">
+            <?php echo $this->__('Sort By') ?>
+        </h2>
+    </header>
+    <div class="nav__list-container panel__container filter-navigation">
+        <div class="sorting sorting__container-inner">
+            <div class="sorting__group sorting-list">
+                <ul class="sorting__list">
+                    <?php foreach($this->getAvailableOrders() as $_key => $_order): ?>
+                        <li data-request-var="<?php echo $this->getOrderVarName();?>" value="<?php echo $_key;?>" class="filter__item sorting__item <?php if($this->isOrderCurrent($_key)): ?> is-selected<?php endif; ?>"><span class="sorting__item-title "><?php echo $_order ?></span></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <div class="sorting__group direction">
+                <ul class="sorting__list">
+                    <li data-request-var="<?php echo $this->getDirectionVarName();?>" value="asc" class="filter__item sorting__item <?php if($this->getCurrentDirection() == 'desc'): ?> is-selected<?php endif; ?>"><span class="sorting__item-title asc"><?php echo $this->__('Low to high');?></span></li>
+                    <li data-request-var="<?php echo $this->getDirectionVarName();?>" value="desc" class="filter__item sorting__item <?php if($this->getCurrentDirection() == 'asc'): ?> is-selected<?php endif; ?>"><span class="sorting__item-title desc"><?php echo $this->__('High to low');?></span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="layer-apply-button"><?php echo $this->__('Apply sorting');?></div>
+    </div><!-- .nav__list-container panel__container -->
+</nav>
+<script type="text/javascript">
+    //<![CDATA[
+    if (typeof window.ToolbarNavigationFilter == 'undefined') {
+        window.ToolbarNavigationFilter = new awMobile2.app.layerNavigation('top_toolbar_navigation', 'top_toolbar_navigation_link');
+        window.ToolbarNavigationFilter.initializeLayer('product_list');
+        window.ToolbarNavigationFilter.setType('toolbar');
+    }
+    //]]>
+</script>
+<?php endif; ?>

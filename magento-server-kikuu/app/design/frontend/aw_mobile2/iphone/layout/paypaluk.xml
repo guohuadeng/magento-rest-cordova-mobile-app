@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_cart_index_mobile>
+        <reference name="checkout.cart.methods">
+            <block type="paypaluk/express_shortcut" name="checkout.cart.methods.paypaluk_express.bottom" before="-" template="paypal/express/shortcut.phtml">
+                <action method="setIsQuoteAllowed"><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_cart_index_mobile>
+
+    <paypaluk_express_review translate="label">
+        <label>PayPal Express Order Review Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>paypal/express/review/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="paypal/express_review" name="paypal.express.review" template="paypaluk/express/review.phtml">
+                <action method="setPaypalActionPrefix"><prefix>paypaluk</prefix></action>
+                <block type="paypal/express_review_details" name="paypal.express.review.details" as="details" template="paypal/express/review/details.phtml">
+                    <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <block type="checkout/cart_totals" name="paypal.express.review.details.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+                </block>
+                <block type="checkout/agreements" name="paypal.express.review.details.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+            </block>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/checkout/review.js</name></action>
+        </reference>
+    </paypaluk_express_review>
+
+    <paypal_express_review_details>
+        <block type="paypal/express_review_details" name="root" output="toHtml" template="paypal/express/review/details.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+            <block type="checkout/cart_totals" name="paypal.express.review.details.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+        </block>
+    </paypal_express_review_details>
+
+    <SHORTCUT_uk_popup>
+        <reference name="product.tooltip">
+            <block type="page/html_wrapper" name="product.info.addtocart.paypaluk.wrapper" translate="label">
+                <block type="paypaluk/express_shortcut" name="product.info.addtocart.paypaluk" template="paypal/express/shortcut.phtml">
+                    <action method="setIsInCatalogProduct"><value>1</value></action>
+                    <action method="setShowOrPosition"><value>after</value></action>
+                </block>
+            </block>
+        </reference>
+    </SHORTCUT_uk_popup>
+</layout>

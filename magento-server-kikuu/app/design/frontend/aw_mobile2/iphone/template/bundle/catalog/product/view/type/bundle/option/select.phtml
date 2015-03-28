@@ -1,0 +1,59 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php /* @var $this Mage_Bundle_Block_Catalog_Product_View_Type_Bundle_Option_Select */ ?>
+<?php $_option      = $this->getOption(); ?>
+<?php $_selections  = $_option->getSelections(); ?>
+<?php $_showSingle = (count($_selections) == 1 && $_option->getRequired()) ?>
+<?php if ($_default = $_option->getDefaultSelection()): ?>
+    <?php $_defaultQty = $_default->getSelectionQty()*1 ?>
+    <?php $_canChangeQty = $_default->getSelectionCanChangeQty() ?>
+<?php else: ?>
+    <?php if (!$_showSingle): ?>
+        <?php $_defaultQty = '0' ?>
+        <?php $_canChangeQty = false ?>
+    <?php else: ?>
+        <?php $_defaultQty = $_selections[0]->getSelectionQty()*1 ?>
+        <?php $_canChangeQty = $_selections[0]->getSelectionCanChangeQty() ?>
+    <?php endif; ?>
+<?php endif; ?>
+<div class="form__field<?php if ($_option->getRequired()): ?> form__field--required<?php endif; ?>">
+    <label class="form__label<?php if ($_option->getRequired()): ?> form__label--required<?php endif; ?>"><?php echo $this->htmlEscape($_option->getTitle()) ?></label>
+    <?php if ($_showSingle): ?>
+        <?php echo $this->getSelectionTitlePrice($_selections[0]) ?>
+        <input type="hidden" name="bundle_option[<?php echo $_option->getId() ?>]" value="<?php echo $_selections[0]->getSelectionId() ?>"/>
+    <?php else:?>
+        <select onchange="bundle.changeSelection(this)" id="bundle-option-<?php echo $_option->getId() ?>" name="bundle_option[<?php echo $_option->getId() ?>]" class="form__select bundle-option-<?php echo $_option->getId() ?><?php if ($_option->getRequired()) echo ' required-entry' ?> bundle-option-select change-container-classname">
+            <option value=""><?php echo $this->__('Choose a selection...') ?></option>
+            <?php foreach ($_selections as $_selection): ?>
+                <option value="<?php echo $_selection->getSelectionId() ?>"<?php echo ($_selection->getIsDefault() && $_selection->isSaleable())?' selected="selected" ':'' ?><?php echo !$_selection->isSaleable()?' disabled="disabled" ':'' ?>><?php echo $this->getSelectionTitlePrice($_selection, false) ?></option>
+            <?php endforeach; ?>
+        </select>
+    <?php endif; ?>
+    <div class="form__field">
+        <label class="form__label" for="bundle-option-<?php echo $_option->getId() ?>-qty-input"><?php echo $this->__('Qty:') ?>&nbsp;</label>
+        <input onkeyup="bundle.changeOptionQty(this, event)" onblur="bundle.changeOptionQty(this, event)" <?php if (!$_canChangeQty) echo ' disabled="disabled"' ?> id="bundle-option-<?php echo $_option->getId() ?>-qty-input" class="form__textfield textfield qty<?php if (!$_canChangeQty) echo ' qty-disabled' ?>" type="tel" name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>"/>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="form__field<?php if ($this->isRequired()) echo ' form__field--required' ?>">
+    <label for="<?php echo $this->getFieldId('month')?>" class="form__label<?php if ($this->isRequired()) echo ' form__label--required' ?>"><?php echo $this->__('Date of Birth') ?></label>
+    <div class="input-box customer-dob <?php echo $this->getClassName()?>">
+        <?php
+        $this->setDateInput('d',
+            '<div class="dob-day">
+                 <input type="tel" id="' . $this->getFieldId('day') . '" name="' . $this->getFieldName('day') . '" value="' . $this->getDay() . '" title="' . $this->__('Day') . '" class="input-text validate-custom" ' . $this->getFieldParams() . ' />
+                 <label for="' . $this->getFieldId('day') . '">' . $this->__('DD') . '</label>
+             </div>'
+        );
+
+        $this->setDateInput('m',
+            '<div class="dob-month">
+                 <input type="tel" id="' . $this->getFieldId('month') . '" name="' . $this->getFieldName('month') . '" value="' . $this->getMonth()  . '" title="' . $this->__('Month')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . ' />
+                 <label for="' . $this->getFieldId('month') . '">' . $this->__('MM')  . '</label>
+             </div>'
+        );
+
+        $this->setDateInput('y',
+            '<div class="dob-year">
+                 <input type="tel" id="' . $this->getFieldId('year') . '" name="' . $this->getFieldName('year') . '" value="' . $this->getYear()  . '" title="' . $this->__('Year')  . '" class="input-text validate-custom" ' . $this->getFieldParams()  . ' />
+                 <label for="' . $this->getFieldId('year') . '">' . $this->__('YYYY')  . '</label>
+             </div>'
+        );
+        ?>
+        <?php echo $this->getSortedDateInputs() ?>
+        <div class="dob-full" style="display:none;">
+            <input type="hidden" id="<?php echo $this->getFieldId('dob')?>" name="<?php echo $this->getFieldName('dob')?>" />
+        </div>
+        <div style="clear:both"></div>
+        <div class="validation-advice" id="<?php echo $this->getFieldId('date-advice')?>" style="display:none;"></div>
+    </div>
+</div><!-- .form__submit-wrapper -->
+<script type="text/javascript">
+    //<![CDATA[
+    var customer_dob = new Varien.DOB('.<?php echo $this->getClassName() ? $this->getClassName() : "customer-dob";?>', <?php echo $this->isRequired() ? 'true' : 'false' ?>, '<?php echo $this->getDateFormat() ?>');
+    //]]>
+</script>

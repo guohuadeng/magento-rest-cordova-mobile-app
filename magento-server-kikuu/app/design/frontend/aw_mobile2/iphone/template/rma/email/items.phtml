@@ -1,0 +1,85 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/** @var $this Enterprise_Rma_Block_Email_Items */
+?>
+<table cellspacing="0" cellpadding="0" border="0" width="650">
+    <thead>
+    <tr>
+        <th align="left" width="220" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Product Name:</th>
+        <th align="left" width="80" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">SKU</th>
+        <th align="left" width="95" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Condition</th>
+        <th align="left" width="95" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Resolution</th>
+        <th align="left" width="75" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Requested Qty</th>
+        <th align="left" width="75" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Qty</th>
+        <th align="left" width="85" bgcolor="#EAEAEA" style="font-size:13px; padding:5px 9px 6px 9px; line-height:1em;">Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $color = '#CCCCCC';
+    foreach($this->collection as $item):
+        if (!$color) {
+            $color = '#CCCCCC';
+        } else {
+            $color = '';
+        }
+    ?>
+    <tr>
+        <td valign="top" align="left" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <strong><?php echo $this->escapeHtml($item->getProductName()) ?></strong>
+            <?php $_options = $item->getOptions();
+                if($_options): ?>
+            <dl class="item-options">
+            <?php foreach ($_options as $_option) : ?>
+                <dt><?php echo $this->escapeHtml($_option['label']) ?></dt>
+                <dd><?php echo $_option['value'] ?></dd>
+            <?php endforeach; ?>
+            </dl>
+            <?php endif; ?>
+        </td>
+        <td valign="top" align="left" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->escapeHtml($item->getProductSku()) ?></span>
+        </td>
+        <td valign="top" align="left" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->escapeHtml($this->getOptionAttributeStringValue($item->getCondition())) ?>
+        </td>
+        <td valign="top" align="left" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->escapeHtml($this->getOptionAttributeStringValue($item->getResolution())) ?>
+        </td>
+        <td valign="top" align="center" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->helper('enterprise_rma')->parseQuantity($item->getQtyRequested(), $item) ?>
+        </td>
+        <td valign="top" align="center" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->helper('enterprise_rma')->getQty($item) ?>
+        </td>
+        <td valign="top" align="left" style="font-size:11px;padding:3px 9px;border-bottom:1px dotted <?php echo $color?>">
+            <?php echo $this->escapeHtml($item->getStatusLabel()) ?>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

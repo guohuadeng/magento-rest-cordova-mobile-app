@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account">
+            <block type="enterprise_reward/customer_account" name="enterprise.reward.customer.account" />
+        </reference>
+    </customer_account>
+
+    <enterprise_reward_customer_info>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Reward Points</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_reward/customer_reward" name="customer.reward" template="reward/customer/reward.phtml">
+                <block type="enterprise_reward/customer_reward_info" name="customer.reward.info" template="reward/customer/reward/info.phtml"/>
+                <block type="enterprise_reward/customer_reward_history" name="mobile_list_toolbar_pager" template="reward/customer/reward/history.phtml"/>
+                <block type="enterprise_reward/customer_reward_subscription" name="customer.reward.subscription" template="reward/customer/reward/subscription.phtml"/>
+            </block>
+        </reference>
+    </enterprise_reward_customer_info>
+
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.payment.methods_additional">
+            <block type="enterprise_reward/checkout_payment_additional" template="reward/checkout/onepage/payment/additional.phtml" name="reward.points" before="-"/>
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_paymentmethod>
+        <reference name="checkout.onepage.payment.methods.scripts">
+            <block type="enterprise_reward/checkout_payment_additional" template="reward/checkout/onepage/payment/scripts.phtml" name="reward.scripts" after="-" />
+        </reference>
+    </checkout_onepage_paymentmethod>
+
+    <catalog_product_view>
+        <reference name="product.tag.list.list.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.tag" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_tag</type></action>
+                <action method="setWrapperClass"><class>reward-tag</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Submit a new tag now and earn %s once the tag is approved.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s new tag(s) can be rewarded.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <review_product_list>
+        <reference name="product.review.form.fields.before">
+            <block type="enterprise_reward/tooltip" name="reward.hint.review" template="reward/tooltip.phtml" after="product.info">
+                <action method="initRewardType"><type>enterprise_reward/action_review</type></action>
+                <action method="setWrapperClass"><class>reward-review</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Submit a review now and earn %s once the review is approved.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s new review(s) can be rewarded.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </review_product_list>
+
+    <customer_logged_out>
+        <reference name="customer.form.register.fields.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.register" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_register</type></action>
+                <action method="setWrapperClass"><class>reward-register</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Register on our site now and earn %s.</message></action>
+            </block>
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.newsletter" template="reward/tooltip.phtml" after="reward.tooltip.register">
+                <action method="initRewardType"><type>enterprise_reward/action_newsletter</type></action>
+                <action method="setWrapperClass"><class>reward-newsletter</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Subscribe to our newsletter now and earn %s.</message></action>
+            </block>
+        </reference>
+    </customer_logged_out>
+
+    <newsletter_manage_index>
+        <reference name="customer.newsletter.form.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.newsletter" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_newsletter</type></action>
+                <action method="setWrapperClass"><class>reward-newsletter</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Subscribe to our newsletter now and earn %s.</message></action>
+            </block>
+        </reference>
+    </newsletter_manage_index>
+
+    <default>
+        <reference name="checkout.cart.form.before">
+            <block type="enterprise_reward/tooltip_checkout" name="reward.tooltip.checkout" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_orderExtra</type></action>
+                <action method="setWrapperClass"><class>reward-checkout</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Checkout now and earn %s for this order.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </default>
+
+    <default>
+        <reference name="checkout.cart.form.before">
+            <block type="enterprise_reward/tooltip_checkout" name="reward.tooltip.checkout.salesrule" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_salesrule</type></action>
+                <action method="setWrapperClass"><class>reward-checkout</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Checkout now and earn %s for this order.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </default>
+
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.login.before">
+            <block type="enterprise_reward/tooltip_checkout" name="reward.tooltip.checkout" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_orderExtra</type></action>
+                <action method="setWrapperClass"><class>reward-checkout</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Log in now and earn %s for this order.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.login.before">
+            <block type="enterprise_reward/tooltip_checkout" name="reward.tooltip.checkout.salesrule" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_salesrule</type></action>
+                <action method="setWrapperClass"><class>reward-checkout</class></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Log in now and earn %s for this order.</message></action>
+                <action method="setIsGuestNote"><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_onepage_index>
+
+    <!--enterprise_invitation_index_index>
+        <reference name="invitations.list.list.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.invitation" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_invitationCustomer</type></action>
+                <action method="setWrapperClass"><class>reward-invitation</class></action>
+                <action method="setHideBalance"><value>1</value></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Send invitation now and earn %s when your invitee registers on our site.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s invitee registration(s) can be rewarded.</message></action>
+            </block>
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.invitation.order" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_invitationOrder</type></action>
+                <action method="setWrapperClass"><class>reward-invitation</class></action>
+                <action method="setHideLink"><value>1</value></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Earn %s for purchases by your invitees.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s invitee purchase(s) can be rewarded.</message></action>
+            </block>
+        </reference>
+    </enterprise_invitation_index_index>
+
+    <enterprise_invitation_index_send>
+        <reference name="invitations.form.form.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.invitation" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_invitationCustomer</type></action>
+                <action method="setWrapperClass"><class>reward-invitation</class></action>
+                <action method="setHideBalance"><value>1</value></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Send invitation now and earn %s when your invitee registers on our site.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s invitee registration(s) can be rewarded.</message></action>
+            </block>
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.invitation.order" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_invitationOrder</type></action>
+                <action method="setWrapperClass"><class>reward-invitation</class></action>
+                <action method="setHideLink"><value>1</value></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Earn %s for purchases by your invitees.</message></action>
+                <action method="setRewardQtyLimitationMessage" translate="message" module="enterprise_reward"><message>Up to %s invitee purchase(s) can be rewarded.</message></action>
+            </block>
+        </reference>
+    </enterprise_invitation_index_send>
+
+    <enterprise_invitation_customer_account_create>
+        <reference name="customer.form.register.invitation.fields.before">
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.register" template="reward/tooltip.phtml">
+                <action method="initRewardType"><type>enterprise_reward/action_register</type></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Register on our site now and earn %s.</message></action>
+            </block>
+            <block type="enterprise_reward/tooltip" name="reward.tooltip.newsletter" template="reward/tooltip.phtml" after="reward.tooltip.register">
+                <action method="initRewardType"><type>enterprise_reward/action_newsletter</type></action>
+                <action method="setRewardMessage" translate="message" module="enterprise_reward"><message>Subscribe to our newsletter now and earn %s.</message></action>
+            </block>
+        </reference>
+    </enterprise_invitation_customer_account_create-->
+
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_order_view>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_order_invoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_order_creditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_reward/sales_order_total" name="reward.sales.order.total" />
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

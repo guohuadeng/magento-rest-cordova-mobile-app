@@ -1,0 +1,31 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div id="payment_form_<?php echo $this->getMethodCode() ?>" style="display:none;">
+    <p class="form__field">
+        <label for="po_number" class="form__label"><?php echo $this->__('Purchase Order Number') ?></label>
+        <input type="text" class="form__textfield textfield required-entry" title="<?php echo $this->__('Purchase Order Number') ?>" name="payment[po_number]" id="po_number" value="<?php echo $this->htmlEscape($this->getInfoData('po_number')) ?>" />
+    </p><!-- .form__field -->
+</div>

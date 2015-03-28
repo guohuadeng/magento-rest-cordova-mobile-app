@@ -1,4 +1,4 @@
-var isApp = location.search !== '?debug=true',
+var isApp = false,
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         products: baseUrl + '/api/rest/products?category_id=%s&limit=10&page=%s',

@@ -1,0 +1,61 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php $rootCategories = $this->getRootCategories();?>
+<nav id="navigation_menu" class="nav_iphone panel panel--from-bottom">
+    <header class="panel-nav">
+        <button style="display: none;" class="panel-nav__action panel-nav__action--left panel-nav__action--back nav__back-action js-catalog-nav-back" data-default-label="<?php echo $this->__("Back");?>">
+            <span class="panel-nav__action-label"><?php echo $this->__("Back");?></span>
+        </button>
+        <h2 class="panel-nav__title" data-default-title="<?php echo $this->__('Menu');?>">
+            <span class="active"><?php echo $this->__('Menu')?></span>
+        </h2>
+        <button type="button" class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel">
+        </button>
+    </header>
+    <div class="nav__list-container panel__container">
+        <?php if (count($rootCategories) > 0):?>
+        <div class="nav__list" id="root_nav">
+            <ul class="nav__list-inner">
+                <?php foreach($rootCategories as $rootCategory):?>
+                    <?php $isCurrent = $this->getCurrentCategory()->getEntityId() === $rootCategory->getEntityId();?>
+                    <li data-category="<?php echo $rootCategory->getEntityId();?>" class="nav__item <?php if (count($this->getActiveChildren($rootCategory)) > 0) echo "nav__item--with-subcategory"; ?><?php echo $isCurrent?' is-current':''?>">
+                        <a class="nav__item-title" title="<?php echo $this->escapeHtml($rootCategory->getName());?>" href="<?php if (count($this->getActiveChildren($rootCategory)) == 0) echo "javascript:setLocation('" . $this->getCategoryUrl($rootCategory) . "');void(0);"; else echo "javascript:void(0);";?>"><?php echo $this->escapeHtml($rootCategory->getName());?></a>
+                    </li>
+                <?php endforeach;?>
+            </ul>
+            <div class="nav__list-shadow"></div>
+        </div><!-- .nav__list -->
+            <?php foreach($rootCategories as $rootCategory):?>
+                <?php echo $this->getChildCategoriesHtml($rootCategory);?>
+            <?php endforeach;?>
+        <?php endif;?>
+    </div><!-- .nav__list-container panel__container -->
+</nav>
+<script type="text/javascript">
+    //<![CDATA[
+    window.navigation = new awMobile2.app.categoryNavigation('navigation_menu', 'navigation_link');
+    //]]>
+</script>

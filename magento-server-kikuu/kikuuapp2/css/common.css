@@ -8,6 +8,7 @@
 .bar .icon {
     font-size: 32px;
     padding: 6px;
+	color:#8a8a8a;
 }
 
 /******************* start **************************/
@@ -44,6 +45,7 @@
 .cbp-spmenu {
     position: fixed;
     z-index: 1000;
+	width:80%;
 }
 
 .cbp-spmenu h3 {
@@ -59,22 +61,22 @@
 .cbp-spmenu a {
     display: block;
     color: #fff;
-    font-size: 1.1em;
+    font-size: 0.8em;
     font-weight: 300;
     text-decoration: none;
 }
 
 .cbp-spmenu li:hover a, .cbp-spmenu li.active a {
-    background: #258ecd;
+    background: #E62E04;
     color: #fff;
 }
 
 .cbp-spmenu-left {
-    left: -450px;
+    left: -82%;
 }
 
 .cbp-spmenu-right {
-    right: -450px;
+    right: -82%;
 }
 
 .cbp-spmenu-left.cbp-spmenu-open {
@@ -104,21 +106,21 @@
     top: 44px;
     height: 40px;
     position: fixed;
-    background: #000;
+    background: #eeeeee;
     width: 100%;
     text-align: center;
     z-index: 10;
 }
 
 .bullet-item {
-    color: #fff;
+    color: #8a8a8a;
     line-height: 40px;
     margin: 0 10px;
     font-size: 16px;
 }
 
 .bullet-item-active {
-    border-bottom: 2px solid #9a9a9a;
+    border: 2px solid #9a9a9a;
 }
 
 /******************** grid item *********************/
@@ -172,7 +174,7 @@
 }
 
 .products-grid .item .product-name {
-    margin-top: 5px;
+    margin-top: 15px;
     margin-bottom: 7px;
     line-height: 100%;
     font-size: 18px;
@@ -217,7 +219,7 @@
     font-size: 100%;
     background: #e35a32;
     color: #fff;
-	width:80px;
+	width:60px;
     padding: 6px 8px;
 	opacity:0.7;
 }
@@ -229,6 +231,23 @@
     font-size: 140%;
 }
 
+.price-box .discount .price,
+.item .item-price .discount .price,
+.item .product-price .discount .price {
+    font-size: 100%;
+    background: #e35a32;
+    color: #fff;
+	width:60px;
+    padding: 6px 8px;
+	opacity:0.7;
+}
+
+.item .discount {
+    position: absolute;
+    left: 0px;
+    top: -11px;
+    font-size: 120%;
+}
 /********************* tools ********************/
 .tools {
     position: fixed;

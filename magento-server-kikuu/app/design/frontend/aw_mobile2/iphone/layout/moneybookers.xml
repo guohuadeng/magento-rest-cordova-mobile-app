@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <moneybookers_processing_payment>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>moneybookers/payment/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="moneybookers/payment" name="moneybookers_payment" template="moneybookers/payment.phtml" />
+        </reference>
+    </moneybookers_processing_payment>
+
+    <moneybookers_processing_placeform>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>paypal/express/review/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="moneybookers/placeform" name="moneybookers_placeform" template="moneybookers/placeform.phtml" />
+        </reference>
+    </moneybookers_processing_placeform>
+</layout>

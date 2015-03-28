@@ -1,0 +1,43 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php echo $this->getChildHtml('items_before'); ?>
+<div id="checkout-review-table-wrapper">
+<table class="order-review">
+    <tfoot>
+        <tr><td class="padding-top" colspan="4"></td></tr>
+        <?php echo $this->getChildHtml('totals'); ?>
+    </tfoot>
+    <tbody>
+        <?php foreach($this->getItems() as $_item): ?>
+            <?php $_html = $this->getItemHtml($_item)?>
+            <?php if(trim($_html)):?>
+                <?php echo $_html?>
+            <?php endif;?>
+        <?php endforeach ?>
+    </tbody>
+</table>
+</div>
+<?php echo $this->getChildHtml('items_after'); ?>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="enterprise_customerbalance">
+                <name>enterprise_customerbalance</name>
+                <path>enterprise_customerbalance/info/</path>
+                <label>Store Credit</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <enterprise_customerbalance_info_index translate="label">
+        <label>Customer My Account Store Credit</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Store Credit</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="core/template" name="customerbalance.wrapper" template="customerbalance/account/wrapper.phtml" translate="label">
+                <label>Store Credit Balance and History Wrapper</label>
+                <block type="enterprise_customerbalance/account_balance" name="balance" template="customerbalance/account/balance.phtml" before="-" />
+                <block type="enterprise_customerbalance/account_history" name="history" template="customerbalance/account/history.phtml" after="-" />
+            </block>
+        </reference>
+    </enterprise_customerbalance_info_index>
+
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.payment.methods_additional">
+            <block type="enterprise_customerbalance/checkout_onepage_payment_additional" template="customerbalance/checkout/onepage/payment/additional.phtml" name="customerbalance" />
+        </reference>
+    </checkout_onepage_index>
+
+    <checkout_onepage_paymentmethod>
+        <reference name="checkout.onepage.payment.methods.scripts">
+            <block type="enterprise_customerbalance/checkout_onepage_payment_additional" template="customerbalance/checkout/onepage/payment/scripts.phtml" name="customerbalance_scripts" />
+        </reference>
+    </checkout_onepage_paymentmethod>
+
+    <sales_order_view>
+        <reference name="order_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance_total_refunded" template="customerbalance/order/customerbalance_refunded.phtml" after="-">
+                <action method="setAfterTotal"><value>grand_total</value></action>
+            </block>
+        </reference>
+    </sales_order_view>
+    <sales_email_order_items>
+        <reference name="order_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance_total_refunded" template="customerbalance/order/customerbalance_refunded.phtml" after="-">
+                <action method="setAfterTotal"><value>grand_total</value></action>
+            </block>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_order_invoice>
+        <reference name="invoice_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+        </reference>
+    </sales_order_invoice>
+    <sales_email_order_invoice_items>
+        <reference name="invoice_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance_total_refunded" template="customerbalance/order/customerbalance_refunded.phtml" after="-">
+                <action method="setAfterTotal"><value>grand_total</value></action>
+            </block>
+        </reference>
+    </sales_order_creditmemo>
+    <sales_email_order_creditmemo_items>
+        <reference name="creditmemo_totals">
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance" template="customerbalance/order/customerbalance.phtml" />
+            <block type="enterprise_customerbalance/sales_order_customerbalance" name="customerbalance_total_refunded" template="customerbalance/order/customerbalance_refunded.phtml" after="-">
+                <action method="setAfterTotal"><value>grand_total</value></action>
+            </block>
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

@@ -1,0 +1,67 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?>
+<header class="panel-nav">
+    <button style="display:none;" class="panel-nav__action panel-nav__action--left panel-nav__action--back nav__back-action js-catalog-nav-back" data-default-label="">
+        <span class="panel-nav__action-label"></span>
+    </button>
+    <h2 class="panel-nav__title" data-default-title="<?php echo $this->__('Customer Login');?>">
+        <span class="active"><?php echo $this->__('Customer Login')?></span>
+    </h2>
+    <button type="button" class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel">
+    </button>
+</header>
+<!--<div class="login_in_logo">logo区域</div>-->
+<div class="login_top">
+    <div class="login_in_l"><button id="login_form_link" type="button" title="<?php echo $this->__('Login') ?>" class="form__submit button continue-another" style="border:0;padding:10px 0;color:#F4A137;"><?php echo $this->__('Login') ?></button></div>
+    <div class="login_in_r"><button id="create_form_link" type="button" title="<?php echo $this->__('Register') ?>" class="form__submit button continue-another" style="border:0;padding:10px 0;color:#ccc;"><?php echo $this->__('Register') ?></button></div>
+</div>
+
+<div class="customer-account nav__list-container panel__container" style="top:120px;">
+    <?php echo $this->getChildHtml('customer_form_login');?>
+    <?php echo $this->getChildHtml('forgotPassword');?>
+    <?php echo $this->getChildHtml('customer_form_register');?>
+</div>
+<script>
+	jQuery(function(){
+			jQuery(".login_in_r button").click(function(){
+					jQuery(this).css("color","#F4A137");
+					//jQuery(".customer-account-register").show();
+					//jQuery(".customer-account-login,.customer-account-forgotpassword").hide();
+					jQuery(".login_in_r").css("border-bottom","2px solid #F4A137");
+					jQuery(".login_in_l").css("border-bottom","none");
+					jQuery(".login_in_l button").css("color","#ccc");
+				});
+			jQuery(".login_in_l button").click(function(){
+					//jQuery(".customer-account-login").show();
+					//jQuery(".customer-account-register,.customer-account-forgotpassword").hide();
+					jQuery(this).css("color","#F4A137");
+					jQuery(".login_in_l").css("border-bottom","2px solid #F4A137");
+					jQuery(".login_in_r").css("border-bottom","none");
+					jQuery(".login_in_r button").css("color","#ccc");
+				});
+		})
+</script>

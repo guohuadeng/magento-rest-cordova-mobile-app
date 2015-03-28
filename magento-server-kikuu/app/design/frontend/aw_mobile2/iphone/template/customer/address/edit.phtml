@@ -1,0 +1,136 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="address-book">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getSaveUrl() ?>" class="form" method="post" id="form-validate">
+        <p class="required">
+            <?php echo $this->__('Required Fields') ?>
+        </p>
+        <?php echo $this->getBlockHtml('formkey')?>
+        <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+        <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+        <div class="address-book__edit-section">
+            <legend class="address-book__edit-section-title"><?php echo $this->__('Contact Information') ?></legend>
+            <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getAddress()->getFirstname() ? $this->getAddress() : $this->getCustomer())->toHtml() ?>
+            <p class="form__field">
+                <label class="form__label"><?php echo $this->__('Company') ?></label>
+                <input type="text" name="company" id="company" title="<?php echo $this->__('Company') ?>" value="<?php echo $this->htmlEscape($this->getAddress()->getCompany()) ?>" class="form__textfield textfield" />
+            </p><!-- .form__field -->
+            <p class="form__field form__field--required">
+                <label class="form__label form__label--required"><?php echo $this->__('Telephone') ?></label>
+                <input type="tel" name="telephone" value="<?php echo $this->htmlEscape($this->getAddress()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" class="form__textfield textfield required-entry" id="telephone" />
+            </p><!-- .form__field -->
+            <p class="form__field">
+                <label class="form__label"><?php echo $this->__('Fax') ?></label>
+                <input type="tel" name="fax" id="fax" title="<?php echo $this->__('Fax') ?>" value="<?php echo $this->htmlEscape($this->getAddress()->getFax()) ?>" class="form__textfield textfield">
+            </p><!-- .form__field -->
+        </div><!-- .address-book__edit-section -->
+        <div class="address-book__edit-section">
+            <legend class="address-book__edit-section-title"><?php echo $this->__('Address') ?></legend>
+            <p class="form__field form__field--required">
+                <label class="form__label form__label--required"><?php echo $this->__('Street Address') ?></label>
+                <input type="text" name="street[]" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet(1)) ?>" title="<?php echo $this->__('Street Address') ?>" id="street_1" class="form__textfield textfield required-entry">
+            </p><!-- .form__field -->
+            <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                <p class="form__field">
+                    <label class="form__label" for="street_<?php echo $_i?>"><?php echo $this->__('Street Address %s', $_i) ?></label>
+                    <input type="text" class="form__textfield textfield" title="<?php echo $this->__('Street Address %s', $_i) ?>" value="<?php echo $this->htmlEscape($this->getAddress()->getStreet($_i)) ?>" title="<?php echo $this->__('Street Address %s', $_i) ?>" id="street_<?php echo $_i?>" />
+                </p><!-- .form__field -->
+            <?php endfor ?>
+            <p class="form__field form__field--required">
+                <label class="form__label form__label--required"><?php echo $this->__('City') ?></label>
+                <input type="text" name="city" value="<?php echo $this->htmlEscape($this->getAddress()->getCity()) ?>"  title="<?php echo $this->__('City') ?>" class="form__textfield textfield required-entry" id="city" />
+            </p><!-- .form__field -->
+            <p class="form__field form__field--required">
+                <label class="form__label form__label--required" for="region_id"><?php echo $this->__('State/Province') ?></label>
+                <select class="form__select validate-select" id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;">
+                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                </select>
+                <script type="text/javascript">
+                    //<![CDATA[
+                    $('region_id').setAttribute('defaultValue',  "<?php echo $this->getAddress()->getRegionId() ?>");
+                    //]]>
+                </script>
+                <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getAddress()->getRegion()) ?>"  title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+            </p><!-- .form__field -->
+            <p class="form__field form__field--required">
+                <label for="zip" class="form__label form__label--required"><?php echo $this->__('Zip/Postal Code') ?></label>
+                <input type="text" name="postcode" value="<?php echo $this->htmlEscape($this->getAddress()->getPostcode()) ?>" title="<?php echo $this->__('Zip/Postal Code') ?>" id="zip" class="form__textfield textfield validate-zip-international required-entry" >
+            </p><!-- .form__field -->
+            <p class="form__field form__field--required">
+                <label class="form__label form__label--required"><?php echo $this->__('Country') ?></label>
+                <?php echo $this->getCountryHtmlSelect() ?>
+            </p><!-- .form__field -->
+
+            <?php $userDefinedAttributes = $this->getLayout()->getBlock('customer_form_user_attributes'); ?>
+            <?php if ($userDefinedAttributes && $userDefinedAttributes instanceof Enterprise_Customer_Block_Form):?>
+                <?php echo $userDefinedAttributes->setEntity($this->getAddress())->setShowContainer(false)->toHtml(); ?>
+            <?php endif;?>
+
+            <div class="form__field form__field--required">
+                <ul class="form__checkboxes">
+                    <li class="form__checkboxes-item <?php if($this->canSetAsDefaultBilling()) echo 'control' ?>">
+                        <?php if($this->isDefaultBilling()): ?>
+                            <label class="form__checkbox-label">
+                                <?php echo $this->__('Default Billing Address') ?>
+                            </label>
+                        <?php elseif($this->canSetAsDefaultBilling()): ?>
+                            <input type="checkbox" id="primary_billing" name="default_billing" value="1" title="<?php echo $this->__('Use as My Default Billing Address') ?>" class="form__checkbox">
+                            <label class="form__checkbox-label">
+                                <?php echo $this->__('Use as My Default Billing Address') ?>
+                            </label>
+                        <?php else: ?>
+                            <input type="hidden" name="default_billing" value="1" />
+                        <?php endif; ?>
+                    </li>
+                    <li class="form__checkboxes-item <?php if($this->canSetAsDefaultShipping()) echo 'control' ?>">
+                        <?php if($this->isDefaultShipping()): ?>
+                            <label class="form__checkbox-label">
+                                <?php echo $this->__('Default Shipping Address') ?>
+                            </label>
+                        <?php elseif($this->canSetAsDefaultShipping()): ?>
+                            <input type="checkbox" id="primary_shipping" name="default_shipping" value="1" title="<?php echo $this->__('Use as My Default Shipping Address') ?>" class="form__checkbox">
+                            <label class="form__checkbox-label">
+                                <?php echo $this->__('Use as My Default Shipping Address') ?>
+                            </label>
+                        <?php else: ?>
+                            <input type="hidden" name="default_shipping" value="1" />
+                        <?php endif; ?>
+                    </li>
+                </ul>
+            </div><!-- .form__field -->
+            <p class="form__submit-wrapper">
+                <button type="submit" title="<?php echo $this->__('Save Address') ?>" class="form__submit button continue-another"><?php echo $this->__('Save Address') ?></button>
+            </p><!-- .form__submit-wrapper -->
+        </div><!-- .address-book__edit-section -->
+    </form>
+    <script type="text/javascript">
+        //<![CDATA[
+        var dataForm = new VarienForm('form-validate', true);
+        new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>, undefined, 'zip');
+        //]]>
+    </script>
+</div>

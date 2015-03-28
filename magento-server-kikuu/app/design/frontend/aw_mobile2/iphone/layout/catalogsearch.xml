@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="header">
+            <block type="core/template" as="catalog_search_link" name="catalog.search.link" template="catalogsearch/form_link.phtml"/>
+        </reference>
+        <reference name="top.search">
+            <block type="core/template" name="catalog.search" template="catalogsearch/form.mini.phtml"/>
+        </reference>
+    </default>
+    <catalogsearch_result_index translate="label">
+        <label>Quick Search Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>catalog/category/breadcrumbs.phtml</template></action>
+            <block type="catalogsearch/result" name="category.top" as="category.top"  template="catalogsearch/top.phtml">
+                <block type="catalogsearch/layer" name="catalog.layer" as="catalogsearch_layer_nav" template="catalog/layer/view.phtml">
+                </block>
+                <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_top" as="product_list_toolbar_top" template="catalog/category/toolbar_top.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="catalogsearch/result" name="search.result" template="catalogsearch/result.phtml">
+                <block type="catalog/product_list" name="search_result_list" template="catalog/product/list.phtml">
+                    <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_bottom" template="catalog/product/list/toolbar_bottom.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <action method="setDefaultListPerPage"><limit>20</limit></action>
+                        <action method="setDefaultGridPerPage"><limit>20</limit></action>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar_bottom</name></action>
+                </block>
+                <action method="setListOrders"/>
+                <action method="setListModes"/>
+                <action method="setListCollection"/>
+            </block>
+        </reference>
+    </catalogsearch_result_index>
+</layout>

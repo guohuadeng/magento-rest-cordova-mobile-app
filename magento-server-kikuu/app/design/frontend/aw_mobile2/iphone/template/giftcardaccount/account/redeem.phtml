@@ -1,0 +1,71 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/**
+ * @see Enterprise_GiftCardAccount_Block_Account_Redeem
+ */
+?>
+<div class="giftcardaccount">
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form class="form" id="giftcard-form" action="<?php echo $this->getUrl('*/*/*') ?>" method="post"<?php if (!$this->canRedeem()): ?> onsubmit="giftCardAccountLookupBalance(); return false;"<?php endif; ?>>
+        <div id="giftcard_balance_lookup"></div>
+        <div class="form__field">
+            <p class="form__field">
+                <label for="giftcard_code" class="form__label"><?php echo $this->__('Enter gift card code') ?></label>
+                <input type="text" id="giftcard_code" name="giftcard_code" class="required-entry form__textfield textfield" value="<?php echo $this->getCurrentGiftcard(); ?>" />
+            </p>
+        </div>
+        <p class="form__submit-wrapper">
+            <?php if ($this->canRedeem()): ?>
+                <button class="button form__submit green-button" onclick="giftcardForm.submit()" type="button" value="<?php echo $this->__('Redeem Gift Card') ?>"><?php echo $this->__('Redeem Gift Card') ?></button>
+            <?php endif; ?>
+            <button class="button check-gc-status green-button-other" id="gca_balance_button" type="button" value="<?php echo $this->__('Check status and balance') ?>"><?php echo $this->__('Check status and balance') ?></button>
+        </p>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+    var giftcardForm = new VarienForm('giftcard-form');
+    function giftCardAccountLookupBalance() {
+        if (giftcardForm.validator && !giftcardForm.validator.validate()) {
+            return false;
+        }
+        new Ajax.Updater('giftcard_balance_lookup', '<?php echo Mage::getUrl('enterprise_giftcardaccount/cart/quickCheck', array('_secure' => true)) ?>', {
+            onCreate: function() {
+                $('ajax_loader').show()
+            },
+            onComplete: function() {
+                $('ajax_loader').hide();
+                if ($$('.messages')) {
+                    $$('..messages').invoke('hide');
+                }
+            },
+            parameters : {giftcard_code : $('giftcard_code').value}
+        });
+    }
+    $('gca_balance_button').observe('click', giftCardAccountLookupBalance);
+    //]]>
+    </script>
+</div>

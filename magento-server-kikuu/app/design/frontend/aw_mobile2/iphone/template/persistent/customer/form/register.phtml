@@ -1,0 +1,148 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="nav__list nav__list--subcategory customer-account-register">
+    <div class="nav__list-inner customer-account-register-container">
+        <div class="customer-form-register-before">
+            <?php echo $this->getChildHtml('form_fields_before')?>
+        </div>
+        <form action="<?php echo $this->helper('aw_mobile2/url')->getRegisterPostUrl() ?>" method="post" id="user_create_form" class="form">
+            <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+            <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+            <p class="form__field form__field--required">
+                <!--<label for="email_address" class="form__label form__label--required"><?php echo $this->__('Email Address') ?></label>-->
+                <input type="email" placeholder="Email" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>">
+            </p><!-- .form__field -->
+            <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
+            <?php if ($this->isNewsletterEnabled()): ?>
+                <div class="form__field">
+                    <ul class="form__checkboxes">
+                        <li class="form__checkboxes-item">
+                            <input type="checkbox" class="form__checkbox" name="is_subscribed" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> value="1" title="<?php echo $this->__('Sign Up for Newsletter') ?>">
+                            <label for="is_subscribed" class="form__checkbox-label"><?php echo $this->__('Sign Up for Newsletter') ?></label>
+                        </li>
+                    </ul>
+                </div>
+            <?php endif ?>
+            <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob')->setClassName('register_customer_dob') ?>
+            <?php if ($_dob->isEnabled()): ?>
+                <?php echo $_dob->setDate($this->getFormData()->getDob())->toHtml() ?>
+            <?php endif ?>
+            <?php $_taxvat = $this->getLayout()->createBlock('customer/widget_taxvat') ?>
+            <?php if ($_taxvat->isEnabled()): ?>
+                <?php echo $_taxvat->setTaxvat($this->getFormData()->getTaxvat())->toHtml() ?>
+            <?php endif ?>
+            <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
+            <?php if ($_gender->isEnabled()): ?>
+                <?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?>
+            <?php endif ?>
+            <?php $customerAttributes = $this->getChild('customer_form_user_attributes');?>
+            <?php if ($customerAttributes && $customerAttributes instanceof Enterprise_Customer_Block_Form): ?>
+                <?php $customerAttributes->setShowContainer(false);?>
+                <?php $this->restoreSessionData($customerAttributes->getForm());?>
+                <?php echo $customerAttributes->toHtml()?>
+            <?php endif;?>
+            <?php if($this->getShowAddressFields()): ?>
+                <p class="form__field">
+                    <label class="form__label" for="company"><?php echo $this->__('Company') ?></label>
+                    <input type="text" class="form__textfield textfield" id="company" name="company" value="<?php echo $this->htmlEscape($this->getFormData()->getCompany()) ?>" title="<?php echo $this->__('Company') ?>">
+                </p><!-- .form__field -->
+                <p class="form__field form__field--required">
+                    <label for="telephone" class="form__label form__label--required"><?php echo $this->__('Telephone') ?></label>
+                    <input type="tel" class="form__textfield textfield required-entry" name="telephone" value="<?php echo $this->htmlEscape($this->getFormData()->getTelephone()) ?>" title="<?php echo $this->__('Telephone') ?>" id="telephone" />
+                </p><!-- .form__field -->
+
+                <p class="form__field form__field--required">
+                    <label for="street_1" class="form__label form__label--required"><?php echo $this->__('Address') ?></label>
+                    <input type="text" class="form__textfield textfield required-entry" name="street[]" title="<?php echo $this->__('Street Address') ?>" id="street_1" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet(1)) ?>">
+                </p><!-- .form__field -->
+                <?php for ($_i=2, $_n=$this->helper('customer/address')->getStreetLines(); $_i<=$_n; $_i++): ?>
+                    <p class="form__field">
+                        <input type="text" class="form__textfield textfield" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="street[]" id="street_<?php echo $_i?>" value="<?php echo $this->htmlEscape($this->getFormData()->getStreet($_i)) ?>">
+                    </p><!-- .form__field -->
+                <?php endfor ?>
+                <p class="form__field form__field--required">
+                    <label class="form__label form__label--required" for="city"><?php echo $this->__('City') ?></label>
+                    <input type="text" class="form__textfield textfield required-entry" title="<?php echo $this->__('City') ?>" id="city" name="city" value="<?php echo $this->htmlEscape($this->getFormData()->getCity()) ?>">
+                </p><!-- .form__field -->
+                <p class="form__field form__field--required">
+                    <label class="form__label form__label--required" for="region_id"><?php echo $this->__('State/Province') ?></label>
+                    <select class="form__select validate-select" id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;">
+                        <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                    </select>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        $('region_id').setAttribute('defaultValue', "<?php echo $this->getFormData()->getRegionId() ?>");
+                        //]]>
+                    </script>
+                    <input type="text" id="region" name="region" value="<?php echo $this->htmlEscape($this->getRegion()) ?>" title="<?php echo $this->__('State/Province') ?>" class="input-text" style="display:none;" />
+                </p><!-- .form__field -->
+                <p class="form__field form__field--required">
+                    <label for="zip" class="form__label form__label--required"><?php echo $this->__('Zip/Postal Code') ?></label>
+                    <input type="text" class="form__textfield textfield validate-zip-international required-entry" title="<?php echo $this->__('Zip/Postal Code') ?>" name="postcode" id="zip" value="<?php echo $this->htmlEscape($this->getFormData()->getPostcode()) ?>" />
+                </p><!-- .form__field -->
+                <p class="form__field form__field--required">
+                    <label class="form__label form__label--required" for="country"><?php echo $this->__('Country') ?></label>
+                    <?php echo $this->getCountryHtmlSelect() ?>
+                </p><!-- .form__field -->
+                <?php $addressAttributes = $this->getChild('customer_form_address_user_attributes');?>
+                <?php if ($addressAttributes && $addressAttributes instanceof Enterprise_Customer_Block_Form): ?>
+                    <?php $addressAttributes->setEntity($this->getAddress());?>
+                    <?php $addressAttributes->setFieldIdFormat('address:%1$s')->setFieldNameFormat('address[%1$s]');?>
+                    <?php $this->restoreSessionData($addressAttributes->getForm(), 'address');?>
+                    <?php echo $addressAttributes->setShowContainer(false)->toHtml()?>
+                <?php endif;?>
+                <input type="hidden" name="default_billing" value="1" />
+                <input type="hidden" name="default_shipping" value="1" />
+            <?php endif ?>
+            <div id="register-customer-password">
+                <p class="form__field form__field--required">
+                    <!--<label for="password" class="form__label form__label--required"><?php echo $this->__('Password') ?></label>-->
+                    <input placeholder="Password (6 characters contain numbers and letters)" class="form__textfield textfield required-entry validate-password" type="password" name="password" id="password" title="<?php echo $this->__('Password') ?>" />
+                </p><!-- .form__field -->
+                <p class="form__field form__field--required">
+                    <!--<label for="confirmation" class="form__label form__label--required"><?php echo $this->__('Confirm Password') ?></label>-->
+                    <input placeholder="Confirm Password" class="form__textfield textfield required-entry validate-cpassword" type="password" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" />
+                </p><!-- .form__field -->
+            </div>
+            <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+            <?php echo $this->getChildHtml('form.additional.info'); ?>
+            <p class="form__submit-wrapper">
+                <button type="submit" title="<?php echo $this->__('Register') ?>" class="form__submit button continue" style="background-color:#F4A137" onclick="window.customerAccount.register()"><?php echo $this->__('Register') ?></button>
+            </p><!-- .form__submit-wrapper -->
+            <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+                <input name="context" type="hidden" value="checkout" />
+            <?php endif; ?>
+        </form>
+        <script type="text/javascript">
+            //<![CDATA[
+            Event.observe(window, 'load', function(e){
+                window.customerAccount.setRegisterForm('user_create_form');				
+                window.customerAccount.setRegisterTitle(<?php echo Zend_Json::encode($this->__('Create Account'));?>);
+            });
+            //]]>
+        </script>
+    </div>
+</div>

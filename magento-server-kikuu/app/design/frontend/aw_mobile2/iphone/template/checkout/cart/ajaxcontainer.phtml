@@ -1,0 +1,60 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><div class="shopping-cart-ajax panel panel--from-bottom <?php if($this->helper('aw_mobile2')->isCanOpenCartPopup()):?>is-opened<?php endif;?>">
+    <div id="shopping_cart_ajax_container" class="panel__container">
+        <header class="panel-nav">
+        	<a href="javascript:history.back();" title="<?php echo $this->htmlEscape($firstLink['title']) ?>" class="page-header__action page-header__action--left page-header__action--back">
+            	<span class="page-header__action--back" style="font-size:24px">&lt;</span>
+        	</a>
+            <h2 class="panel-nav__title"><?php echo $this->__("Your cart");?></h2>
+            <button type="button" class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel">
+            </button>
+        </header>
+        <div id="top_cart">
+            <?php echo $this->getChildHtml('checkout_cart');?>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	jQuery(function(){
+			jQuery(window).load(function(){
+					var r_url = document.referrer;
+					if(r_url.indexOf("skymazon.sunpop.cn") > 0){
+							jQuery("#shopping_cart_ajax_container .panel-nav .js-close-panel").show();
+							jQuery("#shopping_cart_ajax_container .panel-nav .page-header__action--back").hide();
+							console.log("yes");
+						}
+					else{
+							jQuery("#shopping_cart_ajax_container .panel-nav .js-close-panel").hide().remove();
+							jQuery("#shopping_cart_ajax_container .panel-nav .page-header__action--back").show();
+							console.log("no");
+						}
+				});
+		})
+    //<![CDATA[
+    window.shoppingCart = new awMobile2.app.shoppingCart('shopping_cart', 'shopping_cart_ajax_container');
+    //]]>
+</script>

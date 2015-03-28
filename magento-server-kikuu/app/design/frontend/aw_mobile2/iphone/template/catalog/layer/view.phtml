@@ -1,0 +1,87 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+$_category  = $this->getCategory();
+$_helper    = $this->helper('catalog/output');
+$menuTitle = $this->getMenuTitle();
+if (is_object($_category)) {
+    $menuTitle = $_helper->categoryAttribute($_category, $_category->getName(), 'name');
+}
+?>
+<?php if($this->canShowBlock()):?>
+    <!--<a id="layer_navigation_link" href="javascript:void(0);" class="category-filter__action category-filter__action--parameters js-open-panel"></a>-->
+    <nav id="layer_navigation" class="nav_iphone panel panel--from-bottom filter">
+        <header class="panel-nav">
+            <button class="panel-nav__action panel-nav__action--left panel-nav__action--apply js-catalog-nav-back panel-nav__action--back" data-default-label="<?php echo $this->__("Back");?>">
+                <span class="panel-nav__action-label"><?php echo $this->__("Back");?></span>
+            </button>
+            <button class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel" type="button">
+            </button>
+            <h2 class="panel-nav__title" data-default-title="<?php echo $this->__('Filter By');?>">
+                <span ><?php echo $this->__('Filter By')?></span>
+            </h2>
+        </header>
+        <div class="nav__list-container panel__container filter-navigation">
+            <div class="filter__lists">
+                <div class="filter__list filter__list--mainlist" style="display: block;">
+                    <div id="root_filter_block" class="filter__list-wrapper nav__list">
+                        <ul class="filter__list-inner">
+                            <?php $_filters = $this->getFilters() ?>
+                            <?php echo $this->getStateHtml() ?>
+                            <?php foreach ($_filters as $index => $_filter): ?>
+                                <?php if($_filter->getItemsCount()): ?>
+                                    <li data-category="<?php echo $index?>" class="nav__item filter__item filter__item--parameter <?php if (count($_filter->getItems()) > 0) echo "nav__item--with-subcategory"; ?>">
+                                        <a class="filter__item-title nav__item-title" title="<?php echo $this->__($_filter->getName()) ?>" href="javascript:void(0)"><?php echo $this->__($_filter->getName()) ?><span data-default-title="<?php echo $this->__('Filter By');?>" class="selected-option"></span></a>
+                                    </li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </ul>
+                        <div class="nav__list-shadow"></div>
+                    </div>
+                    <?php if($this->canShowOptions()): ?>
+                        <?php foreach ($_filters as $index => $_filter): ?>
+                            <?php if($_filter->getItemsCount()): ?>
+                                <div id="sub_filter_<?php echo $index;?>" data-parent-category="<?php echo $index;?>" class="filter__list filter__list--sublist_iphone nav__list nav__list--subcategory">
+                                    <?php echo $_filter->getHtml();?>
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach;?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="layer-apply-button disabled"><?php echo $this->__('Apply the filter');?></div>
+        </div><!-- .nav__list-container panel__container -->
+    </nav>
+    <script type="text/javascript">
+        //<![CDATA[
+        if (typeof window.LayerNavigationFilter == 'undefined') {
+            window.LayerNavigationFilter = new awMobile2.app.layerNavigation('layer_navigation', 'layer_navigation_link');
+            window.LayerNavigationFilter.initializeLayer('product_list');
+            window.LayerNavigationFilter.setType('layer');
+        }
+        //]]>
+    </script>
+<?php endif; ?>

@@ -1,0 +1,53 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php $_orders = $this->getOrders(); ?>
+<div class="dashboard-section island">
+    <?php if( sizeof($_orders->getItems()) > 0 ): ?>
+        <p class="dashboard__edit">
+            <a href="<?php echo $this->getUrl('sales/order/history') ?>" class="dashboard__edit-button"><?php echo $this->__('View All') ?></a>
+        </p>
+    <?php endif; ?>
+    <h2 class="dashboard-section__title"><?php echo $this->__('Recent Orders') ?></h2>
+    <?php if( sizeof($_orders->getItems()) > 0 ): ?>
+    <div class="dashboard-section__content">
+        <div class="my-orders">
+            <table class="my-orders__list">
+                <tbody>
+                <?php foreach ($_orders as $_order): ?>
+                    <tr class="my-orders__item">
+                        <th class="my-orders__number"><a href="<?php echo $this->getViewUrl($_order) ?>" class="my-orders__link"><?php echo $_order->getRealOrderId() ?></a></th>
+                        <td class="my-orders__date"><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></td>
+                        <td class="my-orders__price"><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div><!-- .checkout-step__content -->
+    <?php else: ?>
+        <p><?php echo $this->__('You have placed no orders.'); ?></p>
+    <?php endif; ?>
+</div><!-- .island -->

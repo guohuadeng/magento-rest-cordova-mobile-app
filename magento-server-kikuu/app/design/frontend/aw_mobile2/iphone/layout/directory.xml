@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!--
+Category default layout
+-->
+    <default>
+        <reference name="head">
+            <block type="core/template" name="optional_zip_countries" as="optional_zip_countries" template="directory/js/optional_zip_countries.phtml" />
+        </reference>
+        <reference name="footer">
+            <block type="directory/currency" name="currency" after="store_switcher" template="directory/currency.phtml"/>
+        </reference>
+    </default>
+</layout>

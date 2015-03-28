@@ -1,0 +1,67 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><script type="text/javascript" src="<?php echo $this->getJsUrl('varien/accordion.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/opcheckout.js') ?>"></script>
+<script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
+<div class="islands" id="checkoutSteps">
+    <?php $i=0; foreach($this->getSteps() as $_stepId => $_stepInfo): ?>
+        <?php if (!$this->getChild($_stepId) || !$this->getChild($_stepId)->isShow()): continue; endif; $i++ ?>
+        <div id="opc-<?php echo $_stepId ?>" class="checkout-step island section<?php echo !empty($_stepInfo['allow'])?' allow':'' ?><?php echo !empty($_stepInfo['complete'])?' saved':'' ?>">
+            <p style="display:none;" class="checkout-step__edit"><button class="checkout-step__edit-button" ></button></p>
+            <h2 class="checkout-step__title step-title">
+                <span class="step-number"><?php echo $i;?></span>
+                <span class="title"><?php echo $_stepInfo['label'] ?></span>
+                <?php if($_stepId != 'review'):?>
+                <span class="step-edit"><a onclick="checkout.accordion.openSection('<?php echo $_stepId ?>'); return false;" href="javascript:void(0);"><?php echo $this->__('Edit') ?></a></span>
+                <?php endif;?>
+                <span class="step-description" id="<?php echo $_stepId ?>_step_description"></span>
+            </h2>
+            <div class="step a-item checkout-step__content" id="checkout-step-<?php echo $_stepId ?>" style="display:none;">
+                <?php echo $this->getChildHtml($_stepId) ?>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+<script type="text/javascript">
+    //<![CDATA[
+    var accordion = new Accordion('checkoutSteps', '.step-title', true);
+    <?php if($this->getActiveStep()): ?>
+    accordion.openSection('opc-<?php echo $this->getActiveStep() ?>');
+    <?php endif ?>
+    var checkout = new Checkout(accordion,{
+        progress: '<?php echo $this->getUrl('checkout/onepage/progress') ?>',
+        review: '<?php echo $this->getUrl('checkout/onepage/review') ?>',
+        saveMethod: '<?php echo $this->getUrl('checkout/onepage/saveMethod') ?>',
+        failure: '<?php echo $this->getUrl('checkout/cart') ?>'}
+    );
+    var setStepDescription = function(stepId, description)
+    {
+        if($(stepId + '_step_description')) {
+            $(stepId + '_step_description').innerHTML = description;
+        }
+    };
+    //]]>
+</script>

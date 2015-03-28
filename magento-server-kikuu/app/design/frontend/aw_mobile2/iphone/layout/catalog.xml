@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="top.menu">
+            <block type="aw_mobile2/catalog_navigation" name="catalog.topnav" template="catalog/navigation/top.phtml" />
+        </reference>
+        <block type="catalog/product_price_template" name="catalog_product_price_template" />
+    </default>
+    <catalog_category_layered translate="label">
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>catalog/category/breadcrumbs.phtml</template></action>
+            <block type="catalog/category_view" name="category.top" as="category.top" template="catalog/category/top.phtml">
+                <block type="catalog/layer_view" name="catalog.layer" as="catalog_layer_nav" template="catalog/layer/view.phtml">
+                </block>
+                <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_top" as="product_list_toolbar_top" template="catalog/category/toolbar_top.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_bottom" template="catalog/product/list/toolbar_bottom.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                            <action method="setDefaultListPerPage"><limit>20</limit></action>
+                            <action method="setDefaultGridPerPage"><limit>20</limit></action>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar_bottom</name></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_category_layered>
+
+    <catalog_category_default translate="label">
+        <label>Catalog Category (Non-Anchor)</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>catalog/category/breadcrumbs.phtml</template></action>
+            <block type="catalog/category_view" name="category.top" as="category.top" template="catalog/category/top.phtml">
+                <block type="catalog/layer_view" name="catalog.layer" as="catalog_layer_nav" template="catalog/layer/view.phtml">
+                </block>
+                <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_top" as="product_list_toolbar_top" template="catalog/category/toolbar_top.phtml" />
+            </block>
+        </reference>
+        <reference name="content">
+            <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
+                <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
+                    <block type="aw_mobile2/catalog_product_list_toolbar" name="product_list_toolbar_bottom" template="catalog/product/list/toolbar_bottom.phtml">
+                        <block type="page/html_pager" name="product_list_toolbar_pager"/>
+                        <action method="setDefaultListPerPage"><limit>20</limit></action>
+                        <action method="setDefaultGridPerPage"><limit>20</limit></action>
+                    </block>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar_bottom</name></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_product_view>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>catalog/product/view/breadcrumbs.phtml</template></action>
+        </reference>
+        <reference name="head">
+            <action method="addJs"><script>varien/product.js</script></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_view" name="product.info" template="catalog/product/view.phtml">
+                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>
+                <block type="catalog/product_view_media" name="product.info.gallery" template="catalog/product/view/gallery.phtml" />
+                <block type="catalog/product_view" name="product.clone_prices" as="prices" template="catalog/product/view/price.phtml"/>
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/>
+                <block type="catalog/product_list_related" name="catalog.product.related" template="catalog/product/list/related.phtml"/>
+                <block type="catalog/product_list_upsell" name="product.info.upsell" template="catalog/product/list/upsell.phtml"/>
+                <block type="checkout/cart_crosssell" name="checkout.cart.crosssell" template="catalog/product/list/crosssell.phtml"/>
+                <block type="catalog/product_view_tabs" name="product.info.tabs" as="info_tabs" template="catalog/product/view/tabs.phtml" >
+                    <action method="addTab" translate="title" module="catalog"><alias>details</alias><title>Details</title><block>catalog/product_view_description</block><template>catalog/product/view/description.phtml</template></action>
+                    <action method="addTab" translate="title" module="catalog"><alias>reviews</alias><title>Reviews</title><block>review/product_view_list</block><template>review/product/view/list.phtml</template></action>
+                    <action method="addTab" translate="title" module="catalog"><alias>related</alias><title>Related</title><block>core/template</block><template>catalog/product/view/tab/related.phtml</template></action>
+                </block>
+                <block type="catalog/product_view" name="product.info.options.wrapper" as="product_options_wrapper" template="catalog/product/view/options/wrapper.phtml" translate="label">
+                    <label>Info Column Options Wrapper</label>
+                    <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="catalog/product/view/options.phtml">
+                        <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+                        <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+                        <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+                        <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+                    </block>
+                    <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action>
+                </block>
+            </block>
+        </reference>
+    </catalog_product_view>
+    <PRODUCT_TYPE_simple translate="label" module="catalog">
+        <label>Catalog Product View (Simple)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_simple" name="product.info.simple" as="product_type_data" template="catalog/product/view/type/simple.phtml">
+                <block type="core/text_list" name="product.info.simple.extra" as="product_type_data_extra"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_simple>
+    <PRODUCT_TYPE_configurable translate="label" module="catalog">
+        <label>Catalog Product View (Configurable)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_configurable" name="product.info.configurable" as="product_type_data" template="catalog/product/view/type/configurable.phtml">
+                <block type="core/text_list" name="product.info.configurable.extra" as="product_type_data_extra"/>
+            </block>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="catalog/product_view_type_configurable" name="product.info.options.configurable" as="options_configurable" before="-" template="catalog/product/view/type/options/configurable.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_configurable>
+    <PRODUCT_TYPE_grouped translate="label" module="catalog">
+        <label>Catalog Product View (Grouped)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_grouped" name="product.info.grouped" as="product_type_data" template="catalog/product/view/type/grouped.phtml">
+                <block type="core/text_list" name="product.info.grouped.extra" as="product_type_data_extra"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_grouped>
+    <PRODUCT_TYPE_virtual translate="label" module="catalog">
+        <label>Catalog Product View (Virtual)</label>
+        <reference name="product.info">
+            <block type="catalog/product_view_type_virtual" name="product.info.virtual" as="product_type_data" template="catalog/product/view/type/virtual.phtml">
+                <block type="core/text_list" name="product.info.virtual.extra" as="product_type_data_extra"/>
+            </block>
+        </reference>
+    </PRODUCT_TYPE_virtual>
+</layout>

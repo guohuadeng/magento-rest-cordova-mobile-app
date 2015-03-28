@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <PRODUCT_TYPE_giftcard translate="label" module="enterprise_giftcard">
+        <label>Catalog Product View (Gift Card)</label>
+        <reference name="product.info">
+            <block type="enterprise_giftcard/catalog_product_view_type_giftcard" name="product.info.giftcard" as="product_type_data" template="giftcard/catalog/product/view/type/giftcard.phtml">
+                <action method="addPriceBlockType"><type>giftcard</type><block>enterprise_giftcard/catalog_product_price</block><template>giftcard/catalog/product/price.phtml</template></action>
+                <block type="cataloginventory/stockqty_default" name="product.info.giftcard.extra" as="product_type_data_extra" template="cataloginventory/stockqty/default.phtml"/>
+            </block>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="enterprise_giftcard/catalog_product_view_type_giftcard" name="product.type.options" as="product_type_options" template="giftcard/catalog/product/view/type/option.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_giftcard>
+
+    <catalog_category_default>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_view>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_view>
+
+    <catalog_category_layered>
+        <reference name="product_list">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_result_index>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <default>
+        <reference name="catalog_product_price_template">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+        <reference name="checkout.cart">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/checkout_cart_item_renderer</block>
+                <template>checkout/cart/item/default.phtml</template>
+            </action>
+        </reference>
+    </default>
+
+    <catalog_product_view>
+        <reference name="catalog.product.related">
+            <action method="addPriceBlockType">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/catalog_product_price</block>
+                <template>giftcard/catalog/product/price.phtml</template>
+            </action>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_onepage_review>
+        <reference name="root">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/checkout_cart_item_renderer</block>
+                <template>checkout/onepage/review/item.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_review>
+
+    <paypal_express_review>
+        <reference name="paypal.express.review.details">
+            <action method="addItemRender"><type>giftcard</type><block>enterprise_giftcard/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypal_express_review>
+    <paypal_express_review_details>
+        <reference name="root">
+            <action method="addItemRender"><type>giftcard</type><block>enterprise_giftcard/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypal_express_review_details>
+
+    <sales_order_view>
+        <reference name="order_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_view>
+
+    <sales_order_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_invoice>
+
+    <sales_order_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/shipment/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_shipment>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_order_creditmemo>
+
+    <!--
+    For guests
+    -->
+    <sales_guest_view>
+        <reference name="order_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_guest_view>
+
+    <sales_guest_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/invoice/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_guest_invoice>
+
+    <sales_guest_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/shipment/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_guest_shipment>
+
+    <sales_guest_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer</block>
+                <template>sales/order/creditmemo/items/renderer/default.phtml</template>
+            </action>
+        </reference>
+    </sales_guest_creditmemo>
+
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                <template>email/order/items/order/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_email_order_invoice_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                <template>email/order/items/invoice/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_email_order_shipment_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                <template>email/order/items/shipment/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_shipment_items>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="items">
+            <action method="addItemRender">
+                <type>giftcard</type>
+                <block>enterprise_giftcard/sales_order_item_renderer_noquote</block>
+                <template>email/order/items/creditmemo/default.phtml</template>
+            </action>
+        </reference>
+    </sales_email_order_creditmemo_items>
+
+    <rss_catalog_category>
+        <reference name="rss.catalog.category">
+            <action method="addPriceBlockType"><type>giftcard</type><block>enterprise_giftcard/catalog_product_price</block><template>giftcard/rss/catalog/product/price.phtml</template></action>
+        </reference>
+    </rss_catalog_category>
+    <rss_catalog_new>
+        <reference name="rss.catalog.new">
+            <action method="addPriceBlockType"><type>giftcard</type><block>enterprise_giftcard/catalog_product_price</block><template>giftcard/rss/catalog/product/price.phtml</template></action>
+        </reference>
+    </rss_catalog_new>
+    <rss_catalog_tag>
+        <reference name="rss.catalog.tag">
+            <action method="addPriceBlockType"><type>giftcard</type><block>enterprise_giftcard/catalog_product_price</block><template>giftcard/rss/catalog/product/price.phtml</template></action>
+        </reference>
+    </rss_catalog_tag>
+</layout>

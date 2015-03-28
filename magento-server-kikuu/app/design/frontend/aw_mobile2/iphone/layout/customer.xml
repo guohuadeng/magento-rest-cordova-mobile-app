@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <update handle="customer_account"/>
+    </default>
+
+    <customer_logged_out>
+        <reference name="customer_account_navigation">
+            <action method="setTemplate"><name>customer/ajaxlogin.phtml</name></action>
+            <block type="aw_mobile2/customer_form_login" name="customer_form_login" template="customer/form/login.phtml"/>
+            <block type="customer/account_forgotpassword" name="forgotPassword" template="customer/form/forgotpassword.phtml"/>
+            <block type="aw_mobile2/customer_form_register" name="customer_form_register" template="customer/form/register.phtml">
+                <block type="aw_mobile2/enterprise_customer_form" template="customer/form/userattributes.phtml" name="customer_form_user_attributes">
+                    <action method="setFormCode"><code>customer_account_create</code></action>
+                    <action method="setEntityModelClass"><code>customer/customer</code></action>
+                </block>
+                <block type="aw_mobile2/enterprise_customer_form" template="customer/form/userattributes.phtml" name="customer_form_address_user_attributes">
+                    <action method="setFormCode"><code>customer_register_address</code></action>
+                    <action method="setEntityModelClass"><code>customer/address</code></action>
+                </block>
+                <block type="page/html_wrapper" name="customer.form.register.fields.before" as="form_fields_before"/>
+            </block>
+        </reference>
+        <update handle="customer_form_template_handle"/>
+    </customer_logged_out>
+
+    <customer_account translate="label">
+        <label>Customer My Account (All Pages)</label>
+        <reference name="content">
+            <block type="page/html_wrapper" name="my.account.wrapper">
+                <action method="setElementClass"><value>my-account</value></action>
+            </block>
+        </reference>
+        <reference name="customer_account">
+            <block type="core/template" name="customer.ajax.account" as="customer_ajax_account" template="customer/ajaxcontainer.phtml">
+                <block type="customer/account_navigation" name="customer_account_navigation" template="customer/account/navigation.phtml">
+                    <action method="addLink" translate="label" module="customer"><name>account</name><path>customer/account/</path><label>Account Dashboard</label></action>
+                    <action method="addLink" translate="label" module="customer"><name>account_edit</name><path>customer/account/edit/</path><label>Account Information</label></action>
+                    <action method="addLink" translate="label" module="customer"><name>address_book</name><path>customer/address/</path><label>Address Book</label></action>
+                </block>
+            </block>
+        </reference>
+    </customer_account>
+
+    <customer_account_resetpassword translate="label">
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Reset a Password</title></action>
+        </reference>
+        <reference name="content">
+            <block type="customer/account_resetpassword" name="resetPassword" template="customer/form/resetforgottenpassword.phtml"/>
+        </reference>
+    </customer_account_resetpassword>
+
+    <customer_account_confirmation>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Send confirmation link</title></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="accountConfirmation" template="customer/form/confirmation.phtml"/>
+        </reference>
+    </customer_account_confirmation>
+
+    <customer_account_index translate="label">
+        <label>Customer My Account Dashboard</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Dashboard</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/account_dashboard" name="customer_account_dashboard" template="customer/account/dashboard.phtml">
+                <block type="customer/account_dashboard_hello" name="customer_account_dashboard_hello" as="hello" template="customer/account/dashboard/hello.phtml"/>
+                <block type="core/template" name="customer_account_dashboard_top" as="top" />
+                <block type="customer/account_dashboard_info" name="customer_account_dashboard_info" as="info" template="customer/account/dashboard/info.phtml"/>
+                <block type="customer/account_dashboard_address" name="customer_account_dashboard_address" as="address" template="customer/account/dashboard/address.phtml"/>
+            </block>
+        </reference>
+    </customer_account_index>
+
+    <customer_address_index translate="label">
+        <label>Customer My Account Address Book</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Address Book</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_book" name="address_book" template="customer/address/book.phtml"/>
+        </reference>
+    </customer_address_index>
+
+    <customer_address_form translate="label">
+        <label>Customer My Account Address Edit Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Address Edit Form</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/address_edit" name="customer_address_edit" template="customer/address/edit.phtml">
+                <block type="aw_mobile2/enterprise_customer_form" template="customer/form/userattributes.phtml" name="customer_form_user_attributes">
+                    <action method="setFormCode"><code>customer_address_edit</code></action>
+                </block>
+            </block>
+        </reference>
+        <update handle="customer_form_template_handle"/>
+    </customer_address_form>
+
+    <customer_account_edit translate="label">
+        <label>Customer Account Edit Form</label>
+        <reference name="root">
+            <action method="setHeaderTitle" translate="title" module="customer"><title>Edit Account Info</title></action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>Account Information</title></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="customer/form_edit" name="customer_edit" template="customer/form/edit.phtml">
+                <block type="aw_mobile2/enterprise_customer_form" template="customer/form/userattributes.phtml" name="customer_form_user_attributes">
+                    <action method="setFormCode"><code>customer_account_edit</code></action>
+                </block>
+            </block>
+        </reference>
+        <update handle="customer_form_template_handle"/>
+    </customer_account_edit>
+
+    <customer_account_logoutsuccess translate="label">
+        <label>Customer Account Logout Success</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>You are now logged out</title></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="customer_logout" template="customer/logout.phtml"/>
+        </reference>
+    </customer_account_logoutsuccess>
+
+    <customer_form_template_handle>
+        <reference name="content">
+            <block name="customer_form_template" type="aw_mobile2/enterprise_customer_form_template">
+                <action method="addRenderer">
+                    <type>text</type>
+                    <renderer_block>enterprise_customer/form_renderer_text</renderer_block>
+                    <template>customer/form/renderer/text.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>textarea</type>
+                    <renderer_block>enterprise_customer/form_renderer_textarea</renderer_block>
+                    <template>customer/form/renderer/textarea.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>multiline</type>
+                    <renderer_block>enterprise_customer/form_renderer_multiline</renderer_block>
+                    <template>customer/form/renderer/multiline.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>date</type>
+                    <renderer_block>enterprise_customer/form_renderer_date</renderer_block>
+                    <template>customer/form/renderer/date.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>select</type>
+                    <renderer_block>enterprise_customer/form_renderer_select</renderer_block>
+                    <template>customer/form/renderer/select.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>multiselect</type>
+                    <renderer_block>enterprise_customer/form_renderer_multiselect</renderer_block>
+                    <template>customer/form/renderer/multiselect.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>boolean</type>
+                    <renderer_block>enterprise_customer/form_renderer_boolean</renderer_block>
+                    <template>customer/form/renderer/boolean.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>file</type>
+                    <renderer_block>enterprise_customer/form_renderer_file</renderer_block>
+                    <template>customer/form/renderer/file.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>image</type>
+                    <renderer_block>enterprise_customer/form_renderer_image</renderer_block>
+                    <template>customer/form/renderer/image.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </customer_form_template_handle>
+</layout>

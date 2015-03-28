@@ -1,0 +1,49 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/** @var $this Mage_Paypal_Block_Payflow_Link_Form */
+?>
+<div id="iframe-warning" class="warning-message">
+    <?php echo $this->__('Please do not refresh the page until you complete payment.') ?>
+</div>
+<iframe id="payflow-link-iframe" style="display:none;" scrolling="no" frameborder="0" border="0" src="<?php echo $this->getFrameActionUrl() ?>" height="400" width="480"></iframe>
+<script type="text/javascript">
+//<![CDATA[
+var headers = $$('#' + checkout.accordion.container.readAttribute('id') + ' .section');
+headers.each(function(header) {
+    header.removeClassName('allow');
+});
+$('payflow-link-iframe').observe('load', function(){
+    $('payflow-link-iframe').show();
+    $('iframe-warning').show();
+    checkout.loadWaiting = 'review';
+    checkout.setLoadWaiting(false);
+    if (checkout.accordion.currentSection == 'opc-review') {
+        $('checkout-review-submit').hide();
+    }
+});
+//]]>
+</script>

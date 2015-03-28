@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_category_default>
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+        </reference>
+    </catalog_category_default>
+
+    <catalog_category_view>
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+        </reference>
+    </catalog_category_view>
+
+    <catalog_category_layered>
+        <reference name="product_list">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+        </reference>
+    </catalog_category_layered>
+
+    <catalogsearch_result_index>
+        <reference name="search_result_list">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+        </reference>
+    </catalogsearch_result_index>
+
+    <catalog_product_view>
+        <reference name="catalog.product.related">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+        </reference>
+    </catalog_product_view>
+
+    <!--
+    Partof block for simple products
+    -->
+
+    <PRODUCT_TYPE_simple>
+        <reference name="product.info.upsell">
+            <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+            <action method="setItemLimit"><type>bundle</type><limit>4</limit></action>
+        </reference>
+    </PRODUCT_TYPE_simple>
+
+    <!--
+    Shopping cart item renderer
+    -->
+
+    <default>
+        <reference name="checkout.cart">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/cart/item/default.phtml</template></action>
+        </reference>
+    </default>
+
+    <checkout_cart_index_mobile>
+        <reference name="root">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/cart/item/default.phtml</template></action>
+        </reference>
+    </checkout_cart_index_mobile>
+
+    <!--
+    Onepage Checkout Review Page
+    -->
+
+    <checkout_onepage_review>
+        <reference name="root">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </checkout_onepage_review>
+
+    <paypal_express_review>
+        <reference name="paypal.express.review.details">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypal_express_review>
+    <paypal_express_review_details>
+        <reference name="root">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypal_express_review_details>
+
+    <paypaluk_express_review>
+        <reference name="paypal.express.review.details">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypaluk_express_review>
+    <paypaluk_express_review_details>
+        <reference name="root">
+            <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+        </reference>
+    </paypaluk_express_review_details>
+
+    <!--
+    Additional block for bundle product type
+    -->
+
+    <PRODUCT_TYPE_bundle translate="label" module="bundle">
+        <label>Catalog Product View (Bundle)</label>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/bundle.js</name></action>
+        </reference>
+        <reference name="product.info">
+            <block type="bundle/catalog_product_view_type_bundle" name="product.info.bundle" as="product_type_data" template="bundle/catalog/product/view/type/bundle.phtml">
+                <action method="addPriceBlockType"><type>bundle</type><block>bundle/catalog_product_price</block><template>bundle/catalog/product/price.phtml</template></action>
+                <block type="bundle/catalog_product_price" name="bundle.prices" as="bundle_prices" template="bundle/catalog/product/view/price.phtml">
+                    <action method="setMAPTemplate"><tmpl>catalog/product/price_msrp_item.phtml</tmpl></action>
+                </block>
+            </block>
+        </reference>
+        <reference name="product.info.options.wrapper">
+            <block type="bundle/catalog_product_view_type_bundle" name="product.info.bundle.options" as="type_bundle_options" template="bundle/catalog/product/view/type/bundle/options.phtml">
+                <action method="addRenderer"><type>select</type><block>bundle/catalog_product_view_type_bundle_option_select</block></action>
+                <action method="addRenderer"><type>multi</type><block>bundle/catalog_product_view_type_bundle_option_multi</block></action>
+                <action method="addRenderer"><type>radio</type><block>bundle/catalog_product_view_type_bundle_option_radio</block></action>
+                <action method="addRenderer"><type>checkbox</type><block>bundle/catalog_product_view_type_bundle_option_checkbox</block></action>
+            </block>
+            <action method="insert"><block>product.info.bundle.options</block></action>
+        </reference>
+        <reference name="product.info.options.wrapper.bottom">
+            <remove name="product.tierprices" />
+            <block type="bundle/catalog_product_view" name="bundle.tierprices" as="tierprices" before="-" template="bundle/catalog/product/view/tierprices.phtml"/>
+            <block type="cataloginventory/qtyincrements" name="product.info.qtyincrements" before="-" template="cataloginventory/qtyincrements.phtml"/>
+        </reference>
+    </PRODUCT_TYPE_bundle>
+
+    <sales_order_view>
+        <reference name="order_items">
+            <action method="addItemRender"><type>bundle</type><block>aw_mobile2/bundle_sales_order_items_renderer</block><template>bundle/sales/order/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_view>
+
+    <sales_order_invoice>
+        <reference name="invoice_items">
+            <action method="addItemRender"><type>bundle</type><block>aw_mobile2/bundle_sales_order_items_renderer</block><template>bundle/sales/order/invoice/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_invoice>
+
+    <sales_order_shipment>
+        <reference name="shipment_items">
+            <action method="addItemRender"><type>bundle</type><block>aw_mobile2/bundle_sales_order_items_renderer</block><template>bundle/sales/order/shipment/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_shipment>
+
+    <sales_order_creditmemo>
+        <reference name="creditmemo_items">
+            <action method="addItemRender"><type>bundle</type><block>aw_mobile2/bundle_sales_order_items_renderer</block><template>bundle/sales/order/creditmemo/items/renderer.phtml</template></action>
+        </reference>
+    </sales_order_creditmemo>
+
+    <!--
+    Emails
+    -->
+    <sales_email_order_items>
+        <reference name="items">
+            <action method="addItemRender"><type>bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/order/default.phtml</template></action>
+        </reference>
+    </sales_email_order_items>
+
+    <sales_email_order_invoice_items>
+        <reference name="items">
+            <action method="addItemRender"><type>bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/invoice/default.phtml</template></action>
+        </reference>
+    </sales_email_order_invoice_items>
+
+    <sales_email_order_shipment_items>
+        <reference name="items">
+            <action method="addItemRender"><type>bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/shipment/default.phtml</template></action>
+        </reference>
+    </sales_email_order_shipment_items>
+
+    <sales_email_order_creditmemo_items>
+        <reference name="items">
+            <action method="addItemRender"><type>bundle</type><block>bundle/sales_order_items_renderer</block><template>bundle/email/order/items/creditmemo/default.phtml</template></action>
+        </reference>
+    </sales_email_order_creditmemo_items>
+</layout>

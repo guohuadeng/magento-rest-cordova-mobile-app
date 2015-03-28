@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <paypal_express_review translate="label">
+        <label>PayPal Express Order Review Form</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>paypal/express/review/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="paypal/express_review" name="paypal.express.review" template="paypal/express/review.phtml">
+                <block type="paypal/express_review_details" name="paypal.express.review.details" as="details" template="paypal/express/review/details.phtml">
+                    <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+                    <block type="checkout/cart_totals" name="paypal.express.review.details.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+                </block>
+                <block type="checkout/agreements" name="paypal.express.review.details.agreements" as="agreements" template="checkout/onepage/agreements.phtml"/>
+            </block>
+        </reference>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/checkout/review.js</name></action>
+        </reference>
+    </paypal_express_review>
+    <paypal_express_review_details>
+        <block type="paypal/express_review_details" name="root" output="toHtml" template="paypal/express/review/details.phtml">
+            <action method="addItemRender"><type>default</type><block>checkout/cart_item_renderer</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>checkout/onepage/review/item.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/onepage/review/item.phtml</template></action>
+            <block type="checkout/cart_totals" name="paypal.express.review.details.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
+        </block>
+    </paypal_express_review_details>
+    <checkout_onepage_review>
+        <reference name="checkout.onepage.review.info.items.after">
+            <block type="paypal/iframe" name="paypal.iframe" />
+        </reference>
+        <reference name="checkout.onepage.review.button">
+            <action method="setTemplate"><template helper="paypal/hss/getReviewButtonTemplate"><name>paypal/hss/review/button.phtml</name><block>checkout.onepage.review.button</block></template></action>
+        </reference>
+    </checkout_onepage_review>
+    <paypal_payflow_link_iframe>
+        <block type="paypal/payflow_link_iframe" name="payflow.link.iframe" template="paypal/payflowlink/form.phtml" />
+    </paypal_payflow_link_iframe>
+
+    <paypal_payflow_advanced_iframe>
+        <block type="paypal/payflow_advanced_iframe" name="payflow.advanced.iframe" template="paypal/payflowadvanced/form.phtml" />
+    </paypal_payflow_advanced_iframe>
+
+    <paypal_hosted_pro_iframe>
+        <block type="paypal/hosted_pro_iframe" name="hosted.pro.iframe" template="paypal/hss/form.phtml"/>
+    </paypal_hosted_pro_iframe>
+
+    <SHORTCUT_popup>
+        <reference name="product.tooltip">
+            <block type="page/html_wrapper" name="product.info.addtocart.paypal.wrapper" translate="label">
+                <block type="paypal/express_shortcut" name="product.info.addtocart.paypal" template="paypal/express/shortcut.phtml">
+                    <action method="setIsInCatalogProduct"><value>1</value></action>
+                    <action method="setShowOrPosition"><value>after</value></action>
+                </block>
+            </block>
+        </reference>
+    </SHORTCUT_popup>
+</layout>

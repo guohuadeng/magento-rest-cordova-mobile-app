@@ -1,0 +1,57 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/**
+ * @see Enterprise_Reward_Block_Customer_Reward_Settings
+ */
+?>
+<div class="island">
+    <form action="<?php echo $this->getUrl('reward/customer/saveSettings') ?>" method="post" id="form-validate" class="form">
+        <div class="form__field">
+            <?php echo $this->getBlockHtml('formkey')?>
+            <h2 class="island-title">
+                <?php echo $this->__('Email Notification Settings'); ?>
+            </h2>
+            <div class="form__field">
+                <ul class="form__checkboxes">
+                    <li class="form__checkboxes-item">
+                        <input type="checkbox" name="subscribe_updates" value="1" title="<?php echo $this->__('Subscribe for balance updates') ?>"<?php if($this->isSubscribedForUpdates()): ?> checked="checked"<?php endif; ?> id="subscribe_updates" class="form__checkbox" />
+                        <label class="form__checkbox-label" for="subscribe_updates">
+                            <?php echo $this->__('Subscribe for balance updates') ?>
+                        </label>
+                        <input type="checkbox" name="subscribe_warnings" id="subscribe_warnings" value="1"<?php if($this->isSubscribedForWarnings()): ?> checked="checked"<?php endif; ?> class="form__checkbox" />
+                        <label class="form__checkbox-label" for="subscribe_warnings">
+                            <?php echo $this->__('Subscribe for points expiration notifications') ?>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+            <p class="form__submit-wrapper">
+                <button type="submit" class="button continue-another" title="<?php echo $this->__('Save Subscription Settings') ?>"><?php echo $this->__('Save Subscription Settings') ?></button>
+            </p>
+        </div>
+    </form>
+</div>

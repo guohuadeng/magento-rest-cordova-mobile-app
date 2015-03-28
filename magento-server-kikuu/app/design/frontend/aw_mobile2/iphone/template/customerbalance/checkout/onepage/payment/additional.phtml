@@ -1,0 +1,122 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/**
+ * @see Enterprise_CustomerBalance_Block_Checkout_Onepage_Payment_Additional
+ */
+?>
+<?php if ($this->isDisplayContainer()): ?>
+    <div class="form__field checkout-onepage-payment-additional-customerbalance" id="customerbalance_placer">
+        <input type="hidden" name="payment[use_customer_balance]" value="0" />
+        <ul class="form__checkboxes">
+            <li class="form__checkboxes-item">
+                <?php $balance = Mage::helper('core')->currency($this->getBalance()); ?>
+                <input type="checkbox" name="payment[use_customer_balance]" value="1" title="" id="use_customer_balance" <?php echo ($this->isCustomerBalanceUsed() ? 'checked' : '') ?> class="form__checkbox" />
+                <label class="form__checkbox-label" for="use_customer_balance"><?php echo $this->__('Use Store Credit') ?>
+                    (<span id="customerbalance_available_amount"><?php echo $balance; ?></span>
+                    <?php echo Mage::helper('enterprise_customerbalance')->__('available'); ?>)
+                </label>
+            </li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    var isFullyPaidAfterCustomerBalanceApplication = <?php echo ($this->isFullyPaidAfterApplication() ? 'true' : 'false'); ?>;
+    var customerBalanceSubstracted = <?php if ($this->isCustomerBalanceUsed()): ?>true<?php else: ?>false<?php endif; ?>;
+
+    if (customerBalanceSubstracted) {
+        quoteBaseGrandTotal += <?php echo (float)$this->getQuote()->getBaseCustomerBalAmountUsed(); ?>;
+        checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+        customerBalanceSubstracted = false;
+    }
+
+    Payment.prototype.switchCustomerBalanceCheckbox = function() {
+
+        if (!customerBalanceSubstracted && $('use_customer_balance').checked) {
+            quoteBaseGrandTotal -= <?php echo (float)$this->getBalance(); ?>;
+            customerBalanceSubstracted = true;
+            checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+        }
+        if (customerBalanceSubstracted && !$('use_customer_balance').checked) {
+            quoteBaseGrandTotal += <?php echo (float)$this->getBalance(); ?>;
+            customerBalanceSubstracted = false;
+            checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+        }
+        if (((checkQuoteBaseGrandTotal < 0.0001 || checkQuoteBaseGrandTotal > 0.0001) && quoteBaseGrandTotal == 0) || (quoteBaseGrandTotal > checkQuoteBaseGrandTotal)) {
+            quoteBaseGrandTotal = checkQuoteBaseGrandTotal;
+        }
+
+        if (quoteBaseGrandTotal < 0.0001) {
+            var elements = Form.getElements(this.form);
+            for (var i=0; i<elements.length; i++) {
+                if ($('use_customer_balance').checked) {
+                    if (elements[i].name == 'payment[method]') {
+                        elements[i].disabled = true;
+                    }
+                }
+                if (elements[i].name == 'payment[method]' && elements[i].value == 'free') {
+                    elements[i].checked = false;
+                    elements[i].disabled = true;
+                    $(elements[i].parentNode).hide();
+                }
+            }
+            if ($('use_customer_balance').checked) {
+                $('checkout-payment-method-load').hide();
+                payment.switchMethod();
+            }
+        } else {
+            var elements = Form.getElements(this.form);
+            for (var i=0; i<elements.length; i++) {
+                if (elements[i].name == 'payment[method]') {
+                    elements[i].disabled = false;
+                }
+            }
+            $('checkout-payment-method-load').show();
+            payment.switchMethod(payment.lastUsedMethod);
+        }
+    }
+
+    if (payment) {
+        var customerBalanceInit = function() {
+            if ($('use_customer_balance')) {
+                $('use_customer_balance').disabled = false;
+            }
+            this.switchCustomerBalanceCheckbox();
+        }
+        payment.addAfterInitFunction('customerbalance', customerBalanceInit.bind(payment));
+        var customerBalanceValidate = function() {
+            if (quoteBaseGrandTotal < 0.0001) {
+                return true;
+            }
+            return false;
+        }
+        payment.addBeforeValidateFunction('customerbalance', customerBalanceValidate.bind(payment));
+    }
+
+    Event.observe($('use_customer_balance'), 'click', payment.switchCustomerBalanceCheckbox);
+    //]]>
+    </script>
+<?php endif; ?>

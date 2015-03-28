@@ -1,0 +1,51 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/**
+ * @see Enterprise_Reward_Block_Tooltip
+ */
+?>
+<div class="reward-message <?php echo $this->getWrapperClass()?>">
+    <div class="reward">
+        <?php if ($this->hasRewardMessage()):?>
+            <p><?php echo $this->__($this->getRewardMessage(), Mage::helper('enterprise_reward')->formatReward($this->getRewardPoints(), $this->getRewardAmount(), null, '<strong>%s</strong>'))?></p>
+        <?php endif;?>
+        <?php if ($this->hasPointsBalance() && !$this->hasHideBalance()):?>
+            <p class="balance">
+                <?php echo $this->__('Your current balance is %s.', Mage::helper('enterprise_reward')->formatReward($this->getPointsBalance(), null, null, '<strong>%s</strong>'))?>
+            </p>
+        <?php endif;?>
+        <?php if (!$this->hasHideLink()):?>
+            <p class="a-more"><?php echo $this->renderLearnMoreLink()?></p>
+        <?php endif;?>
+        <?php if ($this->hasQtyLimit() && $this->hasRewardQtyLimitationMessage()):?>
+            <p class="limit"><?php echo $this->__($this->getRewardQtyLimitationMessage(), "<strong>{$this->getQtyLimit()}</strong>")?></p>
+        <?php endif;?>
+        <?php if ($this->hasGuestNote()):?>
+            <p class="limit"><?php echo $this->__($this->getGuestNote())?></p>
+        <?php endif;?>
+    </div>
+</div>

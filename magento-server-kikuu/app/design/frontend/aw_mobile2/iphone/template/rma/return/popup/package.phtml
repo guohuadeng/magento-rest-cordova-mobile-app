@@ -1,0 +1,78 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php /** @var $this Enterprise_Rma_Block_Return_Tracking_Package */ ?>
+<div class="rma-package">
+    <?php  $_results = $this->getPackageInfo() ?>
+    <?php foreach ($this->getPackages() as $packageId => $package): ?>
+        <div class="order__section">
+            <?php $package = new Varien_Object($package) ?>
+            <?php $params = new Varien_Object($package->getParams()) ?>
+            <h2 class="order__section-title"><?php echo Mage::helper('sales')->__('Package') . ' ' . $packageId ?></h2>
+            <p>
+                <?php echo Mage::helper('enterprise_rma')->__('Type') ?>:<?php echo $this->getContainerTypeByCode($params->getContainer()) ?>
+            </p>
+            <p>
+                <?php echo Mage::helper('enterprise_rma')->__('Length') ?>:<?php echo $params->getLength() .' '. Mage::helper('usa')->getMeasureDimensionName($params->getDimensionUnits()) ?>
+            </p>
+            <p>
+                <?php echo Mage::helper('enterprise_rma')->__('Total Weight') ?>:<?php echo $params->getWeight() .' '. Mage::helper('usa')->getMeasureWeightName($params->getWeightUnits()) ?>
+            </p>
+            <p>
+                <?php echo Mage::helper('enterprise_rma')->__('Width') ?>:<?php echo $params->getWidth() .' '. Mage::helper('usa')->getMeasureDimensionName($params->getDimensionUnits()) ?>
+            </p>
+            <p>
+                <?php echo Mage::helper('enterprise_rma')->__('Height') ?>:<?php echo $params->getHeight() .' '. Mage::helper('usa')->getMeasureDimensionName($params->getDimensionUnits()) ?>
+            </p>
+            <strong><?php echo Mage::helper('enterprise_rma')->__('Items in the Package') ?></strong>
+            <table class="tracking-table-popup data-table">
+                <thead>
+                <tr class="data-table-row">
+                    <th><?php echo Mage::helper('enterprise_rma')->__('Product') ?></th>
+                    <th><?php echo Mage::helper('enterprise_rma')->__('Weight') ?></th>
+                    <th><?php echo Mage::helper('enterprise_rma')->__('Qty') ?></th>
+                </tr>
+                </thead>
+
+                <tbody id="">
+                <?php foreach($package->getItems() as $itemId => $item) : ?>
+                    <?php $item = new Varien_Object($item) ?>
+                    <tr title="#" id="" class="data-table-row">
+                        <td>
+                            <?php echo $item->getName(); ?>
+                        </td>
+                        <td>
+                            <?php echo $item->getWeight(); ?>
+                        </td>
+                        <td>
+                            <?php echo $item->getQty()*1; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endforeach; ?>
+</div>

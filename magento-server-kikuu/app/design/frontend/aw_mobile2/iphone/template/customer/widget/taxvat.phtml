@@ -1,0 +1,29 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><p class="form__field<?php if ($this->isRequired()) echo ' form__field--required' ?>">
+    <label for="<?php echo $this->getFieldId('taxvat')?>" class="form__label<?php if ($this->isRequired()) echo ' form__label--required' ?>"><?php echo $this->__('Tax/VAT number') ?></label>
+    <input type="text" title="<?php echo $this->__('Tax/VAT number') ?>" name="<?php echo $this->getFieldName('taxvat')?>" id="<?php echo $this->getFieldId('taxvat')?>" value="<?php echo $this->htmlEscape($this->getTaxvat()) ?>" class="form__textfield textfield<?php if ($this->isRequired()):?> required-entry<?php endif; ?>" <?php echo $this->getFieldParams() ?> />
+</p><!-- .form__field -->

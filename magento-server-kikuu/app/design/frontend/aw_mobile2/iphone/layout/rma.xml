@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <block type="enterprise_rma/link" name="enterprise_rma_link_dashboard">
+            <action method="addDashboardLink" translate="label" module="enterprise_rma">
+                <block>customer_account_navigation</block>
+                <name>return</name><path>enterprise_rma/return/history/</path><label>My Returns</label>
+            </action>
+        </block>
+    </customer_account>
+
+    <enterprise_rma_return_history translate="label">
+        <label>Customer My Returns History</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>customer/account/top.phtml</template></action>
+            <action method="setTitle"><title>My Returns</title></action>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive"><path>enterprise_rma/return/history/</path></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_rma/return_history" name="mobile_list_toolbar_pager">
+                <block type="core/text_list" name="rma.return.history.info" as="info" translate="label">
+                    <label>Returns History Info</label>
+                </block>
+            </block>
+        </reference>
+    </enterprise_rma_return_history>
+
+    <enterprise_rma_return_create translate="label">
+        <label>Customer My Return Create</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>rma/return/create/top.phtml</template></action>
+        </reference>
+        <reference name="customer_account_navigation">
+            <action method="setActive"><path>enterprise_rma/return/history/</path></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_rma/return_create" as="create" name="rma.return.create" template="rma/return/create.phtml">
+                <action method="setFormCode"><code>default</code></action>
+                <action method="setEntityModelClass"><code>enterprise_rma/item</code></action>
+            </block>
+        </reference>
+        <update handle="enterprise_rma_return_create_handle"/>
+    </enterprise_rma_return_create>
+
+    <enterprise_rma_return_create_handle>
+        <reference name="content">
+            <block name="enterprise_rma_item_form_template" type="enterprise_eav/form_template">
+                <action method="addRenderer">
+                    <type>text</type>
+                    <renderer_block>enterprise_eav/form_renderer_text</renderer_block>
+                    <template>rma/form/renderer/text.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>textarea</type>
+                    <renderer_block>enterprise_eav/form_renderer_textarea</renderer_block>
+                    <template>rma/form/renderer/textarea.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>select</type>
+                    <renderer_block>enterprise_rma/form_renderer_select</renderer_block>
+                    <template>rma/form/renderer/select.phtml</template>
+                </action>
+                <action method="addRenderer">
+                    <type>image</type>
+                    <renderer_block>enterprise_rma/form_renderer_image</renderer_block>
+                    <template>rma/form/renderer/image.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </enterprise_rma_return_create_handle>
+
+    <enterprise_rma_return_view translate="label">
+        <label>Customer My Account Return View</label>
+        <reference name="customer_account_navigation">
+            <action method="setActive"><path>enterprise_rma/return/history/</path></action>
+        </reference>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>rma/return/view/top.phtml</template></action>
+        </reference>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_rma/return_view" name="rma.return.history">
+                <block type="core/text_list" name="rma.return.history.info" as="info" translate="label">
+                    <label>Customer My Account Return View</label>
+                </block>
+            </block>
+        </reference>
+        <update handle="enterprise_rma_return_view_handle"/>
+        <block type="enterprise_rma/return_tracking" name="rma.return.tracking" as="tracking" />
+    </enterprise_rma_return_view>
+
+    <enterprise_rma_return_view_handle>
+        <reference name="content">
+            <block name="enterprise_rma_item_form_template" type="enterprise_eav/form_template">
+                <action method="addRenderer">
+                    <type>image</type>
+                    <renderer_block>enterprise_rma/form_renderer_image</renderer_block>
+                    <template>rma/form/view/image.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </enterprise_rma_return_view_handle>
+
+    <enterprise_rma_return_returns translate="label">
+        <label>Customer My Account Order Returns View</label>
+        <reference name="my.account.wrapper">
+            <block type="sales/order_info" as="info" name="sales.order.info">
+                <block type="sales/order_info_buttons" as="buttons" name="sales.order.info.buttons">
+                    <block type="enterprise_rma/order_button" name="enterprise.rma.info.button" template="rma/order/button.phtml" />
+                </block>
+            </block>
+            <block type="enterprise_rma/return_returns" name="rma.return.returns" />
+        </reference>
+        <reference name="sales.order.info">
+            <action method="addLink" translate="label" module="sales"><name>view</name><path>sales/order/view</path><label>Order Information</label></action>
+            <action method="addLink" translate="label" module="sales"><name>invoice</name><path>sales/order/invoice</path><label>Invoices</label></action>
+            <action method="addLink" translate="label" module="sales"><name>shipment</name><path>sales/order/shipment</path><label>Shipments</label></action>
+            <action method="addLink" translate="label" module="sales"><name>creditmemo</name><path>sales/order/creditmemo</path><label>Refunds</label></action>
+            <action method="addLink" translate="label" module="sales"><name>returns</name><path></path><label>Returns</label></action>
+        </reference>
+    </enterprise_rma_return_returns>
+
+    <sales_order_view>
+        <reference name="my.account.wrapper">
+            <block type="enterprise_rma/order_info" name="enterprise.rma.info" />
+        </reference>
+        <reference name="sales.order.info.buttons">
+            <block type="enterprise_rma/order_button" name="enterprise.rma.info.button" template="rma/order/button.phtml" />
+        </reference>
+    </sales_order_view>
+
+    <enterprise_rma_email_rma_items>
+        <block type="enterprise_rma/email_items" name="enterprise_rma_email_items" template="rma/email/items.phtml" />
+    </enterprise_rma_email_rma_items>
+
+    <enterprise_rma_return_addlabel>
+        <block type="enterprise_rma/return_tracking" name="enterprise_rma_return_tracking" template="rma/return/tracking.phtml" />
+    </enterprise_rma_return_addlabel>
+    <enterprise_rma_return_dellabel>
+        <block type="enterprise_rma/return_tracking" name="enterprise_rma_return_tracking" template="rma/return/tracking.phtml" />
+    </enterprise_rma_return_dellabel>
+
+    <enterprise_rma_guest_addlabel>
+        <block type="enterprise_rma/return_tracking" name="enterprise_rma_return_tracking" template="rma/return/tracking.phtml" />
+    </enterprise_rma_guest_addlabel>
+    <enterprise_rma_guest_dellabel>
+        <block type="enterprise_rma/return_tracking" name="enterprise_rma_return_tracking" template="rma/return/tracking.phtml" />
+    </enterprise_rma_guest_dellabel>
+
+    <enterprise_rma_tracking_popup translate="label">
+        <label>Shipment Tracking Popup</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>shipping/tracking/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="enterprise_rma/return_tracking_popup" name="rma.tracking.popup" template="shipping/tracking/popup.phtml" />
+        </reference>
+    </enterprise_rma_tracking_popup>
+
+    <enterprise_rma_tracking_package translate="label">
+        <label>Shipment Package Popup</label>
+        <reference name="breadcrumbs">
+            <action method="setTemplate"><template>rma/return/popup/top.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="enterprise_rma/return_tracking_package" name="rma.tracking.popup" template="rma/return/popup/package.phtml" />
+        </reference>
+    </enterprise_rma_tracking_package>
+</layout>

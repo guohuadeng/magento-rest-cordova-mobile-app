@@ -1,0 +1,70 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/** @var $this Enterprise_Rma_Block_Return_History */
+?>
+<div class="rma-history" id="rma_history">
+    <?php $_returns = $this->getReturns(); ?>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php echo $this->getChildHtml('info');?>
+    <?php if($_returns->getSize()): ?>
+        <table class="data-table" id="my-returns-table">
+            <thead>
+            <tr class="data-table-row">
+                <th><?php echo $this->__('Return #') ?></th>
+                <th><?php echo $this->__('Date') ?></th>
+                <th><?php echo $this->__('Ship From') ?></th>
+                <th><span class="nobr"><?php echo $this->__('Return Status') ?></span></th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($_returns as $_return): ?>
+                <tr class="data-table-row">
+                    <td><?php echo $_return->getIncrementId() ?></td>
+                    <td><span class="nobr"><?php echo Mage::helper('enterprise_rma')->getFormatedDate($_return->getDateRequested()) ?></span></td>
+                    <td><?php echo $this->escapeHtml($_return->getCustomerName()) ?></td>
+                    <td><?php echo $this->escapeHtml($_return->getStatusLabel()) ?></td>
+                    <td>
+                        <span class="nobr"><a href="<?php echo $this->getViewUrl($_return) ?>"><?php echo $this->__('View Return') ?></a></span>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php echo $this->getPagerHtml(); ?>
+        <script type="text/javascript">
+            //<![CDATA[
+            if (typeof pager != 'undefined') {
+                pager.containerId = 'rma_history';
+                pager.tableId = 'my-returns-table';
+            }
+            //]]>
+        </script>
+    <?php else: ?>
+        <p><?php echo $this->__('You have placed no returns.'); ?></p>
+    <?php endif ?>
+</div>

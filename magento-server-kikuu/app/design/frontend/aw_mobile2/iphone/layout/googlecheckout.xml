@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_cart_index_mobile>
+        <reference name="checkout.cart.methods">
+            <block type="googlecheckout/link" name="checkout.cart.methods.googlecheckout.bottom" template="googlecheckout/link.phtml"/>
+        </reference>
+        <reference name="google_analytics">
+            <action method="setGoogleCheckout"><flag>true</flag></action>
+        </reference>
+    </checkout_cart_index_mobile>
+    <googlecheckout_redirect_redirect>
+        <reference name="content">
+            <block type="googlecheckout/redirect" name="googlecheckout_redirect" template="page/redirect.phtml"></block>
+        </reference>
+    </googlecheckout_redirect_redirect>
+</layout>

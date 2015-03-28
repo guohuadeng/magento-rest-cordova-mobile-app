@@ -1,0 +1,112 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Mobile2
+ * @version    2.0.2
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+/**
+ * Downloadable product links
+ *
+ * @see Mage_Downloadable_Block_Catalog_Product_Links
+ */
+?>
+<?php $_linksPurchasedSeparately = $this->getLinksPurchasedSeparately() ?>
+<?php if ($this->getProduct()->isSaleable() && $this->hasLinks()):?>
+    <?php $_links = $this->getLinks(); ?>
+    <?php $_isRequired = $this->getLinkSelectionRequired(); ?>
+    <div class="form__field<?php if ($_isRequired): ?> form__field--required<?php endif; ?>">
+        <label class="form__label<?php if ($_isRequired): ?> form__label--required<?php endif; ?>"><?php echo $this->getLinksTitle() ?></label>
+        <ul id="downloadable-links-list" class="form__checkboxes options-list">
+            <?php foreach ($_links as $_link): ?>
+                <li class="form__checkboxes-item">
+                    <?php if ($_linksPurchasedSeparately): ?>
+                        <input type="checkbox" class="form__checkbox<?php if($_isRequired):?> validate-one-required-by-name<?php endif; ?> product-downloadable-link" onclick="dConfig.reloadPrice()" name="links[]" id="links_<?php echo $_link->getId() ?>" value="<?php echo $_link->getId() ?>" />
+                    <?php endif; ?>
+                    <label for="links_<?php echo $_link->getId() ?>" class="form__checkbox-label">
+                        <?php echo $_link->getTitle() ?>
+                        <?php if ($_link->getSampleFile() || $_link->getSampleUrl()): ?>
+                            &nbsp;(<a href="<?php echo $this->getLinkSamlpeUrl($_link) ?>" <?php echo $this->getIsOpenInNewWindow()?'onclick="this.target=\'_blank\'"':''; ?>><?php echo Mage::helper('downloadable')->__('sample') ?></a>)
+                        <?php endif; ?>
+                        <?php if ($_linksPurchasedSeparately): ?>
+                            <?php echo $this->getFormattedLinkPrice($_link); ?>
+                        <?php endif; ?>
+                    </label>
+                    <?php if ($_isRequired): ?>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            $('links_<?php echo $_link->getId() ?>').advaiceContainer = 'links-advice-container';
+                            $('links_<?php echo $_link->getId() ?>').callbackFunction = 'validateDownloadableCallback';
+                            //]]>
+                        </script>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php if ($_isRequired): ?>
+            <span id="links-advice-container"></span>
+        <?php endif;?>
+    </div><!-- .form__field -->
+    <script type="text/javascript">
+        //<![CDATA[
+        Product.Downloadable = Class.create();
+        Product.Downloadable.prototype = {
+            config : {},
+            initialize : function(config){
+                this.config = config;
+                this.reloadPrice();
+            },
+            reloadPrice : function(){
+                var price = 0;
+                config = this.config;
+                $$('.product-downloadable-link').each(function(elm){
+                    if (config[elm.value] && elm.checked) {
+                        price += parseFloat(config[elm.value]);
+                    }
+                });
+                try {
+                    var _displayZeroPrice = optionsPrice.displayZeroPrice;
+                    optionsPrice.displayZeroPrice = false;
+                    optionsPrice.changePrice('downloadable', price);
+                    optionsPrice.reload();
+                    optionsPrice.displayZeroPrice = _displayZeroPrice;
+                } catch (e) {
+
+                }
+            }
+        };
+
+        function validateDownloadableCallback(elmId, result) {
+            var container = $('downloadable-links-list');
+            if (result == 'failed') {
+                container.removeClassName('validation-passed');
+                container.addClassName('validation-failed');
+            } else {
+                container.removeClassName('validation-failed');
+                container.addClassName('validation-passed');
+            }
+        }
+
+        var dConfig = new Product.Downloadable(<?php echo $this->getJsonConfig() ?>);
+        //]]>
+    </script>
+<?php endif;?>
