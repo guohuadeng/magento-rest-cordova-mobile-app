@@ -1,5 +1,4 @@
 function initPageScroll(options) {
-    document.addEventListener("orientationchange", updateLayout);
 
     options = $.extend({}, {
         pages: [],
@@ -8,64 +7,8 @@ function initPageScroll(options) {
         },
         onLoadMore: function (callback) {
             callback();
-        },
-        onPage: function (page) {
-            return false;
-        },
-        onLeft: function () {
-            return false;
-        },
-        onRight: function () {
-            return false;
         }
     }, options);
-
-    // The wrapperWidth before orientationChange. Used to identify the current page number in updateLayout();
-    var wrapperWidth = 0,
-        wrapperPage,
-        wrapperX;
-
-    window.myScroll = new iScroll('pageWrapper', {
-        snap: true,
-        momentum: false,
-        hScrollbar: false,
-        vScrollbar: false,
-        lockDirection: true,
-        onScrollStart: function () {
-            wrapperX = this.x;
-        },
-        onScrollMove: function () {
-            if (wrapperPage === myScroll.currPageX) {
-                if (wrapperPage === 0 && this.x - wrapperX >= 50) {
-                    options.onLeft();
-                } else if (wrapperX  - this.x >= 50) {
-                    options.onRight();
-                }
-            }
-            wrapperPage = myScroll.currPageX;
-        },
-        onScrollEnd: function () {
-            options.onPage(myScroll.currPageX);
-        }
-    });
-
-    updateLayout();
-
-    function updateLayout() {
-
-        var currentPage = 0;
-
-        if (wrapperWidth > 0) {
-            currentPage = - Math.ceil( $('#pageScroller').position().left / wrapperWidth);
-        }
-
-        wrapperWidth = $('#pageWrapper').width();
-
-        $('#pageScroller').css('width', wrapperWidth * options.pages.length);
-        $('.page').css('width', wrapperWidth - 40);
-        myScroll.refresh();
-        myScroll.scrollToPage(currentPage, 0, 0);
-    }
 
     var pullActionDetect = {
         count: 0,

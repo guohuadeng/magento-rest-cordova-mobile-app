@@ -2,7 +2,8 @@ function ready() {
     var currentPage = 0,
         $menuTpl = $('#menu-template'),
         $slideTpl = $('#slide-template'),
-        $itemTpl = $('#item-template');
+        $itemTpl = $('#item-template'),
+        $detailTpl = $('#detail-template');
 
     function showMenus() {
         $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
@@ -11,12 +12,16 @@ function ready() {
 
         $.each(pages, function (i, page) {
             $('.swiper-pagination').append(sprintf(
-                '<span class="bullet-item %s">%s</span>',
-                i === 0 ? 'bullet-item-active' : '',
-                page.title));
+                '<a href="#%s" data-rel="auto" class="bullet-item">%s</a>',
+                page.id, page.title));
         });
         $('.bullet-item').click(function () {
-            myScroll.scrollToPage($(this).index(), 0);
+            var $this = $(this);
+            $this.addClass('bullet-item-active')
+                .siblings().removeClass('bullet-item-active');
+            setTimeout(function () {
+                $($this.attr('href')).data('scroll').refresh();
+            }, 500);
         });
 
         $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
@@ -39,7 +44,7 @@ function ready() {
             contentType: 'application/json',
             success: function (list) {
                 var items = $.map(list, function (item) {
-                    item.product_detail = api.product_detail;
+                    item.url = api.product_detail + item.entity_id;
                     item.price_percent = ~~(-100 * (item.regular_price_with_tax -
                         item.final_price_with_tax) / item.regular_price_with_tax);
                     item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
@@ -59,26 +64,46 @@ function ready() {
         });
     }
 
+    initEvents();
     initViews();
     showMenus();
     initPageScroll({
         pages: pages,
-        onPage: function (page) {
-            currentPage = page;
-            $('.bullet-item').eq(page).addClass('bullet-item-active')
-                .siblings().removeClass('bullet-item-active');
-        },
         onRefresh: function (callback) {
             initItems($('.products-grid').eq(currentPage), 'html', callback);
         },
         onLoadMore: function (callback) {
             initItems($('.products-grid').eq(currentPage), 'append', callback);
-        },
-        onLeft: toggleMenu
+        }
     });
     new Swiper('#wrapper .swiper-container', {
         autoplay: 2000
     });
+    Mobilebone.callback = function (pageinto) {
+        var $this = $(pageinto),
+            $headerIndex = $('.header-index').addClass('out'),
+            $frame = $('.frame').addClass('out');
+
+        if ($this.hasClass('page-index')) {
+            $headerIndex.removeClass('out');
+            $frame.removeClass('out');
+            $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
+                .siblings().removeClass('bullet-item-active');
+        } else if ($this.hasClass('page-detail')) {
+            var m = location.hash.match(/id=(\d+)/);
+            if (m) {
+                $this.find('iframe').attr('src', api.product_detail + m[1]);
+            }
+        }
+    };
+    Mobilebone.jsonHandle = function (product) {
+        console.log(product);
+        product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
+        product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
+        return $(Handlebars.compile($detailTpl.html())({
+            product: product
+        })).html();
+    };
 }
 
 if (isApp) {
