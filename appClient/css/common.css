@@ -145,7 +145,7 @@
  }
 
 /* 热卖特殊处理：分两栏 */
-#wrapper2 .products-grid .item {
+#comingSoon .products-grid .item {
     float: left;
     width: 50%;
 }
@@ -175,7 +175,10 @@
     margin-top: 5px;
     margin-bottom: 7px;
     line-height: 100%;
-    font-size: 18px;
+    font-size: 18px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .products-grid .item .product-addto-wrap {
@@ -238,17 +241,21 @@
 }
 
 /******************** detail *********************/
-iframe, .loading {
-    width: 100%;
-    height: 100%;
-    border: none;
-    position: absolute;
-    text-align: center;
-}
 
-#detailModal h1 {
+.page-detail h1 {
     text-overflow: ellipsis;
     width: 70%;
     overflow: hidden;
     left: 15%;
+}
+
+.page-detail .bar-nav ~ .content {
+    margin-top: 44px;
+    padding-top: 0;
+}
+
+.page-detail iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
 }

@@ -2,6 +2,7 @@ var isApp = location.search !== '?debug=true',
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         products: baseUrl + '/api/rest/products?category_id=%s&limit=10&page=%s',
+//        product_detail: baseUrl + '/api/rest/products/'
         product_detail: 'http://skymazon.sunpop.cn/catalog/product/view/id/'
     },
     menus = [{
@@ -43,19 +44,19 @@ var isApp = location.search !== '?debug=true',
         url: 'http://skymazon.sunpop.cn/#account/?fromui=app'
     }],
     pages = [{
-        id: 'wrapper',
+        id: 'dailySale',
         category_id: 127,
         title: 'Daily Sale',
         pullRefresh: true,
         num: 1
     }, {
-        id: 'wrapper1',
+        id: 'bestSeller',
         category_id: 128,
         title: 'Best Seller',
         pullRefresh: true,
         num: 1
     }, {
-        id: 'wrapper2',
+        id: 'comingSoon',
         category_id: 129,
         title: 'Coming Soon',
         pullRefresh: true,
@@ -70,6 +71,12 @@ var isApp = location.search !== '?debug=true',
 window.onerror = function (e) {
 //    alert(e);
 };
+
+function initEvents() {
+    $(document).on('click', '[data-role="back"]', function () {
+        history.back();
+    });
+}
 
 function initViews() {
     setTimeout(function () {
@@ -142,7 +149,5 @@ function toggleMenu(e) {
         left = $('.cbp-spmenu').outerWidth() + 10;
 
     $menu.toggleClass('active');
-    $('body, header').css('left', $menu.hasClass('active') ? left : 0);
-    $('header.bar').css('width', $menu.hasClass('active') ? '100%' : 'auto');
     $('.cbp-spmenu-left').toggleClass('cbp-spmenu-open');
 }
