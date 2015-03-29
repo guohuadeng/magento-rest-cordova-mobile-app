@@ -31,7 +31,6 @@
             <block type="core/messages" name="global_messages" as="global_messages"/>
             <block type="core/messages" name="messages" as="messages"/>
             <block type="core/text_list" name="content" as="content"/>
-            <block type="core/text_list" name="content" as="content"/>
             <block type="core/text_list" name="before_body_end" as="before_body_end"/>
             <block type="core/text_list" name="customer_account" as="customer_account"/>
             <block type="core/text_list" name="loaders" as="loaders">

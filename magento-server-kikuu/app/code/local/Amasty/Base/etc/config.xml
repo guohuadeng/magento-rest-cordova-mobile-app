@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Amasty_Base>
+      <version>2.1.0</version>
+    </Amasty_Base>
+  </modules>
+  
+    <global>
+        <blocks>
+          <ambase>
+            <class>Amasty_Base_Block</class>
+          </ambase>
+        </blocks>
+        <resources>
+          <ambase_setup>
+              <setup>
+                  <module>Amasty_Base</module>
+              </setup>
+              <connection>
+                  <use>core_setup</use>
+              </connection>
+          </ambase_setup>
+          <ambase_write>
+              <connection>
+                  <use>core_write</use>
+              </connection>
+          </ambase_write>
+          <ambase_read>
+              <connection>
+                  <use>core_read</use>
+              </connection>
+          </ambase_read>
+        </resources>
+        <models>
+            <ambase>
+                <class>Amasty_Base_Model</class>
+            </ambase>
+        </models>
+      <helpers>
+          <ambase>
+              <class>Amasty_Base_Helper</class>
+          </ambase>
+      </helpers>
+    </global>
+
+<admin>
+            <routers>
+                <ambase>
+                        <use>admin</use>
+                        <args>
+                            <module>Amasty_Base</module>
+                            <frontName>ambase</frontName>
+                        </args>
+                </ambase>
+            </routers>
+        </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <ambase module="Amasty_Base">
+                    <file>amasty/ambase/ambase.xml</file>
+                </ambase>
+            </updates>
+        </layout>
+
+        <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <ambase>
+                                        <title>Amasty - Extensions Information</title>
+                                    </ambase>
+                                    <amstore>
+                                        <title>Amasty - Extensions Store</title>
+                                    </amstore>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <events>
+        <controller_action_predispatch>
+            <observers>
+                <ambase_upds>
+                    <type>singleton</type>
+                    <class>ambase/feed</class>
+                    <method>check</method>
+                </ambase_upds>
+            </observers>
+        </controller_action_predispatch>
+    </events> 
+    </adminhtml>
+    <default>
+        <ambase>
+            <feed>
+                <check_frequency>86400</check_frequency>
+                <interests>INFO,PROMO,UPDATE_RELEASE,NEW_RELEASE,INSTALLED_UPDATE</interests>
+            </feed>
+        </ambase>
+    </default>
+</config>

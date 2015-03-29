@@ -2416,6 +2416,11 @@ p.required, span.required{
 button.form__submit {
     margin-bottom:5px;
 }
+.form_validation {
+    margin-left:5px;
+	padding:5px;
+	width:55%;
+}
 .shopping-cart-bottom {
     padding-left: 15px;
     padding-right: 15px;
@@ -3195,6 +3200,11 @@ input[type="checkbox"]:checked + label
     /**letter-spacing:1px;**/
     border-radius:0;
 }
+
+.validation-code{
+	width:42%;
+}
+
 #checkoutSteps .textfield{
     border:none;
 }
