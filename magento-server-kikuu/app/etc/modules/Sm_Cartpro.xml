@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Sm_Cartpro>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Sm_Cartpro>
+    </modules>
+</config> 

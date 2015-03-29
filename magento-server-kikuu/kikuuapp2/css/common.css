@@ -56,6 +56,9 @@
 
 .cbp-spmenu h3 a {
     color: #000;
+	font-size:1.2em;
+	padding-left:10px;
+	padding-right:10px;
 }
 
 .cbp-spmenu a {

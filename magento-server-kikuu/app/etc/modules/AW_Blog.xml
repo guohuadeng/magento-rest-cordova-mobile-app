@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <AW_Blog>
+            <active>false</active>
+            <codePool>community</codePool>
+        </AW_Blog>
+    </modules>
+</config>

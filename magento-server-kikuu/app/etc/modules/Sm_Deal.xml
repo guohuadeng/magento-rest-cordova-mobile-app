@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Sm_Deal>
+			<active>false</active>
+			<codePool>local</codePool>
+			<depends>
+				<Mage_Core />
+			</depends>
+		</Sm_Deal>
+	</modules>
+</config>

@@ -1,29 +1,4 @@
-<?php
-/**
- * aheadWorks Co.
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the EULA
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://ecommerce.aheadworks.com/AW-LICENSE.txt
- *
- * =================================================================
- *                 MAGENTO EDITION USAGE NOTICE
- * =================================================================
- * This software is designed to work with Magento community edition and
- * its use on an edition other than specified is prohibited. aheadWorks does not
- * provide extension support in case of incorrect edition use.
- * =================================================================
- *
- * @category   AW
- * @package    AW_Mobile2
- * @version    2.0.2
- * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
- * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
- */
-?><div class="nav__list nav__list--subcategory customer-account-register">
+<div class="nav__list nav__list--subcategory customer-account-register">
     <div class="nav__list-inner customer-account-register-container">
         <div class="customer-form-register-before">
             <?php echo $this->getChildHtml('form_fields_before')?>
@@ -31,8 +6,12 @@
         <form action="<?php echo $this->helper('aw_mobile2/url')->getRegisterPostUrl() ?>" method="post" id="user_create_form" class="form">
             <input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
             <input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+			<p class="form__field form__field--required">
+    <!--<label class="form__label form__label--required">First Name</label>-->
+    <input type="text" placeholder="Mobile Number" class="form__textfield textfield required-entry" id="default_mobile_number" name="default_mobile_number" value="" title="Mobile Number">
+</p><!-- .form__field -->
             <p class="form__field form__field--required">
-                <!--<label for="email_address" class="form__label form__label--required"><?php echo $this->__('Email Address') ?></label>-->
+                <!--<label for="email_address111111" class="form__label form__label--required"><?php echo $this->__('Email Address') ?></label>-->
                 <input type="email" placeholder="Email" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="<?php echo $this->htmlEscape($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>">
             </p><!-- .form__field -->
             <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->toHtml() ?>
@@ -56,7 +35,11 @@
             <?php endif ?>
             <?php $_gender = $this->getLayout()->createBlock('customer/widget_gender') ?>
             <?php if ($_gender->isEnabled()): ?>
-                <?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() ?>
+                <?php echo $_gender->setGender($this->getFormData()->getGender())->toHtml() 				
+				?>
+					<script type="text/javascript">
+						document.getElementById("gender")[1].selected=true;
+					</script>
             <?php endif ?>
             <?php $customerAttributes = $this->getChild('customer_form_user_attributes');?>
             <?php if ($customerAttributes && $customerAttributes instanceof Enterprise_Customer_Block_Form): ?>

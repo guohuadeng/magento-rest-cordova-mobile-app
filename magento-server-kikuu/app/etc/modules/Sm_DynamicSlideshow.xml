@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>	
+    <modules>    
+        <Sm_DynamicSlideshow>
+            <active>false</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Catalog />
+            </depends>
+            <version>2.0.0</version>
+        </Sm_DynamicSlideshow>
+    </modules>
+</config>

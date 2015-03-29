@@ -1,0 +1,31 @@
+<?php
+/**
+* @author Amasty Team
+* @copyright Copyright (c) 2008-2012 Amasty (http://www.amasty.com)
+* @package Amasty_Customerattr
+*/ 
+$formElements = $this->getFormElements();
+?>
+<?php if ($this->isShowHeader()): ?>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__('Additional Information') ?></h2>
+<?php endif; ?>
+        <div style="float: left;">
+            <ul class="form-list">
+            <?php foreach ($formElements as $element): ?>
+                <li class="fields">
+	                <div class="field">
+                        <?php echo $element->toHtml(); ?>
+                    </div>
+	            </li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+<!-- CUSTOM IMAGE AT THE RIGHT: <div style="float: right;"><img src="PATH HERE" /></div>-->
+        <div style="clear: both;"></div>
+<?php if ($this->isShowHeader()): ?>
+    </div>
+<?php endif;?>
+<?php if ($this->needRelations()): ?>
+<!-- Customer Attributes Relations -->
+<?php endif; ?>
