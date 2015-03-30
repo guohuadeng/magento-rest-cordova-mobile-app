@@ -5,4 +5,4 @@ cd src
 gulp
 mv dist ../www
 cd ..
-cordova run android
+cordova build android

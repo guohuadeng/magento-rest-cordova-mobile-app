@@ -6,10 +6,39 @@ function ready() {
         $detailTpl = $('#detail-template');
 
     function showMenus() {
-        $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
-            menus: menus
-        }));
+        $.getJSON(api.menus, function (res) {
+            var menus = [{
+                name: 'Home',
+                class_name: 'active'
+            }];
+            $.each(res, function (i, item) {
+                item.url = item.url_key;
+            });
+            menus = menus.concat(res);
+            menus.push({
+                name: '',
+                class_name: 'table-view-divider',
+                url: '#'
+            }, {
+                name: 'My Order',
+                url: 'http://skymazon.sunpop.cn/sales/order/history/?fromui=app'
+            }, {
+                name: 'Cart',
+                url: 'http://skymazon.sunpop.cn/?fromui=app#cart/'
+            }, {
+                name: 'Wish List',
+                url: 'http://skymazon.sunpop.cn/wishlist/?fromui=app'
+            }, {
+                name: 'Setting',
+                url: 'http://skymazon.sunpop.cn/#account/?fromui=app'
+            });
+            $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
+                menus: menus
+            }));
+        });
+    }
 
+    function showPages() {
         $.each(pages, function (i, page) {
             $('.swiper-pagination').append(sprintf(
                 '<a href="#%s" data-rel="auto" class="bullet-item">%s</a>',
@@ -25,10 +54,10 @@ function ready() {
         });
 
         $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
-            menus: pages
-        })).find('.products-grid').each(function () {
-            initItems($(this), 'html');
-        });
+                menus: pages
+            })).find('.products-grid').each(function () {
+                initItems($(this), 'html');
+            });
     }
 
     function initItems($el, func, callback) {
@@ -40,13 +69,22 @@ function ready() {
 
         $.ajax({
             type: 'get',
-            url: sprintf(api.products, page.category_id, page.num),
+            url: sprintf(api.products, page.cmd, page.num),
             contentType: 'application/json',
+            dataType: 'json',
             success: function (list) {
                 var items = $.map(list, function (item) {
-                    item.url = api.product_detail + item.entity_id;
-                    item.price_percent = ~~(-100 * (item.regular_price_with_tax -
-                        item.final_price_with_tax) / item.regular_price_with_tax);
+                    var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
+                        toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
+                        date = new Date();
+                    if (+fromDate <= +date && +date <= +toDate) {
+                        item.price_percent = ~~(-100 * (item.regular_price_with_tax -
+                            item.final_price_with_tax) / item.regular_price_with_tax);
+                        item.price_percent_class = '';
+                    } else {
+                        item.price_percent_class = 'none';
+                        item.final_price_with_tax = item.regular_price_with_tax;
+                    }
                     item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
                     return item;
                 });
@@ -67,6 +105,7 @@ function ready() {
     initEvents();
     initViews();
     showMenus();
+    showPages();
     initPageScroll({
         pages: pages,
         onRefresh: function (callback) {
@@ -90,9 +129,9 @@ function ready() {
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
                 .siblings().removeClass('bullet-item-active');
         } else if ($this.hasClass('page-detail')) {
-            var m = location.hash.match(/id=(\d+)/);
+            var m = location.hash.match(/url=(.*)/);
             if (m) {
-                $this.find('iframe').attr('src', api.product_detail + m[1]);
+                $this.find('iframe').attr('src', m[1]);
             }
         }
     };
