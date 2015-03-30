@@ -39,19 +39,20 @@
         }
             $firstLink['label'] = '&nbsp;&nbsp;';
     ?>
-    <header id="breadcrumbs" class="page-header">
-        <a href="javascript:history.back();" title="<?php echo $this->htmlEscape($firstLink['title']) ?>" class="page-header__action page-header__action--left  product-view-breadcrumbs">
-                <span class="page-header__action--back"></span>
-                <span class="title">
-                    <?php echo $this->htmlEscape($firstLink['label']) ?>
-                </span>
-        </a>
+    <a href="javascript:history.back();" title="<?php echo $this->htmlEscape($firstLink['title']) ?>" class="page-header__action page-header__action--left  product-view-breadcrumbs" style="position:fixed; top:4px; left:4px; background-color:#ccc; width:40px; height:40px; display:block; z-index:99;">
+            <span class="page-header__action--back"></span>
+            <span class="title">
+                <?php echo $this->htmlEscape($firstLink['label']) ?>
+            </span>
+    </a>
+    <!--<header id="breadcrumbs" class="page-header">
+        
         <?php
             $_product = Mage::registry('current_product');
             $_helper = $this->helper('catalog/output');
         ?>
         <h1 id="product_title" class="page-header__title"><span><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name')?></span></h1>
-    </header><!-- .page-header -->
+    </header>--><!-- .page-header -->
     <script type="text/javascript">
         setTitleMargin($('product_title'));
     </script>

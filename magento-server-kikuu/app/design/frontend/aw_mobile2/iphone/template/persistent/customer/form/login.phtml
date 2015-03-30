@@ -38,8 +38,8 @@
         <?php echo $this->getChildHtml('form.additional.info'); ?>
         <p class="form__submit-wrapper">
         	<a id="forgot_pass_link" href="javascript:void(0);"><?php echo $this->__('Forgot Password?') ?></a>
-            <button type="submit" title="<?php echo $this->__('Login') ?>" class="form__submit button continue" style="background-color:#F4A137;" onclick="window.customerAccount.login()"><?php echo $this->__('Login') ?></button>
-            <!--<button id="create_form_link" type="button" title="<?php echo $this->__('Create an Account') ?>" class="form__submit button continue-another" style="border:1px solid #F4A137; color:#F4A137;" onclick=""><?php echo $this->__('Create an Account') ?></button>-->
+            <button id="create_form_link" type="button" title="<?php echo $this->__('Create an Account') ?>" style="border:none; color:#b3b3b3;width:50%;float:right;background-color:#f3f3f3; height:20px;text-decoration:underline; font-size:15px;" onclick=""><?php echo $this->__('Create an Account') ?></button>
+        	<button type="submit" title="<?php echo $this->__('Login') ?>" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onclick="window.customerAccount.login()"><?php echo $this->__('Login') ?></button>        
         </p><!-- .form__submit-wrapper -->
     </form>
     <script type="text/javascript">

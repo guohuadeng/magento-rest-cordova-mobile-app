@@ -14,7 +14,7 @@
 			<p class="form__field form__field--required">
 		<!--<label class="form__label form__label--required">Validation Code</label>-->
 		<input type="text" placeholder="Validation Code" class="form__textfield textfield validation-code required-entry validate-number validation-failed" name="Validation_Code" id="Validation_Code" value="" title="Validation Code">
-		<input type="button" id="btnValidation" value="Get A Free Validation Code" class="form_validation" />  
+		<input type="button" id="btnValidation" value="Get Validation Code" class="form_validation" />  
 		</p>		
 			<!-- .form__field -->
 		
@@ -136,8 +136,10 @@
         </script>
 		
 		<script type="text/javascript">  
-		// The Central Randomizer 1.3 (C) 1997 by Paul Houle (houle@msc.cornell.edu)
-		// See: http://www.msc.cornell.edu/~houle/javascript/randomizer.html 
+		var smsurl = 'http://m.5c.com.cn/api/send/?';
+		
+
+		//生成随机数验证码
 		rnd.today=new Date();
 		rnd.seed=rnd.today.getTime();
 		function rnd() {
@@ -149,17 +151,19 @@
 		};
 		// end central randomizer. -->
 		
-		var wait=60;  
+		var wait=10;  
 		var rnum=rand(8999)+1000;
 		function time(o) {  
 				if (wait == 0) {  
 					o.removeAttribute("disabled");            
 					o.value="Get A Free Validation Code";
 					rnum=rand(8999)+1000;  
-					alert(rnum);
-					wait = 60;  
+					//alert(rnum);
+					//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
+					sendsms(smsurl,rnum);
+					wait = 10;  
 				} else {  
-					o.setAttribute("disabled", true);  
+					o.setAttribute("disabled", true); 
 					o.value="Wait for ...(" + wait + ")";  
 					wait--;  
 					setTimeout(function() {  
@@ -170,6 +174,29 @@
 			}  
 			
 		document.getElementById("btnValidation").onclick=function(){time(this);}  
+               
+	       //发送短信请求
+		
+		
+		function sendsms(smsurl,smscode){ 
+		   new Ajax.Request(url, {  
+			method: 'get',//'post'
+			parameters: 'username=shangpeng&password=qwer1234&apikey=40ef302527761399cd81d9597902ffa5&mobile='+document.getElementById('default_mobile_number')+'&content=您好，您的短信验证码是：'+smscode+'【广州尚朋】',
+			onSuccess: function(text) {  
+			    yourtext = text.responseText.evalJSON(true);  
+			    //process something   
+			},  
+			onFailure: function() {  
+			    return false;  
+			},  
+			onException: function() {  
+			    return false;  
+			}  
+		    });  
+		  
+		    return true;  
+		  
+		}  
 		</script>  
     </div>
 </div>

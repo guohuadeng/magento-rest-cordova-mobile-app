@@ -23,17 +23,16 @@
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
-?><header class="panel-nav" id="my_account">
+?><!--<header class="panel-nav" id="my_account">
 	<a href="javascript:history.back();" title="<?php echo $this->htmlEscape($firstLink['title']) ?>" class="page-header__action page-header__action--left page-header__action--back">
             	<span class="page-header__action--back" style="font-size:24px">&lt;</span>
         	</a>
     <h2 class="panel-nav__title" data-default-title="<?php echo $this->__('My Account');?>">
         <span class="active"><?php echo $this->__('My Account')?></span>
     </h2>
-    <button type="button" class="panel-nav__action panel-nav__action--right panel-nav__action--cancel not-lap-land js-close-panel">
-    </button>
-</header>
-<div class="my-account panel__container">
+    
+</header>-->
+<div class="my-account panel__container" style="top:0;">
 	<!--<div class="panel-order">
     	<div class="panel_order_top">
         	已登录状态显示
@@ -60,10 +59,12 @@
             <?php foreach ($this->getLinks() as $_link): ?>
                 <li class="my-account-nav__item <?php if ($this->isActive($_link)): ?>is-current<?php endif;?>"><a class="my-account-nav__link" href="<?php if ($this->isActive($_link)) echo 'javascript:void(0);'?><?php if (!$this->isActive($_link)) echo $_link->getUrl()?>"><?php echo $_link->getLabel() ?></a></li>
             <?php endforeach;?>
-            <li class="my-account-nav__item"><a class="my-account-nav__link logout" href="<?php echo $this->helper('customer')->getLogoutUrl();?>"><?php echo $this->__("Logout");?></a></li>
+            <li class="my-account-nav__item"><a class="my-account-nav__link" href="#"><?php echo $this->__("My wish list");?></a></li>
+            <li class="my-account-nav__item"><a class="my-account-nav__link logout" style="color:#E62E04;" href="<?php echo $this->helper('customer')->getLogoutUrl();?>"><?php echo $this->__("Logout");?></a></li>
         </ul>
     </div><!-- .nav__list -->
 </div>
+<button type="button" class="js-close-panel" style="position:fixed; right:10px; bottom:10px; width:40px; height:40px; border:none; border-radius:50%; background-color:#fff; background-position:center;"></button>
 <script>
 	jQuery(function(){
 			jQuery(window).load(function(){
