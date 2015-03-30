@@ -1,63 +1,26 @@
 var isApp = location.search !== '?debug=true',
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
-        products: baseUrl + '/api/rest/products?category_id=%s&limit=10&page=%s',
+        menus: baseUrl + '/restconnect/?cmd=menu',
+        products: baseUrl + '/restconnect/?cmd=%s&limit=10&page=%s',
 //        product_detail: baseUrl + '/api/rest/products/'
         product_detail: 'http://skymazon.sunpop.cn/catalog/product/view/id/'
     },
-    menus = [{
-        title: 'Home',
-        class_name: 'active'
-    }, {
-        title: 'MOBILE AND TABLETS',
-        url: 'http://skymazon.sunpop.cn/mobile-and-tablets.html?fromui=app'
-    }, {
-        title: 'WOMEN\'S FASHION',
-        url: 'http://skymazon.sunpop.cn/womens-fashion.html?fromui=app'
-    }, {
-        title: 'MEN\'S FASHION',
-        url: 'http://skymazon.sunpop.cn/mens-fashion.html?fromui=app'
-    }, {
-        title: 'BEAUTY AND HEALTH',
-        url: 'http://skymazon.sunpop.cn/beauty-and-health.html?fromui=app'
-    }, {
-        title: 'BABY, KIDS AND TOYS',
-        url: 'http://skymazon.sunpop.cn/baby-kids-and-toys.html?fromui=app'
-    }, {
-        title: 'FOODS AND WINES',
-        url: 'http://skymazon.sunpop.cn/foods-and-wines.html?fromui=app'
-    }, {
-        title: '',
-        class_name: 'table-view-divider',
-        url: '#'
-    }, {
-        title: 'My Order',
-        url: 'http://skymazon.sunpop.cn/sales/order/history/?fromui=app'
-    }, {
-        title: 'Cart',
-        url: 'http://skymazon.sunpop.cn/?fromui=app#cart/'
-    }, {
-        title: 'Wish List',
-        url: 'http://skymazon.sunpop.cn/wishlist/?fromui=app'
-    }, {
-        title: 'Setting',
-        url: 'http://skymazon.sunpop.cn/#account/?fromui=app'
-    }],
     pages = [{
         id: 'dailySale',
-        category_id: 127,
+        cmd: 'daily_sale',
         title: 'Daily Sale',
         pullRefresh: true,
         num: 1
     }, {
         id: 'bestSeller',
-        category_id: 128,
+        cmd: 'best_seller',
         title: 'Best Seller',
         pullRefresh: true,
         num: 1
     }, {
         id: 'comingSoon',
-        category_id: 129,
+        cmd: 'coming_soon',
         title: 'Coming Soon',
         pullRefresh: true,
         num: 1

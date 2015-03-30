@@ -20,6 +20,7 @@
     "handlebars": "~3.0.0",
     "sprintf": "~1.0.2",
     "store2": "~2.2.0",
-    "swiper": "~3.0.4"
+    "swiper": "~3.0.4",
+    "momentjs": "~2.9.0"
   }
 }

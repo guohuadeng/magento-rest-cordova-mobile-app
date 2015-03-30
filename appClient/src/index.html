@@ -44,16 +44,15 @@
     </ul>
 </div>
 
-
 <script id="menu-template" type="text/x-handlebars-template">
     {{#each menus}}
-    <li class="table-view-cell {{class_name}}"><a href="{{url}}" data-ajax="false">{{title}}</a></li>
+    <li class="table-view-cell {{class_name}}"><a href="{{url}}" data-ajax="false">{{name}}</a></li>
     {{/each}}
 </script>
 
 <script id="slide-template" type="text/x-handlebars-template">
     {{#each menus}}
-    <div id="{{id}}" class="page page-index out" >
+    <div id="{{id}}" class="page page-index out">
         <div class="scroller">
             <div class="pullDown">
                 <span class="pullDownIcon"></span>
@@ -83,7 +82,7 @@
                        <!--data-contentType="application/json"-->
                        <!--data-dataType="json"-->
                        <!--data-ajax="true">{{name}}</a>-->
-                    <a href="detail.html?id={{entity_id}}">{{name}}</a>
+                    <a href="detail.html?url={{url_key}}">{{name}}</a>
                 </div>
 
                 <div class="product-price">
@@ -93,7 +92,7 @@
                                 <span class="price">${{final_price_with_tax}}</span>
                             </span>
                         </span>
-                        <span class="old-price">
+                        <span class="old-price {{price_percent_class}}">
                             <span class="price">{{price_percent}}%</span>
                         </span>
                     </div>

@@ -227,6 +227,10 @@
     font-size: 140%;
 }
 
+.item .old-price.none {
+    display: none;
+}
+
 /********************* tools ********************/
 .tools {
     position: fixed;
