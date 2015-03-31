@@ -40,10 +40,14 @@ function ready() {
 
     function showPages() {
         $.each(pages, function (i, page) {
-            $('.swiper-pagination').append(sprintf(
-                '<a href="#%s" data-rel="auto" class="bullet-item">%s</a>',
+            $('.swiper-container .swiper-wrapper').append(sprintf(
+                '<a href="#%s" data-rel="auto" class="swiper-slide bullet-item">%s</a>',
                 page.id, page.title));
         });
+        new Swiper('.swiper-container', {
+            slidesPerView: 2.5
+        });
+
         $('.bullet-item').click(function () {
             var $this = $(this);
             $this.addClass('bullet-item-active')
@@ -86,6 +90,7 @@ function ready() {
                         item.final_price_with_tax = item.regular_price_with_tax;
                     }
                     item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
+                    item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
                     return item;
                 });
                 $el[func](Handlebars.compile($itemTpl.html())({
@@ -114,9 +119,6 @@ function ready() {
         onLoadMore: function (callback) {
             initItems($('.products-grid').eq(currentPage), 'append', callback);
         }
-    });
-    new Swiper('#wrapper .swiper-container', {
-        autoplay: 2000
     });
 	
     Mobilebone.callback = function (pageinto) {
@@ -147,9 +149,7 @@ function ready() {
 }
 
 if (isApp) {
-    $(function () {
-        document.addEventListener("deviceready", ready, false);
-    });
+    $(document).ready(ready);
 } else {
     $(document).ready(ready);
 }

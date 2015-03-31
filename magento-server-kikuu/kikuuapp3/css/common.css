@@ -125,11 +125,9 @@
 	width: 100%;
 	height: 30px;
     z-index: 10;
-	top: 120px
 }
 .swiper-slide {
 	text-align: center;
-	background: #fff;
 	width: 30%;
 	z-index: 10;
 
@@ -157,8 +155,11 @@
 .bullet-item {
     color: #8a8a8a;
     line-height: 32px;
-    margin: 0 10px;
+    margin: 0;
     font-size: 16px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .bullet-item-active {

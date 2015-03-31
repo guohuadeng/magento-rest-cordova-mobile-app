@@ -41,6 +41,7 @@ function initPageScroll(options) {
             vScrollbar: false,
             lockDirection: true,
             onScrollMove: function () {
+                console.log(this.x);
                 if (!page.pullRefresh) {
                     return;
                 }
