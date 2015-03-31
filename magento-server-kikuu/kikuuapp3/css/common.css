@@ -50,6 +50,7 @@
     position: fixed;
     z-index: 1000;
 	width:80%;
+	top: 0;
 }
 
 .cbp-spmenu h3 {
@@ -88,10 +89,12 @@
 
 .cbp-spmenu-left.cbp-spmenu-open {
     left: 0;
+	top: 0;
 }
 
 .cbp-spmenu-right.cbp-spmenu-open {
     right: 0;
+	top: 0;
 }
 /* Push classes applied to the body */
 
