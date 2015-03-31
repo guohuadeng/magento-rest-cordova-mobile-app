@@ -21,16 +21,16 @@ function ready() {
                 url: '#'
             }, {
                 name: 'My Order',
-                url: 'detail.html?url=http://skymazon.sunpop.cn/sales/order/history/?fromui=app'
+                url: 'detail.html?title=My Order&url=http://skymazon.sunpop.cn/sales/order/history/?fromui=app'
             }, {
                 name: 'Cart',
-                url: 'detail.html?url=http://skymazon.sunpop.cn/?fromui=app#cart/'
+                url: 'detail.html?title=Cart&url=http://skymazon.sunpop.cn/?fromui=app#cart/'
             }, {
                 name: 'Wish List',
-                url: 'detail.html?url=http://skymazon.sunpop.cn/wishlist/?fromui=app'
+                url: 'detail.html?title=Wish List&url=http://skymazon.sunpop.cn/wishlist/?fromui=app'
             }, {
                 name: 'Setting',
-                url: 'detail.html?url=http://skymazon.sunpop.cn/#account/?fromui=app'
+                url: 'detail.html?title=Setting&url=http://skymazon.sunpop.cn/#account/?fromui=app'
             });
             $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
                 menus: menus
@@ -73,7 +73,7 @@ function ready() {
 
         $.ajax({
             type: 'get',
-            url: sprintf(api.products, page.cmd, page.num),
+            url: sprintf(api.products, page.cmd, page.num === 1 ? 10 : 3, page.num),
             contentType: 'application/json',
             dataType: 'json',
             success: function (list) {
@@ -120,7 +120,7 @@ function ready() {
             initItems($('.products-grid').eq(currentPage), 'append', callback);
         }
     });
-	
+
     Mobilebone.callback = function (pageinto) {
         var $this = $(pageinto),
             $headerIndex = $('.header-index').addClass('out'),
@@ -132,9 +132,16 @@ function ready() {
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
                 .siblings().removeClass('bullet-item-active');
         } else if ($this.hasClass('page-detail')) {
-            var m = location.hash.match(/url=(.*)/);
-            if (m) {
-                $this.find('iframe').attr('src', m[1]);
+            var query = {};
+            $.each(location.hash.substring(location.hash.indexOf('?') + 1).split('&'), function (i, item) {
+                var items = item.split('=');
+                query[items[0]] = items[1];
+            });
+            if (query.url) {
+                $this.find('iframe').attr('src', query.url);
+            }
+            if (query.title) {
+                $this.find('.title').text(query.title);
             }
         }
     };
@@ -149,7 +156,7 @@ function ready() {
 }
 
 if (isApp) {
-    $(document).ready(ready);
+    document.addEventListener('deviceready', ready, false);
 } else {
     $(document).ready(ready);
 }

@@ -13,7 +13,7 @@
     <a href="search.html" class="icon fa fa-search pull-left"></a>
     <a class="icon fa fa-shopping-cart pull-right"></a>
     <a class="icon fa fa-qrcode pull-right qrcode"></a>
-    <h1 class="title"><img src="images/logo.png" height="40"></h1>
+    <h2 class="title"><img src="images/logo.png" height="40"></h2>
 </header>
 
 <div class="header-index swiper-container swiper-pagination">
@@ -28,7 +28,7 @@
     </div>
 </div>
 
-<div class="tools">
+<div class="tools none">
     <a href="http://skymazon.sunpop.cn/sales/order/history/?fromui=app" data-ajax="false">
         <i class="fa fa-user"></i>
     </a> |
@@ -75,7 +75,7 @@
     <div class="item">
         <div class="item-inner">
             <div class="product-image">
-                <a href="detail.html?url={{url_key}}">
+                <a href="detail.html?title={{name}}&url={{url_key}}">
 					<img class="small-image" src="{{image_url}}" alt="{{name}}" height="200">
 				</a>
             </div>
@@ -136,6 +136,7 @@
     {{/with}}
 </script>
 
+<script src="cordova.js"></script>
 <script src="js/assets.js"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>

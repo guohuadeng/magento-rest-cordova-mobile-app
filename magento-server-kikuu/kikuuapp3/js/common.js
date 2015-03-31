@@ -1,8 +1,8 @@
-var isApp = false,
+var isApp = true,
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         menus: baseUrl + '/restconnect/?cmd=menu',
-        products: baseUrl + '/restconnect/?cmd=%s&limit=10&page=%s',
+        products: baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
 //        product_detail: baseUrl + '/api/rest/products/'
         product_detail: 'http://skymazon.sunpop.cn/catalog/product/view/id/'
     },
@@ -56,28 +56,22 @@ var isApp = false,
     };
 
 window.onerror = function (e) {
-//    alert(e);
+    alert(e);
 };
 
 function initEvents() {
     $(document).on('click', '[data-role="back"]', function () {
         history.back();
     });
-    $(document).on('click', '.cbp-spmenu a', function () {
-        $(this).parent().addClass('active').siblings().removeClass('active');
-        toggleMenu();
-    });
-}
-
-function initViews() {
-    setTimeout(function () {
-        $('.start').hide();
-        checkFirstTime();
-    }, define.startTime);
 
     $('.menu-toggle, .menu-close').click(toggleMenu);
 
-    $('.qrcode').click(function () {
+    $(document).on('click', '.cbp-spmenu li a', function () {
+        $(this).parent().addClass('active').siblings().removeClass('active');
+        toggleMenu();
+    });
+
+    $(document).on('click', '.qrcode', function () {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
                 if (result.format === 'QR_CODE' && confirm(result.text)) {
@@ -94,27 +88,18 @@ function initViews() {
         );
     });
 
-    var $detailModal = $('#detailModal');
-    $detailModal.find('.share').click(function () {
-        plugins.socialsharing.share($detailModal.find('.title').text(), null, null,
-            $detailModal.find('iframe').attr('src'));
+    $(document).on('click', '.share', function () {
+        var $this = $(this).parents('.page');
+        plugins.socialsharing.share($this.find('.title').text(), null, null,
+            $this.find('iframe').attr('src'));
     });
-    $(document).on('click', '.detail-link', function () {
-        $detailModal.find('.title').text($(this).data('title'));
-        $detailModal.find('iframe').attr('src', api.product_detail + $(this).data('id'));
-    });
-    $detailModal.on('modalOpen', function () {
-        state = 'detail';
-    });
-    $detailModal.on('modalClose', function(e) {
-        $detailModal.find('iframe').attr('src', '').hide();
-        setTimeout(function () {
-            state = 'index';
-        }, 1000);
-    });
-    $detailModal.find('iframe').load(function() {
-        $(this).show();
-    });
+}
+
+function initViews() {
+    setTimeout(function () {
+        $('.start').hide();
+        checkFirstTime();
+    }, define.startTime);
 }
 
 function checkFirstTime() {
