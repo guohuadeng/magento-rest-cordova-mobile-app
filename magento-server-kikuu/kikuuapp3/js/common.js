@@ -63,7 +63,10 @@ function initEvents() {
     $(document).on('click', '[data-role="back"]', function () {
         history.back();
     });
-    $(document).on('click', '.cbp-spmenu a', toggleMenu);
+    $(document).on('click', '.cbp-spmenu a', function () {
+        $(this).parent().addClass('active').siblings().removeClass('active');
+        toggleMenu();
+    });
 }
 
 function initViews() {
