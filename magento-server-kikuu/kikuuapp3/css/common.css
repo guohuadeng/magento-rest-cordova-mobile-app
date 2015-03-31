@@ -15,6 +15,10 @@
 	color:#8a8a8a;
 }
 
+.title img {
+    vertical-align: middle;
+}
+
 /******************* start **************************/
 .start, .slider {
     position: fixed;

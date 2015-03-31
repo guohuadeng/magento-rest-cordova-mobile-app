@@ -59,8 +59,15 @@ function ready() {
 
         $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
                 menus: pages
-            })).find('.products-grid').each(function () {
-                initItems($(this), 'html');
+            })).find('.products-grid').each(function (i) {
+                initItems($(this), 'html', function () {
+                    if (i === 0) {
+                        $('.first-start.loading').remove();
+                        if (!location.hash) {
+                            $('#dailySale').click();
+                        }
+                    }
+                });
             });
     }
 
@@ -156,7 +163,8 @@ function ready() {
 }
 
 if (isApp) {
-    document.addEventListener('deviceready', ready, false);
+    $(document).ready(ready);
+//    document.addEventListener('deviceready', ready, false);
 } else {
     $(document).ready(ready);
 }
