@@ -1,0 +1,141 @@
+/* Copyright (c) 2011 - Andago
+*
+* author: Daniel Tizon
+*
+* Licensed under the Apache License, Version 2.0 (the "License"); you may not
+* use this file except in compliance with the License. You may obtain a copy of
+* the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+* WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+* License for the specific language governing permissions and limitations under
+* the License.
+*/
+
+cordova.define("cordova/plugin/bluetooth",
+  function(require, exports, module) {
+    var exec = require("cordova/exec");
+
+    var Bluetooth = function() {};
+
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.listDevices = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'listDevices', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.isBTEnabled = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'isBTEnabled', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.enableBT = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'enableBT', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.disableBT = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'disableBT', [argument]);
+    };
+
+    /**
+    * @param argument Argument that we are going to pass to the plugin, you need pass the MAC address of the bluetooth device with wich you want to pair
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.pairBT = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'pairBT', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin, you need pass the MAC address of the bluetooth device that you want unpair
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.unPairBT = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'unPairBT', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.listBoundDevices = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'listBoundDevices', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin - for this method no arguments are needed
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.stopDiscovering = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'stopDiscovering', [argument]);
+    };
+    
+    /**
+    * @param argument Argument that we are going to pass to the plugin, you need pass the MAC address of the mobile that you want to know if it is bound
+    * @param successCallback The callback which will be called when listDevices is successful
+    * @param failureCallback The callback which will be called when listDevices encouters an error
+    */
+    Bluetooth.prototype.isBound = function(argument,successCallback, failureCallback) {
+        exec(successCallback, failureCallback, 'BluetoothPlugin', 'isBound', [argument]);
+    };
+
+    /**
+    * 往蓝牙设备写字符串数据
+    * 
+    * @param successCallback:success message
+    * @param failureCallback:error message
+    * @param address:设备物理地址
+    * @param message:要写入的数据
+    * @param encoding:数据编码格式
+    */
+    Bluetooth.prototype.writeString = function(argument,successCallback, failureCallback) {
+    	exec(successCallback, failureCallback, 'BluetoothPlugin', 'writeString', [argument.address,argument.message,argument.type]);
+    };
+    
+    /**
+     * 往蓝牙设备写字符串数据
+     * 
+     * @param successCallback:success message
+     * @param failureCallback:error message
+     * @param address:设备物理地址
+     * @param message:要写入的数据
+     * @param encoding:数据编码格式
+     */
+     Bluetooth.prototype.connection = function(argument,successCallback, failureCallback) {
+     	exec(successCallback, failureCallback, 'BluetoothPlugin', 'connect', [argument]);
+     };
+    
+    var bluetooth = new Bluetooth();
+    module.exports = bluetooth;
+});
+
+
+if (!window.plugins) {
+    window.plugins = {};
+}
+if (!window.plugins.bluetooth) {
+    window.plugins.bluetooth = cordova.require("cordova/plugin/bluetooth");
+}

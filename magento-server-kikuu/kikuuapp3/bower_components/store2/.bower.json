@@ -1,0 +1,25 @@
+{
+  "name": "store2",
+  "version": "2.2.0",
+  "main": "dist/store2.js",
+  "ignore": [
+    "**/.*",
+    "Gruntfile.js",
+    "libs",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test"
+  ],
+  "homepage": "https://github.com/nbubna/store",
+  "_release": "2.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.2.0",
+    "commit": "6447069032afe55d1a49c6caf1b4ea5d6091faed"
+  },
+  "_source": "git://github.com/nbubna/store.git",
+  "_target": "~2.2.0",
+  "_originalSource": "store2",
+  "_direct": true
+}

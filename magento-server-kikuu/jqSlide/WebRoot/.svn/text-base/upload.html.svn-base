@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+
+
+<html>
+
+<head>
+
+<title>PhoneGap_dataTransfer</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" charset="utf-8"
+
+    src="js/jquery.mobile-1.3.2.min.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+
+<script type="text/javascript">
+
+ //   $(document).bind("mobileinit", function() {
+   //     $.support.cors = true;
+     //   $.mobile.allowCrossDomainPages = true;
+    //});
+    var pictureSource; // picture source
+
+    var destinationType; // sets the format of returned value
+
+    // Wait for Cordova to connect with the device
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready to be used!
+    function onDeviceReady() {
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+    }
+    
+    // A button will call this function
+    function capturePhoto() {
+        // Take picture using device camera and retrieve image as base64-encoded string
+        navigator.camera.getPicture(uploadPhoto, onFail2, {
+            quality : 75,
+            destinationType : navigator.camera.DestinationType.FILE_URI,
+           
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType : Camera.EncodingType.JPEG,
+            popoverOptions : CameraPopoverOptions,
+            saveToPhotoAlbum : true
+        });
+    }
+    
+    window.resolveLocalFileSystemURI(imageURI, onResolveSuccess, onError);
+    function onResolveSuccess(fileEntry){
+         alert(fileEntry.fullPath);
+     }
+     
+     function onError(error) {
+     toLog( "网络不给力请重新上传…… " );
+        // toLog("error code: "+ error.code);
+     };
+     
+     
+    
+    // A button will call this function
+    //
+    function capturePhotoEdit() {
+        // Take picture using device camera, allow edit, and retrieve image as base64-encoded string 
+        navigator.camera.getPicture(uploadPhoto, onFail, {
+            quality : 50,
+            allowEdit : true,
+            destinationType : destinationType.DATA_URL,
+            saveToPhotoAlbum : true
+        });
+    }
+    // A button will call this function
+    //
+ 
+    function getPhoto(source) {
+        // Retrieve image file location from specified source
+        navigator.camera.getPicture(uploadPhotoFromALbum, onFail, {
+            quality : 50,
+            destinationType : destinationType.FILE_URI,//这里要用FILE_URI，才会返回文件的URI地址
+ 
+            sourceType : source
+        });
+    }
+    
+    
+    function onFail2(message) {
+  	  alert("操作中断，相机已关闭！");
+    }
+    function onFail(message) {
+  	  alert("操作中断！");
+    }
+    
+    function uploadPhoto(imageURI) {
+    
+  	  	$.mobile.loadingMessageTextVisible = true;    
+    	$.mobile.showPageLoadingMsg( "a", "正在上传图片， 请耐心等候！" ); 
+    
+        var options = new FileUploadOptions();
+        options.fileKey = "fileAddPic";
+        options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+        
+        options.mimeType = "image/jpeg";
+        var uri = encodeURI("http://192.168.254.136:8080/jdxt/FileUploadServlet");
+        
+        
+        options.chunkedMode = false;
+        var ft = new FileTransfer();
+        ft.upload(imageURI, uri, win, fail, options);
+        
+    }
+    
+     function uploadPhotoFromALbum(imageURI) {
+    	 
+    	$.mobile.loadingMessageTextVisible = true;    
+    	$.mobile.showPageLoadingMsg( "a", "正在上传图片， 请耐心等候！" ); 
+     	
+        var options = new FileUploadOptions();
+        options.fileKey = "fileAddPic";
+        options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
+        
+        options.mimeType = "image/jpeg";
+        var uri = encodeURI("http://192.168.254.136:8080/jdxt/PhoneGapServlet");
+        
+        options.chunkedMode = false;
+        
+        var ft = new FileTransfer();
+        
+        ft.upload(imageURI, uri, win, fail, options);
+       
+    }
+    
+    
+    function win(r) {
+        alert("上传成功");
+    	$.mobile.hidePageLoadingMsg();
+        var response = r.response;
+        var message = eval("(" + r.response + ")").message;
+        $("#_picFile").val(message);
+        var imageURI = CONSTANT['context'] + message;
+    }
+    
+    function fail(error) {
+    
+    	alert("网络不给力请重新上传 …… ");
+    	$.mobile.hidePageLoadingMsg();
+    }
+</script>
+ 
+</head>
+ 
+ 
+ 
+ 
+<body>
+
+    <!-- page write -->
+    <div data-role="page" id="write">
+        <div data-role="header" data-position="fixed">
+            <a href="#" data-icon="back" data-rel="back">返回</a>
+            <a href="index.jsp" data-icon="home" data-rel="back">主页</a>
+            <h1>拍照并上传图片</h1>
+    
+        </div>
+        
+     
+        <!-- /header -->
+        <div data-role="content">
+            <input id="_picFile" type="hidden" value="" />
+            
+            <!-- take photoes -->
+            <button data-theme="b" onclick="capturePhoto();">点击拍照</button>
+            
+            <br>
+            <button data-theme="b" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">从相册选择图片</button>
+        
+        </div>
+
+        <!-- /content -->
+
+    </div>
+    <!-- /page write -->
+</body>
+
+</html>

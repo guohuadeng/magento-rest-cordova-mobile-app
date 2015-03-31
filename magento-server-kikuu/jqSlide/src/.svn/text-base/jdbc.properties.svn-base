@@ -1,0 +1,6 @@
+driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+url=jdbc\:sqlserver\://www.gdjsds.com\:8765;databaseName\=jdxt
+username=jdxt
+password=jdxt2013
+initialSize=1
+maxActive=500

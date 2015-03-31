@@ -42,10 +42,14 @@
 }
 
 /******************** menus *************************/
+.card {
+	margin: 0px;
+	height: 100%;
+}
 .cbp-spmenu {
     position: fixed;
     z-index: 1000;
-	width:80%;
+	width: 80%;
 }
 
 .cbp-spmenu h3 {

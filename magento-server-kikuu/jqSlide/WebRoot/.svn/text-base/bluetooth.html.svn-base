@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>蓝牙打印</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/bluetooth.js"></script>
+<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery-1.9.1.min.js"></script>
+
+<script type="text/javascript" charset="utf-8"
+	src="js/jquery.mobile-1.3.2.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+	function onBodyLoad() {
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+
+	function onDeviceReady() {
+		
+		//------------------------------------------------------ 打开蓝牙 ------------------------------------------------------
+		var btnEnableBT = document.getElementById("enableBT");
+		btnEnableBT.onclick = function() {
+			alert("正在打开蓝牙！");
+			window.plugins.bluetooth.enableBT(null, function(r) {
+				//printResult3(r)
+			}, function(e) {
+				log(e)
+			});
+		}
+
+		//------------------------------------------------------ 关闭蓝牙 ------------------------------------------------------
+
+		var btnDisableBT = document.getElementById("disableBT");
+		btnDisableBT.onclick = function() {
+			alert("正在关闭蓝牙！");
+			window.plugins.bluetooth.disableBT(null, function(r) {
+				//printResult4(r)
+			}, function(e) {
+				log(e)
+			});
+		}
+
+		
+		
+	//------------------------------------------------------ 查看已配对设备 ------------------------------------------------------
+		var btnListBoundDevices = document.getElementById("list-bound-devices");
+		btnListBoundDevices.onclick = function() {
+			window.plugins.bluetooth.listBoundDevices(null, function(r) {
+				printResult7(r)
+			}, function(e) {
+				log(e)
+			});
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------------------
+	function printResult7(resultadoString) {
+		// 先清空先前的数据
+		$("#listBoundDevices").empty();
+		var resultado = eval(resultadoString);
+		for (var i = 0; i < resultado.length; i++) {
+			//创建input标签
+			var newInput = $("<input>");
+			//获取蓝牙设备的地址
+			var address = resultado[i].address;
+			var driver = resultado[i].name;
+			//给input标签添加各种属性
+			newInput.attr("type","button").attr("data-theme","e").attr("value","发送数据到：" + driver)
+			.bind("click",{driver:driver,address:address},function(event){ //绑定点击事件
+                // 显示输入框
+				$("#win").show("slow");
+				$("#driver").html(event.data.driver + "准备就绪！");
+				//绑定关闭按钮事件
+				var btnClose = document.getElementById("close");
+				btnClose.onclick = function() {
+					$("#win").fadeOut();
+					
+				}
+				
+				//绑定打印按钮事件
+				var btnWriterString = document.getElementById("writerString");
+				btnWriterString.onclick = function() {
+					var type = $("#type").val();
+					var content = $("#content").val();
+					//连接设备
+	                window.plugins.bluetooth.connection(
+	                	event.data.address,
+	  					function(r) {
+	  						alert(r);
+	  						//printResult10(r)
+	  					}, function(e) {
+	  						log(e)
+	  					});
+	                
+	                
+	                //发送数据
+	                window.plugins.bluetooth.writeString(
+                		{
+                			address:event.data.address,
+                			message:content,	
+                			type:type
+                		},
+		                function(r) {
+		    				alert(r);
+		    				//printResult10(r)
+		    			}, function(e) {
+		    				log(e)
+		    			});
+				}
+                
+    		});
+			
+			//将input标签添加到div标签里
+			newInput.appendTo("#listBoundDevices");
+			newInput.button();
+		}
+		
+	}
+</script>
+</head>
+
+
+<body onload="onBodyLoad()">
+	<div data-role="page" id="write">
+		<div data-role="header" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">返回</a> <a
+				href="index.jsp" data-icon="home" data-rel="back">主页</a>
+			<h1>蓝牙打印</h1>
+		</div>
+		<div data-role="content" align="center">
+			<div data-role="controlgroup" data-type="horizontal">
+				<input id="enableBT" type="button" data-theme="b" value="打开蓝牙" /> <input
+					id="disableBT" type="button" data-theme="b" value="关闭蓝牙" />
+			</div>
+			<input id="list-bound-devices" type="button" data-theme="b"
+				value="查看已配对蓝牙设备" />
+			<hr>
+			<div id="result"></div><br/>
+			
+			<!-- 已绑定蓝牙设备输入框 -->
+			<div id="listBoundDevices" >
+			</div>
+			
+			<!-- 输入框div -->
+			<div id="win" style="display: none;">
+				<span id="driver" style="color: green"></span>
+				<textarea rows="10" cols="10" id="content"></textarea>
+				<div data-role="controlgroup" data-type="horizontal">
+					<input id="writerString" type="button" data-theme="b" value="打印" />
+					<input id="close" type="button" data-theme="b" value="取消打印" />
+				</div>
+				<select id="type" data-native-menu="false" data-ajax="false">
+						<option value="-1">打印格式</option>
+						<option value="0">复位打印机</option>
+						<option value="1">标准ASCII字体</option>
+						<option value="2">压缩ASCII字体</option>
+						<option value="3">字体不放大</option>
+						<option value="4">宽高加倍</option>
+						<option value="5">取消加粗模式</option>
+						<option value="6">选择加粗模式</option>
+				</select>
+			</div>
+
+
+		</div>
+	</div>
+	<!-- /page write -->
+</body>
+</html>

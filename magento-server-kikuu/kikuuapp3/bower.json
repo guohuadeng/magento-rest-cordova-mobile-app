@@ -1,0 +1,26 @@
+{
+  "name": "sm-market",
+  "version": "1.0.0",
+  "authors": [
+    "zhixin <wenzhixin2010@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ratchet": "~2.0.2",
+    "jquery": "1.10.0",
+    "fontawesome": "~4.3.0",
+    "handlebars": "~3.0.0",
+    "sprintf": "~1.0.2",
+    "store2": "~2.2.0",
+    "swiper": "~3.0.4",
+    "momentjs": "~2.9.0"
+  }
+}
