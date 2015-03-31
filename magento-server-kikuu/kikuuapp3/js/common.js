@@ -63,6 +63,7 @@ function initEvents() {
     $(document).on('click', '[data-role="back"]', function () {
         history.back();
     });
+    $(document).on('click', '.cbp-spmenu a', toggleMenu);
 }
 
 function initViews() {
