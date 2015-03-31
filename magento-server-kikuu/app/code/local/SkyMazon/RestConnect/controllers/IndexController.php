@@ -27,35 +27,26 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 						$_helper->getCategoryUrl ( $_category );
 
 						$_categorylist [] = array (
-						
+
 								'category_id' => $_category->getId (),
 
 								'name' => $_category->getName (),
-								
-								'is_active' => $_category->getIsActive(),
-								
-								'position ' => $_category->getPosition(),
-								
-								'level ' => $_category->getLevel(),
+
+								'is_active' => $_category->getIsActive (),
+
+								'position ' => $_category->getPosition (),
+
+								'level ' => $_category->getLevel (),
 
 								'url_key' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getUrlPath (),
-								
+
 								'thumbnail_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getThumbnailUrl (),
-								'thumbnail_url' => $_category->getThumbnailUrl (),
-								
+
 								'image_url' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl (),
 
-								'children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getAllChildren()
+								'children' => Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getAllChildren () 
 
 						);
-
-						// $_categorylist []['name'] = $_category->getName ();
-
-						// $_categorylist []['catid'] = $_category->getId ();
-
-						// $_categorylist[]['imageurl']=$_category->getImageUrl ();
-
-						// $_categorylist []['imageurl'] = Mage::getModel ( 'catalog/category' )->load ( $_category->getId () )->getImageUrl ();
 
 					}
 
@@ -87,59 +78,43 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 
 				$collection = $category->getProductCollection ()->addAttributeToSort ( $order, $dir )->setPage ( $page, $limit );
 
-				$productlist = array ();
+				// $productlist = array ();
 
-				foreach ( $collection as $product ) {
+				// foreach ( $collection as $product ) {
 
-					// getting product object for particular product id,设置要显示商品的属性
+				// // getting product object for particular product id,设置要显示商品的属性
 
-					$_product = $model->load ( $product ['entity_id'] );
+				// $_product = $model->load ( $product ['entity_id'] );
 
-					$productlist [] = array (
+				// $productlist [] = array (
 
-							'entity_id' => $_product->getId (),
+				// 'entity_id' => $_product->getId (),
 
-							'sku' => $_product->getSku (),
+				// 'sku' => $_product->getSku (),
 
-							'name' => $_product->getName (),
+				// 'name' => $_product->getName (),
 
-							'news_from_date' => $_product->getNewsFromDate (),
+				// 'news_from_date' => $_product->getNewsFromDate (),
 
-							'news_to_date' => $_product->getNewsToDate (),
+				// 'news_to_date' => $_product->getNewsToDate (),
 
-							'special_from_date' => $_product->getSpecialFromDate (),
+				// 'special_from_date' => $_product->getSpecialFromDate (),
 
-							'special_to_date' => $_product->getSpecialToDate (),
+				// 'special_to_date' => $_product->getSpecialToDate (),
 
-							'image_url' => $_product->getImageUrl (),
+				// 'image_url' => $_product->getImageUrl (),
 
-							'url_key' => $_product->getProductUrl (),
+				// 'url_key' => $_product->getProductUrl (),
 
-							'regular_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $_product->getPrice (), 'CNY', 'USD' ),
+				// 'regular_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $_product->getPrice (), 'CNY', 'USD' ),
 
-							'final_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $_product->getSpecialPrice (), 'CNY', 'USD' ) 
+				// 'final_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $_product->getSpecialPrice (), 'CNY', 'USD' )
 
-					);
+				// );
 
-					// $productlist ['name'] [] = $_product->getName ();
+				// }
 
-					// $productlist ['price'] [] = $_product->getPrice ();
-
-					// $productlist ['special_price'] [] = $_product->getSpecialPrice ();
-
-					// $productlist ['thumbnail'] [] = $_product->getThumbnailUrl ();
-
-					// $productlist ['short_description'] [] = $_product->getShortDescription ();
-
-					// $productlist ['image'] [] = $_product->getImageUrl ();
-
-					// $productlist ['small_image'] [] = $_product->getSmallImageUrl ();
-
-					// $productlist ['description'] [] = $_product->getDescription ();
-
-					// $productlist ['product_url'] = $_product->getProductUrl ();
-
-				}
+				$productlist = $this->getProductlist ( $collection, 'catalog' );
 
 				echo json_encode ( $productlist );
 
@@ -207,39 +182,7 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 
 				$products = $_productCollection->getItems ();
 
-				$productlist = array ();
-
-				foreach ( $products as $product ) {
-
-					// echo $product->getName ();
-
-					$productlist [] = array (
-
-							'entity_id' => $product->getId (),
-
-							'sku' => $product->getSku (),
-
-							'name' => $product->getName (),
-
-							'news_from_date' => $product->getNewsFromDate (),
-
-							'news_to_date' => $product->getNewsToDate (),
-
-							'special_from_date' => $product->getSpecialFromDate (),
-
-							'special_to_date' => $product->getSpecialToDate (),
-
-							'image_url' => $product->getImageUrl (),
-
-							'url_key' => $product->getProductUrl (),
-
-							'regular_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), 'CNY', 'USD' ),
-
-							'final_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), 'CNY', 'USD' ) 
-
-					);
-
-				}
+				$productlist = $this->getProductlist ( $products );
 
 				echo json_encode ( $productlist );
 
@@ -258,14 +201,10 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 				$todayDate = Mage::app ()->getLocale ()->date ()->toString ( Varien_Date::DATETIME_INTERNAL_FORMAT );
 
 				$_products = Mage::getModel ( 'catalog/product' )->getCollection ()->addAttributeToSelect ( '*'/* array (
-
-						'name',
-
-						'special_price',
-
-						'news_from_date' 
-
-				) */ )->addAttributeToFilter ( 'news_from_date', array (
+		'name',
+		'special_price',
+		'news_from_date' 
+) */ )->addAttributeToFilter ( 'news_from_date', array (
 
 						'or' => array (
 
@@ -337,39 +276,9 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 
 				$products = $_products->getItems ();
 
-				$productlist = array ();
-
-				foreach ( $products as $product ) {
-
-					// echo $product->getName ();
-
-					$productlist [] = array (
-
-							'entity_id' => $product->getId (),
-
-							'sku' => $product->getSku (),
-
-							'name' => $product->getName (),
-
-							'news_from_date' => $product->getNewsFromDate (),
-
-							'news_to_date' => $product->getNewsToDate (),
-
-							'image_url' => $product->getImageUrl (),
-
-							'url_key' => $product->getProductUrl (),
-
-							'regular_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), 'CNY', 'USD' ),
-
-							'final_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), 'CNY', 'USD' ) 
-
-					);
-
-				}
+				$productlist = $this->getProductlist ( $products );
 
 				echo json_encode ( $productlist );
-
-				
 
 				// ------------------------------首页 预特价商品 END--------------------------------//
 
@@ -427,39 +336,7 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 
 				$products = $collection->getItems ();
 
-				$productlist = array ();
-
-				foreach ( $products as $product ) {
-
-					// echo $product->getName ();
-
-					$productlist [] = array (
-
-							'entity_id' => $product->getId (),
-
-							'sku' => $product->getSku (),
-
-							'name' => $product->getName (),
-
-							'news_from_date' => $product->getNewsFromDate (),
-
-							'news_to_date' => $product->getNewsToDate (),
-
-							'special_from_date' => $product->getSpecialFromDate (),
-
-							'special_to_date' => $product->getSpecialToDate (),
-
-							'image_url' => $product->getImageUrl (),
-
-							'url_key' => $product->getProductUrl (),
-
-							'regular_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), 'CNY', 'USD' ),
-
-							'final_price_with_tax' => Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), 'CNY', 'USD' ) 
-
-					);
-
-				}
+				$productlist = $this->getProductlist ( $products );
 
 				echo json_encode ( $productlist );
 
@@ -481,4 +358,63 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 
 	}
 
+	public function getProductlist($products, $mod = 'product') {
+
+		$productlist = array ();
+
+		foreach ( $products as $product ) {
+
+			if ($mod == 'catalog') {
+
+				$product = Mage::getModel ( 'catalog/product' )->load ( $product ['entity_id'] );
+
+				// $product = $_product;
+
+			}
+
+			// echo $product->getName ();
+
+			$productlist [] = array (
+
+					'entity_id' => $product->getId (),
+
+					'sku' => $product->getSku (),
+
+					'name' => $product->getName (),
+
+					'news_from_date' => $product->getNewsFromDate (),
+
+					'news_to_date' => $product->getNewsToDate (),
+
+					'special_from_date' => $product->getSpecialFromDate (),
+
+					'special_to_date' => $product->getSpecialToDate (),
+
+					'image_url' => $product->getImageUrl (),
+
+					'url_key' => $product->getProductUrl (),
+
+					'regular_price_with_tax' =>number_format( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), 'CNY', 'USD' ), 2, '.', ''),
+
+					'final_price_with_tax' => number_format(Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), 'CNY', 'USD' ), 2, '.', '')
+
+					
+
+			
+
+			);
+
+		}
+
+		return $productlist;
+
+	}
+
 }
+
+
+
+
+
+
+
