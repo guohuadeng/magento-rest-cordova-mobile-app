@@ -7,6 +7,12 @@ function initPageScroll(options) {
         },
         onLoadMore: function (callback) {
             callback();
+        },
+        onLeft: function () {
+            return false;
+        },
+        onRight: function () {
+            return false;
         }
     }, options);
 
@@ -32,7 +38,7 @@ function initPageScroll(options) {
         }
     };
 
-    function initScroll(page) {
+    function initScroll(i, page) {
         var $el = $('#' + page.id),
             $pd = $el.find('.pullDown');
 
@@ -59,6 +65,14 @@ function initPageScroll(options) {
                 pullActionDetect.check(scroll, $el.find('.pullUp'), 1);
             },
             onScrollEnd: function () {
+                if (this.distX < -100) {
+                    options.onRight(page.id, i);
+                    return;
+                }
+                if (this.distX > 100) {
+                    options.onLeft(page.id, i);
+                    return;
+                }
                 if (!page.pullRefresh) {
                     return;
                 }
@@ -80,7 +94,5 @@ function initPageScroll(options) {
         $el.data('scroll', scroll);
     }
 
-    $.each(options.pages, function (i, page) {
-        initScroll(page);
-    });
+    $.each(options.pages, initScroll);
 }

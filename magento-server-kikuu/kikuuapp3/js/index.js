@@ -1,5 +1,6 @@
 function ready() {
     var currentPage = 0,
+        bannerSwiper,
         $menuTpl = $('#menu-template'),
         $slideTpl = $('#slide-template'),
         $itemTpl = $('#item-template'),
@@ -44,8 +45,8 @@ function ready() {
                 '<a href="#%s" data-rel="auto" class="swiper-slide bullet-item">%s</a>',
                 page.id, page.title));
         });
-        new Swiper('.swiper-container', {
-            slidesPerView: 3.2
+        bannerSwiper = new Swiper('.swiper-container', {
+            slidesPerView: 3
         });
 
         $('.bullet-item').click(function () {
@@ -125,6 +126,18 @@ function ready() {
         },
         onLoadMore: function (callback) {
             initItems($('.products-grid').eq(currentPage), 'append', callback);
+        },
+        onLeft: function (id, index) {
+            if (index === 0) {
+                toggleMenu();
+            } else {
+                Mobilebone.transition($('#' + pages[index - 1].id)[0], $('#' + id)[0], true);
+            }
+        },
+        onRight: function (id, index) {
+            if (index + 1 < pages.length) {
+                Mobilebone.transition($('#' + pages[index + 1].id)[0], $('#' + id)[0], false);
+            }
         }
     });
 
@@ -134,6 +147,7 @@ function ready() {
             $frame = $('.frame').addClass('out');
 
         if ($this.hasClass('page-index')) {
+            bannerSwiper.slideTo($this.index());
             $headerIndex.removeClass('out');
             $frame.removeClass('out');
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')

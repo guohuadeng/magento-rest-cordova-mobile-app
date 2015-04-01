@@ -1,4 +1,4 @@
-var isApp = true,
+var isApp = false,
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         menus: baseUrl + '/restconnect/?cmd=menu',
