@@ -19,6 +19,17 @@
     vertical-align: middle;
 }
 
+a. {
+	color: 	#8a8a8a;
+}
+
+a.active {
+	color: 	#e62e04;
+}
+.btn-positive {
+	background-color: #F4A137;
+	border: 1px solid #F4A137;
+}
 /******************* start **************************/
 .start, .slider {
     position: fixed;
@@ -122,7 +133,7 @@
 
 .swiper-pagination {
     top: 44px;
-    height: 32px;
+    height: 36px;
     position: fixed;
     background: #eeeeee;
     width: 100%;
@@ -136,7 +147,7 @@
 }
 .swiper-slide {
 	text-align: center;
-	width: 30%;
+	width: auto;
 	z-index: 10;
 
 	/* Center slide text vertically */
@@ -154,15 +165,15 @@
 	align-items: center;
 }
 .swiper-slide:nth-child(2n) {
-	width: 30%;
+	width: auto;
 }
 .swiper-slide:nth-child(3n) {
-	width: 30%;
+	width: auto;
 }
 
 .bullet-item {
     color: #8a8a8a;
-    line-height: 32px;
+    line-height: 36px;
     margin: 0;
     font-size: 16px;
     text-overflow: ellipsis;
@@ -286,13 +297,13 @@
 .item .discount {
     position: absolute;
     top: 10px;
-    font-size: 120%;
+    font-size: 1em%;
 }
 
 .price-box .discount .price,
 .item .item-price .discount .price,
 .item .product-price .discount .price {
-    font-size: 100%;
+    font-size: 1em;
     background: #e35a32;
     color: #fff;
 	width:60px;
@@ -305,7 +316,7 @@
 .item .discount {
     position: absolute;
     left: 0px;
-    top: -11px;
+    top: -8px;
     font-size: 120%;
 }
 

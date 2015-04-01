@@ -21,16 +21,16 @@ function ready() {
                 url: '#'
             }, {
                 name: 'My Order',
-                url: 'detail.html?title=My Order&url=http://skymazon.sunpop.cn/sales/order/history/?fromui=app'
+                url: 'detail.html?title=My Order&url=' + baseUrl + '/sales/order/history/?fromui=app'
             }, {
-                name: 'Cart',
-                url: 'detail.html?title=Cart&url=http://skymazon.sunpop.cn/?fromui=app#cart/'
+                name: 'My Shopping Cart',
+                url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
             }, {
-                name: 'Wish List',
-                url: 'detail.html?title=Wish List&url=http://skymazon.sunpop.cn/wishlist/?fromui=app'
+                name: 'My Wish List',
+                url: 'detail.html?title=My Wish List&url=' + baseUrl + '/wishlist/?fromui=app'
             }, {
-                name: 'Setting',
-                url: 'detail.html?title=Setting&url=http://skymazon.sunpop.cn/#account/?fromui=app'
+                name: 'Account and Setting',
+                url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
             });
             $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
                 menus: menus
@@ -45,7 +45,7 @@ function ready() {
                 page.id, page.title));
         });
         new Swiper('.swiper-container', {
-            slidesPerView: 2.5
+            slidesPerView: 3.2
         });
 
         $('.bullet-item').click(function () {

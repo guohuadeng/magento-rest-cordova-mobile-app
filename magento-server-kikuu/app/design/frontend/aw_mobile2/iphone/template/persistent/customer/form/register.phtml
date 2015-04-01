@@ -120,7 +120,7 @@
             <?php endif ?>
             <?php //echo $this->getChildHtml('persistent.remember.me'); ?>
             <p class="form__submit-wrapper">
-                <button type="submit" title="<?php echo $this->__('Register') ?>" class="form__submit button continue" style="background-color:#F4A137" onclick="window.customerAccount.register()"><?php echo $this->__('Register') ?></button>
+                <button type="submit" title="<?php echo $this->__('Register') ?>" class="form__submit button continue" style="background-color:#F4A137" onclick="checkcode();window.customerAccount.register()"><?php echo $this->__('Register') ?></button>
             </p><!-- .form__submit-wrapper -->
             <?php if (Mage::helper('checkout')->isContextCheckout()): ?>
                 <input name="context" type="hidden" value="checkout" />
@@ -134,11 +134,8 @@
             });
             //]]>
         </script>
-		
-		<script type="text/javascript">  
-		var smsurl = 'http://m.5c.com.cn/api/send/?';
-		
 
+	<script type="text/javascript">
 		//生成随机数验证码
 		rnd.today=new Date();
 		rnd.seed=rnd.today.getTime();
@@ -152,39 +149,40 @@
 		// end central randomizer. -->
 		
 		var wait=10;  
-		var rnum=rand(8999)+1000;
+		var rnum=8888;
 		function time(o) {  
-				if (wait == 0) {  
+				if (wait == 0 ) {  
 					o.removeAttribute("disabled");            
 					o.value="Get A Free Validation Code";
-					rnum=rand(8999)+1000;  
-					//alert(rnum);
-					//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
-					sendsms(smsurl,rnum);
-					wait = 10;  
-				} else {  
+					wait = 10;  				       
+				}else{  
 					o.setAttribute("disabled", true); 
 					o.value="Wait for ...(" + wait + ")";  
+					if(wait == 10){
+						//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
+						rnum = rand(8999)+1000;
+					        sendsms(smsurl,rnum);
+					}
 					wait--;  
 					setTimeout(function() {  
 						time(o)  
-					},  
-					1000)  
+					},  1000)  
 				}  
 			}  
 			
 		document.getElementById("btnValidation").onclick=function(){time(this);}  
-               
+
 	       //发送短信请求
-		
-		
+		var smsurl = 'http://skymazon.sunpop.cn/sendsms.php';
 		function sendsms(smsurl,smscode){ 
-		   new Ajax.Request(url, {  
-			method: 'get',//'post'
-			parameters: 'username=shangpeng&password=qwer1234&apikey=40ef302527761399cd81d9597902ffa5&mobile='+document.getElementById('default_mobile_number')+'&content=您好，您的短信验证码是：'+smscode+'【广州尚朋】',
+		   new Ajax.Request(smsurl, {
+			method: 'GET',
+			crossSite: true,
+			parameters: 'mobile='+document.getElementById('default_mobile_number').value+'&content=您好，您的短信验证码是：'+smscode+'【美联软通】',
+                        contentType: 'application/x-www-form-urlencoded',
 			onSuccess: function(text) {  
-			    yourtext = text.responseText.evalJSON(true);  
-			    //process something   
+			    // yourtext = text.responseText.evalJSON(true);  
+			    //process something  
 			},  
 			onFailure: function() {  
 			    return false;  
@@ -194,9 +192,16 @@
 			}  
 		    });  
 		  
-		    return true;  
-		  
-		}  
-		</script>  
+		    return true;
+		} 
+
+		//验证码检测
+		function checkcode(){
+		   var smscode = document.getElementById('Validation_Code').value;
+		   if(rnum !=smscode){
+			document.getElementById('Validation_Code').value="Sorry ,you get a wrong Validation Code";
+		   }
+		}
+	</script> 
     </div>
 </div>

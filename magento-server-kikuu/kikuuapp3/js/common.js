@@ -4,7 +4,7 @@ var isApp = true,
         menus: baseUrl + '/restconnect/?cmd=menu',
         products: baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
 //        product_detail: baseUrl + '/api/rest/products/'
-        product_detail: 'http://skymazon.sunpop.cn/catalog/product/view/id/'
+        product_detail: baseUrl + '/catalog/product/view/id/'
     },
     pages = [{
         id: 'dailySale',
