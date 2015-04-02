@@ -47,6 +47,10 @@
     <ul class="table-view cbp-spmenu-list">
     </ul>
 </div>
+
+    <!--Handlebars.js模版-->
+    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+    <!--id可以用来唯一确定一个模版,type是模版固定的写法-->
 <!--######菜单列表 ######-->
 <script id="menu-template" type="text/x-handlebars-template">
     {{#each menus}}
@@ -140,7 +144,6 @@
     {{/with}}
 </script>
 
-<script src="cordova.js"></script>
 <script src="js/assets.js"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>

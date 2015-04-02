@@ -131,7 +131,7 @@ textarea {
     box-sizing: border-box;
     padding: 5px 10px;
     width: 100%;
-    border: 1px solid #007aff;
+    border: 1px solid #F4A137;
     border-radius: 4px;
     background: #fff;
     color: #F4A137;
@@ -1146,7 +1146,7 @@ input[type="radio"]:checked + label, .sorting__group.sorting-list .is-selected .
 }
 .products {
     margin-bottom: 20px;
-    padding-top:0;
+    padding-top:40px;
 }
 .product-card {
     display: block;
@@ -2357,7 +2357,7 @@ div#shopping_cart_ajax_container {
 #user_forgotpassword_form, .customer-account-register-container, .discount-container-content,
 .order, .logout, .moneybookers-payment, .contacts, .giftcardaccount, .rma-history, .rma-create, .rma-view, .shipping-tracking,
 .rma-package, .category-cms {
-    padding:15px;
+    padding:2px 15px;
 }
 .contacts {
     background-color: #f3f3f3;
@@ -2418,6 +2418,10 @@ p.required, span.required{
 button.form__submit {
     margin-bottom:5px;
 }
+button.create_form_link {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	}
 .form_validation {
     margin-left:5px;
 	padding:5px;
@@ -3051,7 +3055,7 @@ span.price-excluding-tax span, span.price-including-tax span, a.minimal-price-li
     width: 29px;
 }
 .panel--from-bottom .panel__container,  .panel--from-right .panel__container{
-    top:55px;
+    top:0px;
 }
 #checkoutSteps.islands {
     background:none;
@@ -3371,7 +3375,7 @@ label{
 }
 
 #shopping_cart_ajax_container .panel-nav, .add-to-cart-options .panel-nav, .popup-form .panel-nav{
-    height:55px;
+    height:0px;
     line-height:55px;
     font-size:12px;
     font-weight: 400;
@@ -3825,7 +3829,6 @@ label{
     /**width:100%;**/
     max-width:100%;
     padding-left:0;
-	visibility: hidden;
 }
 .product-view-breadcrumbs span.title{
     padding-left:37px;

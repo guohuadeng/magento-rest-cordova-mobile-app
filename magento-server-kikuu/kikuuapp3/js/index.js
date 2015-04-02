@@ -6,11 +6,8 @@ function ready() {
         $itemTpl = $('#item-template'),
         $detailTpl = $('#detail-template');
 
-    function showMenus() {
-		
-		//var myCartUrl = 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app';
-        //$("cartIcon").attr("href",myCartUrl);
-		//document.getElementById("cartIcon").setAttribute ("href", myCartUrl);
+    <!--进行数据处理、html构造-->
+    function showMenus() {	
 		
         $.getJSON(api.menus, function (res) {
             var menus = [{
@@ -31,10 +28,7 @@ function ready() {
             }, {
                 name: 'My Shopping Cart',
                 url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
-            }, {
-                name: 'My Wish List',
-                url: 'detail.html?title=My Wish List&url=' + baseUrl + '/wishlist/?fromui=app'
-            }, {
+            },  {
                 name: 'Account and Setting',
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
             }, {

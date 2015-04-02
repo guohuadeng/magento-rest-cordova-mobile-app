@@ -4,6 +4,7 @@ var isApp = location.search.indexOf('debug') === -1,
         menus: baseUrl + '/restconnect/?cmd=menu',
         products: baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
 //        product_detail: baseUrl + '/api/rest/products/'
+        products_rest: baseUrl + '/api/rest/products/',
         product_detail: baseUrl + '/catalog/product/view/id/'
     },
     pages = [{

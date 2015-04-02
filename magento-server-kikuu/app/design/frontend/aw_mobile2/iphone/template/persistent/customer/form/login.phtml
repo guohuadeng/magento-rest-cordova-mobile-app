@@ -27,6 +27,7 @@
     <form action="<?php echo $this->helper('aw_mobile2/url')->getCustomerPostActionUrl() ?>" method="post" id="user_login_form" class="nav__list-inner">
         <?php echo $this->getMessagesBlock()->addMessages(Mage::getSingleton('customer/session')->getMessages(true))->getGroupedHtml() ?>
         <?php echo $this->getBlockHtml('formkey'); ?>
+        <p class="form__submit-wrapper">&nbsp;</p>
         <p class="form__field form__field--required">
             <!--<label for="email" class="form__label form__label--required"><?php echo $this->__('Email Address') ?></label>-->
             <input type="email" placeholder="Email or Member ID" class="form__textfield textfield validate-email required-entry" name="login[username]" id="email" value="<?php echo $this->htmlEscape($this->getUsername()) ?>" title="<?php echo $this->__('Email Address') ?>">
@@ -38,10 +39,15 @@
         <?php echo $this->getChildHtml('form.additional.info'); ?>
         <p class="form__submit-wrapper">
         	<a id="forgot_pass_link" href="javascript:void(0);"><?php echo $this->__('Forgot Password?') ?></a>
-            <button id="create_form_link" type="button" title="<?php echo $this->__('Create an Account') ?>" style="border:none; color:#000000;width:50%;float:right;background-color:#f3f3f3; height:20px;text-decoration:underline; font-size:15px;text-align: right;" onclick=""><?php echo $this->__('Create an Account') ?></button>
         <p class="form__submit-wrapper">&nbsp;</p>
         	<button type="submit" title="<?php echo $this->__('Login') ?>" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onclick="window.customerAccount.login()"><?php echo $this->__('Login') ?></button>        
-        </p><!-- .form__submit-wrapper -->
+        </p>
+        <p class="form__submit-wrapper">&nbsp;</p>
+        <p class="form__submit-wrapper" style="text-align:center;">New Customer? </p>
+        <p class="form__submit-wrapper">&nbsp;</p>
+            <button id="create_form_link" class="create_form_link button" type="button" title="<?php echo $this->__('Create an Account') ?>" onclick=""><?php echo $this->__('Create an Account') ?></button>
+		
+		<!-- .form__submit-wrapper -->
     </form>
     <script type="text/javascript">
         //<![CDATA[
