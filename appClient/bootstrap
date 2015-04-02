@@ -2,5 +2,7 @@
 
 rm -rf www
 mkdir www
-cp -a ../magento-server-kikuu/kikuuapp3/* www/
+
+rsync -avz --exclude=_notes ../magento-server-kikuu/kikuuapp3/ www
+
 cordova run android

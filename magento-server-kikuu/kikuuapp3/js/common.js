@@ -1,4 +1,4 @@
-var isApp = false,
+var isApp = location.search.indexOf('debug') === -1,
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         menus: baseUrl + '/restconnect/?cmd=menu',
@@ -56,7 +56,7 @@ var isApp = false,
     };
 
 window.onerror = function (e) {
-    alert(e);
+//    alert(e);
 };
 
 function initEvents() {
