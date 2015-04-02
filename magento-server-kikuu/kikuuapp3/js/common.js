@@ -27,7 +27,7 @@ var isApp = location.search.indexOf('debug') === -1,
     }, {
         id: '121',
         cmd: 'catalog&categoryid=121',
-        title: 'Mobile & Tablets',
+        title: 'Mobile&Tablets',
         pullRefresh: true,
         num: 1
     }, {

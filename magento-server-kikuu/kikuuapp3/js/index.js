@@ -7,6 +7,11 @@ function ready() {
         $detailTpl = $('#detail-template');
 
     function showMenus() {
+		
+		//var myCartUrl = 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app';
+        //$("cartIcon").attr("href",myCartUrl);
+		//document.getElementById("cartIcon").setAttribute ("href", myCartUrl);
+		
         $.getJSON(api.menus, function (res) {
             var menus = [{
                 name: 'Home',
@@ -32,6 +37,9 @@ function ready() {
             }, {
                 name: 'Account and Setting',
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
+            }, {
+                name: 'Exit',
+                url: '#'
             });
             $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
                 menus: menus
@@ -46,7 +54,9 @@ function ready() {
                 page.id, page.title));
         });
         bannerSwiper = new Swiper('.swiper-container', {
-            slidesPerView: 3
+            slidesPerView : 3,
+			centeredSlides : true,
+			parallax: true
         });
 
         $('.bullet-item').click(function () {

@@ -11,7 +11,7 @@
 <header class="header-index bar bar-nav out">
     <a class="menu-toggle icon fa fa-bars pull-left"></a>
     <a href="search.html" class="icon fa fa-search pull-left"></a>
-    <a class="icon fa fa-shopping-cart pull-right"></a>
+    <a href="detail.html?title=My Shopping Cart&url=http://skymazon.sunpop.cn/checkout/cart/?fromui=app"id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
     <a class="icon fa fa-qrcode pull-right qrcode"></a>
     <h2 class="title"><img src="images/logo.png" width="40%"></h2>
 </header>
@@ -47,10 +47,10 @@
     <ul class="table-view cbp-spmenu-list">
     </ul>
 </div>
-
+<!--######菜单列表 ######-->
 <script id="menu-template" type="text/x-handlebars-template">
     {{#each menus}}
-    <li class="table-view-cell {{class_name}}"><a href="{{url}}"">{{name}}</a></li>
+    <li class="table-view-cell {{class_name}}"><a href="{{url}}">{{name}}</a></li>
     {{/each}}
 </script>
 
@@ -71,6 +71,8 @@
     </div>
     {{/each}}
 </script>
+
+<!--######商品列表部分, 1column ######-->
 
 <script id="item-template" type="text/x-handlebars-template">
     {{#each items}}
