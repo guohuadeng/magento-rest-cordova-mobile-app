@@ -147,7 +147,8 @@ function ready() {
             $frame = $('.frame').addClass('out');
 
         if ($this.hasClass('page-index')) {
-            bannerSwiper.slideTo($this.index());
+            currentPage = $this.index();
+            bannerSwiper.slideTo(currentPage);
             $headerIndex.removeClass('out');
             $frame.removeClass('out');
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
@@ -167,7 +168,6 @@ function ready() {
         }
     };
     Mobilebone.jsonHandle = function (product) {
-        console.log(product);
         product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
         product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
         return $(Handlebars.compile($detailTpl.html())({
