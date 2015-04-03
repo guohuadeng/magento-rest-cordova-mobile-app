@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
-    <modules>
-        <AW_All>
+     <modules>
+        <SkyMazon_RestConnect>
             <active>true</active>
             <codePool>local</codePool>
-        </AW_All>
-    </modules>
+        </SkyMazon_RestConnect>
+     </modules>
 </config>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <AW_All>
-            <active>true</active>
+        <SkyMazon_Tweaks>
+            <active>false</active>
             <codePool>local</codePool>
-        </AW_All>
+        </SkyMazon_Tweaks>
     </modules>
 </config>
