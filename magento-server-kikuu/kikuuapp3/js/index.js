@@ -1,19 +1,20 @@
 function ready() {
-    var currentPage = 0,
+    var currentPage = 0, // 当前切换页面 index
         bannerSwiper,
         $menuTpl = $('#menu-template'),
         $slideTpl = $('#slide-template'),
         $itemTpl = $('#item-template'),
         $detailTpl = $('#detail-template');
 
-    <!--进行数据处理、html构造-->
-    function showMenus() {	
-		
+    // 根据 rest 接口构造菜单
+    function showMenus() {
         $.getJSON(api.menus, function (res) {
-            var menus = [{
-                name: 'Home',
-                class_name: 'active'
-            }];
+            var menus = [
+                {
+                    name: 'Home',
+                    class_name: 'active'
+                }
+            ];
             $.each(res, function (i, item) {
                 item.url = '#' + item.category_id;
             });
@@ -28,7 +29,7 @@ function ready() {
             }, {
                 name: 'My Shopping Cart',
                 url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
-            },  {
+            }, {
                 name: 'Account and Setting',
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
             }, {
@@ -41,6 +42,7 @@ function ready() {
         });
     }
 
+    // 根据 page 配置构造 banner 和 切换页面
     function showPages() {
         $.each(pages, function (i, page) {
             $('.swiper-container .swiper-wrapper').append(sprintf(
@@ -48,18 +50,9 @@ function ready() {
                 page.id, page.title));
         });
         bannerSwiper = new Swiper('.swiper-container', {
-            slidesPerView : 3,
-			centeredSlides : true,
-			parallax: true
-        });
-
-        $('.bullet-item').click(function () {
-            var $this = $(this);
-            $this.addClass('bullet-item-active')
-                .siblings().removeClass('bullet-item-active');
-            setTimeout(function () {
-                $($this.attr('href')).data('scroll').refresh();
-            }, 500);
+            slidesPerView: 3,
+            centeredSlides: true,
+            parallax: true
         });
 
         $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
@@ -76,6 +69,7 @@ function ready() {
             });
     }
 
+    // 单个产品列表处理
     function initItems($el, func, callback) {
         var page = pages[$el.parents('.page').index()],
             $page = $('#' + page.id),
@@ -89,6 +83,7 @@ function ready() {
             contentType: 'application/json',
             dataType: 'json',
             success: function (list) {
+                // 处理返回数据
                 var items = $.map(list, function (item) {
                     var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
                         toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
@@ -145,6 +140,7 @@ function ready() {
         }
     });
 
+    // 统一处理页面跳转相关
     Mobilebone.callback = function (pageinto) {
         var $this = $(pageinto),
             $headerIndex = $('.header-index').addClass('out'),
@@ -157,6 +153,7 @@ function ready() {
             $frame.removeClass('out');
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
                 .siblings().removeClass('bullet-item-active');
+            $this.data('scroll').refresh(); // 刷新 scroll
         } else if ($this.hasClass('page-detail')) {
             var query = {};
             $.each(location.hash.substring(location.hash.indexOf('?') + 1).split('&'), function (i, item) {
@@ -171,6 +168,8 @@ function ready() {
             }
         }
     };
+
+    // 处理 ajax json 加载，暂时没有使用到，留着详情页 rest 接口用
     Mobilebone.jsonHandle = function (product) {
         product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
         product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);

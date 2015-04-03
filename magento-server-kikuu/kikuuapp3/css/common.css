@@ -5,6 +5,7 @@
 .modal {
     display: none;
 }
+
 .modal.active {
     display: block;
 }
@@ -12,26 +13,28 @@
 .bar .icon {
     font-size: 32px;
     padding: 6px;
-	color:#8a8a8a;
+    color: #8a8a8a;
 }
 
 .title img {
     vertical-align: middle;
-	height: 36px;
-	width: auto;
+    height: 36px;
+    width: auto;
 }
 
 a {
-	color: 	#8a8a8a;
+    color: #8a8a8a;
 }
 
 a:active {
-	color: 	#e62e04;
+    color: #e62e04;
 }
+
 .btn-positive {
-	background-color: #F4A137;
-	border: 1px solid #F4A137;
+    background-color: #F4A137;
+    border: 1px solid #F4A137;
 }
+
 /******************* start **************************/
 .start, .slider {
     position: fixed;
@@ -41,16 +44,20 @@ a:active {
     text-align: center;
     z-index: 1000;
 }
+
 .start img, .slider img {
     vertical-align: middle;
     width: 100%;
 }
+
 .start, .slider {
     display: none;
 }
+
 .slide {
     position: relative;
 }
+
 .slider .slide-group .slide-text {
     position: absolute;
     top: 45%;
@@ -59,19 +66,20 @@ a:active {
     font-size: 24px;
     color: #fff;
     text-align: center;
-    text-shadow: 0 0 10px rgba(0,0,0,.5);
+    text-shadow: 0 0 10px rgba(0, 0, 0, .5);
 }
 
 /******************** menus *************************/
 .card {
-	margin: 0px;
-	height: 100%;
+    margin: 0px;
+    height: 100%;
 }
+
 .cbp-spmenu {
     position: fixed;
     z-index: 1000;
-	width:80%;
-	top: 0;
+    width: 80%;
+    top: 0;
 }
 
 .cbp-spmenu h3 {
@@ -82,9 +90,9 @@ a:active {
 
 .cbp-spmenu h3 a {
     color: #000;
-	font-size:1.2em;
-	padding-left:10px;
-	padding-right:10px;
+    font-size: 1.2em;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .cbp-spmenu a {
@@ -110,13 +118,14 @@ a:active {
 
 .cbp-spmenu-left.cbp-spmenu-open {
     left: 0;
-	top: 0;
+    top: 0;
 }
 
 .cbp-spmenu-right.cbp-spmenu-open {
     right: 0;
-	top: 0;
+    top: 0;
 }
+
 /* Push classes applied to the body */
 
 .cbp-spmenu-push {
@@ -143,34 +152,37 @@ a:active {
 }
 
 .swiper-container {
-	width: 100%;
-	height: 36px;
+    width: 100%;
+    height: 36px;
     z-index: 10;
 }
-.swiper-slide {
-	text-align: center;
-	width: auto;
-	z-index: 10;
 
-	/* Center slide text vertically */
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	-webkit-justify-content: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	-webkit-align-items: center;
-	align-items: center;
+.swiper-slide {
+    text-align: center;
+    width: auto;
+    z-index: 10;
+
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
 }
+
 .swiper-slide:nth-child(2n) {
-	width: auto;
+    width: auto;
 }
+
 .swiper-slide:nth-child(3n) {
-	width: auto;
+    width: auto;
 }
 
 .bullet-item {
@@ -185,8 +197,8 @@ a:active {
 
 .bullet-item-active {
     border-bottom: 1px solid #e62e04;
-	padding-bottom: 3px;
-	color: #e62e04;
+    padding-bottom: 3px;
+    color: #e62e04;
 }
 
 /******************** grid item *********************/
@@ -201,13 +213,13 @@ a:active {
     width: 50%;
 }
 
-
 #wrapper .swiper-container {
     display: block;
 }
+
 .swiper-container img {
     max-width: 100%;
- }
+}
 
 /* 特殊处理：一栏 */
 #dailySale .products-grid .item {
@@ -217,6 +229,7 @@ a:active {
     position: relative;
     width: 100%;
 }
+
 #bestSeller .products-grid .item {
     margin-bottom: 10px;
     text-align: center;
@@ -250,8 +263,8 @@ a:active {
     margin-top: 5px;
     margin-bottom: 7px;
     line-height: 100%;
-    font-size: 0.6em; 
-	text-align: center;
+    font-size: 0.6em;
+    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -293,16 +306,22 @@ a:active {
     font-size: 100%;
     background: #e35a32;
     color: #fff;
-	width:60px;
+    width: 60px;
     padding: 6px 8px;
-	opacity:0.7;
+    opacity: 0.7;
 }
 
 .item .old-price {
     position: absolute;
     font-size: 80%;
-	color:: #8a8a8a;
-	text-decoration: line-through;
+    color:
+
+: #8a8a8a
+
+;
+text-decoration: line-through
+
+;
 }
 
 .item .discount {
@@ -317,13 +336,15 @@ a:active {
     font-size: 1em;
     background: #e35a32;
     color: #fff;
-	width:60px;
+    width: 60px;
     padding: 2px 4px;
-	opacity:0.8;
+    opacity: 0.8;
 }
+
 .item .discount.none {
     display: none;
 }
+
 .item .discount {
     position: absolute;
     left: 0px;
@@ -346,8 +367,9 @@ a:active {
 
 /******************** detail *********************/
 .page {
-	padding:5px;
+    padding: 5px;
 }
+
 .page-detail h1 {
     text-overflow: ellipsis;
     width: 70%;

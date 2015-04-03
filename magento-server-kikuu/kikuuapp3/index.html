@@ -11,7 +11,7 @@
 <header class="header-index bar bar-nav out">
     <a class="menu-toggle icon fa fa-bars pull-left"></a>
     <a href="search.html" class="icon fa fa-search pull-left"></a>
-    <a href="detail.html?title=My Shopping Cart&url=http://skymazon.sunpop.cn/checkout/cart/?fromui=app"id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
+    <a href="detail.html?title=My Shopping Cart&url=http://skymazon.sunpop.cn/checkout/cart/?fromui=app" id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
     <a class="icon fa fa-qrcode pull-right qrcode"></a>
     <h2 class="title"><img src="images/logo.png" width="40%"></h2>
 </header>
@@ -48,9 +48,9 @@
     </ul>
 </div>
 
-    <!--Handlebars.js模版-->
-    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
-    <!--id可以用来唯一确定一个模版,type是模版固定的写法-->
+<!--Handlebars.js模版-->
+<!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
+<!--id可以用来唯一确定一个模版,type是模版固定的写法-->
 <!--######菜单列表 ######-->
 <script id="menu-template" type="text/x-handlebars-template">
     {{#each menus}}
@@ -77,7 +77,6 @@
 </script>
 
 <!--######商品列表部分, 1column ######-->
-
 <script id="item-template" type="text/x-handlebars-template">
     {{#each items}}
     <div class="item">
@@ -117,6 +116,7 @@
     {{/each}}
 </script>
 
+<!-- 详情 rest 页，暂时没有用到 -->
 <script id="detail-template" type="text/x-handlebars-template">
     {{#with product}}
     <div class="page page-detail">
@@ -144,6 +144,8 @@
     {{/with}}
 </script>
 
+<!-- 使用 cordova 插件要用到，不能删除 -->
+<script src="cordova.js"></script>
 <script src="js/assets.js"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>

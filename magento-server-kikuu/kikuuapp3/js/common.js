@@ -1,4 +1,4 @@
-var isApp = location.search.indexOf('debug') === -1,
+var isApp = location.search.indexOf('debug') === -1, // 默认为 app，方便测试桌面在 url 加上 ?debug
     baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
     api = {
         menus: baseUrl + '/restconnect/?cmd=menu',
@@ -7,71 +7,85 @@ var isApp = location.search.indexOf('debug') === -1,
         products_rest: baseUrl + '/api/rest/products/',
         product_detail: baseUrl + '/catalog/product/view/id/'
     },
-    pages = [{
-        id: 'dailySale',
-        cmd: 'daily_sale',
-        title: 'Daily Sale',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: 'bestSeller',
-        cmd: 'best_seller',
-        title: 'Best Seller',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: 'comingSoon',
-        cmd: 'coming_soon',
-        title: 'Coming Soon',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: '121',
-        cmd: 'catalog&categoryid=121',
-        title: 'Mobile&Tablets',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: '122',
-        cmd: 'catalog&categoryid=122',
-        title: 'Women Fashion',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: '123',
-        cmd: 'catalog&categoryid=123',
-        title: 'Men Fashion',
-        pullRefresh: true,
-        num: 1
-    }, {
-        id: '165',
-        cmd: 'catalog&categoryid=165',
-        title: 'Jewelry',
-        pullRefresh: true,
-        num: 1
-    }],
+    pages = [
+        {
+            id: 'dailySale',
+            cmd: 'daily_sale',
+            title: 'Daily Sale',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'bestSeller',
+            cmd: 'best_seller',
+            title: 'Best Seller',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'comingSoon',
+            cmd: 'coming_soon',
+            title: 'Coming Soon',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'c121',
+            cmd: 'catalog&categoryid=121',
+            title: 'Mobile&Tablets',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'c122',
+            cmd: 'catalog&categoryid=122',
+            title: 'Women Fashion',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'c123',
+            cmd: 'catalog&categoryid=123',
+            title: 'Men Fashion',
+            pullRefresh: true,
+            num: 1
+        },
+        {
+            id: 'c165',
+            cmd: 'catalog&categoryid=165',
+            title: 'Jewelry',
+            pullRefresh: true,
+            num: 1
+        }
+    ],
     state = 'index',
     define = {
         showWelcome: isApp,
         startTime: isApp ? 2000 : 0
     };
 
+// 全局事件处理，用于调试错误信息
 window.onerror = function (e) {
 //    alert(e);
 };
 
+// 全局事件处理
 function initEvents() {
+    // 返回
     $(document).on('click', '[data-role="back"]', function () {
         history.back();
     });
 
+    // 菜单切换
     $('.menu-toggle, .menu-close').click(toggleMenu);
 
+    // 菜单项点击
     $(document).on('click', '.cbp-spmenu li a', function () {
         $(this).parent().addClass('active').siblings().removeClass('active');
         toggleMenu();
     });
 
+    // 二维码
     $(document).on('click', '.qrcode', function () {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
@@ -79,7 +93,7 @@ function initEvents() {
                     if (result.text.indexOf('skymazon.sunpop.cn') !== -1) {
                         location.href = result.text;
                     } else {
-                        navigator.app.loadUrl(result.text, {openExternal : true});
+                        navigator.app.loadUrl(result.text, {openExternal: true});
                     }
                 }
             },
@@ -89,6 +103,7 @@ function initEvents() {
         );
     });
 
+    // 分享
     $(document).on('click', '.share', function () {
         var $this = $(this).parents('.page');
         plugins.socialsharing.share($this.find('.title').text(), null, null,
@@ -117,6 +132,7 @@ function checkFirstTime() {
     }
 }
 
+// 切换菜单
 function toggleMenu(e) {
     if (state !== 'index') {
         return;
