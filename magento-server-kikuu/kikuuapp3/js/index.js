@@ -16,7 +16,7 @@ function ready() {
                 }
             ];
             $.each(res, function (i, item) {
-                item.url = '#' + item.category_id;
+                item.url = '#c' + item.category_id;
             });
             menus = menus.concat(res);
             menus.push({
