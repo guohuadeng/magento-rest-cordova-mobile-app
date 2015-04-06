@@ -34,6 +34,7 @@ function ready() {
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
             }, {
                 name: 'Exit',
+                class_name: 'exit',
                 url: '#'
             });
             $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({

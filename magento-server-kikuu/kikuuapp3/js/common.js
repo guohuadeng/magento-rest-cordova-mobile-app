@@ -79,10 +79,19 @@ function initEvents() {
     // 菜单切换
     $('.menu-toggle, .menu-close').click(toggleMenu);
 
+    // 手机点击菜单按键
+    document.addEventListener("menubutton", toggleMenu, false);
+
     // 菜单项点击
     $(document).on('click', '.cbp-spmenu li a', function () {
         $(this).parent().addClass('active').siblings().removeClass('active');
-        toggleMenu();
+        
+        // 退出
+        if ($(this).parent().hasClass('exit')) {
+            navigator.app.exitApp();
+        } else {
+            toggleMenu();
+        }
     });
 
     // 二维码
