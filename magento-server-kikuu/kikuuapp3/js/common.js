@@ -80,10 +80,10 @@ function initEvents() {
     $('.menu-toggle, .menu-close').click(toggleMenu);
 	
 	$('.menu-toggle').click(function(){
-		$('.menu-close,.menu-bottom').show();
+		$('.menu-bottom').show();
 	});
 	$('.menu-close').click(function(){
-		$('.menu-close,.menu-bottom').hide();
+		$('.menu-bottom').hide();
 	});
 	$('.menu-bottom').click(function(){
 		$('.menu-close').click();
@@ -95,7 +95,7 @@ function initEvents() {
     // 菜单项点击
     $(document).on('click', '.cbp-spmenu li a', function () {
         $(this).parent().addClass('active').siblings().removeClass('active');
-        
+        $('.menu-bottom').hide();
         // 退出
         if ($(this).parent().hasClass('exit')) {
             navigator.app.exitApp();
