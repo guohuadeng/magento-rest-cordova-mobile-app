@@ -436,7 +436,7 @@ table {
     z-index:1;
     top:0;
     width:35px;
-    height:40px;
+    height:0px;
 }
 /**.page-header__action--back:active {
     background-image: url("../images/arrow-back_active.svg");

@@ -96,7 +96,7 @@ var hideTopMenuBySwipe = function () {
 
         }
 
-        var topHeight = 84;
+        var topHeight = 1;
 
         if (window.topFlag) {
 
