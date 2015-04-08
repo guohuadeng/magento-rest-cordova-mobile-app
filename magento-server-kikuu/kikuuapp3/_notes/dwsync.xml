@@ -17,4 +17,7 @@
 <file name="package.json" server="skymazon.sunpop.cn//kikuuapp3/" local="130723580133122758" remote="130723589400000000" Dst="0" />
 <file name="productDetail.html" server="skymazon.sunpop.cn" local="130724735701181017" remote="130724735400000000" Dst="0" />
 <file name="detail.html" server="skymazon.sunpop.cn" local="130723580133072698" remote="130724734800000000" Dst="0" />
+<file name="forgot_password.html" server="skymazon.sunpop.cn" local="130729337296955301" remote="130729338600000000" Dst="0" />
+<file name="login.html" server="skymazon.sunpop.cn" local="130729337297005367" remote="130729338600000000" Dst="0" />
+<file name="register.html" server="skymazon.sunpop.cn" local="130729337297015380" remote="130729338600000000" Dst="0" />
 </dwsync>

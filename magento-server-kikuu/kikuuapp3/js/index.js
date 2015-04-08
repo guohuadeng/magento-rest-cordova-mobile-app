@@ -34,13 +34,13 @@ function ready() {
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
             },{
                 name: 'Login',
-                url: 'detail.htm?title=页标头登录&url=login.html'
+                url: 'detail.html?title=页标头登录&url=login.html'
             },{
                 name: 'Register',
-                url: 'detail.htm?title=页标头注册&url=register.html'
+                url: 'detail.html?title=页标头注册&url=register.html'
             },{
                 name: 'Fogot Password',
-                url: 'detail.htm?title=页标头找回密码&url=forgot_password.html'
+                url: 'detail.html?title=页标头找回密码&url=forgot_password.html'
             }, {
                 name: 'Exit',
                 class_name: 'exit',
