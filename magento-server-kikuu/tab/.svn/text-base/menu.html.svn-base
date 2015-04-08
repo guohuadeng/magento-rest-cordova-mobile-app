@@ -1,0 +1,14 @@
+<br />
+<p><a style="margin-left:15px; font-size: 19px; "  onclick="loginOut()" >注销用户</a>  </p>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px; color:#d7d541;" href="#">工程监督</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="index.html">监督巡查</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">安全生产管理</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;"  href="#">监督机构及监督员管理</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">监测监管</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">从业人员查验</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">起重设备及特种人员管理</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">法律法规查询</a></p><br/>
+<p><span class="s_arrow"></span><a style="margin-left:15px; font-size: 19px;color: #d7d541;" href="#">系统管理</a></p><br/>
+
+
+

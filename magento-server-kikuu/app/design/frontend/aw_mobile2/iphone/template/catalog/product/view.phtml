@@ -34,7 +34,6 @@ $_product = $this->getProduct();
 <div class="product__product-card product-card">
    	<div id="product-info" class="product-info">
         <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
-        <?php echo $this->getReviewsSummaryHtml($_product, false, false)?>
     </div>
     <?php echo $this->getChildHtml('product.info.gallery');?>
     <div class="product-name">

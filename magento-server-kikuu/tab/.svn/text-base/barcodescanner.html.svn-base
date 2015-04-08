@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+
+
+<html>
+	<head>
+		<meta name="viewport" content="width=320; user-scalable=no" />
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title>二维码扫描</title>
+
+		<!-- 加载phonegap -->
+		<script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
+		<!-- 加载jquery -->
+		<script type="text/javascript" charset="utf-8"
+			src="js/jquery-1.9.1.min.js"></script>
+		<!-- 加载jquerymobile -->
+		<script type="text/javascript" charset="utf-8"
+			src="js/jquery.mobile-1.3.2.min.js"></script>
+		<!-- 加载自定义插件 -->
+		<script type="text/javascript" charset="utf-8"
+			src="js/barcodescanner.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css">
+		<script type="text/javascript" charset="utf-8">
+	$(function() {
+		$("#btnbarcode").click(
+				function() {
+					window.plugins.barcodeScanner.scan(
+							BarcodeScanner.Type.QR_CODE, function(result) {
+								$("#barcodediv").html("" + result);
+							}, function(error) {
+								$("#barcodediv").html("扫描失败：" + result);
+							});
+
+				});
+	});
+</script>
+	</head>
+	<body>
+
+		<!-- page write -->
+		<div data-role="page" id="write">
+			<div data-role="header" data-position="fixed">
+				<a href="#" data-icon="back" data-rel="back">返回</a>
+				<a href="index.jsp" data-icon="home" data-rel="back">主页</a>
+				<h1>
+					二维码扫描
+				</h1>
+			</div>
+
+
+			<!-- /header -->
+			<div data-role="content">
+				<button data-theme="b" id="btnbarcode">
+					扫描
+				</button>
+				二维码信息：<div id="barcodediv"></div>
+				<br>
+			</div>
+			<!-- /content -->
+		</div>
+	</body>
+
+</html>

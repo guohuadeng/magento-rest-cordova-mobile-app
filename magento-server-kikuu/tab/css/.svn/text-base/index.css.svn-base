@@ -1,0 +1,87 @@
+#menu {
+	position: absolute;
+	display: none;
+	width: 250px;
+	height: 100%;
+	color: #eee;
+	background-color: #000;
+}
+
+#title {
+	background: #01030f;
+	font-weight: bold;
+	width: 100%;
+	height: 8%;
+	text-align: center;
+	font-size: 14px;
+	line-height: 40px;
+}
+
+#openMenuBtn {
+	float: left;
+}
+#user {
+	color:white;
+	float: right;
+}
+#jdxt {
+	font-size:25px;
+	color:white;
+}
+
+#home {
+	float: right;
+}
+
+#mask {
+	z-index: 2;
+	opacity: 0;
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: red;
+}
+
+#content {
+	background: #fafafa;
+}
+
+.line {
+	width: 20%;
+	height: 3px;
+	background: #000;
+	position: absolute;
+	left: 0;
+	top: 78px;
+	display: none; /*display:block;为了效率将特效取消*/
+}
+
+.line::before {
+	display: block;
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: 50%;
+	margin-left: -6px;
+	border: 6px solid #000;
+	border-color: transparent transparent #000 transparent;
+	bottom: 2px;
+	display: block;
+	content: '';
+}
+
+#openMenuBtn {
+	background: center center no-repeat transparent;
+	background-image:
+		url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAE1JREFUeNpi/P//PwOtARMDHQBdLGFBYt+nkR2KjEhxQqvIYaR7cD2glSWMo0mY3DiJo5Edi4ZPEqZ7nMSP5pPRon60qB9NwpQDgAADAMIxHUJvWs/TAAAAAElFTkSuQmCC);
+	cursor: pointer;
+	display: block;
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	top: 0;
+	left: 10px;
+}
+
+

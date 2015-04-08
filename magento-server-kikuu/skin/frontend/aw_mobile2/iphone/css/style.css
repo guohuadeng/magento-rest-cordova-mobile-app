@@ -367,8 +367,6 @@ table {
 	width: 45%;
 	height: 49px;
 	background-color: #f7f7f7;
-	position: fixed;
-	bottom: 4px;
 	left: 10px;
 	z-index: 4;
 }
@@ -4004,6 +4002,8 @@ label{
 .add_to_cart_all_l{
 	width:30%;
 	height:49px;
+	bottom:1px;
+	position:fixed;
 	}
 .collect_product{
 	float:right;
