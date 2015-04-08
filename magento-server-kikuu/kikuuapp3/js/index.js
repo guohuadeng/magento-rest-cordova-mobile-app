@@ -66,19 +66,16 @@ function ready() {
     function initItems($el, func, callback) {
         var page = pages[$el.parents('.page').index()],
             $page = $('#' + page.id),
-            $loading = $('.page-loading'),
             items = [];
 
         page.num = func === 'html' ? 1 : page.num + 1;
 
-        $loading.show();
         $.ajax({
             type: 'get',
-            url: sprintf(api.products, page.cmd, page.num === 1 ? 10 : 3, page.num),
+            url: sprintf(api.products, page.cmd, page.num === 1 ? 10 : 4, page.num),
             contentType: 'application/json',
             dataType: 'json',
             success: function (list) {
-                $loading.hide();
                 // 处理返回数据
                 var items = $.map(list, function (item) {
                     var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
@@ -154,7 +151,10 @@ function ready() {
 
             $page = $pages.eq(currentPage);
             if (!$page.data('init')) {
-                initItems($page, 'html');
+                $('.page-loading').show();
+                initItems($page, 'html', function () {
+                    $('.page-loading').hide();
+                });
                 $page.data('init', true);
             }
             $this.data('scroll').refresh(); // 刷新 scroll

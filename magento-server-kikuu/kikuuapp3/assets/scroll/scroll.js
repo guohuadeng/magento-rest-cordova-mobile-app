@@ -25,10 +25,10 @@ function initPageScroll(options) {
             }
             // Detects whether the momentum has stopped, and if it has reached the end - 200px of the scroller - it trigger the pullUpAction
             setTimeout(function() {
-                if (scroll.y <= (scroll.maxScrollY + 200) && !$el.hasClass('loading')) {
-                    $el.show().addClass('loading');
+                if (scroll.y <= (scroll.maxScrollY + 200) && !$el.hasClass('scroll-loading')) {
+                    $el.show().addClass('scroll-loading');
                     options.onLoadMore(function () {
-                        $el.hide().removeClass('loading');
+                        $el.hide().removeClass('scroll-loading');
                     });
                 } else if (pullActionDetect.count < pullActionDetect.limit) {
                     pullActionDetect.check(scroll, $el);
@@ -78,7 +78,7 @@ function initPageScroll(options) {
                 }
                 if ($pd.is(':visible')) {
                     if ($pd.hasClass('flip')) {
-                        $pd.attr('class', 'pullDown loading')
+                        $pd.attr('class', 'pullDown scroll-loading')
                             .find('.pullDownLabel')
                             .text('Loading...');
                         options.onRefresh(function () {

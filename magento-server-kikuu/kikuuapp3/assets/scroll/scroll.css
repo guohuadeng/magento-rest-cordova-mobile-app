@@ -89,7 +89,7 @@
     -ms-transform: rotate(0deg) translateZ(0)
 }
 
-.pullDown.loading .pullDownIcon, .pullUp.loading .pullUpIcon {
+.pullDown.scroll-loading .pullDownIcon, .pullUp.scroll-loading .pullUpIcon {
     background-position: 0 100%;
     -webkit-transform: rotate(0deg) translateZ(0);
     -ms-transform: rotate(0deg) translateZ(0);
