@@ -1,6 +1,7 @@
 function ready() {
     var currentPage = 0, // 当前切换页面 index
         bannerSwiper,
+        $pages,
         $menuTpl = $('#menu-template'),
         $slideTpl = $('#slide-template'),
         $itemTpl = $('#item-template'),
@@ -32,15 +33,6 @@ function ready() {
             }, {
                 name: 'Account and Setting',
                 url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
-            },{
-                name: 'Login',
-                url: 'detail.html?title=页标头登录&url=login.html'
-            },{
-                name: 'Register',
-                url: 'detail.html?title=页标头注册&url=register.html'
-            },{
-                name: 'Fogot Password',
-                url: 'detail.html?title=页标头找回密码&url=forgot_password.html'
             }, {
                 name: 'Exit',
                 class_name: 'exit',
@@ -65,34 +57,28 @@ function ready() {
             parallax: true
         });
 
-        $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
-                menus: pages
-            })).find('.products-grid').each(function (i) {
-                initItems($(this), 'html', function () {
-                    if (i === 0) {
-                        $('.first-start.loading').remove();
-                        if (!location.hash) {
-                            $('#dailySale').click();
-                        }
-                    }
-                });
-            });
+        $pages = $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
+            menus: pages
+        })).find('.products-grid');
     }
 
     // 单个产品列表处理
     function initItems($el, func, callback) {
         var page = pages[$el.parents('.page').index()],
             $page = $('#' + page.id),
+            $loading = $('.page-loading'),
             items = [];
 
         page.num = func === 'html' ? 1 : page.num + 1;
 
+        $loading.show();
         $.ajax({
             type: 'get',
             url: sprintf(api.products, page.cmd, page.num === 1 ? 10 : 3, page.num),
             contentType: 'application/json',
             dataType: 'json',
             success: function (list) {
+                $loading.hide();
                 // 处理返回数据
                 var items = $.map(list, function (item) {
                     var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
@@ -119,7 +105,8 @@ function ready() {
                 }
             },
             error: function (jqXHR) {
-                alert(this.url + ':' + jqXHR.status);
+                alert('Please check the network!');
+                navigator.app.exitApp();
             }
         });
     }
@@ -154,7 +141,8 @@ function ready() {
     Mobilebone.callback = function (pageinto) {
         var $this = $(pageinto),
             $headerIndex = $('.header-index').addClass('out'),
-            $frame = $('.frame').addClass('out');
+            $frame = $('.frame').addClass('out'),
+            $page;
 
         if ($this.hasClass('page-index')) {
             currentPage = $this.index();
@@ -163,6 +151,12 @@ function ready() {
             $frame.removeClass('out');
             $(sprintf('a[href="#%s"', $this.attr('id'))).addClass('bullet-item-active')
                 .siblings().removeClass('bullet-item-active');
+
+            $page = $pages.eq(currentPage);
+            if (!$page.data('init')) {
+                initItems($page, 'html');
+                $page.data('init', true);
+            }
             $this.data('scroll').refresh(); // 刷新 scroll
         } else if ($this.hasClass('page-detail')) {
             var query = {};
