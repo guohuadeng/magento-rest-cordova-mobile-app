@@ -78,7 +78,17 @@ function initEvents() {
 
     // 菜单切换
     $('.menu-toggle, .menu-close').click(toggleMenu);
-
+	
+	$('.menu-toggle').click(function(){
+			$('.menu-bottom').show();
+		});
+	$('.menu-close').click(function(){
+			$('.menu-bottom').hide();
+		});
+	$('.menu-bottom').click(function(){
+			$('.menu-close').click();
+		});
+	
     // 手机点击菜单按键
     document.addEventListener("menubutton", toggleMenu, false);
 
