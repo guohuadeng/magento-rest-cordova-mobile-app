@@ -455,6 +455,7 @@ table {
     right: 0;
     z-index:-1;
     font-size: 12px;
+	height: 0px;
 }
 .page-header__title span{
     width:auto;
@@ -2397,6 +2398,7 @@ div#shopping_cart_ajax_container {
     color:#0a0a0a;
     /**letter-spacing:1px;**/
     border:none;
+	height: 0px;
 }
 .dashboard .messages {
     padding: 15px 15px 0 15px
