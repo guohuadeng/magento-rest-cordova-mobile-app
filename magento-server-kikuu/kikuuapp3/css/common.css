@@ -78,7 +78,7 @@ a:active {
 .cbp-spmenu {
     position: fixed;
     z-index: 1000;
-    width: 78%;
+    width: 80%;
     top: 0;
 }
 
@@ -96,6 +96,7 @@ a:active {
 	top: 0;
 	right: -50px;
 	background-color: #f2f2f2;
+	display:none;
 }
 
 .cbp-spmenu a {
@@ -120,6 +121,7 @@ a:active {
 	opacity:0.1;
 	display:none;
 }
+
 .cbp-spmenu-left {
     left: -82%;
 }
