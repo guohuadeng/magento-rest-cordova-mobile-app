@@ -31,8 +31,11 @@ function ready() {
                 name: 'My Shopping Cart',
                 url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
             }, {
-                name: 'Account and Setting',
-                url: 'detail.html?title=Account and Setting&url=' + baseUrl + '/customer/account/?fromui=app'
+                name: 'My Account',
+                url: 'detail.html?title=My Account&url=' + baseUrl + '/#account?fromui=app'
+            },  {
+                name: 'Settings testLogin',
+                url: 'detail.html?title=Settings&url=register.html'
             }, {
                 name: 'Exit',
                 class_name: 'exit',

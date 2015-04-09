@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="IndexController.php" server="a.goosky.com" local="130718328600000000" remote="130718328600000000" Dst="-1" />
-<file name="MenuController.php" server="a.goosky.com" local="130717250400000000" remote="130717250400000000" Dst="-1" />
-<file name="IndexController.php" server="skymazon.sunpop.cn" local="130722781395340247" remote="130722735000000000" Dst="0" />
-<file name="MenuController.php" server="skymazon.sunpop.cn" local="130722781397741886" remote="130722735000000000" Dst="0" />
+<file name="IndexController.php" server="a.goosky.com" local="130718328600000000" remote="130718328600000000" />
+<file name="MenuController.php" server="a.goosky.com" local="130717250400000000" remote="130717250400000000" />
+<file name="IndexController.php" server="skymazon.sunpop.cn" local="130730185200000000" remote="130730185200000000" />
+<file name="MenuController.php" server="skymazon.sunpop.cn" local="130730444400000000" remote="130730444400000000" />
+<file name="CustomerController.php" server="skymazon.sunpop.cn" local="130730509519337994" remote="130730512800000000" />
 </dwsync>
