@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="index.html" server="skymazon.sunpop.cn" local="130730758471283129" remote="130730758200000000" Dst="0" />
 <file name="bower.json" server="skymazon.sunpop.cn//kikuuapp/" local="130723580131450625" remote="130723587600000000" Dst="0" />
 <file name="gulpfile.js" server="skymazon.sunpop.cn//kikuuapp/" local="130723580133072698" remote="130723587600000000" Dst="0" />
 <file name="index-old.html" server="skymazon.sunpop.cn//kikuuapp/" local="130723580133102734" remote="130723587600000000" Dst="0" />
@@ -15,9 +14,10 @@
 <file name="index.html" server="skymazon.sunpop.cn//kikuuapp3/" local="130723580133112741" remote="130723589400000000" Dst="0" />
 <file name="search.html" server="skymazon.sunpop.cn//kikuuapp3/" local="130723580133132768" remote="130723589400000000" Dst="0" />
 <file name="package.json" server="skymazon.sunpop.cn//kikuuapp3/" local="130723580133122758" remote="130723589400000000" Dst="0" />
-<file name="productDetail.html" server="skymazon.sunpop.cn" local="130730782909932305" remote="130730782800000000" Dst="0" />
 <file name="detail.html" server="skymazon.sunpop.cn" local="130723580133072698" remote="130724734800000000" Dst="0" />
 <file name="forgot_password.html" server="skymazon.sunpop.cn" local="130729337296955301" remote="130729338600000000" Dst="0" />
 <file name="login.html" server="skymazon.sunpop.cn" local="130729337297005367" remote="130729338600000000" Dst="0" />
 <file name="register.html" server="skymazon.sunpop.cn" local="130729337297015380" remote="130729338600000000" Dst="0" />
+<file name="productDetail.html" server="skymazon.sunpop.cn" local="130730875143726604" remote="130730874600000000" Dst="0" />
+<file name="index.html" server="skymazon.sunpop.cn" local="130730247260000000" remote="130730831400000000" Dst="0" />
 </dwsync>

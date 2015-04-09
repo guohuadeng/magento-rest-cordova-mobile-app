@@ -17,29 +17,22 @@
 </head>
   <body>  
 
-    <div class="page page-detail">
+    <div class="page-detail">
         <header class="bar bar-nav">
             <a class="icon fa fa-chevron-left pull-left" href="index.html" data-ajax="false"></a>
             <a class="icon fa fa-share-alt pull-right"></a>
-            <h1 class="title">{{name}}</h1>
+            <h1 class="title">Product Detail</h1>
         </header>	
-		</br></br></br>					
-		<button id="btn1">点击生成图片</button>	
-		<button id="btn2">点击生成详情</button>
-      <div class="swiper-container">	  	
+      <div class="product-swiper-container">	  	
         <div class="swiper-wrapper">
-            <div class="swiper-slide">Slide 1</div>
-            <div class="swiper-slide">Slide 2</div>
 		</div>   
         <!-- Add Pagination -->
-        <div class="product-swiper-pagination"></div>
+        <div class="swiper-pagination"></div>
       </div>
-		
-      <div id="productInfo">        
-      </div>
+		<p>&nbsp;	</p>
+      <div id="productInfo" class="detailInfo"></div>
+	  
     </div>
-      <div id="productImg">        
-      </div>
     
     <!--Handlebars.js模版-->
     <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
@@ -48,7 +41,6 @@
 <!-- 详情 rest 页 -->
 <script id="detail-template" type="text/x-handlebars-template">
     {{#with product}}
-        <div class="content">
             <h3>{{name}}</h3>
             <div class="price-box">			
                 <span class="special-price">
@@ -59,7 +51,6 @@
                 <span class="old-price">${{regular_price_with_tax}}</span>
             </div>
             <p>{{description}}</p>
-        </div>
     {{/with}}
 </script>
 
