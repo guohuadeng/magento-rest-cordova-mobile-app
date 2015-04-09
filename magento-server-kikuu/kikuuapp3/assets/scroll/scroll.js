@@ -23,6 +23,9 @@ function initPageScroll(options) {
             if (count) {
                 pullActionDetect.count = 0;
             }
+            if (!$el.length) {
+                return;
+            }
             // Detects whether the momentum has stopped, and if it has reached the end - 200px of the scroller - it trigger the pullUpAction
             setTimeout(function() {
                 if (scroll.y <= (scroll.maxScrollY + 200) && !$el.hasClass('scroll-loading')) {
@@ -83,6 +86,9 @@ function initPageScroll(options) {
                             .text('Loading...');
                         options.onRefresh(function () {
                             $pd.hide();
+                            if ($el.data('pullUp')) {
+                                $el.find('.scroller').append($el.data('pullUp'));
+                            }
                         });
                     } else {
                         $pd.hide();

@@ -2,6 +2,10 @@
     display: none;
 }
 
+.cb {
+    clear: both;
+}
+
 .modal {
     display: none;
 }
@@ -326,20 +330,14 @@ a:active {
 .item .old-price {
     position: absolute;
     font-size: 80%;
-    color:
-
-: #8a8a8a
-
-;
-text-decoration: line-through
-
-;
+    color: #8a8a8a;
+    text-decoration: line-through;
 }
 
 .item .discount {
     position: absolute;
     top: 10px;
-    font-size: 1em%;
+    font-size: 1em;
 }
 
 .price-box .discount .price,

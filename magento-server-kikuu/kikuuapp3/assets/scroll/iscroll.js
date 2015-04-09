@@ -424,7 +424,7 @@ iScroll.prototype = {
 		if (newX > 0 || newX < that.maxScrollX) {
 			newX = that.options.bounce ? that.x + (deltaX / 2) : newX >= 0 || that.maxScrollX >= 0 ? 0 : that.maxScrollX;
 		}
-		if (newY > that.minScrollY || newY < that.maxScrollY) { 
+		if (newY > that.minScrollY || newY < that.maxScrollY) {
 			newY = that.options.bounce ? that.y + (deltaY / 2) : newY >= that.minScrollY || that.maxScrollY >= 0 ? that.minScrollY : that.maxScrollY;
 		}
 
@@ -546,7 +546,7 @@ iScroll.prototype = {
 
 		if (duration < 300 && that.options.momentum) {
 			momentumX = newPosX ? that._momentum(newPosX - that.startX, duration, -that.x, that.scrollerW - that.wrapperW + that.x, that.options.bounce ? that.wrapperW : 0) : momentumX;
-			momentumY = newPosY ? that._momentum(newPosY - that.startY, duration, -that.y, (that.maxScrollY < 0 ? that.scrollerH - that.wrapperH + that.y - that.minScrollY : 0), that.options.bounce ? that.wrapperH : 0) : momentumY;
+			momentumY = newPosY ? that._momentum(newPosY - that.startY, duration, -that.y, (that.maxScrollY < 0 ? that.scrollerH - that.wrapperH + that.y - that.minScrollY : 0), 0) : momentumY;
 
 			newPosX = that.x + momentumX.dist;
 			newPosY = that.y + momentumY.dist;
