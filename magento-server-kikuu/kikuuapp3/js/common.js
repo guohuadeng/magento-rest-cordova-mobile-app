@@ -28,34 +28,6 @@ var isApp = location.search.indexOf('debug') === -1, // 默认为 app，方便�
             title: 'Coming Soon',
             pullRefresh: true,
             num: 1
-        },
-        {
-            id: 'c121',
-            cmd: 'catalog&categoryid=121',
-            title: 'Mobile&Tablets',
-            pullRefresh: true,
-            num: 1
-        },
-        {
-            id: 'c122',
-            cmd: 'catalog&categoryid=122',
-            title: 'Women Fashion',
-            pullRefresh: true,
-            num: 1
-        },
-        {
-            id: 'c123',
-            cmd: 'catalog&categoryid=123',
-            title: 'Men Fashion',
-            pullRefresh: true,
-            num: 1
-        },
-        {
-            id: 'c165',
-            cmd: 'catalog&categoryid=165',
-            title: 'Jewelry',
-            pullRefresh: true,
-            num: 1
         }
     ],
     state = 'index',

@@ -7,48 +7,70 @@ function ready() {
         $itemTpl = $('#item-template'),
         $detailTpl = $('#detail-template');
 
+    function init() {
+        initEvents();
+        initViews();
+        initMenus();
+    }
+
     // 根据 rest 接口构造菜单
-    function showMenus() {
+    function initMenus() {
         $.getJSON(api.menus, function (res) {
-            var menus = [
-                {
-                    name: 'Home',
-                    class_name: 'active'
-                }
-            ];
-            $.each(res, function (i, item) {
-                item.url = '#c' + item.category_id;
-            });
-            menus = menus.concat(res);
-            menus.push({
-                name: '',
-                class_name: 'table-view-divider',
-                url: '#'
-            }, {
-                name: 'My Order',
-                url: 'detail.html?title=My Order&url=' + baseUrl + '/sales/order/history/?fromui=app'
-            }, {
-                name: 'My Shopping Cart',
-                url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
-            }, {
-                name: 'My Account',
-                url: 'detail.html?title=My Account&url=' + baseUrl + '/#account?fromui=app'
-            },  {
-                name: 'Settings testLogin',
-                url: 'detail.html?title=Settings&url=register.html'
-            }, {
-                name: 'Exit',
-                class_name: 'exit',
-                url: '#'
-            });
-            $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
-                menus: menus
-            }));
+            showMenus(res);
+            showPages(res);
+            initPages();
+            Mobilebone.init();
         });
     }
 
+    function showMenus(res) {
+        var menus = [
+            {
+                name: 'Home',
+                class_name: 'active'
+            }
+        ];
+        $.each(res, function (i, item) {
+            item.url = '#c' + item.category_id;
+        });
+        menus = menus.concat(res);
+        menus.push({
+            name: '',
+            class_name: 'table-view-divider',
+            url: '#'
+        }, {
+            name: 'My Order',
+            url: 'detail.html?title=My Order&url=' + baseUrl + '/sales/order/history/?fromui=app'
+        }, {
+            name: 'My Shopping Cart',
+            url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
+        }, {
+            name: 'My Account',
+            url: 'detail.html?title=My Account&url=' + baseUrl + '/#account?fromui=app'
+        },  {
+            name: 'Settings testLogin',
+            url: 'detail.html?title=Settings&url=register.html'
+        }, {
+            name: 'Exit',
+            class_name: 'exit',
+            url: '#'
+        });
+        $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
+            menus: menus
+        }));
+    }
+
     // 根据 page 配置构造 banner 和 切换页面
-    function showPages() {
+    function showPages(res) {
+        $.each(res, function (i, item) {
+            pages.push({
+                id: 'c' + item.category_id,
+                cmd: 'catalog&categoryid=' + item.category_id,
+                title: item.name,
+                pullRefresh: true,
+                num: 1
+            });
+        });
         $.each(pages, function (i, page) {
             $('.swiper-container .swiper-wrapper').append(sprintf(
                 '<a href="#%s" data-rel="auto" class="swiper-slide bullet-item">%s</a>',
@@ -63,6 +85,30 @@ function ready() {
         $pages = $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
             menus: pages
         })).find('.products-grid');
+    }
+
+    function initPages() {
+        initPageScroll({
+            pages: pages,
+            onRefresh: function (callback) {
+                initItems($('.products-grid').eq(currentPage), 'html', callback);
+            },
+            onLoadMore: function (callback) {
+                initItems($('.products-grid').eq(currentPage), 'append', callback);
+            },
+            onLeft: function (id, index) {
+                if (index === 0) {
+                    toggleMenu();
+                } else {
+                    Mobilebone.transition($('#' + pages[index - 1].id)[0], $('#' + id)[0], true);
+                }
+            },
+            onRight: function (id, index) {
+                if (index + 1 < pages.length) {
+                    Mobilebone.transition($('#' + pages[index + 1].id)[0], $('#' + id)[0], false);
+                }
+            }
+        });
     }
 
     // 单个产品列表处理
@@ -111,32 +157,6 @@ function ready() {
         });
     }
 
-    initEvents();
-    initViews();
-    showMenus();
-    showPages();
-    initPageScroll({
-        pages: pages,
-        onRefresh: function (callback) {
-            initItems($('.products-grid').eq(currentPage), 'html', callback);
-        },
-        onLoadMore: function (callback) {
-            initItems($('.products-grid').eq(currentPage), 'append', callback);
-        },
-        onLeft: function (id, index) {
-            if (index === 0) {
-                toggleMenu();
-            } else {
-                Mobilebone.transition($('#' + pages[index - 1].id)[0], $('#' + id)[0], true);
-            }
-        },
-        onRight: function (id, index) {
-            if (index + 1 < pages.length) {
-                Mobilebone.transition($('#' + pages[index + 1].id)[0], $('#' + id)[0], false);
-            }
-        }
-    });
-
     // 统一处理页面跳转相关
     Mobilebone.callback = function (pageinto) {
         var $this = $(pageinto),
@@ -184,6 +204,8 @@ function ready() {
             product: product
         })).html();
     };
+
+    init();
 }
 
 if (isApp) {

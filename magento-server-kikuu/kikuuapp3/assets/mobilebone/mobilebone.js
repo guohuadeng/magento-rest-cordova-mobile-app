@@ -1107,7 +1107,7 @@
 	**/
 	window.addEventListener("DOMContentLoaded", function() {
 		if (hasInited == false) {
-			Mobilebone.init();
+//			Mobilebone.init();
 		}
 	});
 	
