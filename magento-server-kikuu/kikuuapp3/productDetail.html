@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <META http-equiv=Content-Type content="text/html; charset=utf-8">
-    <title>Handlebars 构造</title>
-  </head>
-  <body>
-  <h1>Handlebars 构造</h1>
-  
-<button>向页面发送 HTTP POST 请求，并获得返回的结果</button>
-    <!--基础html框架-->
-    <table>
-      <thead>
-        <tr>
-          <th>姓名</th>
-          <th>性别</th>
-          <th>年龄</th>
-        </tr>
-      </thead>
-      <tbody id="tableList">
-        
-      </tbody>
-    </table>
-    
-    <!--插件引用-->
-    <script type="text/javascript" src="bower_components/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="bower_components/handlebars/handlebars.min.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>Index</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link href="css/assets.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+	
+    <style>
+    .swiper-container {
+        width: 100%;
+        height: 30%;
+    }
+    </style>
+	
+</head>
+  <body>  
+
+    <div class="page page-detail">
+        <header class="bar bar-nav">
+            <a class="icon fa fa-chevron-left pull-left" href="index.html" data-ajax="false"></a>
+            <a class="icon fa fa-share-alt pull-right"></a>
+            <h1 class="title">{{name}}</h1>
+        </header>	
+		</br></br></br>					
+		<button id="btn1">点击生成图片</button>	
+		<button id="btn2">点击生成详情</button>
+      <div class="swiper-container">	  	
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+		</div>   
+        <!-- Add Pagination -->
+        <div class="product-swiper-pagination"></div>
+      </div>
+		
+      <div id="productInfo">        
+      </div>
+    </div>
+      <div id="productImg">        
+      </div>
     
     <!--Handlebars.js模版-->
     <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
-    <!--id可以用来唯一确定一个模版,type是模版固定的写法-->
-    <script id="table-template" type="text/x-handlebars-template">
-      {{#each student}}
-            <tr>
-              <td>{{entity_id}}</td>
-              <td>{{type_id}}</td>
-              <td>{{sku}}</td>
-            </tr>
-      {{/each}}
-    </script>
+    <!--id可以用来唯一确定一个模版,type是模版固定的
 	
-	 <script>	  
-	 
-$(document).ready(function(){
-	$("button").click(function(){
-		$.ajax({ 
-			url: "http://skymazon.sunpop.cn/restconnect/?cmd=menu", 
-			contentType: 'application/json',
-			dataType: 'json',
-			success: function(data){alert(data);}
-			});
-		  });
-});
-        //模拟的json对象  	  
-			
-        var data = {
-                    "student": [
-                        {entity_id: "533",
-						type_id: "simple",
-						sku: "32213928303"
-							}
-                    ]
-                };
-        
-        //注册一个Handlebars模版，通过id找到某一个模版，获取模版的html框架
-        //$("#table-template").html()是jquery的语法，不懂的童鞋请恶补。。。
-        var myTemplate = Handlebars.compile($("#table-template").html());
-        
-        //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础table中。
-        $('#tableList').html(myTemplate(data));
-    </script>
-	
-	
-	
-  </body>
+<!-- 详情 rest 页 -->
+<script id="detail-template" type="text/x-handlebars-template">
+    {{#with product}}
+        <div class="content">
+            <h3>{{name}}</h3>
+            <div class="price-box">			
+                <span class="special-price">
+                    <span class="price-label">Special Price</span>
+                    <span class="price">${{final_price_with_tax}}</span>
+					&nbsp;
+				</span>
+                <span class="old-price">${{regular_price_with_tax}}</span>
+            </div>
+            <p>{{description}}</p>
+        </div>
+    {{/with}}
+</script>
+
+<!-- 详情 rest 图片页 -->
+<script id="detailImg-template" type="text/x-handlebars-template">
+    {{#each imglist}}
+        <div class="swiper-slide"><img src="{{url}}"></div>
+    {{/each}}
+</script>
+		
+
+<!-- 使用 cordova 插件要用到，不能删除 -->
+<script src="cordova.js"></script>
+<script src="js/assets.js"></script>
+<script src="js/common.js"></script>
+<script src="js/productdetail.js"></script>
+</body>
 </html>

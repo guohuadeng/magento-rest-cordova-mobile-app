@@ -8,7 +8,7 @@
         'bower_components/sprintf/dist/sprintf.min.js',
         'bower_components/store2/dist/store2.min.js',
         'bower_components/momentjs/moment.js',
-        'bower_components/swiper/dist/js/swiper.js'
+        'bower_components/swiper/dist/js/swiper.jquery.min.js'
     ];
 
     for (var i = 0; i < scripts.length; i++) {
