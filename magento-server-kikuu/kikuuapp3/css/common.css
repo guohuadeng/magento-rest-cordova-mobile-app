@@ -1,7 +1,6 @@
 .none {
     display: none;
 }
-
 .cb {
     clear: both;
 }
@@ -224,7 +223,7 @@ a:active {
     color: #8a8a8a;
     line-height: 36px;
     margin: 0;
-    font-size: 16px;
+    font-size: 14px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -242,10 +241,32 @@ a:active {
     margin-right: 10px;
 }
 
+/* 特殊处理：一栏 */
+#dailySale .products-grid .item,
+#bestSeller .products-grid .item  {
+    margin-top: 10px;
+    text-align: center;
+    padding: 0;
+    position: relative;
+    width: 100%;
+	min-height: 250px;
+}
+
+#dailySale .products-grid .item .product-price,
+#bestSeller .products-grid .item .product-price {
+    margin-top: 10px;
+    clear: both;
+	text-align: center;
+}
+
 /* 即将上架和目录列表正常处理：分两栏 */
 .products-grid .item {
+    margin-top: 10px;
+	text-align: center;	
     float: left;
     width: 50%;
+	padding: 0 1.25%;
+	min-height: 250px;
 }
 
 #wrapper .swiper-container {
@@ -256,34 +277,25 @@ a:active {
     max-width: 100%;
 }
 
-/* 特殊处理：一栏 */
-#dailySale .products-grid .item {
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 0;
-    position: relative;
-    width: 100%;
-}
-
-#bestSeller .products-grid .item {
-    margin-bottom: 10px;
-    text-align: center;
-    padding: 0;
-    position: relative;
-    width: 100%;
-}
 
 .products-grid .item img {
     max-width: 100%;
 }
 
 .products-grid .item .item-inner {
+	position: relative;
     border-bottom: 1px solid #dddddd;
+}
+
+.products-grid .item .product-image {
+    margin-bottom: 10px;
+    clear: both;
 }
 
 .products-grid .item .product-price {
     margin-top: 10px;
     clear: both;
+	text-align: left;
 }
 
 .products-grid .item .product-review {
@@ -312,7 +324,7 @@ a:active {
 
 .products-grid .item .item-inner .product-info {
     /* width: 100%; */
-    padding: 0px 20px 10px 0px;
+    padding: 0px 10px 10px 10px;
 }
 
 .products-grid .configurable-swatch-list {
@@ -379,7 +391,7 @@ a:active {
 .item .discount {
     position: absolute;
     left: 0px;
-    top: -8px;
+    top: -7px;
     font-size: 120%;
 }
 
@@ -413,7 +425,9 @@ a:active {
     padding-top: 0;
 }
 .page-detail .bar-nav {
+	position: fixed;
     padding-top: 0;
+	z-index: 20;
 }
 
 .page-detail iframe {

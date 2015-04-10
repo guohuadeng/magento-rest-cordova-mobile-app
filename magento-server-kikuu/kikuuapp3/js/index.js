@@ -46,9 +46,9 @@ function ready() {
             url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
         }, {
             name: 'My Account',
-            url: 'detail.html?title=My Account&url=' + baseUrl + '/#account?fromui=app'
+            url: 'detail.html?title=My Account&url=' + baseUrl + '/customer/account?fromui=app'
         },  {
-            name: 'Settings testLogin',
+            name: 'Settings -Register Test',
             url: 'detail.html?title=Settings&url=register.html'
         }, {
             name: 'Exit',
