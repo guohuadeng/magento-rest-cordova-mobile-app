@@ -68,6 +68,8 @@ function initPageScroll(options) {
                 pullActionDetect.check(scroll, $el.find('.pullUp'), 1);
             },
             onScrollEnd: function () {
+                $el.find('scroller').trigger('scroll');
+
                 if (this.distX < -100) {
                     options.onRight(page.id, i);
                     return;

@@ -13,21 +13,24 @@ var isApp = location.search.indexOf('debug') === -1, // 默认为 app，方便�
             cmd: 'daily_sale',
             title: 'Daily Sale',
             pullRefresh: true,
-            num: 1
+            num: 1,
+            total: 0
         },
         {
             id: 'bestSeller',
             cmd: 'best_seller',
             title: 'Best Seller',
             pullRefresh: true,
-            num: 1
+            num: 1,
+            total: 0
         },
         {
             id: 'comingSoon',
             cmd: 'coming_soon',
             title: 'Coming Soon',
             pullRefresh: true,
-            num: 1
+            num: 1,
+            total: 0
         }
     ],
     state = 'index',

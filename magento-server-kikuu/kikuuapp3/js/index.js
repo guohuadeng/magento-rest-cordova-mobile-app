@@ -68,7 +68,8 @@ function ready() {
                 cmd: 'catalog&categoryid=' + item.category_id,
                 title: item.name,
                 pullRefresh: true,
-                num: 1
+                num: 1,
+                total: 0
             });
         });
         $.each(pages, function (i, page) {
@@ -149,6 +150,12 @@ function ready() {
                     var $cb = $el.find('.cb');
                     $cb = $cb.length ? $cb : $('<div class="cb"></div>');
                     $el.append($cb);
+                    $('img.lazy').slice(page.total).lazyload({
+                        effect: 'fadeIn',
+                        container: $page.find('.scroller'),
+                        placeholder: 'images/loading.gif'
+                    });
+                    page.total = func === 'html' ? 0 : page.total + list.length;
                 } else {
                     $page.data('pullUp', $page.find('.pullUp').remove());
                 }
