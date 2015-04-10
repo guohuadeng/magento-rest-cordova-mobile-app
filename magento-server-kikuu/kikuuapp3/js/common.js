@@ -51,12 +51,6 @@ function initEvents() {
     // 菜单切换
     $('.menu-toggle, .menu-close').click(toggleMenu);
 	
-	$('.menu-toggle').click(function(){
-		$('.menu-bottom').show();
-	});
-	$('.menu-close').click(function(){
-		$('.menu-bottom').hide();
-	});
 	$('.menu-bottom').click(function(){
 		$('.menu-close').click();
 	});
@@ -134,4 +128,6 @@ function toggleMenu(e) {
 
     $menu.toggleClass('active');
     $('.cbp-spmenu-left').toggleClass('cbp-spmenu-open');
+	
+	$('.menu-bottom').toggle();
 }
