@@ -49,10 +49,10 @@ function initEvents() {
     });
 
     // 菜单切换
-    $('.menu-toggle, .menu-close').click(toggleMenu);
+    $('.menu-toggle, .menu-close, .menu-bottom').click(toggleMenu);
 	
-	$('.menu-bottom').click(function(){
-		$('.menu-close').click();
+	$(".cbp-spmenu li a").click(function(){
+		$('.menu-bottom').hide();
 	});
 	
     // 手机点击菜单按键
@@ -61,7 +61,6 @@ function initEvents() {
     // 菜单项点击
     $(document).on('click', '.cbp-spmenu li a', function () {
         $(this).parent().addClass('active').siblings().removeClass('active');
-        $('.menu-bottom').hide();
         // 退出
         if ($(this).parent().hasClass('exit')) {
             navigator.app.exitApp();
