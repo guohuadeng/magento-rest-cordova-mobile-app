@@ -3291,8 +3291,13 @@ label{
     border:2px solid #22c064;
     border-radius: 0;
 }
+#customer_order_list{
+	background-color:#f7f7f7;}
 #customer_order_list .island{
     padding: 10px 15px;
+	border-top: 1px solid #f7f7f7;
+	margin-bottom: 10px;
+	box-shadow: 1px 1px 1px #f2f2f2;
 }
 #customer_order_list .island>div{
     display:inline-block;
