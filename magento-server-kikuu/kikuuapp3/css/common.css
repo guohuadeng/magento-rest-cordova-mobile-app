@@ -258,7 +258,14 @@ a:active {
     clear: both;
 	text-align: center;
 }
-
+#dailySale .item .discount,
+#bestSeller .item .discount,
+ {
+    position: absolute;
+    left: 0px;
+    top: -12px;
+    font-size: 120%;
+}
 /* 即将上架和目录列表正常处理：分两栏 */
 .products-grid .item {
     margin-top: 10px;
@@ -367,12 +374,6 @@ a:active {
     text-decoration: line-through;
 }
 
-.item .discount {
-    position: absolute;
-    top: 10px;
-    font-size: 1em;
-}
-
 .price-box .discount .price,
 .item .item-price .discount .price,
 .item .product-price .discount .price {
@@ -391,7 +392,7 @@ a:active {
 .item .discount {
     position: absolute;
     left: 0px;
-    top: -7px;
+    top: -12px;
     font-size: 120%;
 }
 
