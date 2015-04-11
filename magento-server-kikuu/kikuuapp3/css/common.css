@@ -196,7 +196,7 @@ a:active {
 
 .product-swiper-container {
 	position: relative;
-	top: 44px;
+	margin-top: 10px;
 	width: 100%;
 	height: 200px;
     z-index: 10;
@@ -465,4 +465,33 @@ a:active {
 }
 .page-detail .detailInfo {
 	margin-top: 50px;
+}
+/********************product detail *********************/
+.page-product-detail h1 {
+    text-overflow: ellipsis;
+    width: 70%;
+    overflow: hidden;
+    left: 15%;
+}
+
+.page-product-detail .bar-nav ~ .content {
+    margin-top: 44px;
+    padding-top: 0;
+}
+.page-product-detail .bar-nav {
+	position: fixed;
+    padding-top: 0;
+	z-index: 20;
+}
+
+.page-product-detail iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.page-product-detail .detailInfo {
+	margin: 0px 10px 5px 10px;
+}
+.page-product-detail .detailInfo img {
+	max-width: 100%;
 }

@@ -1,63 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Index</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link href="css/assets.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet">
-</head>
-  <body>  
-
-    <div class="page-detail">
-        <header class="bar bar-nav">
-            <a class="icon fa fa-chevron-left pull-left" href="index.html" data-ajax="false"></a>
-            <a class="icon fa fa-share-alt pull-right"></a>
-            <h1 class="title">Product Detail</h1>
-        </header>	
-      <div class="product-swiper-container">	  	
-        <div class="swiper-wrapper">
-		</div>   
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-      </div>
+<div class="page page-product-detail">
+	<header class="bar bar-nav">
+		<a class="icon fa fa-chevron-left pull-left" href="index.html" data-ajax="true"></a>
+		<a class="icon fa fa-chevron-down pull-left" onClick="javascript:showProductPage()">get data</a>
+		<a class="icon fa fa-share-alt pull-right"></a>
+		<h1 class="title">Product Detail</h1>
+	</header>	
+    <div class="content">
+		<div class="product-swiper-container">	  	
+		<div class="swiper-wrapper">
+		</div>    
+		<!-- Add Pagination -->
+		<div class="swiper-pagination"></div>
+		</div>
 		<p>&nbsp;	</p>
-      <div id="productInfo" class="detailInfo"></div>
-	  
-    </div>
-    
-    <!--Handlebars.js模版-->
-    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
-    <!--id可以用来唯一确定一个模版,type是模版固定的
-	
-<!-- 详情 rest 页 -->
-<script id="detail-template" type="text/x-handlebars-template">
-    {{#with product}}
-            <h3>{{name}}</h3>
-            <div class="price-box">			
-                <span class="special-price">
-                    <span class="price-label">Special Price</span>
-                    <span class="price">${{final_price_with_tax}}</span>
-					&nbsp;
-				</span>
-                <span class="old-price">${{regular_price_with_tax}}</span>
-            </div>
-            <p>{{description}}</p>
-    {{/with}}
-</script>
-
-<!-- 详情 rest 图片页 -->
-<script id="detailImg-template" type="text/x-handlebars-template">
-    {{#each imglist}}
-        <div class="swiper-slide"><img src="{{url}}"></div>
-    {{/each}}
-</script>
-		
-
-<!-- 使用 cordova 插件要用到，不能删除 -->
-<script src="cordova.js"></script>
-<script src="js/assets.js"></script>
-<script src="js/common.js"></script>
-<script src="js/productdetail.js"></script>
-</body>
-</html>
+		<div id="productInfo" class="detailInfo"></div>
+	</div>  
+</div>
