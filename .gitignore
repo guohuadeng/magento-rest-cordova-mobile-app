@@ -1,3 +1,8 @@
+#security file
+s.*.doc
+s.*.docx
+s.*.pdf
+
 # Dw Sync
 dwsync.xml
 *.xml
