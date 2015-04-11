@@ -241,7 +241,7 @@ a:active {
     margin-right: 10px;
 }
 
-/* 特殊处理：一栏 */
+/* 特殊处理：一栏 #dailySale  #bestSeller */
 #dailySale .products-grid .item,
 #bestSeller .products-grid .item  {
     margin-top: 10px;
@@ -252,20 +252,48 @@ a:active {
 	min-height: 250px;
 }
 
+#dailySale .products-grid .item .item-inner .product-info,
+#bestSeller .products-grid .item .item-inner .product-info {
+    /* width: 100%; */
+    padding: 0px 10px 10px 10px;
+}
+/*-------for price---------*/
 #dailySale .products-grid .item .product-price,
 #bestSeller .products-grid .item .product-price {
     margin-top: 10px;
     clear: both;
 	text-align: center;
 }
+
+#dailySale .price-box .price,
+#dailySale .category-products .item .price-box .price,
+#bestSeller .price-box .price,
+#bestSeller .category-products .item .price-box .price {
+    color: #e74c3c;
+    font-size: 140%;
+}
 #dailySale .item .discount,
-#bestSeller .item .discount,
+#bestSeller .item .discount
  {
     position: absolute;
     left: 0px;
-    top: -12px;
-    font-size: 120%;
+    top: -7px;
+    font-size: 90%;
 }
+#dailySale .price-box .discount .price,
+#dailySale .item .item-price .discount .price,
+#dailySale .item .product-price .discount .price,
+#bestSeller .price-box .discount .price,
+#bestSeller .item .item-price .discount .price,
+#bestSeller .item .product-price .discount .price {
+    background: #e35a32;
+    color: #fff;
+    width: 60px;
+    padding: 2px 4px;
+    opacity: 0.8;
+}
+/* end 特殊处理：一栏 #dailySale  #bestSeller *
+
 /* 即将上架和目录列表正常处理：分两栏 */
 .products-grid .item {
     margin-top: 10px;
@@ -273,7 +301,7 @@ a:active {
     float: left;
     width: 50%;
 	padding: 0 1.25%;
-	min-height: 250px;
+	min-height: 220px;
 }
 
 #wrapper .swiper-container {
@@ -331,7 +359,7 @@ a:active {
 
 .products-grid .item .item-inner .product-info {
     /* width: 100%; */
-    padding: 0px 10px 10px 10px;
+    padding: 0px 10px 2px 10px;
 }
 
 .products-grid .configurable-swatch-list {
@@ -351,7 +379,7 @@ a:active {
 .price-box .price,
 .category-products .item .price-box .price {
     color: #e74c3c;
-    font-size: 140%;
+    font-size: 100%;
 }
 
 .price-box .old-price .price,
@@ -377,7 +405,6 @@ a:active {
 .price-box .discount .price,
 .item .item-price .discount .price,
 .item .product-price .discount .price {
-    font-size: 1em;
     background: #e35a32;
     color: #fff;
     width: 60px;
@@ -392,8 +419,8 @@ a:active {
 .item .discount {
     position: absolute;
     left: 0px;
-    top: -12px;
-    font-size: 120%;
+    top: -11px;
+    font-size: 80%;
 }
 
 /********************* tools ********************/
