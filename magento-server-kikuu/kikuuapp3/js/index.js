@@ -151,7 +151,6 @@ function ready() {
                     $cb = $cb.length ? $cb : $('<div class="cb"></div>');
                     $el.append($cb);
                     $('img.lazy').slice(page.total).lazyload({
-                        effect: 'fadeIn',
                         container: $page.find('.scroller'),
                         placeholder: 'images/loading.gif'
                     });
