@@ -150,5 +150,5 @@ function requestUrl(paras)
         } 
     }
 //绑定fastclick，更好处理tap,滚动的流畅度提升明显，因chrome浏览器操作原因，开发阶段关闭
-FastClick.attach(document.body);
+//FastClick.attach(document.body);
 	
