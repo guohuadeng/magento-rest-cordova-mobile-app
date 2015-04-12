@@ -1,44 +1,3 @@
-var isApp = location.search.indexOf('debug') === -1, // 默认为 app，方便测试桌面在 url 加上 ?debug
-    baseUrl = isApp ? 'http://skymazon.sunpop.cn' : '',
-    api = {
-        menus: baseUrl + '/restconnect/?cmd=menu',
-        products: baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
-//        product_detail: baseUrl + '/api/rest/products/'
-        products_rest: baseUrl + '/api/rest/products/',
-        product_detail: baseUrl + '/catalog/product/view/id/'
-    },
-    pages = [
-        {
-            id: 'dailySale',
-            cmd: 'daily_sale',
-            title: 'Daily Sale',
-            pullRefresh: true,
-            num: 1,
-            total: 0
-        },
-        {
-            id: 'bestSeller',
-            cmd: 'best_seller',
-            title: 'Best Seller',
-            pullRefresh: true,
-            num: 1,
-            total: 0
-        },
-        {
-            id: 'comingSoon',
-            cmd: 'coming_soon',
-            title: 'Coming Soon',
-            pullRefresh: true,
-            num: 1,
-            total: 0
-        }
-    ],
-    state = 'index',
-    define = {
-        showWelcome: isApp,
-        startTime: isApp ? 2000 : 0
-    };
-
 // 全局事件处理，用于调试错误信息
 window.onerror = function (e) {
 //    alert(e);
@@ -59,18 +18,7 @@ function initEvents() {
 	});
 	
     // 手机点击菜单按键
-    document.addEventListener("menubutton", toggleMenu, false);
-
-    // 菜单项点击
-    $(document).on('click', '.cbp-spmenu li a', function () {
-        $(this).parent().addClass('active').siblings().removeClass('active');
-        // 退出
-        if ($(this).parent().hasClass('exit')) {
-            navigator.app.exitApp();
-        } else {
-            toggleMenu();
-        }
-    });
+    document.addEventListener('menubutton', toggleMenu, false);
 
     // 二维码
     $(document).on('click', '.qrcode', function () {
@@ -98,30 +46,9 @@ function initEvents() {
     });
 }
 
-function initViews() {
-    setTimeout(function () {
-        $('.start').hide();
-        checkFirstTime();
-    }, define.startTime);
-}
-
-function checkFirstTime() {
-    var $firstTime = $('#firstTime');
-
-    if (define.showWelcome && !store('first-time')) {
-        $firstTime.show();
-        store('first-time', true);
-        $('.enter-button').click(function () {
-            $firstTime.remove();
-        });
-    } else {
-        $firstTime.remove();
-    }
-}
-
 // 切换菜单
 function toggleMenu(e) {
-    if (state !== 'index') {
+    if (defines.state !== 'index') {
         return;
     }
 
@@ -133,6 +60,7 @@ function toggleMenu(e) {
 	
 	$('.menu-bottom').toggle();
 }
+
 // 处理页面url传递的参数
 function requestUrl(paras)
     { 

@@ -41,7 +41,7 @@
 
 <div class="card cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" style="overflow: visible;">
     <h3>
-        Menu112
+        Menu
         <a class="icon icon-close pull-right menu-close"></a>
     </h3>
     <ul class="table-view cbp-spmenu-list">
@@ -82,9 +82,9 @@
     {{#each items}}
     <div class="item">
         <div class="item-inner">
-            <a href="detail.html?title={{name}}&url={{url_key}}">
+            <a href="detail.html?title={{name}}&url={{url_key}}&share=true">
             <div class="product-image">
-                    <img class="lazy small-image" data-original="{{image_url}}" alt="{{name}}">
+                <img class="lazy small-image" data-original="{{image_url}}" alt="{{name}}">
             </div>
             </a>
 
@@ -138,6 +138,8 @@
 <!-- 使用 cordova 插件要用到，不能删除 -->
 <script src="cordova.js"></script>
 <script src="js/assets.js"></script>
+<script src="js/define.js"></script>
+<script src="js/server.js"></script>
 <script src="js/common.js"></script>
 <script src="js/index.js"></script>
 <script src="js/productdetail.js"></script>

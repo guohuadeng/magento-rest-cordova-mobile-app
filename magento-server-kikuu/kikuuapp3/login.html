@@ -1,73 +1,14 @@
-<!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<title>Kikuu.com - login</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="description" content="Kikuu.com, extremely customizable, easy to use. Great as a starting point for your custom projects and suitable for every type of store.">
-<meta name="keywords" content="Kikuu.com">
-<meta name="robots" content="INDEX,FOLLOW">
-<meta content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" name="viewport">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<link rel="stylesheet" type="text/css" href="css/web_style.css" media="all">
-
-<link rel="stylesheet" type="text/css" href="css/common.css" media="all">
-
-<script type="text/javascript" src="js_register/fastclick.js"></script>
-
-<link href="http://fonts.useso.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
-<script type="text/javascript">
-//<![CDATA[
-optionalZipCountries = ["HK","IE","MO","PA"];
-//]]>
-</script>
-</head>
-<body orient="landscape">
-<div class="container">
-	
-    <div class="container-pusher">
-    	<div class="wrapper">
-			<!-- .wrapper -->
-<div id="customer_navigation_popup" class="nav_iphone customer-cart-ajax panel panel--from-bottom popup-form" style="display: block; top: 0px; opacity: 1;">
-	  <div id="customer_ajax_container">
-        <div class="customer-account nav__list-container panel__container">
-          <div class="nav__list customer-account-login">
-            <form action="http://skymazon.sunpop.cn/awmobile2/customer/loginPost/" method="post" id="user_login_form" class="nav__list-inner">
-              <input name="form_key" type="hidden" value="gG4N5WWCJWbfpgGG">
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <p class="form__field form__field--required"> 
-                <!--<label for="email" class="form__label form__label--required">Email Address</label>-->
-                <input type="email" placeholder="Email or Member ID" class="form__textfield textfield validate-email required-entry" name="login[username]" id="email" value="" title="Email Address">
-              </p>
-              <!-- .form__field -->
-              <p class="form__field form__field--required"> 
-                <!--<label for="pass" class="form__label form__label--required">Password</label>-->
-                <input placeholder="Password" class="form__textfield textfield required-entry validate-password" type="password" name="login[password]" id="pass" title="Password">
-              </p>
-              <!-- .form__field -->
-              <p class="form__submit-wrapper"> <a id="forgot_pass_link" href="forgot_password.html">Forgot Password?</a> </p>
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <button type="submit" title="Login" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onclick="window.customerAccount.login()">Login</button>
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <!--<button id="create_form_link" class="create_form_link button" type="button" title="Create an Account" onclick="">Create an Account</button>-->
-              <a class="create_form_link button" href="register.html" style="height:40px; line-height:40px; padding:0;">Create an Account</a>
-              <!-- .form__submit-wrapper -->
-            </form>
-            <div class="nav__list-shadow"></div>
-          </div>
+<div class="page page-login">
+    <header class="bar bar-nav">
+        <a class="icon fa fa-chevron-left pull-left" data-role="back"></a>
+        <h1 class="title">Login</h1>
+    </header>
+    <div class="content">
+        <div class="content-padded">
+            <input name="username" type="text" placeholder="Email or Member ID">
+            <input name="password" type="password" placeholder="Password">
+            <a name="login" class="btn btn-positive btn-block">Login</a>
+            <a name="register" class="btn btn-block" href="detail.html?title=Register&url=register.html?fromui=app">Create an Account</a>
         </div>
-      </div>
-	  </div>
- 	  </div>
-  </div>
-	  
-  <div id="ajax_loader" class="loader" style="display:none;"></div>
-  <script type="text/javascript">
-        //<![CDATA[
-            FastClick.attach(document.body);
-        //]]>
-    </script> 
+    </div>
 </div>
-<!-- .container -->
-
-</body>
-</html>

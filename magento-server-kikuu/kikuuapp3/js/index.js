@@ -2,69 +2,74 @@ function ready() {
     var currentPage = 0, // 当前切换页面 index
 		productCountPerAjax = 20,	//产品页每次请求时取的商品数量
         bannerSwiper,
-        $pages,
-        $menuTpl = $('#menu-template'),
-        $slideTpl = $('#slide-template'),
-        $itemTpl = $('#item-template'),
-        $detailTpl = $('#detail-template');
+        $pages;
 
     function init() {
         initEvents();
-        initViews();
         initMenus();
     }
 
-    // 根据 rest 接口构造菜单
+    // 获取菜单信息
     function initMenus() {
-        $.getJSON(api.menus, function (res) {
-            showMenus(res);
-            showPages(res);
+        servers.getMenus(function (menus) {
+            showMenus(menus);
+            showPages(menus);
             initPages();
+            initUser();
             Mobilebone.init();
         });
     }
 
-    function showMenus(res) {
-        var menus = [
-            {
-                name: 'Home',
-                class_name: 'active'
+    // 获取用户
+    function initUser() {
+        servers.getUser(function (user) {
+            defines.user = user;
+
+            var $menus = $('.cbp-spmenu-list');
+
+            if (defines.user) {
+                $menus.find('.login_true').show();
+                $menus.find('.login_false').hide();
+            } else {
+                $menus.find('.login_true').hide();
+                $menus.find('.login_false').show();
             }
-        ];
-        $.each(res, function (i, item) {
+        });
+    }
+
+    // 用户用户状态显示菜单
+    function showMenus(menus) {
+        $.each(menus, function (i, item) {
             item.url = '#c' + item.category_id;
         });
-        menus = menus.concat(res);
-        menus.push({
-            name: '',
-            class_name: 'table-view-divider',
-            url: '#'
-        }, {
-            name: 'My Order',
-            url: 'detail.html?title=My Order&url=' + baseUrl + '/sales/order/history/?fromui=app'
-        }, {
-            name: 'My Shopping Cart',
-            url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app'
-        }, {
-            name: 'My Account',
-            url: 'detail.html?title=My Account&url=' + baseUrl + '/customer/account?fromui=app'
-        },  {
-            name: 'Settings -Register Test',
-            url: 'detail.html?title=Settings&url=register.html'
-        }, {
-            name: 'Exit',
-            class_name: 'exit',
-            url: '#'
-        });
-        $('.cbp-spmenu-list').html(Handlebars.compile($menuTpl.html())({
-            menus: menus
+        // 插入数据到 menus 中，从位置 1 开始
+        defines.menus.splice.apply(defines.menus, [1, 0].concat(menus));
+
+        $('.cbp-spmenu-list').html(Handlebars.compile(defines.menuTpl)({
+            menus: defines.menus
         }));
+
+        // 菜单项点击
+        $(document).on('click', '.cbp-spmenu li a', function () {
+            $(this).parent().addClass('active').siblings().removeClass('active');
+            // 退出
+            if ($(this).parent().hasClass('exit')) {
+                navigator.app.exitApp();
+            } else {
+                toggleMenu();
+            }
+        });
+
+        // logout
+        $(document).on('click', '.logout', function () {
+            servers.logout(initUser);
+        });
     }
 
     // 根据 page 配置构造 banner 和 切换页面
     function showPages(res) {
         $.each(res, function (i, item) {
-            pages.push({
+            defines.pages.push({
                 id: 'c' + item.category_id,
                 cmd: 'catalog&categoryid=' + item.category_id,
                 title: item.name,
@@ -73,7 +78,7 @@ function ready() {
                 total: 0
             });
         });
-        $.each(pages, function (i, page) {
+        $.each(defines.pages, function (i, page) {
             $('.swiper-container .swiper-wrapper').append(sprintf(
                 '<a href="#%s" data-rel="auto" class="swiper-slide bullet-item">%s</a>',
                 page.id, page.title));
@@ -84,14 +89,14 @@ function ready() {
             parallax: true
         });
 
-        $pages = $('#pageScroller').html(Handlebars.compile($slideTpl.html())({
-            menus: pages
+        $pages = $('#pageScroller').html(Handlebars.compile(defines.slideTpl)({
+            menus: defines.pages
         })).find('.products-grid');
     }
 
     function initPages() {
         initPageScroll({
-            pages: pages,
+            pages: defines.pages,
             onRefresh: function (callback) {
                 initItems($('.products-grid').eq(currentPage), 'html', callback);
             },
@@ -102,12 +107,12 @@ function ready() {
                 if (index === 0) {
                     toggleMenu();
                 } else {
-                    Mobilebone.transition($('#' + pages[index - 1].id)[0], $('#' + id)[0], true);
+                    Mobilebone.transition($('#' + defines.pages[index - 1].id)[0], $('#' + id)[0], true);
                 }
             },
             onRight: function (id, index) {
-                if (index + 1 < pages.length) {
-                    Mobilebone.transition($('#' + pages[index + 1].id)[0], $('#' + id)[0], false);
+                if (index + 1 < defines.pages.length) {
+                    Mobilebone.transition($('#' + defines.pages[index + 1].id)[0], $('#' + id)[0], false);
                 }
             }
         });
@@ -115,57 +120,48 @@ function ready() {
 
     // 单个产品列表处理
     function initItems($el, func, callback) {
-        var page = pages[$el.parents('.page').index()],
+        var page = defines.pages[$el.parents('.page').index()],
             $page = $('#' + page.id),
             items = [];
 
         page.num = func === 'html' ? 1 : page.num + 1;
 
-        $.ajax({
-            type: 'get',
-            url: sprintf(api.products, page.cmd, productCountPerAjax, page.num),
-            contentType: 'application/json',
-            dataType: 'json',
-            success: function (list) {
-                if ($.isArray(list)) {
-                    // 处理返回数据
-                    var items = $.map(list, function (item) {
-                        var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
-                            toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
-                            date = new Date();
-                        if (+fromDate <= +date && +date <= +toDate) {
-                            item.price_percent = ~~(-100 * (item.regular_price_with_tax -
-                                item.final_price_with_tax) / item.regular_price_with_tax);
-                            item.price_percent_class = '';
-                        } else {
-                            item.price_percent_class = 'none';
-                            item.final_price_with_tax = item.regular_price_with_tax;
-                        }
-                        item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
-                        item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
-                        return item;
-                    });
-                    $el[func](Handlebars.compile($itemTpl.html())({
-                        items: items
-                    }));
-                    var $cb = $el.find('.cb');
-                    $cb = $cb.length ? $cb : $('<div class="cb"></div>');
-                    $el.append($cb);
-                    $('img.lazy').slice(page.total).lazyload({
-                        container: $page.find('.scroller'),
-                        placeholder: 'images/loading.gif'
-                    });
-                    page.total = func === 'html' ? 0 : page.total + list.length;
-                } else {
-                    $page.data('pullUp', $page.find('.pullUp').remove());
-                }
-                $page.data('scroll').refresh();
-                if (callback) {
-                    callback();
-                }
-            },
-            error: function (jqXHR) {
-                alert('Please check the network!');
+        servers.getProducts(page, function (list) {
+            if ($.isArray(list)) {
+                // 处理返回数据
+                var items = $.map(list, function (item) {
+                    var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
+                        toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
+                        date = new Date();
+                    if (+fromDate <= +date && +date <= +toDate) {
+                        item.price_percent = ~~(-100 * (item.regular_price_with_tax -
+                            item.final_price_with_tax) / item.regular_price_with_tax);
+                        item.price_percent_class = '';
+                    } else {
+                        item.price_percent_class = 'none';
+                        item.final_price_with_tax = item.regular_price_with_tax;
+                    }
+                    item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
+                    item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
+                    return item;
+                });
+                $el[func](Handlebars.compile(defines.itemTpl)({
+                    items: items
+                }));
+                var $cb = $el.find('.cb');
+                $cb = $cb.length ? $cb : $('<div class="cb"></div>');
+                $el.append($cb);
+                $('img.lazy').slice(page.total).lazyload({
+                    container: $page.find('.scroller'),
+                    placeholder: 'images/loading.gif'
+                });
+                page.total = func === 'html' ? 0 : page.total + list.length;
+            } else {
+                $page.data('pullUp', $page.find('.pullUp').remove());
+            }
+            $page.data('scroll').refresh();
+            if (callback) {
+                callback();
             }
         });
     }
@@ -176,7 +172,8 @@ function ready() {
             $headerIndex = $('.header-index').addClass('out'),
             $frame = $('.frame').addClass('out'),
             $page;
-	//index页
+
+	    // index页
         if ($this.hasClass('page-index')) {
             currentPage = $this.index();
             bannerSwiper.slideTo(currentPage);
@@ -194,10 +191,28 @@ function ready() {
                 $page.data('init', true);
             }
             $this.data('scroll').refresh(); // 刷新 scroll
-        } 
-	//end index 页
-	//detail页	
-		else if ($this.hasClass('page-detail')) {
+            return;
+        }
+
+        // login页
+        if ($this.hasClass('page-login')) {
+            $this.find('[name="login"]').click(function () {
+                var username = $this.find('[name="username"]').val(),
+                    password = $this.find('[name="password"]').val();
+
+                servers.login(username, password, function (res) {
+                    if (res) {
+                        history.back();
+                        initUser();
+                    } else {
+                        alert('Username or password error!');
+                    }
+                });
+            });
+        }
+
+	    // detail页
+		if ($this.hasClass('page-detail')) {
             var query = {};
             $.each(location.hash.substring(location.hash.indexOf('?') + 1).split('&'), function (i, item) {
                 var items = item.split('=');
@@ -209,13 +224,17 @@ function ready() {
             if (query.title) {
                 $this.find('.title').text(query.title);
             }
+            if (query.share) {
+                $this.find('.share').show();
+            }
+            return;
         }
-	//end detail页	
-	//product-detail页处理
-        else if ($this.hasClass('page-product-detail')) {			
+
+	    //product-detail页处理
+        if ($this.hasClass('page-product-detail')) {
 			showProductPage();
-        }	
-	//end product-detail页
+            return;
+        }
     };
 
     // 处理 ajax json 加载，暂时没有使用到，留着详情页 rest 接口用
@@ -230,9 +249,4 @@ function ready() {
     init();
 }
 
-if (isApp) {
-    $(document).ready(ready);
-//    document.addEventListener('deviceready', ready, false);
-} else {
-    $(document).ready(ready);
-}
+$(document).ready(ready);
