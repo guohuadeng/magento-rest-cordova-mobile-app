@@ -1,6 +1,5 @@
 function ready() {
     var currentPage = 0, // 当前切换页面 index
-		productCountPerAjax = 20,	//产品页每次请求时取的商品数量
         bannerSwiper,
         $pages;
 
@@ -212,12 +211,8 @@ function ready() {
         }
 
 	    // detail页
-		if ($this.hasClass('page-detail')) {
-            var query = {};
-            $.each(location.hash.substring(location.hash.indexOf('?') + 1).split('&'), function (i, item) {
-                var items = item.split('=');
-                query[items[0]] = items[1];
-            });
+        if ($this.hasClass('page-detail')) {
+            var query = utils.queryUrl();
             if (query.url) {
                 $this.find('iframe').attr('src', query.url);
             }
@@ -241,7 +236,7 @@ function ready() {
     Mobilebone.jsonHandle = function (product) {
         product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
         product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
-        return $(Handlebars.compile($detailTpl.html())({
+        return $(Handlebars.compile(defines.detailTpl)({
             product: product
         })).html();
     };
