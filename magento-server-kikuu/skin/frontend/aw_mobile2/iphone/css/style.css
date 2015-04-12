@@ -344,12 +344,12 @@ table {
 	background-size: 30px 23px;
 	background-position: 50%;
 	text-align:center;
-	width: 45%;
+	width: 30%;
 	height: 49px;
 	background-color: #f7f7f7;
 	position: fixed;
-	bottom: 4px;
 	left: 10px;
+	bottom: 0px;
 	z-index: 4;
 }
 .header__link--cart-empty {
@@ -358,17 +358,7 @@ table {
     background-position: 0 center;
     padding-right:16px;
     width:30px;
-    height:44px;*/
-	
-	background-image: url("../images/cart.svg");
-	background-size: 30px 23px;
-	background-position: 50%;
-	text-align:center;
-	width: 45%;
-	height: 49px;
-	background-color: #f7f7f7;
-	left: 10px;
-	z-index: 4;
+    height:44px;*/	
 }
 .logo {
     height: 44px;
@@ -3047,12 +3037,20 @@ span.price-excluding-tax span, span.price-including-tax span, a.minimal-price-li
 }
 .js-close-panel{
     background-image: url("../images/pop_up_close.svg");
-    background-position:left center;
+    background-position: center;
     background-size:12px;
-    background-repeat:no-repeat;
+    background-repeat:no-repeat; 
+	width: 55px; 
     height: 55px;
     padding: 0;
-    width: 29px;
+    width: 29px;	
+	position:fixed; 
+	right:20px; 
+	bottom:20px;
+	border-radius:50%; 
+	background-color:#fff; 
+	box-shadow: 2px 2px 2px #ccc;
+	visibility: hidden;	
 }
 .panel--from-bottom .panel__container,  .panel--from-right .panel__container{
     top:0px;
@@ -3442,6 +3440,7 @@ label{
     text-align:center;
     font-weight: 600;
     border-radius: 0;
+	box-sizing: border-box;
 	float:left;
 }
 #shopping_cart_ajax_container .add-to-cart__quantity:focus{
@@ -3689,8 +3688,12 @@ label{
     top:40px;
 }
 .js-add-to-cart{
-    margin:15px 0 4px;
-    padding:16px 10px;
+    margin: 4px 19px;
+	height: 49px;
+	width: 65%;
+	float: right;
+	color: #fff;
+	background-color: #F4A137;
 }
 .product-type-data-container {
     line-height: 19px;
@@ -4005,10 +4008,11 @@ label{
 .price-notice .price{
 	color:#F4A137;}
 .add_to_cart_all_l{
-	width:30%;
-	height:49px;
+	width:100%;
+	height:52px;
 	bottom:1px;
 	position:fixed;
+	background-color: #FFF;	
 	}
 .collect_product{
 	float:right;

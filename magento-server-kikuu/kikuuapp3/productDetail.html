@@ -2,16 +2,29 @@
 	<header class="bar bar-nav">
         <a class="icon fa fa-chevron-left pull-left detail-back" data-role="back"></a>
 		<a class="icon fa fa-share-alt pull-right"></a>
-		<h1 class="title">Product Detail</h1>
+		<a data-role="back"> <h1 class="title">Product Detail</h1></a>
 	</header>	
     <div class="content">	
 		<!-- img swiper -->
 		<div class="product-swiper-container">	  	
-		<div class="swiper-wrapper">
-		</div>    
-		<div class="swiper-pagination"></div>
+			<div class="swiper-wrapper">
+			</div>    
+			<div class="swiper-pagination"></div>
 		</div>
 		<p>&nbsp;	</p>		
-		<div id="productInfo" class="detailInfo"></div>
+		<div id="productInfo" class="detailInfo"></div>		
 	</div>  
+	<footer class="bar bar-standard bar-footer">
+		<!-- cart -->				
+		<div class="add_to_cart_all_l">
+			<p>
+        	<a class="icon fa fa-cart-arrow-down pull-down detail-back" data-role="back"></a>
+			<a id="shopping_cart" href="javascript:void(0)" class="header__link header__link--cart header__link--cart-empty"></a>
+			<input type="hidden" value="1" class="add-to-cart__quantity" name="qty">
+			<button type="button" class="button add-to-cart__submit js-add-to-cart validation-passed" onclick="window.productAddToCartForm.submit()">Add to cart</button>
+			<button type="button" class="button add-to-cart__submit js-add-to-cart" onclick="window.productAddToCartForm.submit()">Configure and Buy</button>
+			</p>	
+		</div>
+		<!-- end cart -->	
+	</footer>
 </div>

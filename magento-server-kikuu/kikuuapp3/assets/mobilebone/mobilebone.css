@@ -22,7 +22,9 @@ html, body, .page {
 }
 .page {
 	position: absolute; left: 0; top: 0;
+	-webkit-scrollbar: width:0px;
 }
+::-webkit-scrollbar {width:0px;}
 
 .out {
 	display: none;

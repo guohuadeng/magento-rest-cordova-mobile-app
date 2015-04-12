@@ -166,7 +166,6 @@ function ready() {
             },
             error: function (jqXHR) {
                 alert('Please check the network!');
-                navigator.app.exitApp();
             }
         });
     }
@@ -214,7 +213,7 @@ function ready() {
 	//end detail页	
 	//product-detail页处理
         else if ($this.hasClass('page-product-detail')) {			
-			showProductPage;
+			showProductPage();
         }	
 	//end product-detail页
     };

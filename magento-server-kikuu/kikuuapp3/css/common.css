@@ -471,7 +471,7 @@ a:active {
     text-overflow: ellipsis;
     width: 70%;
     overflow: hidden;
-    left: 15%;
+    left: 0px;
 }
 
 .page-product-detail .bar-nav ~ .content {

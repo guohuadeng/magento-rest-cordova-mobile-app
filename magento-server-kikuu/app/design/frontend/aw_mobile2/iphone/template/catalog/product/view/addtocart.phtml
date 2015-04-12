@@ -32,9 +32,9 @@
             <?php endif;?>
         </a>
 <?php $_product = $this->getProduct() ?>
-<p class="nowrap">
+<p>
     <input type="hidden" value="<?php echo max($this->getMinimalQty($_product), 1) ?>" class="add-to-cart__quantity" name="qty">
-    <button type="button" class="button add-to-cart__submit js-add-to-cart green-button" style="background-color:#F4A137;" onclick="window.productAddToCartForm.submit()">
+    <button type="button" class="button add-to-cart__submit js-add-to-cart green-button" onclick="window.productAddToCartForm.submit()">
         <?php if($_product->getHasOptions()): ?>
             <?php echo $this->__('Configure and Buy');?>
         <?php else: ?>
