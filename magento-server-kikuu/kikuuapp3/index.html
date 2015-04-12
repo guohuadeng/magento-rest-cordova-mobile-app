@@ -90,7 +90,8 @@
 
             <div class="product-info">
                 <div class="product-name">
-                    <a href="productDetail.html?entity_id={{entity_id}}&title=Product Detail&url={{url_key}}"  data-ajax="true">
+					<!--###### mobilebone会将不同的url处理为不同页，每个不同页生成一个div，故只使用一个url，用全局变量传产品id ######-->
+                    <a href="productDetail.html?title=Product Detail" data-ajax="true" onclick="setProductId({{entity_id}})">
                     {{name}}</a>
                 </div>
 
@@ -114,53 +115,22 @@
     {{/each}}
 </script>
 
-<!-- 详情 rest 页，暂时没有用到 
-<script id="detail-template" type="text/x-handlebars-template">
-    {{#with product}}
-    <div class="page page-detail">
-        <header class="bar bar-nav">
-            <a class="icon fa fa-chevron-left pull-left" href="index.html" data-ajax="false"></a>
-            <a class="icon fa fa-share-alt pull-right"></a>
-            <h1 class="title"></h1>
-        </header>
-        <div class="content">
-            <div><img src="{{image_url}}"></div>
-            <h3>{{name}}</h3>
-            <div class="price-box">
-                <p class="old-price">
-                    <span class="price-label">Regular Price:</span>
-                    <span class="price">${{regular_price_with_tax}}</span>
-                </p>
-                <p class="special-price">
-                    <span class="price-label">Special Price</span>
-                    <span class="price">${{final_price_with_tax}}</span>
-                </p>
-            </div>
-            <p>{{description}}</p>
-        </div>
-    </div>
-    {{/with}}
-</script>
--- End详情 rest 页，暂时没有用到 -->
-
-<!-- 产品详情页专用的相关js -->    
-    <!--Handlebars.js模版-->
-    <!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
-    <!--id可以用来唯一确定一个模版,type是模版固定的
-	
 <!-- 详情 rest 页 -->
 <script id="productDetail-template" type="text/x-handlebars-template">
     {{#with product}}
-            <h3>{{name}}</h3>
-            <div class="price-box">			
-                <span class="special-price">
-                    <span class="price-label">Special Price</span>
-                    <span class="price">${{final_price_with_tax}}</span>
+		<div id="productDetail-{{entity_id}}">
+			<!-- info -->
+			<div class="product-name">{{name}}</a></div>
+			<div class="price-box">			
+				<span class="special-price">
+					<span class="price-label">Special Price</span>
+					<span class="price">${{final_price_with_tax}}</span>
 					&nbsp;
 				</span>
-                <span class="old-price">${{regular_price_with_tax}}</span>
-            </div>
-            <p>{{{description}}}</p>
+				<span class="old-price">${{regular_price_with_tax}}</span>
+			</div>
+			<p>{{{description}}}</p>
+		</div>
     {{/with}}
 </script>
 		
