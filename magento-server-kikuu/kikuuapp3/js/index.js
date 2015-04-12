@@ -210,10 +210,13 @@ function ready() {
             });
         }
 
-	    // detail页
+	    // detail页，product-frame页处理
         if ($this.hasClass('page-detail')) {
             var query = utils.queryUrl();
             if (query.url) {
+				if (query.entity_id) {
+					query.url = query.url + '?entity_id=' + query.entity_id;
+				}
                 $this.find('iframe').attr('src', query.url);
             }
             if (query.title) {
@@ -222,12 +225,6 @@ function ready() {
             if (query.share) {
                 $this.find('.share').show();
             }
-            return;
-        }
-
-	    //product-detail页处理
-        if ($this.hasClass('page-product-detail')) {
-			showProductPage();
             return;
         }
     };

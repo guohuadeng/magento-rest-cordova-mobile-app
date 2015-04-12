@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Product Detail</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link href="css/assets.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet">
-</head>
-<body> 
 <div class="page page-product-detail">
+	<header class="bar bar-nav">
+        <a class="icon fa fa-chevron-left pull-left detail-back" data-role="back"></a>
+		<a class="icon fa fa-share-alt pull-right"></a>
+		<a data-role="back"> <h1 class="title">Product Detail</h1></a>
+	</header>	
     <div class="content">	
 		<!-- img swiper -->
 		<div class="product-swiper-container">	  	
@@ -33,28 +28,3 @@
 		<!-- end cart -->	
 	</footer>
 </div>
-
-<!-- 详情 rest 页 -->
-<script id="productDetail-template" type="text/x-handlebars-template">
-    {{#with product}}
-		<div id="productDetail-{{entity_id}}">
-			<!-- info -->
-			<div class="product-name">{{name}}</a></div>
-			<div class="price-box">			
-				<span class="special-price">
-					<span class="price-label">Special Price</span>
-					<span class="price">${{final_price_with_tax}}</span>
-					&nbsp;
-				</span>
-				<span class="old-price">${{regular_price_with_tax}}</span>
-			</div>
-			<p>{{{description}}}</p>
-		</div>
-    {{/with}}
-</script>
-<!-- 使用 cordova 插件要用到，不能删除 -->
-<script src="cordova.js"></script>
-<script src="js/assets.js"></script>
-<script src="js/config.js"></script>
-</body>
-</html>

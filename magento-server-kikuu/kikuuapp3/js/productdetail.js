@@ -1,28 +1,33 @@
-var productSwiper,		//产品详情页中的图片
-	entity_id;			//当前查看产品
-$productDetailTpl = $('#productDetail-template');	
-//初始化页面中产品
+var entity_id;
+var productSwiper = new Swiper('.product-swiper-container', {
+		pagination: '.product-swiper-container .swiper-pagination',
+		slidesPerView: 1,
+		centeredSlides: true,
+		parallax: true,
+		paginationClickable: true,
+		loop: true
+});
 
+//初始化页面中产品信息
+$(document).ready(function(){
+		entity_id = requestUrl('entity_id');
+		$productDetailTpl = $('#productDetail-template'),
+		$detailImgTpl = $('#detailImg-template');
+	if (entity_id)
+		showProductPage(entity_id);	
+	});
+	
 function setProductId (id)	{ entity_id = id; };
 
 function showProductPage() {
-	var items = [];
+	//var items = [];
 	if (productSwiper) {
 			productSwiper.removeAllSlides();
-			productSwiper = null;
 		}
-	else {
-		}
-	productSwiper = new Swiper('.product-swiper-container', {
-			pagination: '.product-swiper-container .swiper-pagination',
-			paginationClickable: true
-			});	
-	//var entity_id = requestUrl('entity_id') ;
-	//产品图片列表，这个必须在上面的产品详情已经构建完成后才执行
-
+	//产品图片列表
 	$.ajax ({
 			type : 'get',
-			url: baseUrl + '/api/rest/products/' + entity_id + '/images',
+			url: defines.baseUrl + '/api/rest/products/' + entity_id + '/images',
 			dataType: 'json', // 注意：JSONP <-- P (lowercase)
 			success: function(imglist) {
 				$.each(imglist, function (i, item) {					
@@ -42,11 +47,11 @@ function showProductPage() {
 				alert('Please check the network!');
 			}			
 		});	
-//--------	*/
+	// end 产品图片列表--------	*/
 	//产品详情
 	$.ajax ({
 			type : 'get',
-			url: baseUrl+'/api/rest/products/' + entity_id + '/',
+			url: defines.baseUrl+'/api/rest/products/' + entity_id + '/',
 			dataType: 'json', // 注意：JSONP <-- P (lowercase)
 			success:function(product){	
 				//将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础productInfo				
@@ -62,6 +67,6 @@ function showProductPage() {
 				alert('Please check the network!');
 				}			
 			});
-	//end 详情
+	//end 产品详情
 	//productSwiper = null;
 }

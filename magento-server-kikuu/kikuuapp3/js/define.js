@@ -17,6 +17,7 @@
         slideTpl: $('#slide-template').html(),
         itemTpl: $('#item-template').html(),
         detailTpl: $('#detail-template').html(),
+		
         menus: [{
             name: 'Home',
             class_name: 'active'

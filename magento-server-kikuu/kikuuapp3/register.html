@@ -117,7 +117,7 @@
                     <input placeholder="Confirm Password" class="form__textfield textfield required-entry validate-cpassword" type="password" name="confirmation" title="Confirm Password" id="confirmation">
                 </p><!-- .form__field -->
             </div>
-                            <div class="form__field">
+                            <div class="form__field none">
                     <ul class="form__checkboxes">
                         <li class="form__checkboxes-item">
                             <input type="checkbox" class="form__checkbox" name="is_subscribed" id="is_subscribed" value="1" title="Sign Up for Newsletter">
@@ -190,17 +190,15 @@
 		};
 		// end central randomizer. -->
 		
-		var wait=10;  
+		var wait=30;  
 		var rnum=8888;
 		function time(o) {  
 				if (wait == 0 ) {  
 					o.removeAttribute("disabled");            
 					o.value="Get A Free Validation Code";
-					wait = 10;  				       
-				}else{  
-					o.setAttribute("disabled", true); 
-					o.value="Wait for ...(" + wait + ")";  
-					if(wait == 10){
+					wait = 30;  				       
+				}else{   
+					if(wait == 30){
 						//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
 						rnum = rand(8999)+1000;
 					        sendsms(smsurl,rnum);
@@ -209,6 +207,9 @@
 					setTimeout(function() {  
 						time(o)  
 					},  1000)  
+					o.setAttribute("disabled", true);
+					//调试期，直接显示验证码 
+					o.value="["+rnum+"]Wait ...(" + wait + "s)"; 
 				}  
 			}  
 			

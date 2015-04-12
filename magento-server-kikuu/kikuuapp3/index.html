@@ -82,7 +82,7 @@
     {{#each items}}
     <div class="item">
         <div class="item-inner">
-            <a href="detail.html?title={{name}}&url={{url_key}}&share=true">
+            <a href="detail.html?title={{name}}&url={{url_key}}&share=true"  data-reload="root">
             <div class="product-image">
                 <img class="lazy small-image" data-original="{{image_url}}" alt="{{name}}">
             </div>
@@ -90,9 +90,8 @@
 
             <div class="product-info">
                 <div class="product-name">
-					<!--###### mobilebone会将不同的url处理为不同页，每个不同页生成一个div，故只使用一个url，用全局变量传产品id ######-->
-                    <a href="productDetail.html?title=Product Detail" data-ajax="true" onclick="setProductId({{entity_id}})">
-                    {{name}}</a>
+					<!--###### rest详情页的父Frame ######-->
+                    <a href="productFrame.html" data-formdata="url=productDetail.html&entity_id={{entity_id}}&share=true" data-ajax="true">{{name}}</a>
                 </div>
 
                 <div class="product-price">
@@ -113,25 +112,6 @@
         </div>
     </div>
     {{/each}}
-</script>
-
-<!-- 详情 rest 页 -->
-<script id="productDetail-template" type="text/x-handlebars-template">
-    {{#with product}}
-		<div id="productDetail-{{entity_id}}">
-			<!-- info -->
-			<div class="product-name">{{name}}</a></div>
-			<div class="price-box">			
-				<span class="special-price">
-					<span class="price-label">Special Price</span>
-					<span class="price">${{final_price_with_tax}}</span>
-					&nbsp;
-				</span>
-				<span class="old-price">${{regular_price_with_tax}}</span>
-			</div>
-			<p>{{{description}}}</p>
-		</div>
-    {{/with}}
 </script>
 		
 
