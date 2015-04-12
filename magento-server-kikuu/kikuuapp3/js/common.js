@@ -133,3 +133,22 @@ function toggleMenu(e) {
 	
 	$('.menu-bottom').toggle();
 }
+// 处理页面url传递的参数
+function requestUrl(paras)
+    { 
+        var url = location.href; 
+        var paraString = url.substring(url.indexOf('?')+1,url.length).split('&'); 
+        var paraObj = {} 
+        for (i=0; j=paraString[i]; i++){ 
+        paraObj[j.substring(0,j.indexOf('=')).toLowerCase()] = j.substring(j.indexOf('=')+1,j.length); 
+        } 
+        var returnValue = paraObj[paras.toLowerCase()]; 
+        if(typeof(returnValue)=='undefined'){ 
+        return ''; 
+        }else{ 
+        return returnValue; 
+        } 
+    }
+//绑定fastclick，更好处理tap,滚动的流畅度提升明显，因chrome浏览器操作原因，开发阶段关闭
+//FastClick.attach(document.body);
+	

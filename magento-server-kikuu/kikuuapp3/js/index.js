@@ -1,5 +1,6 @@
 function ready() {
     var currentPage = 0, // 当前切换页面 index
+		productCountPerAjax = 20,	//产品页每次请求时取的商品数量
         bannerSwiper,
         $pages,
         $menuTpl = $('#menu-template'),
@@ -122,7 +123,7 @@ function ready() {
 
         $.ajax({
             type: 'get',
-            url: sprintf(api.products, page.cmd, page.num === 1 ? 10 : 4, page.num),
+            url: sprintf(api.products, page.cmd, productCountPerAjax, page.num),
             contentType: 'application/json',
             dataType: 'json',
             success: function (list) {
@@ -171,12 +172,12 @@ function ready() {
     }
 
     // 统一处理页面跳转相关
-    Mobilebone.callback = function (pageinto) {
-        var $this = $(pageinto),
+    Mobilebone.callback = function (pageInto) {
+        var $this = $(pageInto),
             $headerIndex = $('.header-index').addClass('out'),
             $frame = $('.frame').addClass('out'),
             $page;
-
+	//index页
         if ($this.hasClass('page-index')) {
             currentPage = $this.index();
             bannerSwiper.slideTo(currentPage);
@@ -194,7 +195,10 @@ function ready() {
                 $page.data('init', true);
             }
             $this.data('scroll').refresh(); // 刷新 scroll
-        } else if ($this.hasClass('page-detail')) {
+        } 
+	//end index 页
+	//detail页	
+		else if ($this.hasClass('page-detail')) {
             var query = {};
             $.each(location.hash.substring(location.hash.indexOf('?') + 1).split('&'), function (i, item) {
                 var items = item.split('=');
@@ -207,6 +211,12 @@ function ready() {
                 $this.find('.title').text(query.title);
             }
         }
+	//end detail页	
+	//product-detail页处理
+        else if ($this.hasClass('page-product-detail')) {			
+			showProductPage;
+        }	
+	//end product-detail页
     };
 
     // 处理 ajax json 加载，暂时没有使用到，留着详情页 rest 接口用
