@@ -191,8 +191,9 @@ a:active {
     -webkit-align-items: center;
     align-items: center;
 }
+/* 因为有时会不见，经常出现在多次调用外部web页后返回的情况，故写死宽度 */
 .header-index .swiper-wrapper .swiper-slide	{
-	width:30% !important;
+	width:33% !important;
 	}
 /* end 首页滚动标签栏 */
 /*product detail swiper*/
