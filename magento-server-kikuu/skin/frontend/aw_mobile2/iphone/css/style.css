@@ -1749,7 +1749,13 @@ li .product__description ul, li .product__description ol {
     /**margin: 15px 0;**/
     padding: 23px 15px;
 }
-
+#page_content .island{
+	border-bottom:1px solid #ccc;
+	box-shadow:1px 1px 1px #ccc;
+	margin-bottom:5px;}
+#page_content .island:last-child{
+	box-shadow:none;
+	border:none;}
 .checkout-step__title {
     font-size: 9px;
     text-transform:uppercase;
@@ -2039,25 +2045,18 @@ li .product__description ul, li .product__description ol {
 }
 
 .my-orders th, .my-orders td {
-    padding: 5px;
-    border-bottom: 1px solid #ccc
+    padding: 10px;
+    border-bottom: 1px solid #e1e1e1;
+	text-align:center;
 }
-
+.my-orders tr:nth-child(even){
+	background-color:#f7f7f7;}
 .my-orders th:first-child, .my-orders td:first-child {
     padding-left: 0
 }
 
 .my-orders th:last-child, .my-orders td:last-child {
     padding-right: 0
-}
-
-.my-orders__item:first-child th, .my-orders__item:first-child td {
-    padding-top: 0
-}
-
-.my-orders__item:last-child th, .my-orders__item:last-child td {
-    padding-bottom: 0;
-    border: none
 }
 
 .my-orders__list {
@@ -2230,8 +2229,9 @@ ul#downloadale_products_list li:first-child{
 .dashboard-section__title {
     margin-bottom: 17px;
     text-transform: uppercase;
-    font-size:12px;
     font-weight: 600;
+	border-left: 4px solid #666;
+	padding-left: 10px;
 }
 /**.my-account-nav-logout{
     display:block;
