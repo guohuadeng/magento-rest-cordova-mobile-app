@@ -10,4 +10,6 @@ rsync -avz android/crosswalk-assets-www/ android/Kikuu/assets/www
 
 rsync -avz doc/icons/icon.png android/Kikuu/res/drawable/icon.png
 
+node version.js
+
 ./android/Kikuu/cordova/build
