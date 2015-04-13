@@ -14,9 +14,13 @@
             logout: defines.baseUrl + '/customer/account/logout',
             menus: defines.baseUrl + '/restconnect/?cmd=menu',
             products: defines.baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
-//            product_detail: baseUrl + '/api/rest/products/'
-            products_rest: defines.baseUrl + '/api/rest/products/',
-            product_detail: defines.baseUrl + '/catalog/product/view/id/'
+            products_search: defines.baseUrl + '/restconnect/search/?q=watch',
+            product_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
+            products_rest: defines.baseUrl + '/api/rest/products/%s',			
+            //product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
+            product_img: defines.baseUrl + '/api/rest/products/%s/images/',
+            product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中
+            product_option: defines.baseUrl + '/restconnect/products/getcustomeoption/productid/%s'
         };
 
     window.servers = {};
@@ -44,6 +48,57 @@
         $.ajax({
             type: 'get',
             url: sprintf(url.products, page.cmd, defines.productsLimit, page.num),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    };
+
+    servers.getProductsDetail = function (id,callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_detail, id),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    };
+    servers.getProductsRest = function (id,callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_rest, id),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    };
+    servers.getProductsImg = function (id,callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_img, id),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    servers.getProductsAttr = function (id,callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_attr, id),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    };
+    };
+    servers.getProductsOption = function (id,callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_option, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,

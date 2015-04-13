@@ -6,10 +6,12 @@
 
 (function (window) {
 
-    var baseUrl = 'http://skymazon.sunpop.cn';
+    var baseUrl = 'http://skymazon.sunpop.cn',
+		cur_entity_id;	//当前查看产品id，可能没用，留着
 
     window.defines = {
         baseUrl: baseUrl,
+        cur_entity_id: cur_entity_id,
         user: null,
         state: 'index',
         productsLimit: 20, // 产品页每次请求时取的商品数量;
