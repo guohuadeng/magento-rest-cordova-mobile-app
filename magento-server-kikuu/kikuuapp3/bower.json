@@ -22,6 +22,7 @@
     "store2": "~2.2.0",
     "swiper": "~3.0.4",
     "momentjs": "~2.9.0",
-    "jquery.lazyload": "~1.9.5"
+    "jquery.lazyload": "~1.9.5",
+    "alpaca": "~1.5.8"
   }
 }

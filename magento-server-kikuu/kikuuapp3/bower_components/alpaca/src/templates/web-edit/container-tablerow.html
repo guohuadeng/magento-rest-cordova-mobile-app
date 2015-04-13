@@ -1,0 +1,18 @@
+<script type="text/x-handlebars-template">
+
+    <div class="alpaca-merge-up">
+
+        {{#each items}}
+            {{#item}}{{/item}}
+        {{/each}}
+
+        <!-- actions cell -->
+        {{#if options.showActionsColumn}}
+            <div class="alpaca-merge-up">
+                {{#arrayActionbar}}{{/arrayActionbar}}
+            </div>
+        {{/if}}
+
+    </div>
+
+</script>
