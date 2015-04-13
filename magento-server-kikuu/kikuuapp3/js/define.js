@@ -16,7 +16,7 @@
         menuTpl: $('#menu-template').html(),
         slideTpl: $('#slide-template').html(),
         itemTpl: $('#item-template').html(),
-        detailTpl: $('#detail-template').html(),
+        detailTpl: $('#detail-template').html(),		
 		
         menus: [{
             name: 'Home',

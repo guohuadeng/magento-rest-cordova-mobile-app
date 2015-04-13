@@ -2425,7 +2425,7 @@ button.create_form_link {
 .form_validation {
     margin-left:5px;
 	padding:5px;
-	width:55%;
+	width:45%;
 }
 .shopping-cart-bottom {
     padding-left: 15px;
@@ -3208,7 +3208,7 @@ input[type="checkbox"]:checked + label
 }
 
 .validation-code{
-	width:42%;
+	width:50%;
 }
 
 #checkoutSteps .textfield{
