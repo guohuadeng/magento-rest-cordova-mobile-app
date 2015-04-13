@@ -63,11 +63,12 @@ function ready() {
 				});		
 			};	
 	//end 产品详情
-	//产品选项
+	//产品选 项如：产品id为385， http://skymazon.sunpop.cn/restconnect/products/getcustomoption/productid/385
+	//只处理2种选项先，text，select
 	function showOption(entity_id) {	
 		$.ajax ({
 				type : 'get',
-				url: defines.baseUrl+'/api/rest/products/' + entity_id + '/',
+				url: defines.baseUrl+'.cn/restconnect/products/getcustomoption/productid/' + entity_id,
 				dataType: 'json', // 注意：JSONP <-- P (lowercase)
 				success:function(product){	
 					product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
