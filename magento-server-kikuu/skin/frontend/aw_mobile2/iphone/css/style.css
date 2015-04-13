@@ -3297,14 +3297,42 @@ label{
 	margin-bottom: 10px;
 	box-shadow: 1px 1px 1px #f2f2f2;
 }
-#customer_order_list .island>div{
-    display:inline-block;
-    width: 49%;
-    text-transform: uppercase;
-    padding: 5px 0;
+#customer_order_list .island .date,#customer_order_list .island .total{
+	width:100%;
+	height:24px;
+	line-height:24px;
+	padding-left:15px;
 }
-#customer_order_list .island>div:nth-of-type(even){
+#customer_order_list .island h3{
+	text-align:left;
+	float:left;
+	color:#333;
+}
+#customer_order_list .island span{
+	margin-left:20px;
+}
+#customer_order_list .island span .price{
+	color: #e62e04;
+	float:right;
+	margin-right:20px;
+}
+/*#customer_order_list .island>div:nth-of-type(even){
     text-align: right;
+}*/
+.island .order-number{
+	height:40px;
+	line-height:40px;
+	padding-left:15px;
+	border-top:1px solid #ececec;
+	border-bottom:1px solid #ececec;
+	background: url(../images/arrow-right-orange.svg) no-repeat;
+	background-size: 24px;
+	background-position: center right;
+}
+.island .order-number a{
+	display:block;
+	width:100%;
+	height:40px;
 }
 .checkout-method__title.guest
 {

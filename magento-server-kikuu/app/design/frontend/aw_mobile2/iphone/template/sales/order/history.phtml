@@ -28,15 +28,15 @@
     <?php $_orders = $this->getOrders(); ?>
     <?php if($_orders->getSize()): ?>
         <?php foreach ($_orders as $_order): ?>
-            <div class="island">
-                <div><?php echo $this->__('Order #');?></div>
-                <div>
-                    <a href="<?php echo $this->getViewUrl($_order) ?>" class="my-orders__link"><?php echo $_order->getRealOrderId() ?></a>
+            <div class="island" style="padding:0;">
+            	<div class="date"><h3><?php echo $this->__('Date');?></h3><span><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></div>
+                <div class="order-number">
+                	<a href="<?php echo $this->getViewUrl($_order) ?>" class="my-orders__link">
+						<h3><?php echo $this->__('Order #');?></h3>
+                        <span><?php echo $_order->getRealOrderId() ?></span>
+                     </a>
                 </div>
-                <div><?php echo $this->__('Date');?></div>
-                <div><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></div>
-                <div><?php echo $this->__('Total');?></div>
-                <div><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></div>
+                <div class="total"><h3><?php echo $this->__('Total');?></h3><span><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></span></div>
             </div>
         <?php endforeach; ?>
     <!--table id="order_history_data" class="my-orders__list">
