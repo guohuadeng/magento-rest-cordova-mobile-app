@@ -55,6 +55,11 @@ function toggleMenu(e) {
     var $menu = $('.menu-toggle'),
         left = $('.cbp-spmenu').outerWidth() + 10;
 
+    // fix #12
+    if (!$menu.hasClass('active')) {
+        initUser();
+    }
+
     $menu.toggleClass('active');
     $('.cbp-spmenu-left').toggleClass('cbp-spmenu-open');
 	

@@ -239,6 +239,9 @@ function ready() {
     };
 
     init();
+
+    // 全局函数
+    window.initUser = initUser;
 }
 
 $(document).ready(ready);
