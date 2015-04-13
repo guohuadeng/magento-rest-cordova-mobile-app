@@ -160,7 +160,6 @@ a:active {
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
 .swiper-pagination {
     height: 36px;
     position: fixed;

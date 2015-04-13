@@ -152,7 +152,8 @@ function ready() {
                 $el.append($cb);
                 $('img.lazy').slice(page.total).lazyload({
                     container: $page.find('.scroller'),
-                    placeholder: 'images/loading.gif'
+                    placeholder: 'images/loading.gif',
+					threshold : 200	//离像素还有200px时加载
                 });
                 page.total = func === 'html' ? 0 : page.total + list.length;
             } else {

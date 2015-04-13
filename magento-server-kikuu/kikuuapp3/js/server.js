@@ -16,7 +16,7 @@
             products: defines.baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
             products_search: defines.baseUrl + '/restconnect/search/?q=watch',
             product_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
-            products_rest: defines.baseUrl + '/api/rest/products/%s',			
+            products_info: defines.baseUrl + '/api/rest/products/%s',			
             //product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
             product_img: defines.baseUrl + '/api/rest/products/%s/images/',
             product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中

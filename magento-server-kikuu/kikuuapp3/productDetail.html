@@ -16,7 +16,8 @@
 			</div>    
 			<div class="swiper-pagination"></div>
 		</div>
-		<p>&nbsp;	</p>		
+		<p>&nbsp;	</p>			
+		<div id="productOption" class="optionInfo"></div>	
 		<div id="productInfo" class="detailInfo"></div>		
 	</div>  
 	<footer class="bar bar-standard bar-footer">
@@ -35,9 +36,45 @@
 </div>
 
 <!-- 详情 rest 页 -->
-<script id="productDetail-template" type="text/x-handlebars-template">
+<script id="productInfo-template" type="text/x-handlebars-template">
     {{#with product}}
-		<div id="productDetail-{{entity_id}}">
+		<div id="productInfo-{{entity_id}}">
+			<!-- info -->
+			<div class="product-name">{{name}}</a></div>
+			<div class="price-box">			
+				<span class="special-price">
+					<span class="price-label">Special Price</span>
+					<span class="price">${{final_price_with_tax}}</span>
+					&nbsp;
+				</span>
+				<span class="old-price">${{regular_price_with_tax}}</span>
+			</div>
+			<p>{{{description}}}</p>
+		</div>
+    {{/with}}
+</script>
+<!-- 详情 rest 页 -->
+<script id="productAttr-template" type="text/x-handlebars-template">
+    {{#with product}}
+		<div id="productAttr-{{entity_id}}">
+			<!-- info -->
+			<div class="product-name">{{name}}</a></div>
+			<div class="price-box">			
+				<span class="special-price">
+					<span class="price-label">Special Price</span>
+					<span class="price">${{final_price_with_tax}}</span>
+					&nbsp;
+				</span>
+				<span class="old-price">${{regular_price_with_tax}}</span>
+			</div>
+			<p>{{{description}}}</p>
+		</div>
+    {{/with}}
+</script>
+<!-- 详情 rest 页 -->
+<script id="productOption-template" type="text/x-handlebars-template">
+    {{#with product}}
+		<div id="productOption-{{entity_id}}">
 			<!-- info -->
 			<div class="product-name">{{name}}</a></div>
 			<div class="price-box">			

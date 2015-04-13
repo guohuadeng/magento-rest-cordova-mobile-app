@@ -18,7 +18,9 @@
         menuTpl: $('#menu-template').html(),
         slideTpl: $('#slide-template').html(),
         itemTpl: $('#item-template').html(),
-        detailTpl: $('#detail-template').html(),		
+        productInfoTpl: $('#productInfo-template').html(),	
+        productAttrTpl: $('#productAttr-template').html(),		
+        productOptionTpl: $('#productOption-template').html(),		
 		
         menus: [{
             name: 'Home',
