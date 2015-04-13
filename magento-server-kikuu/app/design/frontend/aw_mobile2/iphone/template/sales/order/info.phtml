@@ -23,10 +23,10 @@
  * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
  * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
  */
-?><div class="order">
+?><div class="order" style="padding:0">
     <?php  $_order = $this->getOrder() ?>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-    <div class="order__section">
+    <div class="order__section-top">
         <?php echo $this->getChildHtml('buttons') ?>
         <p class="order__reorder"><a href="<?php echo $this->getReorderUrl($_order) ?>"><?php echo $this->__('Reorder') ?></a></p>
         <p class="order__date"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>

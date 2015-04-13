@@ -197,7 +197,7 @@ table {
 .price {
     font-size:14px;
     font-weight: 600;
-    color: #22c064;
+    color: #e62e04;
 }
 .special-price .price{
     color:#F4A137;
@@ -1172,11 +1172,11 @@ a.product-card span.label {
 	color:#999;
 	margin-top:4px;}
 .product-card__selected-options{
-	float:right;
-	width:25%;
+	width:100%;
 	font-size:16px;
-	color:#F4A137;
-	text-align:right;}
+	color:#999;
+	text-align:left;
+	margin-top:5px;}
 .product-original__price{
 	color:#999;
 	text-decoration:line-through;}
@@ -2076,9 +2076,16 @@ li .product__description ul, li .product__description ol {
 }
 
 .order__section {
-    margin-bottom: 30px
+    padding: 15px;
 }
-
+.order__section:nth-child(odd){
+	background-color:#f7f7f7;
+}
+.order__section-top{
+	height:30px;
+	padding:10px 15px 0 15px;
+	margin-bottom:5px;
+	box-shadow:2px 2px 2px #ccc;}
 .order__section-title {
     font-size: 16px;
     margin-bottom: 10px
@@ -2095,11 +2102,11 @@ li .product__description ul, li .product__description ol {
 }
 
 .order-items th, .order-items td {
-    padding: 0 5px 10px
+    padding: 5px 10px
 }
 
 .order-items th:first-child, .order-items td:first-child {
-    padding-left: 0
+    padding: 10px 0;
 }
 
 .order-items th:last-child, .order-items td:last-child {
@@ -2109,20 +2116,24 @@ li .product__description ul, li .product__description ol {
 .order-items__grand-total {
     font-weight: bold
 }
-
+.order-items__item-main-row{
+	border-bottom:1px dashed #e1e1e1;}
 .order-items__item-main-row th, .order-items__item-main-row td {
     padding-bottom: 0
 }
 
 .order-items__item-additional-row {
-    font-size: 90%
+    font-size: 90%;
+	height:40px;
 }
 
 .order-items__title {
     font-weight: bold;
     text-align: left
 }
-
+.order-items__title a{
+	color:#F4A137;
+	font-weight:normal;}
 .order-items tfoot tr:first-child th, .order-items tfoot tr:first-child td {
     border-top: 1px solid #ccc;
     padding-top: 10px
