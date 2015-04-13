@@ -71,23 +71,98 @@
 		</div>
     {{/with}}
 </script>
-<!-- 详情 rest 页 -->
+
+<!-- 自定义选项，动态价格相关 -->
 <script id="productOption-template" type="text/x-handlebars-template">
-    {{#with product}}
-		<div id="productOption-{{entity_id}}">
-			<!-- info -->
-			<div class="product-name">{{name}}</a></div>
-			<div class="price-box">			
-				<span class="special-price">
-					<span class="price-label">Special Price</span>
-					<span class="price">${{final_price_with_tax}}</span>
-					&nbsp;
-				</span>
-				<span class="old-price">${{regular_price_with_tax}}</span>
+<div class="product-options" id="product-options-wrapper">
+	<dl class="last">
+    {{#each option}}
+	    <dl class="last">
+            <dt><label>普通文本</label>
+			<span class="price-notice">+<span class="price">$15.00</span></span></dt>
+			<dd>
+				<div class="input-box">
+				<input type="text" onchange="opConfig.reloadPrice()" id="options_67_text" class="input-text  product-custom-option" name="options[67]" value="">
+				</div>
+			</dd>
+			
+			<dt><label class="required"><em>*</em>下拉框</label></dt>
+			<dd>
+			<div class="input-box">
+				<select name="options[62]" id="select_62" class=" required-entry product-custom-option" title="" onchange="opConfig.reloadPrice()">
+				<option value="">-- Please Select --</option><option value="148" price="1">Black +$1.00</option>
+				<option value="146" price="2">Golden +$2.00</option><option value="147" price="3">White +$3.00</option>
+				</select>
 			</div>
-			<p>{{{description}}}</p>
-		</div>
-    {{/with}}
+			</dd>
+            
+			<dt><label class="required"><em>*</em>勾选框</label></dt>
+			<dd>
+				<div class="input-box">
+					<ul id="options-63-list" class="options-list">
+					<li>
+						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_2" value="150" price="11">
+						<span class="label">
+							<label for="options_63_2">crashProof <span class="price-notice">+<span class="price">$11.00</span></span></label>
+						</span>
+					</li>
+					<li>
+						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_3" value="151" price="22">
+						<span class="label">
+							<label for="options_63_3">dustProof <span class="price-notice">+<span class="price">$22.00</span></span></label>
+						</span>
+					</li>
+					<li>
+						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_4" value="149" price="33">
+						<span class="label">
+							<label for="options_63_4">waterProof <span class="price-notice">+<span class="price">$33.00</span></span></label>
+						</span>
+					</li>
+					</ul>
+					<span id="options-63-container"></span>
+				</div>
+			</dd>
+            
+		<dt><label class="required"><em>*</em>选项框</label></dt>
+		<dd>
+			<div class="input-box">
+				<ul id="options-60-list" class="options-list">
+					<li>
+						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_2" value="143" price="111">
+						<span class="label">
+							<label for="options_60_2">16G mincard <span class="price-notice">+<span class="price">$111.00</span></span></label>
+						</span>
+					</li>
+					<li>
+						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_3" value="141" price="222">
+							<span class="label">
+								<label for="options_60_3">4G mincard <span class="price-notice">+<span class="price">$222.00</span></span></label>
+							</span>
+					</li>
+					<li>
+						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_4" value="142" price="333">
+						<span class="label">
+							<label for="options_60_4">8G mincard <span class="price-notice">+<span class="price">$333.00</span></span></label>
+						</span>
+					</li>
+				</ul>
+				<span id="options-60-container"></span>
+			</div>
+		</dd>
+            
+		<dt><label class="required"><em>*</em>多选栏</label></dt>
+		<dd class="last">
+			<div class="input-box">
+				<select name="options[61][]" id="select_61" class="multiselect required-entry product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
+					<option value="144" price="1111">Battery +$1,111.00</option>
+					<option value="145" price="2222">Case +$2,222.00</option>
+				</select>
+			</div>
+		</dd>
+        </dl>	
+    {{/each}}
+	</dl>
+	</div>
 </script>
 <!-- 使用 cordova 插件要用到，不能删除 -->
 <script src="cordova.js"></script>
