@@ -189,6 +189,8 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 	}
 	public function getProductlist($products, $mod = 'product') {
 		$productlist = array ();
+		$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
+		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
 		foreach ( $products as $product ) {
 			if ($mod == 'catalog') {
 				$product = Mage::getModel ( 'catalog/product' )->load ( $product ['entity_id'] );
@@ -205,8 +207,9 @@ class SkyMazon_RestConnect_IndexController extends Mage_Core_Controller_Front_Ac
 					'special_to_date' => $product->getSpecialToDate (),
 					'image_url' => $product->getImageUrl (),
 					'url_key' => $product->getProductUrl (),
-					'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (),  Mage::app()->getStore()->getCurrentCurrencyCode(), 'USD' ), 2, '.', '' ),
-					'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (),  Mage::app()->getStore()->getCurrentCurrencyCode(), 'USD' ), 2, '.', '' ) 
+					'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+					'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+					'symbol'=> Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol()
 			);
 		}
 		return $productlist;
