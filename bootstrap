@@ -12,4 +12,4 @@ rsync -avz doc/icons/icon.png android/Kikuu/res/drawable/icon.png
 
 node version.js
 
-./android/Kikuu/cordova/build
+./android/Kikuu/cordova/build --release
