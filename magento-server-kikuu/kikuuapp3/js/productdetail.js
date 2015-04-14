@@ -2,16 +2,12 @@
 //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础productInfo				
 // 处理返回数据
 function ready() {
-    var entity_id,
-        productSwiper
+	var entity_id,
+		productSwiper;
 
     entity_id = defines.cur_entity_id;  //主页面传来的全局 产品id，但是有时不是主页面传来而是直接网页参数传来
     if (requestUrl('entity_id')) {
         entity_id = requestUrl('entity_id');
-    }
-    function init() {
-        showInfo(entity_id);
-        showImg(entity_id);
     }
 
     //产品图片列表
@@ -64,7 +60,7 @@ function ready() {
         });
     }
     //end 产品详情
-    //产品选项
+    /*/产品选项
     function showOption(entity_id) {
         $.ajax({
             type: 'get',
@@ -83,8 +79,10 @@ function ready() {
             }
         });
     }
-    //end 产品选项
-    init();
+    *///end 产品选项
+	//构造页面
+    showImg(entity_id);
+    showInfo(entity_id);
 }
 
 $(document).ready(ready);
