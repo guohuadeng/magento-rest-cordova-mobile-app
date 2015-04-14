@@ -14,13 +14,7 @@
         cur_entity_id: cur_entity_id,
         user: null,
         state: 'index',
-        productsLimit: 20, // 产品页每次请求时取的商品数量;
-        menuTpl: $('#menu-template').html(),
-        slideTpl: $('#slide-template').html(),
-        itemTpl: $('#item-template').html(),
-        productInfoTpl: $('#productInfo-template').html(),	
-        productAttrTpl: $('#productAttr-template').html(),		
-        productOptionTpl: $('#productOption-template').html(),		
+        productsLimit: 20, // 产品页每次请求时取的商品
 		
         menus: [{
             name: 'Home',

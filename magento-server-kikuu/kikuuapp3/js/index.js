@@ -1,7 +1,10 @@
 function ready() {
     var currentPage = 0, // 当前切换页面 index
         bannerSwiper,
-        $pages;
+        $pages,
+        menuTpl = $('#menu-template').html(),
+        slideTpl = $('#slide-template').html(),
+        itemTpl = $('#item-template').html();
 
     function init() {
         initEvents();
@@ -44,7 +47,7 @@ function ready() {
         // 插入数据到 menus 中，从位置 1 开始
         defines.menus.splice.apply(defines.menus, [1, 0].concat(menus));
 
-        $('.cbp-spmenu-list').html(Handlebars.compile(defines.menuTpl)({
+        $('.cbp-spmenu-list').html(Handlebars.compile(menuTpl)({
             menus: defines.menus
         }));
 
@@ -90,7 +93,7 @@ function ready() {
             parallax: true
         });
 
-        $pages = $('#pageScroller').html(Handlebars.compile(defines.slideTpl)({
+        $pages = $('#pageScroller').html(Handlebars.compile(slideTpl)({
             menus: defines.pages
         })).find('.products-grid');
     }
@@ -146,7 +149,7 @@ function ready() {
                     item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
                     return item;
                 });
-                $el[func](Handlebars.compile(defines.itemTpl)({
+                $el[func](Handlebars.compile(itemTpl)({
                     items: items
                 }));
                 var $cb = $el.find('.cb');
@@ -218,11 +221,11 @@ function ready() {
 	    // detail页，product-frame页处理
         if ($this.hasClass('page-detail')) {
             var query = utils.queryUrl();
-            if (query.url) {
+            if (query.frameUrl) {
 				if (query.entity_id) {
-					query.url = query.url + '?entity_id=' + query.entity_id;
+					query.frameUrl = query.frameUrl + '?entity_id=' + query.entity_id;
 				}
-                $this.find('iframe').attr('src', query.url);
+                $this.find('iframe').attr('src', query.frameUrl);
             }
             if (query.title) {
                 $this.find('.title').text(query.title);
