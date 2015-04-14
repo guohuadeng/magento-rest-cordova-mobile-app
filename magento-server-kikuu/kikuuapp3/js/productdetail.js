@@ -14,10 +14,6 @@ function ready() {
       entity_id = requestUrl('entity_id') || defines.cur_entity_id;
     
 
-    function init() {
-        showInfo(entity_id);
-        showImg(entity_id);
-    }
 
     //产品图片列表
     function showImg(entity_id) {
@@ -38,7 +34,6 @@ function ready() {
                 var iHtml;
                 $.each(imglist, function (i, item) {
                     productSwiper.appendSlide(sprintf('<div class="swiper-slide"><img class="small-image" src="%s" alt="Kikuu.com"></div>', item.url));
-                    //productSwiper.appendSlide(sprintf('<div class="swiper-slide"><img class="swiper-lazy small-image" data-src="%s" alt="Kikuu.com"></div>',item.url)); 延迟加载暂时不用
                 });
                 productSwiper.slideTo(0);
             },
@@ -51,7 +46,6 @@ function ready() {
     // end 产品图片列表--------	*/
     //产品详情
     function showInfo(entity_id) {
-		alert(defines.baseUrl + '/restconnect/products/getproductdetail/productid/' + entity_id);
         $.ajax({
             type: 'get',
             url: defines.baseUrl + '/restconnect/products/getproductdetail/productid/' + entity_id,
@@ -71,30 +65,62 @@ function ready() {
         });
     }
     //end 产品详情
-    /*/产品选项
+    //产品选项
     function showOption(entity_id) {
         $.ajax({
             type: 'get',
-            url: defines.baseUrl + '/api/rest/products/' + entity_id + '/',
+            url: defines.baseUrl + '/restconnect/products/getcustomoption/productid/' + entity_id,
             dataType: 'json', // 注意：JSONP <-- P (lowercase)
-            success: function (product) {
-                product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
-                product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
-
-                $('#productInfo').html(Handlebars.compile(defines.productOptionTpl)({
-                    product: product
+            success: function (option) { 
+				$.each(option, function(i,item) {
+					$("#debug").append(item.custom_option_type+"一级</br>");
+					
+					$.each(item.custom_option_value, function(j,item2) {
+						$("#debug").append(item2.default_price+"二级</br>");
+							
+							});						
+						});
+				
+                $('#productOption').html(Handlebars.compile(productOptionTpl)({
+                    option: option
                 }));
-            },
+				},
             error: function (jqXHR) {
                 alert('Please check the network!');
             }
         });
     }
-    *///end 产品选项
-	// 内嵌的iFrame需要处理自己的url，所以临时加上
-// 处理页面url传递的参数
-	function requestUrl(paras)
-		{ 
+    ///end 产品选项
+	
+    function handleOption($el, func, list) {
+        // 处理返回数据
+        var items = $.map(list, function (item) {
+            var custom_option_value = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
+                toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
+                date = new Date();
+            if (+fromDate <= +date && +date <= +toDate) {
+                item.price_percent = ~~(-100 * (item.regular_price_with_tax -
+                    item.final_price_with_tax) / item.regular_price_with_tax);
+                item.price_percent_class = '';
+            } else {
+                item.price_percent_class = 'none';
+                item.final_price_with_tax = item.regular_price_with_tax;
+            }
+            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
+            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
+            return item;
+        });
+        $el[func](Handlebars.compile(itemTpl)({
+            items: items
+        }));
+        var $cb = $el.find('.cb');
+        $cb = $cb.length ? $cb : $('<div class="cb"></div>');
+        $el.append($cb);
+      //end 处理返回数据
+    }
+	function requestUrl(paras)	{ 
+			// 内嵌的iFrame需要处理自己的url，所以临时加上
+			// 处理页面url传递的参数
 			var url = location.href; 
 			var paraString = url.substring(url.indexOf('?')+1,url.length).split('&'); 
 			var paraObj = {} 
@@ -110,7 +136,8 @@ function ready() {
 		}
 	//构造页面
     showImg(entity_id);
-    showInfo(entity_id);
+//    showInfo(entity_id);
+    showOption(entity_id);
 }
 
 $(document).ready(ready);
