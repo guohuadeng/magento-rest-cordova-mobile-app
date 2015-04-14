@@ -51,13 +51,15 @@ function ready() {
     // end 产品图片列表--------	*/
     //产品详情
     function showInfo(entity_id) {
+		alert(defines.baseUrl + '/restconnect/products/getproductdetail/productid/' + entity_id);
         $.ajax({
             type: 'get',
-            url: defines.baseUrl + '/api/rest/products/' + entity_id + '/',
+            url: defines.baseUrl + '/restconnect/products/getproductdetail/productid/' + entity_id,
             dataType: 'json',
             success: function (product) {
-                product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
-                product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
+				//处理为带千位","，去除小数点
+                product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
+                product.regular_price_with_tax = fmoney(product.regular_price_with_tax,0);
 
                 $('#productInfo').html(Handlebars.compile(productInfoTpl)({
                     product: product

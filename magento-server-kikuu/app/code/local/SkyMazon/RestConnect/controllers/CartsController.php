@@ -1,6 +1,6 @@
 <?php
 class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Action {
-	public function addAction() {
+	public function test1Action() {
 		$cart = $this->_getCart ();
 		$params = $this->getRequest ()->getParams ();
 		if ($params ['isAjax'] == 1) {
@@ -66,7 +66,7 @@ class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Ac
 			return parent::addAction ();
 		}
 	}
-	public function testAction() {
+	public function addAction() {
 		// $productid = $this->getRequest ()->getParam ( 'productid' );
 		// $product = Mage::getModel ( "catalog/product" )->load ( $productid );
 		// $cart=Mage::helper('checkout/cart')->getCart();
@@ -77,7 +77,8 @@ class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Ac
 		// $cart->_getSession ()->setCartWasUpdated ( true );
 		try {
 			$product_id = $this->getRequest ()->getParam ( 'productid' );
-			$qty = $this->getRequest ()->getParam ( 'qty' );
+			$param=$this->getRequest ()->getParam ( 'param' );
+			//$qty = $this->getRequest ()->getParam ( 'qty' );
 			if ($product_id == '') {
 				$session->addError ( "Product Not Added
 					The SKU you entered ($sku) was not found." );
@@ -88,7 +89,8 @@ class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Ac
 					'name' => 'frontend' 
 			) );
 			$cart = Mage::helper ( 'checkout/cart' )->getCart ();
-			$cart->addProduct ( $product, $qty );
+			//$cart->addProduct ( $product, $qty );
+			$cart->addProduct ( $product, $param );
 			$session->setLastAddedProductId ( $product->getId () );
 			$session->setCartWasUpdated ( true );
 			$cart->save ();
@@ -120,6 +122,12 @@ class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Ac
 		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
 		$url = Mage::helper ( 'checkout/cart' )->getAddUrl ( $product );
 		echo "{'url':'" . $url . "'}";
+		$cart = Mage::helper ( 'checkout/cart' )->getCart ();
+		$item_qty=$cart->getItemsQty();
+		echo "{'item_qty':'" . $item_qty . "'}";
+		$summarycount=$cart->getSummaryCount();
+		echo "{'summarycount':'" . $summarycount . "'}";
+		
 	}
 } 
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="IndexController.php" server="a.goosky.com" local="130718328600000000" remote="130718328600000000" />
-<file name="MenuController.php" server="a.goosky.com" local="130717250400000000" remote="130717250400000000" />
-<file name="IndexController.php" server="skymazon.sunpop.cn" local="130733706600000000" remote="130733706600000000" />
-<file name="MenuController.php" server="skymazon.sunpop.cn" local="130731398400000000" remote="130731398400000000" />
-<file name="CustomerController.php" server="skymazon.sunpop.cn" local="130731279000000000" remote="130731279000000000" />
-<file name="ProductsController.php" server="skymazon.sunpop.cn" local="130734482400000000" remote="130734482400000000" />
-<file name="CartsController.php" server="skymazon.sunpop.cn" local="130734705000000000" remote="130734705000000000" />
-<file name="SearchController.php" server="skymazon.sunpop.cn" local="130733880000000000" remote="130733880000000000" />
+<file name="IndexController.php" server="a.goosky.com" local="130718328600000000" remote="130718328600000000" Dst="-1" />
+<file name="MenuController.php" server="a.goosky.com" local="130717250400000000" remote="130717250400000000" Dst="-1" />
+<file name="IndexController.php" server="skymazon.sunpop.cn" local="130734988438860893" remote="130733706600000000" Dst="0" />
+<file name="MenuController.php" server="skymazon.sunpop.cn" local="130734988438850781" remote="130731398400000000" Dst="0" />
+<file name="CustomerController.php" server="skymazon.sunpop.cn" local="130734988437309006" remote="130731279000000000" Dst="0" />
+<file name="ProductsController.php" server="skymazon.sunpop.cn" local="130735013767654031" remote="130735013400000000" Dst="0" />
+<file name="CartsController.php" server="skymazon.sunpop.cn" local="130734988437328886" remote="130734757800000000" Dst="0" />
+<file name="SearchController.php" server="skymazon.sunpop.cn" local="130734988440342651" remote="130733880000000000" Dst="0" />
 </dwsync>

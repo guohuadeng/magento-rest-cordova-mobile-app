@@ -25,14 +25,12 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 		echo json_encode ( $select );
 	}
 	public function getproductdetailAction() {
-		header('Content-type: text/json');
-		$productlist = array ();
+		$productdetail = array ();
 		$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
 		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
 		$productid = $this->getRequest ()->getParam ( 'productid' );
-		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
-		echo
-		$productlist [] = array (
+		$product = Mage::getModel ( "catalog/product" )->load ( $productid );		
+		$productdetail  = array (
 				'entity_id' => $product->getId (),
 				'sku' => $product->getSku (),
 				'name' => $product->getName (),
@@ -47,6 +45,6 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 				'description'=>nl2br($product->getDescription()),
 				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol ()
 		);
-		echo json_encode ( $productlist );
+		echo json_encode ( $productdetail );
 	}
 } 

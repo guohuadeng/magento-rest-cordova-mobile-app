@@ -1747,7 +1747,7 @@ li .product__description ul, li .product__description ol {
     border-bottom: solid #aaaaaa;
     border-width: 1px 0;
     /**margin: 15px 0;**/
-    padding: 23px 15px;
+    padding: 10px 10px;
 }
 #page_content .island{
 	border-bottom:1px solid #ccc;
@@ -2204,7 +2204,9 @@ ul#downloadale_products_list li:first-child{
     margin-bottom: 10px
 }**/
 .dashboard__edit {
-    float: right
+    float: right;
+    padding: 10px 10px 0 10px;
+    border-bottom: 1px solid #F4A137;
 }
 .dashboard__edit-button {
     outline: none;
@@ -2231,7 +2233,8 @@ ul#downloadale_products_list li:first-child{
     text-transform: uppercase;
     font-weight: 600;
 	border-left: 4px solid #666;
-	padding-left: 10px;
+    padding: 10px 0 10px 10px;
+    background-color: #eee;
 }
 /**.my-account-nav-logout{
     display:block;
