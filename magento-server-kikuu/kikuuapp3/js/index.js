@@ -132,33 +132,11 @@ function ready() {
 
         servers.getProducts(page, function (list) {
             if ($.isArray(list)) {
-                // 处理返回数据
-                var items = $.map(list, function (item) {
-                    var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
-                        toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
-                        date = new Date();
-                    if (+fromDate <= +date && +date <= +toDate) {
-                        item.price_percent = ~~(-100 * (item.regular_price_with_tax -
-                            item.final_price_with_tax) / item.regular_price_with_tax);
-                        item.price_percent_class = '';
-                    } else {
-                        item.price_percent_class = 'none';
-                        item.final_price_with_tax = item.regular_price_with_tax;
-                    }
-                    item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
-                    item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
-                    return item;
-                });
-                $el[func](Handlebars.compile(itemTpl)({
-                    items: items
-                }));
-                var $cb = $el.find('.cb');
-                $cb = $cb.length ? $cb : $('<div class="cb"></div>');
-                $el.append($cb);
+                handleItems($el, func, list);
                 $('img.lazy').slice(page.total).lazyload({
                     container: $page.find('.scroller'),
                     placeholder: 'images/loading.gif',
-					threshold : 200	//离像素还有200px时加载
+                    threshold : 200	//离像素还有200px时加载
                 });
                 page.total = func === 'html' ? 0 : page.total + list.length;
             } else {
@@ -171,12 +149,39 @@ function ready() {
         });
     }
 
+    function handleItems($el, func, list) {
+        // 处理返回数据
+        var items = $.map(list, function (item) {
+            var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
+                toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
+                date = new Date();
+            if (+fromDate <= +date && +date <= +toDate) {
+                item.price_percent = ~~(-100 * (item.regular_price_with_tax -
+                    item.final_price_with_tax) / item.regular_price_with_tax);
+                item.price_percent_class = '';
+            } else {
+                item.price_percent_class = 'none';
+                item.final_price_with_tax = item.regular_price_with_tax;
+            }
+            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
+            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
+            return item;
+        });
+        $el[func](Handlebars.compile(itemTpl)({
+            items: items
+        }));
+        var $cb = $el.find('.cb');
+        $cb = $cb.length ? $cb : $('<div class="cb"></div>');
+        $el.append($cb);
+    }
+
     // 统一处理页面跳转相关
     Mobilebone.callback = function (pageInto) {
         var $this = $(pageInto),
             $headerIndex = $('.header-index').addClass('out'),
             $frame = $('.frame').addClass('out'),
-            $page;
+            $page,
+            query = utils.queryUrl();
 
         defines.state = $this.attr('class').match(/page-(\w+)/)[1];
 
@@ -220,7 +225,6 @@ function ready() {
 
 	    // detail页，product-frame页处理
         if ($this.hasClass('page-detail')) {
-            var query = utils.queryUrl();
             if (query.frameUrl) {
 				if (query.entity_id) {
 					query.frameUrl = query.frameUrl + '?entity_id=' + query.entity_id;
@@ -235,6 +239,27 @@ function ready() {
             }
             return;
         }
+
+        // search
+        if ($this.hasClass('page-search')) {
+            $this.find('[name="q"]').keyup(function () {
+                $this.find('[name="search"]').attr('href', 'searchResult.html?q=' + $(this).val());
+            });
+            return;
+        }
+
+        // search result
+        if ($this.hasClass('page-search-result')) {
+            servers.getProductsSearch(query.q, function (list) {
+                handleItems($this.find('.products-grid'), 'html', list);
+                $('img.lazy').lazyload({
+                    container: $this.find('.content'),
+                    placeholder: 'images/loading.gif',
+                    threshold : 200	//离像素还有200px时加载
+                });
+            });
+        }
+        return;
     };
 
     init();
