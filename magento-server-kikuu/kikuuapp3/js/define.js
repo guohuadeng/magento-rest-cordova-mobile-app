@@ -25,15 +25,15 @@
             url: '#'
         }, {
             name: 'My Order',
-            url: 'detail.html?title=My Order&url=' + baseUrl + '/sales/order/history/?fromui=app',
+            url: 'detail.html?title=My Order&frameUrl=' + baseUrl + '/sales/order/history/',
             class_name: 'login_true'
         }, {
             name: 'My Shopping Cart',
-            url: 'detail.html?title=My Shopping Cart&url=' + baseUrl + '/checkout/cart/?fromui=app',
+            url: 'detail.html?title=My Shopping Cart&frameUrl=' + baseUrl + '/checkout/cart/',
             class_name: 'login_true'
         }, {
             name: 'My Account',
-            url: 'detail.html?title=My Account&url=' + baseUrl + '/customer/account?fromui=app',
+            url: 'detail.html?title=My Account&frameUrl=' + baseUrl + '/customer/account',
             class_name: 'login_true'
         }, {
             name: 'Logout',
@@ -45,7 +45,7 @@
             class_name: 'login_false'
         }, {
             name: 'Register',
-            url: 'detail.html?title=Register&url=' + baseUrl + '/kikuuapp3/register.html?fromui=app',
+            url: 'detail.html?title=Register&frameUrl=' + baseUrl + '/kikuuapp3/register.html',
             class_name: 'login_false'
         }, {
             name: 'Exit',
