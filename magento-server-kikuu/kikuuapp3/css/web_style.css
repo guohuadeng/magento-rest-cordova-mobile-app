@@ -64,11 +64,11 @@ html, body, .container, .wrapper {
 }
 body, select, input, textarea, button {
     color: #000;
-    font-family: -apple-system-font, Open Sans, normal;
+    font-family: -apple-system-font, opensans, Open Sans, normal;
     font-weight: 400;
 }
 body {
-    font: 9px/12px -apple-system-font, Open Sans, normal;
+    font: 9px/12px -apple-system-font, opensans, Open Sans, normal;
     font-weight: 400;
 }
 h1, h2, h3, h4, h5, h6 {

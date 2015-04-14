@@ -1,6 +1,6 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
-    <title>
-    Kikuu.com - Home</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Kikuu.com - Home</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="description" content="Kikuu.com, extremely customizable, easy to use. Great as a starting point for your custom projects and suitable for every type of store.">
 <meta name="keywords" content="Kikuu.com">
@@ -9,8 +9,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="stylesheet" type="text/css" href="css/web_style.css" media="all">
 <link rel="stylesheet" type="text/css" href="css/common.css" media="all">
-
-
 <script type="text/javascript" src="js_register/prototype.js"></script>
 <script type="text/javascript" src="js_register/validation.js"></script>
 <script type="text/javascript" src="js_register/effects.js"></script>
@@ -20,135 +18,147 @@
 <script type="text/javascript" src="js_register/cookies.js"></script>
 <script type="text/javascript" src="js_register/fastclick.js"></script>
 <script type="text/javascript" src="js_register/app.js"></script>
-
+<link rel="stylesheet" type="text/css" href="css/font.css" media="all">
 </head>
 <body orient="landscape">
 <div class="container">
-    <div class="container-pusher">
-    	<div class="wrapper">
-			<!-- .wrapper -->
-<div id="customer_navigation_popup" class="nav_iphone customer-cart-ajax panel panel--from-bottom popup-form" style="display: block; top: 0px; opacity: 1;">
-    <div id="customer_ajax_container">
-
-<div class="customer-account nav__list-container panel__container">
-    <div class="nav__list customer-account-login is-shadow-showed is-shadowed">
-    <form action="http://skymazon.sunpop.cn/awmobile2/customer/loginPost/" method="post" id="user_login_form" class="nav__list-inner">
-                <input name="form_key" type="hidden" value="bfVX0t8BTAPNohZS">
-        <p class="form__submit-wrapper">&nbsp;</p>
-        <p class="form__field form__field--required">
-            <!--<label for="email" class="form__label form__label--required">Email Address</label>-->
-            <input type="email" placeholder="Email or Member ID" class="form__textfield textfield validate-email required-entry" name="login[username]" id="email" value="" title="Email Address">
-        </p><!-- .form__field -->
-        <p class="form__field form__field--required">
-            <!--<label for="pass" class="form__label form__label--required">Password</label>-->
-            <input placeholder="Password" class="form__textfield textfield required-entry validate-password" type="password" name="login[password]" id="pass" title="Password">
-        </p><!-- .form__field -->
-                <p class="form__submit-wrapper">
-        	<a id="forgot_pass_link" href="javascript:void(0);">Forgot Password?</a>
-        </p><p class="form__submit-wrapper">&nbsp;</p>
-        	<button type="submit" title="Login" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onClick="window.customerAccount.login()">Login</button>        
-        <p></p>
-        <p class="form__submit-wrapper">&nbsp;</p>
-        <p class="form__submit-wrapper" style="text-align:center;">New Customer? </p>
-        <p class="form__submit-wrapper">&nbsp;</p>
-            <button id="create_form_link" class="create_form_link button" type="button" title="Create an Account" onClick="">Create an Account</button>
-		
-		<!-- .form__submit-wrapper -->
-    </form>
-    <div class="nav__list-shadow"></div>
-</div>
-    <div class="nav__list nav__list--subcategory customer-account-forgotpassword">
-    <form action="http://skymazon.sunpop.cn/awmobile2/customer/forgotpasswordpost/" method="post" id="user_forgotpassword_form" class="nav__list-inner">
-        <p class="form-notice">Please enter your email below and we will send you a new password.</p>
-        <p class="form__field form__field--required">
-            <!--<label for="email_address" class="form__label form__label--required">Email Address</label>-->
-            <input type="email" placeholder="Email Address" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="" title="Email Address">
-        </p><!-- .form__field -->
-                <p class="form__submit-wrapper">
-            <button type="submit" title="Submit" class="form__submit button continue" onClick="window.customerAccount.forgot()">Submit</button>
-        </p><!-- .form__submit-wrapper -->
-    </form>
-</div>    <div class="nav__list nav__list--subcategory customer-account-register is-opened js-active">
-    <div class="nav__list-inner customer-account-register-container">
-        <div class="customer-form-register-before">
-                    </div>
-        <form action="http://skymazon.sunpop.cn/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
-            <input type="hidden" name="success_url" value="">
-            <input type="hidden" name="error_url" value="">
-			<p class="form__field form__field--required">
-		<!--<label class="form__label form__label--required">Mobile Number</label>-->
-		<input type="text" placeholder="Mobile Number" class="form__textfield textfield required-entry validate-number validation-failed" name="amcustomerattr[default_mobile_number]" id="default_mobile_number" value="" title="Mobile Number">
-		</p><!-- .form__field -->
-		
-			<p class="form__field form__field--required">
-		<!--<label class="form__label form__label--required">Validation Code</label>-->
-		<input type="text" placeholder="Validation Code" class="form__textfield textfield validation-code required-entry validate-number validation-failed" name="Validation_Code" id="Validation_Code" value="" title="Validation Code">
-		<input type="button" id="btnValidation" value="Get Validation Code" class="form_validation">  
-		</p>		
-			<!-- .form__field -->
-		
-				<p class="form__field form__field--required">
+<div class="container-pusher">
+  <div class="wrapper"> 
+    <!-- .wrapper -->
+    <div id="customer_navigation_popup" class="nav_iphone customer-cart-ajax panel panel--from-bottom popup-form" style="display: block; top: 0px; opacity: 1;">
+      <div id="customer_ajax_container">
+        <div class="customer-account nav__list-container panel__container">
+          <div class="nav__list customer-account-login is-shadow-showed is-shadowed">
+            <form action="http://skymazon.sunpop.cn/awmobile2/customer/loginPost/" method="post" id="user_login_form" class="nav__list-inner">
+              <input name="form_key" type="hidden" value="bfVX0t8BTAPNohZS">
+              <p class="form__submit-wrapper">&nbsp;</p>
+              <p class="form__field form__field--required"> 
+                <!--<label for="email" class="form__label form__label--required">Email Address</label>-->
+                <input type="email" placeholder="Email or Member ID" class="form__textfield textfield validate-email required-entry" name="login[username]" id="email" value="" title="Email Address">
+              </p>
+              <!-- .form__field -->
+              <p class="form__field form__field--required"> 
+                <!--<label for="pass" class="form__label form__label--required">Password</label>-->
+                <input placeholder="Password" class="form__textfield textfield required-entry validate-password" type="password" name="login[password]" id="pass" title="Password">
+              </p>
+              <!-- .form__field -->
+              <p class="form__submit-wrapper"> <a id="forgot_pass_link" href="javascript:void(0);">Forgot Password?</a> </p>
+              <p class="form__submit-wrapper">&nbsp;</p>
+              <button type="submit" title="Login" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onClick="window.customerAccount.login()">Login</button>
+              <p></p>
+              <p class="form__submit-wrapper">&nbsp;</p>
+              <p class="form__submit-wrapper" style="text-align:center;">New Customer? </p>
+              <p class="form__submit-wrapper">&nbsp;</p>
+              <button id="create_form_link" class="create_form_link button" type="button" title="Create an Account" onClick="">Create an Account</button>
+              
+              <!-- .form__submit-wrapper -->
+            </form>
+            <div class="nav__list-shadow"></div>
+          </div>
+          <div class="nav__list nav__list--subcategory customer-account-forgotpassword">
+            <form action="http://skymazon.sunpop.cn/awmobile2/customer/forgotpasswordpost/" method="post" id="user_forgotpassword_form" class="nav__list-inner">
+              <p class="form-notice">Please enter your email below and we will send you a new password.</p>
+              <p class="form__field form__field--required"> 
                 <!--<label for="email_address" class="form__label form__label--required">Email Address</label>-->
-                <input type="email" placeholder="Email" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="" title="Email Address">
-            </p><!-- .form__field -->
-            <p class="form__field form__field--required">
-    <!--<label class="form__label form__label--required">First Name</label>-->
-    <input type="text" placeholder="First Name" class="form__textfield textfield required-entry" id="firstname" name="firstname" value="" title="First Name">
-</p><!-- .form__field -->
-<p class="form__field form__field--required">
-    <!--<label class="form__label form__label--required">Last Name</label>-->
-    <input type="text" placeholder="Last Name" class="form__textfield textfield required-entry" id="lastname" name="lastname" value="" title="Last Name">
-</p><!-- .form__field -->
-                                                                                        <p class="form__field form__field--required">
-    <label class="form__label form__label--required" for="gender">Gender</label>
-    <select class="form__select validate-select" id="gender" name="gender" title="Gender">
-                                    <option value=""></option>
+                <input type="email" placeholder="Email Address" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="" title="Email Address">
+              </p>
+              <!-- .form__field -->
+              <p class="form__submit-wrapper">
+                <button type="submit" title="Submit" class="form__submit button continue" onClick="window.customerAccount.forgot()">Submit</button>
+              </p>
+              <!-- .form__submit-wrapper -->
+            </form>
+          </div>
+          <div class="nav__list nav__list--subcategory customer-account-register is-opened js-active">
+            <div class="nav__list-inner customer-account-register-container">
+              <div class="customer-form-register-before"> </div>
+              <form action="http://skymazon.sunpop.cn/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
+                <input type="hidden" name="success_url" value="">
+                <input type="hidden" name="error_url" value="">
+                <p class="form__field form__field--required"> 
+                  <!--<label class="form__label form__label--required">Mobile Number</label>-->
+                  <input type="text" placeholder="Mobile Number" class="form__textfield textfield required-entry validate-number validation-failed" name="amcustomerattr[default_mobile_number]" id="default_mobile_number" value="" title="Mobile Number">
+                </p>
+                <!-- .form__field -->
+                
+                <p class="form__field form__field--required"> 
+                  <!--<label class="form__label form__label--required">Validation Code</label>-->
+                  <input type="text" placeholder="Validation Code" class="form__textfield textfield validation-code required-entry validate-number validation-failed" name="Validation_Code" id="Validation_Code" value="" title="Validation Code">
+                  <input type="button" id="btnValidation" value="Get Validation Code" class="form_validation">
+                </p>
+                <!-- .form__field -->
+                
+                <p class="form__field form__field--required"> 
+                  <!--<label for="email_address" class="form__label form__label--required">Email Address</label>-->
+                  <input type="email" placeholder="Email" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="" title="Email Address">
+                </p>
+                <!-- .form__field -->
+                <p class="form__field form__field--required"> 
+                  <!--<label class="form__label form__label--required">First Name</label>-->
+                  <input type="text" placeholder="First Name" class="form__textfield textfield required-entry" id="firstname" name="firstname" value="" title="First Name">
+                </p>
+                <!-- .form__field -->
+                <p class="form__field form__field--required"> 
+                  <!--<label class="form__label form__label--required">Last Name</label>-->
+                  <input type="text" placeholder="Last Name" class="form__textfield textfield required-entry" id="lastname" name="lastname" value="" title="Last Name">
+                </p>
+                <!-- .form__field -->
+                <p class="form__field form__field--required">
+                  <label class="form__label form__label--required" for="gender" style="display:inline;">Gender</label>
+                  <input name="gender" type="radio" value="man" style="display:inline; margin:0 4px 0 20px;" checked><span style="font-size:14px;">man</span>
+                  <input name="gender" type="radio" value="women" style="display:inline;margin:0 4px 0 20px;"><span style="font-size:14px;">women</span>
+                  <!--<select class="form__select validate-select" id="gender" name="gender" title="Gender">
+                    <option value=""></option>
                     <option value="1" selected="selected">Male</option>
                     <option value="2">Female</option>
-            </select>
-</p><!-- .form__field -->					 <div id="register-customer-password">
-                <p class="form__field form__field--required">
+                  </select>-->
+                </p>
+                <!-- .form__field -->
+                <div id="register-customer-password">
+                  <p class="form__field form__field--required"> 
                     <!--<label for="password" class="form__label form__label--required">Password</label>-->
                     <input placeholder="Password (6 characters contain numbers and letters)" class="form__textfield textfield required-entry validate-password" type="password" name="password" id="password" title="Password">
-                </p><!-- .form__field -->
-                <p class="form__field form__field--required">
+                  </p>
+                  <!-- .form__field -->
+                  <p class="form__field form__field--required"> 
                     <!--<label for="confirmation" class="form__label form__label--required">Confirm Password</label>-->
                     <input placeholder="Confirm Password" class="form__textfield textfield required-entry validate-cpassword" type="password" name="confirmation" title="Confirm Password" id="confirmation">
-                </p><!-- .form__field -->
-            </div>
-                            <div class="form__field none">
-                    <ul class="form__checkboxes">
-                        <li class="form__checkboxes-item">
-                            <input type="checkbox" class="form__checkbox" name="is_subscribed" id="is_subscribed" value="1" title="Sign Up for Newsletter">
-                            <label for="is_subscribed" class="form__checkbox-label">Sign Up for Newsletter</label>
-                        </li>
-                    </ul>
+                  </p>
+                  <!-- .form__field --> 
                 </div>
-                                    <p class="form__submit-wrapper">
-                <button type="submit" title="Register" class="form__submit button continue" style="background-color:#F4A137" onClick="checkcode();window.customerAccount.register()">Register</button>
-            </p><!-- .form__submit-wrapper -->
-                    </form>
-              <a class="create_form_link button" href="detail.html?title=Login&amp;url=login.html?fromui=app" style="height:40px; line-height:40px; padding:0;">Back To Login</a>
+                <div class="form__field none">
+                  <ul class="form__checkboxes">
+                    <li class="form__checkboxes-item">
+                      <input type="checkbox" class="form__checkbox" name="is_subscribed" id="is_subscribed" value="1" title="Sign Up for Newsletter">
+                      <label for="is_subscribed" class="form__checkbox-label">Sign Up for Newsletter</label>
+                    </li>
+                  </ul>
+                </div>
+                <p class="form__submit-wrapper">
+                  <button type="submit" title="Register" class="form__submit button continue" style="background-color:#F4A137" onClick="checkcode();window.customerAccount.register()">Register</button>
+                </p>
+                <!-- .form__submit-wrapper -->
+              </form>
+              <a class="create_form_link button" href="detail.html?title=Login&amp;url=login.html?fromui=app" style="height:40px; line-height:40px; padding:0;">Back To Login</a> </div>
+          </div>
+        </div>
+      </div>
     </div>
-</div></div></div>
+  </div>
+  <!-- .container-pusher -->
+  <div id="ajax_loader" class="loader" style="display:none;"></div>
 </div>
-    </div><!-- .container-pusher -->
-    <div id="ajax_loader" class="loader" style="display:none;"></div>    
 </div>
-
-
 <script type="text/javascript">
     //<![CDATA[
     window.customerAccount = new awMobile2.app.customerAccount('customer_account_link', 'customer_ajax_container');
     //]]>
-</script>
-
+</script> 
 <script type="text/javascript">
     //<![CDATA[
     window.customerAccount = new awMobile2.app.customerAccount('customer_account_link', 'customer_ajax_container');
     //]]>
-</script>
-
+</script> 
 <script type="text/javascript">
 	//<![CDATA[
 	if (typeof window.customerAccount != 'undefined') {
@@ -157,8 +167,7 @@
 		window.customerAccount.setRegisterLink('create_form_link');
 	}
 	//]]>
-</script>
-
+</script> 
 <script type="text/javascript">
 	//<![CDATA[
 	if (typeof window.customerAccount != 'undefined') {
@@ -166,7 +175,7 @@
 		window.customerAccount.setForgotTitle("Forgot Your Password?");
 	}
 	//]]>
-</script>
+</script> 
 <script type="text/javascript">
 	//<![CDATA[
 	Event.observe(window, 'load', function(e){
@@ -174,8 +183,7 @@
 		window.customerAccount.setRegisterTitle("Register");
 	});
 	//]]>
-</script>
-
+</script> 
 <script type="text/javascript">
 		//生成随机数验证码
 		rnd.today=new Date();
@@ -245,35 +253,13 @@
 		   }
 		}
 </script> 
-
 <script type="text/javascript">
 	//<![CDATA[
 		FastClick.attach(document.body);
 	//]]>
-</script>
+</script> 
 <script type="text/javascript">
 	document.getElementById("gender")[1].selected=true;
-</script>
-
-<script>
-	jQuery(function(){
-			jQuery(".login_in_r button").click(function(){
-					jQuery(this).css("color","#F4A137");
-					//jQuery(".customer-account-register").show();
-					//jQuery(".customer-account-login,.customer-account-forgotpassword").hide();
-					jQuery(".login_in_r").css("border-bottom","2px solid #F4A137");
-					jQuery(".login_in_l").css("border-bottom","none");
-					jQuery(".login_in_l button").css("color","#ccc");
-				});
-			jQuery(".login_in_l button").click(function(){
-					//jQuery(".customer-account-login").show();
-					//jQuery(".customer-account-register,.customer-account-forgotpassword").hide();
-					jQuery(this).css("color","#F4A137");
-					jQuery(".login_in_l").css("border-bottom","2px solid #F4A137");
-					jQuery(".login_in_r").css("border-bottom","none");
-					jQuery(".login_in_r button").css("color","#ccc");
-				});
-		})
-</script>                                                               
-
-</body></html>
+</script> 
+</body>
+</html>
