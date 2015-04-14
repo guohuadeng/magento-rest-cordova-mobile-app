@@ -53,7 +53,9 @@ function ready() {
             $(this).parent().addClass('active').siblings().removeClass('active');
             // 退出
             if ($(this).parent().hasClass('exit')) {
-                navigator.app.exitApp();
+                if (confirm('Are you sure to exit the Kikuu app?')) {
+                    navigator.app.exitApp();
+                }
             } else {
                 toggleMenu();
             }
@@ -173,6 +175,8 @@ function ready() {
             $frame = $('.frame').addClass('out'),
             $page;
 
+        defines.state = $this.attr('class').match(/page-(\w+)/)[1];
+
 	    // index页
         if ($this.hasClass('page-index')) {
             currentPage = $this.index();
@@ -228,15 +232,6 @@ function ready() {
             }
             return;
         }
-    };
-
-    // 处理 ajax json 加载，暂时没有使用到，留着详情页 rest 接口用
-    Mobilebone.jsonHandle = function (product) {
-        product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(2);
-        product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(2);
-        return $(Handlebars.compile(defines.detailTpl)({
-            product: product
-        })).html();
     };
 
     init();

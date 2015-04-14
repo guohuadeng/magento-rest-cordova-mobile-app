@@ -2,12 +2,16 @@
 //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础productInfo				
 // 处理返回数据
 function ready() {
-	var entity_id,
-		productSwiper;
+    var entity_id,
+        productSwiper,
+        query = utils.queryUrl();
 
-    entity_id = defines.cur_entity_id;  //主页面传来的全局 产品id，但是有时不是主页面传来而是直接网页参数传来
-    if (requestUrl('entity_id')) {
-        entity_id = requestUrl('entity_id');
+    //主页面传来的全局 产品id，但是有时不是主页面传来而是直接网页参数传来
+    entity_id = query.entity_id || defines.cur_entity_id;
+
+    function init() {
+        showInfo(entity_id);
+        showImg(entity_id);
     }
 
     //产品图片列表

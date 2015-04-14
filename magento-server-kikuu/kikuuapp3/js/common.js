@@ -20,6 +20,18 @@ function initEvents() {
     // 手机点击菜单按键
     document.addEventListener('menubutton', toggleMenu, false);
 
+    // 手机点击返回菜单
+    document.addEventListener('backbutton', function (e) {
+        if (defines.state === 'index') {
+            e.preventDefault();
+            if (confirm('Are you sure to exit the Kikuu app?')) {
+                navigator.app.exitApp();
+            }
+        } else {
+            history.back();
+        }
+    }, false);
+
     // 二维码
     $(document).on('click', '.qrcode', function () {
         cordova.plugins.barcodeScanner.scan(
@@ -68,21 +80,3 @@ function toggleMenu(e) {
 
 //绑定fastclick，更好处理tap,滚动的流畅度提升明显，因chrome浏览器操作原因，开发阶段关闭
 //FastClick.attach(document.body);
-
-// 内嵌的iFrame需要处理自己的url，所以临时加上
-// 处理页面url传递的参数
-function requestUrl(paras)
-    { 
-        var url = location.href; 
-        var paraString = url.substring(url.indexOf('?')+1,url.length).split('&'); 
-        var paraObj = {} 
-        for (i=0; j=paraString[i]; i++){ 
-        paraObj[j.substring(0,j.indexOf('=')).toLowerCase()] = j.substring(j.indexOf('=')+1,j.length); 
-        } 
-        var returnValue = paraObj[paras.toLowerCase()]; 
-        if(typeof(returnValue)=='undefined'){ 
-        return ''; 
-        }else{ 
-        return returnValue; 
-        } 
-    }
