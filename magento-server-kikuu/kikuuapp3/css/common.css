@@ -86,7 +86,7 @@ a:active {
     position: fixed;
     z-index: 1000;
     width: 78%;
-    top: 0;
+    top: 44px;
 }
 
 .cbp-spmenu h3 {
@@ -111,11 +111,12 @@ a:active {
 .cbp-spmenu h3 .icon-close {
     color: #000;
 	font-size: 1.2em;
-	padding: 7px 7px 13px 7px;
+	padding: 5px 5px 6px 5px !important;
 	position: absolute;
-	top: 0;
-	right: -50px;
-	background-color: #f2f2f2;
+	top: -44px;
+	left: 0px;
+	color: #8a8a8a !important;
+    background-color: #FFF;
 }
 
 .cbp-spmenu a {
@@ -148,7 +149,6 @@ a:active {
 
 .cbp-spmenu-left.cbp-spmenu-open {
     left: 0;
-    top: 0;
 }
 
 .cbp-spmenu-right.cbp-spmenu-open {
