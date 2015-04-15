@@ -123,6 +123,7 @@ a:active {
     font-size: 0.8em;
     font-weight: 300;
     text-decoration: none;
+    color: #000;
 }
 
 .cbp-spmenu li:hover a, .cbp-spmenu li.active a {
