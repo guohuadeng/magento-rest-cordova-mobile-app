@@ -41,8 +41,15 @@
 
 <div class="card cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" style="overflow: visible;">
     <h3>
-        Menu
-        <a class="icon icon-close pull-right menu-close"></a>
+        <span class="login_false">
+            <span class="icon icon-person"></span>
+            <a href="login.html">Login</a> | <a href="detail.html?title=Register&amp;frameUrl=http://skymazon.sunpop.cn/kikuuapp3/register.html">Register</a>
+        </span>
+        <span class="login_true userinfo">
+            <img src="" width="36" height="36">
+            <span></span>
+        </span>
+        <span class="icon icon-close pull-right menu-close"></span>
     </h3>
     <ul class="table-view cbp-spmenu-list">
     </ul>
@@ -115,9 +122,8 @@
 </script>
 		
 
-<!-- 使用 cordova 插件要用到，不能删除，发布时增加 --
+<!-- 使用 cordova 插件要用到，不能删除，发布时增加 -->
 <script src="cordova.js"></script>
--- 使用 cordova 插件要用到，不能删除，发布时增加 -->
 <script src="js/assets.js"></script>
 <script src="js/config.js"></script>
 <script src="js/index.js"></script>

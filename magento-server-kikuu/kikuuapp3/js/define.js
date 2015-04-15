@@ -40,14 +40,6 @@
             url: '#',
             class_name: 'login_true logout'
         }, {
-            name: 'Login',
-            url: 'login.html',
-            class_name: 'login_false'
-        }, {
-            name: 'Register',
-            url: 'detail.html?title=Register&frameUrl=' + baseUrl + '/kikuuapp3/register.html',
-            class_name: 'login_false'
-        }, {
             name: 'Exit',
             class_name: 'exit',
             url: '#'

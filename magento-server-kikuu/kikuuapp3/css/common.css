@@ -91,11 +91,23 @@ a:active {
 
 .cbp-spmenu h3 {
     margin-top: 10px;
+    padding-left: 20px;
     line-height: 30px;
-    text-align: center;
+    color: #8a8a8a;
+    font-weight: normal;
 }
 
-.cbp-spmenu h3 a {
+.cbp-spmenu h3 span.icon {
+    font-size: 36px;
+    color: #ccc;
+    vertical-align: middle;
+}
+
+.cbp-spmenu h3 img {
+    vertical-align: middle;
+}
+
+.cbp-spmenu h3 .icon-close {
     color: #000;
 	font-size: 1.2em;
 	padding: 10px;
@@ -106,8 +118,6 @@ a:active {
 }
 
 .cbp-spmenu a {
-    display: block;
-    color: #fff;
     font-size: 0.8em;
     font-weight: 300;
     text-decoration: none;

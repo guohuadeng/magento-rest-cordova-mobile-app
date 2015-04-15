@@ -27,11 +27,14 @@ function ready() {
         servers.getUser(function (user) {
             defines.user = user;
 
-            var $menus = $('.cbp-spmenu-list');
+            var $menus = $('.cbp-spmenu');
 
             if (defines.user) {
                 $menus.find('.login_true').show();
                 $menus.find('.login_false').hide();
+                $menus.find('.userinfo img').attr('src', defines.baseUrl +
+                    '/media/customer' + defines.user.avatar);
+                $menus.find('.userinfo span').text(defines.user.name);
             } else {
                 $menus.find('.login_true').hide();
                 $menus.find('.login_false').show();
@@ -52,7 +55,7 @@ function ready() {
         }));
 
         // 菜单项点击
-        $(document).on('click', '.cbp-spmenu li a', function () {
+        $(document).on('click', '.cbp-spmenu a', function () {
             $(this).parent().addClass('active').siblings().removeClass('active');
             // 退出
             if ($(this).parent().hasClass('exit')) {
@@ -61,6 +64,7 @@ function ready() {
                 }
             } else {
                 toggleMenu();
+                $('.menu-bottom').hide();
             }
         });
 

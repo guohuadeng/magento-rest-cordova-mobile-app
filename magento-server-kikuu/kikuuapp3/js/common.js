@@ -13,10 +13,6 @@ function initEvents() {
     // 菜单切换
     $('.menu-toggle, .menu-close, .menu-bottom').click(toggleMenu);
 	
-	$(".cbp-spmenu li a").click(function(){
-		$('.menu-bottom').hide();
-	});
-	
     // 手机点击菜单按键
     document.addEventListener('menubutton', toggleMenu, false);
 
