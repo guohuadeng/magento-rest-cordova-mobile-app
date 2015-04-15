@@ -33,7 +33,9 @@
         $.getJSON(url.login, {
             username: username,
             password: password
-        }, callback).fail(error);
+        }, callback).fail(function () {
+            alert('Username or password is error!');
+        });
     };
 
     servers.logout = function (callback) {
@@ -76,6 +78,7 @@
             error: error
         });
     };
+
     servers.getProductsRest = function (id, callback) {
         $.ajax({
             type: 'get',
@@ -86,6 +89,7 @@
             error: error
         });
     };
+
     servers.getProductsImg = function (id, callback) {
         $.ajax({
             type: 'get',
@@ -95,17 +99,19 @@
             success: callback,
             error: error
         });
-        servers.getProductsAttr = function (id, callback) {
-            $.ajax({
-                type: 'get',
-                url: sprintf(url.product_attr, id),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: callback,
-                error: error
-            });
-        };
     };
+
+    servers.getProductsAttr = function (id, callback) {
+        $.ajax({
+            type: 'get',
+            url: sprintf(url.product_attr, id),
+            contentType: 'application/json',
+            dataType: 'json',
+            success: callback,
+            error: error
+        });
+    };
+
     servers.getProductsOption = function (id, callback) {
         $.ajax({
             type: 'get',
