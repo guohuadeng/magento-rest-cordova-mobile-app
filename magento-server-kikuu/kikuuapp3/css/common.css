@@ -175,7 +175,7 @@ a:active {
 .swiper-pagination {
     height: 36px;
     position: fixed;
-    background: #eeeeee;
+    background: rgba(244,244,244,0.8);
     width: 100%;
     text-align: center;
 }

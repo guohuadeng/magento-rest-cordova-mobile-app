@@ -89,12 +89,12 @@ function initPageScroll(options) {
                 $el.find('scroller').trigger('scroll');
 				
                 if (this.distX < -100) {
-					showhead();
+					//showhead();
                     options.onRight(page.id, i);
                     return;
                 }
                 if (this.distX > 100) {
-					showhead();
+					//showhead();
                     options.onLeft(page.id, i);
                     return;
                 }
