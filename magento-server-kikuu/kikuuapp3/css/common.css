@@ -230,7 +230,7 @@ a:active {
 }
 .product-swiper-container .swiper-pagination {
 	position: relative;
-    height: 24px;
+    height: 14px;
     background: #eeeeee;
     width: 100%;
     text-align: center;
@@ -507,7 +507,7 @@ a:active {
     height: 100%;
 }
 .page-product-detail .detailInfo {
-	margin: 0px 10px 5px 10px;
+	margin: 20px 10px 5px 10px;
 }
 .page-product-detail .detailInfo img {
 	max-width: 100%;
