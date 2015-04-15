@@ -208,7 +208,7 @@ function ready() {
 
         // login页
         if ($this.hasClass('page-login')) {
-            $this.find('[name="login"]').click(function () {
+            $this.find('[name="login"]').off('click').click(function () {
                 var username = $this.find('[name="username"]').val(),
                     password = $this.find('[name="password"]').val();
 
@@ -242,7 +242,7 @@ function ready() {
 
         // search
         if ($this.hasClass('page-search')) {
-            $this.find('[name="q"]').keyup(function () {
+            $this.find('[name="q"]').off('keyup').keyup(function () {
                 $this.find('[name="search"]').attr('href', 'searchResult.html?q=' + $(this).val());
             });
             return;
