@@ -40,7 +40,19 @@ function initPageScroll(options) {
             }, 200);
         }
     };
-
+	
+	function hidehead(){
+		$(".swiper-container").css("top",0);
+		$(".bar-nav").css("display","none");
+		$(".products-grid").css("margin-top","-39px");
+	}
+	
+	function showhead(){
+		$(".swiper-container").css("top","44px");
+		$(".bar-nav").css("display","block");
+		$(".products-grid").css("margin-top","5px");
+	}
+	
     function initScroll(i, page) {
         var $el = $('#' + page.id),
             $pd = $el.find('.pullDown');
@@ -62,19 +74,27 @@ function initPageScroll(options) {
                         .attr('class', 'pullDown')
                         .find('.pullDownLabel')
                         .text('Pull down to refresh...');
-                } else {
+					showhead();
+                } else if (this.y < 0){
+					$pd.hide();
+					hidehead();	
+				} else {
                     $pd.hide();
+					showhead();
                 }
+				
                 pullActionDetect.check(scroll, $el.find('.pullUp'), 1);
             },
             onScrollEnd: function () {
                 $el.find('scroller').trigger('scroll');
-
+				
                 if (this.distX < -100) {
+					showhead();
                     options.onRight(page.id, i);
                     return;
                 }
                 if (this.distX > 100) {
+					showhead();
                     options.onLeft(page.id, i);
                     return;
                 }
