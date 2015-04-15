@@ -513,5 +513,10 @@ a:active {
 	max-width: 100%;
 }
 .productForm	{
-    padding-top: 20px
+    padding-top: 20px;
+    padding-top: 20px;    
+    width: 100%;
+    padding-bottom: 88px;
+    background-color: rgba(238, 238, 238, .9);
+    z-index:99;
     }
