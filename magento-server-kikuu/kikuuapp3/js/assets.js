@@ -8,6 +8,7 @@
 		//'assets/iscroll5/iscroll.js',
         'assets/scroll/scroll.js',
         'bower_components/jquery/dist/jquery.min.js',
+        'bower_components/ratchet/js/sliders.js',
         'bower_components/handlebars/handlebars.min.js',
         'bower_components/sprintf/dist/sprintf.min.js',
         'bower_components/store2/dist/store2.min.js',

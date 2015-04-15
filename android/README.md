@@ -18,6 +18,8 @@ cd Kikuu
 plugman install --platform android --project . --plugin https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git
 
 plugman install --platform android --project . --plugin https://github.com/wildabeast/BarcodeScanner.git
+
+plugman install --platform android --project . --plugin https://git-wip-us.apache.org/repos/asf/cordova-plugin-splashscreen.git\#r0.3.0
 ```
 
 * run

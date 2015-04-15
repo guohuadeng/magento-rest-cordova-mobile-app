@@ -9,6 +9,7 @@ rsync -avz --exclude=_notes magento-server-kikuu/kikuuapp3/ android/Kikuu/assets
 rsync -avz android/crosswalk-assets-www/ android/Kikuu/assets/www
 
 rsync -avz doc/icons/icon.png android/Kikuu/res/drawable/icon.png
+rsync -avz doc/icons/screen.png android/Kikuu/res/drawable/screen.png
 
 node version.js
 

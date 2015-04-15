@@ -74,5 +74,19 @@ function toggleMenu(e) {
 	$('.menu-bottom').toggle();
 }
 
+function checkFirstTime() {
+    var $firstTime = $('#firstTime');
+
+    if (!store('first-time')) {
+        $firstTime.show();
+        store('first-time', true);
+        $('.enter-button').click(function () {
+            $firstTime.remove();
+        });
+    } else {
+        $firstTime.remove();
+    }
+}
+
 //绑定fastclick，更好处理tap,滚动的流畅度提升明显，因chrome浏览器操作原因，开发阶段关闭
 //FastClick.attach(document.body);

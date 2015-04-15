@@ -7,6 +7,7 @@ function ready() {
         itemTpl = $('#item-template').html();
 
     function init() {
+        checkFirstTime();
         initEvents();
         initMenus();
     }
