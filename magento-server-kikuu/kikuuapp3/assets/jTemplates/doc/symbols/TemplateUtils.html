@@ -1,0 +1,654 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="generator" content="JsDoc Toolkit" />
+		
+		<title>JsDoc Reference - TemplateUtils</title>
+
+		<style type="text/css">
+			/* default.css */
+body
+{
+	font: 12px "Lucida Grande", Tahoma, Arial, Helvetica, sans-serif;
+	width: 800px;
+}
+
+.header
+{
+	clear: both;
+	background-color: #ccc;
+	padding: 8px;
+}
+
+h1
+{
+	font-size: 150%;
+	font-weight: bold;
+	padding: 0;
+	margin: 1em 0 0 .3em;
+}
+
+hr
+{
+	border: none 0;
+	border-top: 1px solid #7F8FB1;
+	height: 1px;
+}
+
+pre.code
+{
+	display: block;
+	padding: 8px;
+	border: 1px dashed #ccc;
+}
+
+#index
+{
+	margin-top: 24px;
+	float: left;
+	width: 160px;
+	position: absolute;
+	left: 8px;
+	background-color: #F3F3F3;
+	padding: 8px;
+}
+
+#content
+{
+	margin-left: 190px;
+	width: 600px;
+}
+
+.classList
+{
+	list-style-type: none;
+	padding: 0;
+	margin: 0 0 0 8px;
+	font-family: arial, sans-serif;
+	font-size: 1em;
+	overflow: auto;
+}
+
+.classList li
+{
+	padding: 0;
+	margin: 0 0 8px 0;
+}
+
+.summaryTable { width: 100%; }
+
+h1.classTitle
+{
+	font-size:170%;
+	line-height:130%;
+}
+
+h2 { font-size: 110%; }
+caption, div.sectionTitle
+{
+	background-color: #7F8FB1;
+	color: #fff;
+	font-size:130%;
+	text-align: left;
+	padding: 2px 6px 2px 6px;
+	border: 1px #7F8FB1 solid;
+}
+
+div.sectionTitle { margin-bottom: 8px; }
+.summaryTable thead { display: none; }
+
+.summaryTable td
+{
+	vertical-align: top;
+	padding: 4px;
+	border-bottom: 1px #7F8FB1 solid;
+	border-right: 1px #7F8FB1 solid;
+}
+
+/*col#summaryAttributes {}*/
+.summaryTable td.attributes
+{
+	border-left: 1px #7F8FB1 solid;
+	width: 140px;
+	text-align: right;
+}
+
+td.attributes, .fixedFont
+{
+	line-height: 15px;
+	color: #002EBE;
+	font-family: "Courier New",Courier,monospace;
+	font-size: 13px;
+}
+
+.summaryTable td.nameDescription
+{
+	text-align: left;
+	font-size: 13px;
+	line-height: 15px;
+}
+
+.summaryTable td.nameDescription, .description
+{
+	line-height: 15px;
+	padding: 4px;
+	padding-left: 4px;
+}
+
+.summaryTable { margin-bottom: 8px; }
+
+ul.inheritsList
+{
+	list-style: square;
+	margin-left: 20px;
+	padding-left: 0;
+}
+
+.detailList {
+	margin-left: 20px; 
+	line-height: 15px;
+}
+.detailList dt { margin-left: 20px; }
+
+.detailList .heading
+{
+	font-weight: bold;
+	padding-bottom: 6px;
+	margin-left: 0;
+}
+
+.light, td.attributes, .light a:link, .light a:visited
+{
+	color: #777;
+	font-style: italic;
+}
+
+.fineprint
+{
+	text-align: right;
+	font-size: 10px;
+}
+		</style>
+	</head>
+
+	<body>
+<!-- ============================== header ================================= -->	
+		<!-- begin static/header.html -->
+		<div id="header">
+	<h3>jTemplates</h3>
+</div>
+
+		<!-- end static/header.html -->
+
+<!-- ============================== classes index ============================ -->
+		<div id="index">
+			<!-- begin publish.classesIndex -->
+			<div align="center"><a href="../index.html">Class Index</a>
+| <a href="../files.html">File Index</a></div>
+<hr />
+<h2>Classes</h2>
+<ul class="classList">
+	
+	<li><i><a href="../symbols/_global_.html">_global_</a></i></li>
+	
+	<li><a href="../symbols/BaseArray.html">BaseArray</a></li>
+	
+	<li><a href="../symbols/BaseNode.html">BaseNode</a></li>
+	
+	<li><a href="../symbols/Cycle.html">Cycle</a></li>
+	
+	<li><a href="../symbols/Error.html">Error</a></li>
+	
+	<li><a href="../symbols/Include.html">Include</a></li>
+	
+	<li><a href="../symbols/jQuery.html">jQuery</a></li>
+	
+	<li><a href="../symbols/jQuery.fn.html">jQuery.fn</a></li>
+	
+	<li><a href="../symbols/JTException.html">JTException</a></li>
+	
+	<li><a href="../symbols/opFOREACH.html">opFOREACH</a></li>
+	
+	<li><a href="../symbols/opFORFactory.html">opFORFactory</a></li>
+	
+	<li><a href="../symbols/opIF.html">opIF</a></li>
+	
+	<li><a href="../symbols/Template.html">Template</a></li>
+	
+	<li><a href="../symbols/TemplateUtils.html">TemplateUtils</a></li>
+	
+	<li><a href="../symbols/TextNode.html">TextNode</a></li>
+	
+	<li><a href="../symbols/Updater.html">Updater</a></li>
+	
+	<li><a href="../symbols/UserParam.html">UserParam</a></li>
+	
+	<li><a href="../symbols/UserVariable.html">UserVariable</a></li>
+	
+</ul>
+<hr />
+			<!-- end publish.classesIndex -->
+		</div>
+		
+		<div id="content">
+<!-- ============================== class title ============================ -->
+			<h1 class="classTitle">
+				
+				Function Namespace TemplateUtils
+			</h1>
+
+<!-- ============================== class summary ========================== -->			
+			<p class="description">
+				
+			
+				Template utilities.
+				
+				
+					<br /><i>Defined in: </i> <a href="../symbols/src/src_jtemplates.js.html">jtemplates.js</a>.
+				
+			</p>
+
+<!-- ============================== constructor summary ==================== -->			
+			
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class TemplateUtils.">
+				<caption>Function Namespace Summary</caption>
+				<thead>
+					<tr>
+						<th scope="col">Constructor Attributes</th>
+						<th scope="col">Constructor Name and Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="attributes">&nbsp;</td>
+						<td class="nameDescription" >
+							<div class="fixedFont">
+								<b><a href="../symbols/TemplateUtils.html">TemplateUtils</a></b>()
+							</div>
+							<div class="description">Template utilities.</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+
+<!-- ============================== properties summary ===================== -->
+			
+
+<!-- ============================== methods summary ======================== -->
+			
+				
+				
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class TemplateUtils.">
+					<caption>Method Summary</caption>
+					<thead>
+						<tr>
+							<th scope="col">Method Attributes</th>
+							<th scope="col">Method Name and Description</th>
+						</tr>
+					</thead>
+					<tbody>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">TemplateUtils.<b><a href="../symbols/TemplateUtils.html#.cloneData">cloneData</a></b>(d, filter, f_escapeString)
+								</div>
+								<div class="description">Make a copy od data 'd'.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">TemplateUtils.<b><a href="../symbols/TemplateUtils.html#.escapeHTML">escapeHTML</a></b>(string)
+								</div>
+								<div class="description">Replace chars &, >, <, ", ' with html entities.</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">TemplateUtils.<b><a href="../symbols/TemplateUtils.html#.optionToObject">optionToObject</a></b>(optionText)
+								</div>
+								<div class="description">Convert text-based option string to Object</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">TemplateUtils.<b><a href="../symbols/TemplateUtils.html#.parseJSON">parseJSON</a></b>(data)
+								</div>
+								<div class="description">Parse JSON string into object</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&lt;static&gt; &nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">TemplateUtils.<b><a href="../symbols/TemplateUtils.html#.ReturnRefValue">ReturnRefValue</a></b>(el, guid, id)
+								</div>
+								<div class="description">Find parents nodes for a reference value and return it</div>
+							</td>
+						</tr>
+					
+					</tbody>
+				</table>
+				
+				
+				
+			
+<!-- ============================== events summary ======================== -->
+			
+
+<!-- ============================== constructor details ==================== -->		
+			
+			<div class="details"><a name="constructor"> </a>
+				<div class="sectionTitle">
+					Function Namespace Detail
+				</div>
+				
+				<div class="fixedFont">
+						<b>TemplateUtils</b>()
+				</div>
+				
+				<div class="description">
+					Template utilities.
+					
+				</div>
+				
+				
+				
+				
+					
+					
+					
+					
+					
+					
+					
+
+			</div>
+			
+
+<!-- ============================== field details ========================== -->		
+			
+
+<!-- ============================== method details ========================= -->		
+			
+				<div class="sectionTitle">
+					Method Detail
+				</div>
+				
+					<a name=".cloneData"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{object}</span>
+					<span class="light">TemplateUtils.</span><b>cloneData</b>(d, filter, f_escapeString)
+					
+					</div>
+					<div class="description">
+						Make a copy od data 'd'. It also filters data (depend on 'filter').
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{object}</span> <b>d</b>
+									
+								</dt>
+								<dd>input data</dd>
+							
+								<dt>
+									<span class="light fixedFont">{object}</span> <b>filter</b>
+									
+								</dt>
+								<dd>a filters</dd>
+							
+								<dt>
+									<span class="light fixedFont">{boolean}</span> <b>filter.escapeData</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Use escapeHTML on every string.</dd>
+							
+								<dt>
+									<span class="light fixedFont">{boolean}</span> <b>filter.noFunc</b>
+									<i>Optional</i>
+								</dt>
+								<dd>Do not allow to use function (throws exception).</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>f_escapeString</b>
+									
+								</dt>
+								<dd>function using to filter string (usually: TemplateUtils.escapeHTML)</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{object}</span> output data (filtered)</dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".escapeHTML"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{string}</span>
+					<span class="light">TemplateUtils.</span><b>escapeHTML</b>(string)
+					
+					</div>
+					<div class="description">
+						Replace chars &, >, <, ", ' with html entities.
+To disable function set settings: filter_data=false, filter_params=false
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>string</b>
+									
+								</dt>
+								<dd></dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{string}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".optionToObject"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Object}</span>
+					<span class="light">TemplateUtils.</span><b>optionToObject</b>(optionText)
+					
+					</div>
+					<div class="description">
+						Convert text-based option string to Object
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>optionText</b>
+									
+								</dt>
+								<dd>text-based option string</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".parseJSON"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{Object}</span>
+					<span class="light">TemplateUtils.</span><b>parseJSON</b>(data)
+					
+					</div>
+					<div class="description">
+						Parse JSON string into object
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{string}</span> <b>data</b>
+									
+								</dt>
+								<dd>Text JSON</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{Object}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					<hr />
+				
+					<a name=".ReturnRefValue"> </a>
+					<div class="fixedFont">&lt;static&gt; 
+					
+					<span class="light">{object}</span>
+					<span class="light">TemplateUtils.</span><b>ReturnRefValue</b>(el, guid, id)
+					
+					</div>
+					<div class="description">
+						Find parents nodes for a reference value and return it
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Element}</span> <b>el</b>
+									
+								</dt>
+								<dd>html element</dd>
+							
+								<dt>
+									<span class="light fixedFont">{int}</span> <b>guid</b>
+									
+								</dt>
+								<dd>template process unique identificator</dd>
+							
+								<dt>
+									<span class="light fixedFont">{int}</span> <b>id</b>
+									
+								</dt>
+								<dd>index</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{object}</span> </dd>
+							
+							</dl>
+						
+						
+						
+
+					
+				
+			
+			
+<!-- ============================== event details ========================= -->		
+			
+			
+			<hr />
+		</div>
+
+		
+<!-- ============================== footer ================================= -->
+		<div class="fineprint" style="clear:both">
+			
+			Documentation generated by <a href="http://www.jsdoctoolkit.org/" target="_blank">JsDoc Toolkit</a> 2.1.0 on Sun Aug 05 2012 14:49:18 GMT+0200 (CEST)
+		</div>
+	</body>
+</html>

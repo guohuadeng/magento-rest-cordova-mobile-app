@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Sales</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery-jtemplates.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript">
+  <!--
+    //global variables
+    Items = null;
+    Customers = null;
+    Sales = null;
+    
+    //update selection of Customers and refresh entries
+    function UpdateCustomer(elem, index) {
+      Customers[index].selected = elem.checked;
+      UpdatEntries();
+    }
+    
+    //update selection of Items and refresh entries
+    function UpdateItem(elem, index) {
+      Items[index].selected = elem.checked;
+      UpdatEntries();
+    }
+    
+    //refresh entries
+    function UpdatEntries() {
+      //local key cache
+      var CustCacheMap = {};
+      var ItemCacheMap = {};
+      
+      //build key cache
+      for(var i=0; i<Customers.length; ++i) {
+        CustCacheMap[Customers[i].ID] = Customers[i];
+      }
+      for(var i=0; i<Items.length; ++i) {
+        ItemCacheMap[Items[i].ID] = Items[i];
+      }
+      
+      //create resultset from all Sales entries
+      var entries = $.map(Sales, function(e) {
+        //find customer and item
+        var cust = CustCacheMap[e.CustomerID];
+        var item = ItemCacheMap[e.ItemID];
+        
+        //if customer of item not found skip record
+        if(cust == null || item == null) {
+          return null;
+        }
+        
+        //if both customer and item are selected then put record
+        if(cust.selected && item.selected) {
+          return [{
+            "CustName": cust.FirstName + ' ' + cust.LastName,
+            "ItemName": item.Name,
+            "Price": e.SalesPrice,
+            "Cost": e.UnitCost
+          }];
+        } else {
+          return null;
+        }
+      });
+      
+      //process template
+      $("#Entries").processTemplate(entries);
+    }
+    
+    $(document).ready(function() {
+      //load data
+      $.getJSON('data.json', function(data) {
+        Items = data.Items;
+        Customers = data.Customers;
+        Sales = data.SalesEntry;
+        
+        //setup templates
+        $("#Customers").setTemplateElement("Template-ListCustomers").processTemplate(Customers);
+        $("#Items").setTemplateElement("Template-ListItems").processTemplate(Items);
+        
+        $("#Entries").setTemplateElement("Template-Entries");
+        $("#Entries").processTemplate(null); //process empty data to show header
+      });
+    });
+  -->
+  </script>
+</head>
+
+<body>
+
+  <!-- Templates -->
+  <p style="display:none"><textarea id="Template-ListCustomers" rows="0" cols="0"><!--
+    <div class="title">Customers</div>
+    <table>
+      <tr>
+        <td class="header">Choose</td>
+        <td class="header">Name</td>
+      </tr>
+      {#foreach $T as Row}
+        <tr class="{#cycle values=['bcEED','bcDEE']}">
+          <td><input type="checkbox" value="{$T.Row.ID}" onclick="UpdateCustomer(this,{$T.Row$index})") /></td>
+          <td>{$T.Row.FirstName} {$T.Row.LastName}</td>
+        </tr>
+      {#/for}
+    </table>
+  --></textarea></p>
+    
+  <p style="display:none"><textarea id="Template-ListItems" rows="0" cols="0"><!--
+    <div class="title">Items</div>
+    <table>
+      <tr>
+        <td class="header">Choose</td>
+        <td class="header">Name</td>
+      </tr>
+      {#foreach $T as Row}
+        <tr class="{#cycle values=['bcEED','bcDEE']}">
+          <td><input type="checkbox" value="{$T.Row.ID}" onclick="UpdateItem(this,{$T.Row$index})") /></td>
+          <td>{$T.Row.Name}</td>
+        </tr>
+      {#/for}
+    </table>
+  --></textarea></p>
+  
+  <p style="display:none"><textarea id="Template-Entries" rows="0" cols="0"><!--
+    <div class="title">Entries</div>
+    <table>
+      <tr>
+        <td class="header">Customer</td>
+        <td class="header">Item</td>
+        <td class="header">Price</td>
+        <td class="header">Cost</td>
+        <td class="header">Profit</td>
+      </tr>
+      {#param name=ProfitTotal value=0}
+      {#foreach $T as Row}
+        <tr class="{#cycle values=['bcEED','bcDEE']}">
+          <td>{$T.Row.CustName}</td>
+          <td>{$T.Row.ItemName}</td>
+          <td>{$T.Row.Price}</td>
+          <td>{$T.Row.Cost}</td>
+          <td>{$T.Row.Price - $T.Row.Cost}</td>
+        </tr>
+      {#param name=ProfitTotal value=$P.ProfitTotal + ($T.Row.Price - $T.Row.Cost)}
+      {#/for}
+      <tr>
+        <td class="header"></td>
+        <td class="header"></td>
+        <td class="header"></td>
+        <td class="header">Total:</td>
+        <td class="header">{$P.ProfitTotal}</td>
+      </tr>
+    </table>
+  --></textarea></p>
+
+  <!-- Output elements -->
+  <div id="Customers" class="Content"></div>
+  <div id="Items" class="Content"></div>
+  <div id="Entries" class="Content"></div>
+  
+</body>
+</html>

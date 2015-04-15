@@ -7,14 +7,22 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 		$select = array ();
 		foreach ( $product->getOptions () as $o ) {
 			$optionid = 1;
+			//custom_option_type两种类型没有取到value值，field和 file
 			$values = $o->getValues ();
 			$options = array ();
-			foreach ( $values as $v ) {
+			foreach ( $values as $v ) {                
 				$options [$optionid] = $v->getData ();
 				$optionid ++;
 			}
+			if ($o->getType () == "field")	{
+				$max_characters = $o->getMaxCharacters ();
+				$price = $o->getFormatedPrice ();		//id为535的产品，没有值输出，应该输出 555的美金再转换的值
+				}
 			$select [$selectid] = array (
-					'custom_option_id' => $selectid,
+					'option_id' => $o->getId (),
+					'is_require' => $o->getIsRequire (),
+					'price' => $price,
+					'max_characters' => $max_characters,
 					'custom_option_type' => $o->getType (),
 					'custom_option_title' => $o->getTitle (),
 					'custom_option_value' => $options 

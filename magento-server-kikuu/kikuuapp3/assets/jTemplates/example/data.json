@@ -1,0 +1,73 @@
+{
+  "Customers": [
+    {
+      "ID": "C01",
+      "FirstName": "John",
+      "LastName": "Smith",
+      "Born": 1975,
+      "Email": "john.smith@company.com"
+    },
+    {
+      "ID": "C02",
+      "FirstName": "Emily",
+      "LastName": "Smart",
+      "Born": 1983,
+      "Email": "emily.smart@company.com"
+    }
+  ],
+  
+  "Items": [
+    {
+      "ID": "I01",
+      "Name": "Bike",
+      "SalesPrice": 500.00,
+      
+      "BOM": {
+        "Name": "Bike 1",
+        "Elements": [
+          {"Name": "wheel", "Qty": 2},
+          {"Name": "frame", "Qty": 1,
+            "Elements": [
+              {"Name": "steering wheel", "Qty": 1,
+                "Elements": [
+                  {"Name": "bell", "Qty": 1},
+                  {"Name": "handle", "Qty": 2}
+                ]},
+              {"Name": "saddle", "Qty": 1}
+            ]},
+          {"Name": "transmission mechanism", "Qty": 1,
+            "Elements": [
+              {"Name": "chain", "Qty": 1},
+              {"Name": "pedal", "Qty": 2}
+            ]}
+        ]
+      }
+    },
+    {
+      "ID": "I02",
+      "Name": "Car",
+      "SalesPrice": 35000.00
+    }
+  ],
+  
+  "SalesEntry": [
+    {
+      "CustomerID": "C01",
+      "ItemID": "I01",
+      "SalesPrice": 495.00,
+      "UnitCost": 320.00
+    },
+    {
+      "CustomerID": "C01",
+      "ItemID": "I02",
+      "SalesPrice": 33999.00,
+      "UnitCost": 29000.00
+    },
+    {
+      "CustomerID": "C02",
+      "ItemID": "I01",
+      "SalesPrice": 500.00,
+      "UnitCost": 320.00
+    }
+  ]
+}

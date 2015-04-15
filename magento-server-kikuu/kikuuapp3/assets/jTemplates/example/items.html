@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Items</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery-jtemplates.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //set template and process
+      $("#Items").setTemplateElement("Template-Items").processTemplateURL("data.json");
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- Templates -->
+    <p style="display:none"><textarea id="Template-Items" rows="0" cols="0"><!--
+    <table>
+      <tr>
+        <td class="header">Name</td>
+        <td class="header CellDecimal">Sales Prce</td>
+      </tr>
+      {#foreach $T.Items as Item}
+        <tr class="{#cycle values=['bcEED','bcDEE']}">
+          <td>{$T.Item.Name}</td>
+          <td class="CellDecimal">{$T.Item.SalesPrice}</td>
+        </tr>
+      {#/for}
+    </table>
+  --></textarea></p>
+
+  <!-- Output elements -->
+  <div id="Items" class="Content"></div>
+  
+</body>
+</html>

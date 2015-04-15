@@ -5,7 +5,7 @@
     <title>Product Detail</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link href="css/assets.css" rel="stylesheet">
-    <link href="css/common.css" rel="stylesheet">
+    <link href="css/web_style.css" rel="stylesheet">
 </head>
 <body> 
 <div class="page page-product-detail">
@@ -16,24 +16,25 @@
 			</div>    
 			<div class="swiper-pagination"></div>
 		</div>
-		<p>&nbsp;	</p>			
-        <div id="debug"></div>
-		<div id="productOption" class="optionInfo"></div>	
-		<div id="productInfo" class="detailInfo"></div>	
+        <div cass="productForm">
+			<div id="productOption" class="optionInfo"></div>
+        </div>
+		<div id="productInfo" class="detailInfo"></div>
+        <p>&nbsp;</p>        <p>&nbsp;</p>
 	</div>  
-	<footer class="bar bar-standard bar-footer">
-		<!-- cart -->				
-		<div class="add_to_cart_all_l">
-			<p>
-        	<a class="icon fa fa-cart-arrow-down pull-down detail-back" data-role="back"></a>
-			<a id="shopping_cart" href="javascript:void(0)" class="header__link header__link--cart header__link--cart-empty"></a>
-			<input type="hidden" value="1" class="add-to-cart__quantity" name="qty">
-			<button type="button" class="button add-to-cart__submit js-add-to-cart validation-passed" onclick="window.productAddToCartForm.submit()">Add to cart</button>
-			<button type="button" class="button add-to-cart__submit js-add-to-cart" onclick="window.productAddToCartForm.submit()">Configure and Buy</button>
-			</p>	
-		</div>
-		<!-- end cart -->	
-	</footer>
+	<div class="add_to_cart_all_l">
+		<a id="shopping_cart" href="javascript:void(0)" class="header__link header__link--cart">
+			<span class="items-in-cart">3</span>
+		</a>
+        <p>
+		<form action="ajax" method="post" id="product_addtocart_form">
+			<input name="form_key" type="hidden" value="这里不知道生成规则及有什么用，7a6Opst51esbvpxN">
+        </form>
+        <input type="hidden" value="1" class="add-to-cart__quantity validation-passed" name="qty">
+        <button type="button" class="button add-to-cart__submit js-add-to-cart green-button validation-passed" onclick="window.productAddToCartForm.submit()">
+                        Add To Cart</button>
+	</p>
+</div>
 </div>
 
 <!-- 详情 rest 页 -->
@@ -73,101 +74,103 @@
     {{/with}}
 </script>
 
-<!-- 自定义选项，动态价格相关 -->
+<!-- 自定义选项，动态价格相关，空选项的533， 简单535，http://skymazon.sunpop.cn/kikuuapp3/productDetail.html?entity_id=535--> 
+<!-- 产品页 http://skymazon.sunpop.cn/index.php/catalog/product/view/id/385--> 
+
+<!---接口数据  http://skymazon.sunpop.cn/restconnect/products/getcustomoption/productid/535 -->
+<!-- 自定义选项，动态价格相关 复杂385，http://skymazon.sunpop.cn/kikuuapp3/productDetail.html?entity_id=385-->
 <script id="productOption-template" type="text/x-handlebars-template">
-<div class="product-options" id="product-options-wrapper">
-	<dl class="last">
-    {{#each option}}
-	    <dl class="last">
-			
-            <dt><label>ok1{{custom_option_title}}</label>
-			<span class="price-notice">+<span class="price">$15.00</span></span></dt>
+<div class="product-options add-to-cart-options__container-inner popup" id="product-options-wrapper">
+	<div class="no-display">
+		<input type="hidden" name="product" value="{{entity_id}}">
+	</div>
+	<dl>
+    {{#each options}}
+		{{#if is_field}}
+		<!-- field 类型缺数据 -->
+		<!-- 所有价格有分fix和percent，要算，当前只用fix净值类的 --!>
+			<div class="form__field {{#if is_require}} form__field--required {{/if}}">
+			<label class="form__label">{{custom_option_title}}</label>
+			<span class="price-notice">+<span class="price">Tsh{{price}}当前bug无输出</span></span>
 			<dd>
 				<div class="input-box">
-				<input type="text" onchange="opConfig.reloadPrice()" id="options_67_text" class="input-text  product-custom-option" name="options[67]" value="">
+				<input type="text" onchange="opConfig.reloadPrice()" id="options_{{option_id}}_text" class="form__textfield textfield  {{#if is_require}} required-entry {{/if}} product-custom-option" name="options[{{option_id}}]" value="">
+				<div class="validation-advice" id="advice-required-entry-options_{{option_id}}_text">This is a required field.</div>
 				</div>
-			</dd>
-			
-			<dt><label class="required"><em>*</em>下拉框</label></dt>
+			</dd>	
+			</div>	
+		{{/if}}		
+		
+		{{#if is_drop_down}}
+			<div class="form__field {{#if is_require}} form__field--required {{/if}}">
+			<label class="form__label {{#if is_require}} form__label--required {{/if}}">{{custom_option_title}}</label>	
 			<dd>
 			<div class="input-box">
-				<select name="options[62]" id="select_62" class=" required-entry product-custom-option" title="" onchange="opConfig.reloadPrice()">
-				<option value="">-- Please Select --</option><option value="148" price="1">Black +$1.00</option>
-				<option value="146" price="2">Golden +$2.00</option><option value="147" price="3">White +$3.00</option>
+				<select name="options[{{option_id}}]" id="select_{{option_id}}" class="{{#if is_require}} required-entry {{/if}} product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
+					<option value="">-- Please Select --</option>
+					{{#each custom_option_value}}
+					<option value="{{option_type_id}}" price="{{price}}">{{title}} +TSh{{price}}</option>
+					{{/each}}
 				</select>
+				<div class="validation-advice" id="advice-required-entry-select_{{option_id}}">This is a required field.</div>
 			</div>
-			</dd>
-            
-			<dt><label class="required"><em>*</em>勾选框</label></dt>
+			</dd>	
+			</div>	
+		{{/if}}		
+        
+		{{#if is_checkbox}}
+			<div class="form__field {{#if is_require}} form__field--required {{/if}}">	
+			<label class="form__label {{#if is_require}} form__label--required {{/if}}">{{custom_option_title}}</label>		
 			<dd>
 				<div class="input-box">
-					<ul id="options-63-list" class="options-list">
+					<ul id="options-{{option_id}}-list" class="options-list">
+					{{#each custom_option_value}}
 					<li>
-						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_2" value="150" price="11">
-						<span class="label">
-							<label for="options_63_2">crashProof <span class="price-notice">+<span class="price">$11.00</span></span></label>
-						</span>
+						<input type="checkbox" class="checkbox {{#if is_require}} validate-one-required-by-name {{/if}} product-custom-option" onclick="opConfig.reloadPrice()" name="[{{option_id}}][]" id="options_{{option_id}}_2" value="{{option_type_id}}" price="{{price}}">
+							<label for="options_{{option_id}}_2">{{title}} <span class="price-notice">+<span class="price">Tsh{{price}}</span></span></label>
 					</li>
-					<li>
-						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_3" value="151" price="22">
-						<span class="label">
-							<label for="options_63_3">dustProof <span class="price-notice">+<span class="price">$22.00</span></span></label>
-						</span>
-					</li>
-					<li>
-						<input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_4" value="149" price="33">
-						<span class="label">
-							<label for="options_63_4">waterProof <span class="price-notice">+<span class="price">$33.00</span></span></label>
-						</span>
-					</li>
+					{{/each}}
 					</ul>
-					<span id="options-63-container"></span>
+					<span id="options-{{option_id}}-container"></span>
 				</div>
-			</dd>
-            
-		<dt><label class="required"><em>*</em>选项框</label></dt>
-		<dd>
-			<div class="input-box">
-				<ul id="options-60-list" class="options-list">
+			</dd>	
+		{{/if}}
+		
+		{{#if is_radio}}
+			<div class="form__field {{#if is_require}} form__field--required {{/if}}">	
+			<label class="form__label {{#if is_require}} form__label--required {{/if}}">{{custom_option_title}}</label>		
+			<dd>
+				<ul id="options-{{option_id}}-list" class="options-list">
+				{{#each custom_option_value}}
 					<li>
-						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_2" value="143" price="111">
-						<span class="label">
-							<label for="options_60_2">16G mincard <span class="price-notice">+<span class="price">$111.00</span></span></label>
-						</span>
+						<input type="radio" class="radio {{#if is_require}} validate-one-required-by-name {{/if}} product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{option_id}}]" id="options_{{option_id}}_2" value="{{option_type_id}}" price="{{price}}">
+							<label for="options_{{option_id}}_2">{{title}} <span class="price-notice">+<span class="price">Tsh{{price}}</span></span></label>
 					</li>
-					<li>
-						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_3" value="141" price="222">
-							<span class="label">
-								<label for="options_60_3">4G mincard <span class="price-notice">+<span class="price">$222.00</span></span></label>
-							</span>
-					</li>
-					<li>
-						<input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_4" value="142" price="333">
-						<span class="label">
-							<label for="options_60_4">8G mincard <span class="price-notice">+<span class="price">$333.00</span></span></label>
-						</span>
-					</li>
+				{{/each}}
 				</ul>
-				<span id="options-60-container"></span>
+				<span id="options-{{option_id}}-container"></span>
+			</dd>	
+		{{/if}}
+		
+		{{#if is_multiple}}
+			<div class="form__field {{#if is_require}} form__field--required {{/if}}">	
+			<label class="form__label {{#if is_require}} form__label--required {{/if}}">{{custom_option_title}}</label>		
+				<dd>
+					<div class="input-box">
+						<select name="options[{{option_id}}][]" id="select_{{option_id}}" class="multiselect {{#if is_require}} required-entry {{/if}} product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
+						{{#each custom_option_value}}
+						<option value="{{option_type_id}}" price="{{price}}">{{title}} +Tsh{{price}}</option>
+						{{/each}}
+					</div>
+				</dd>
 			</div>
-		</dd>
-            
-		<dt><label class="required"><em>*</em>多选栏</label></dt>
-		<dd class="last">
-			<div class="input-box">
-				<select name="options[61][]" id="select_61" class="multiselect required-entry product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
-					<option value="144" price="1111">Battery +$1,111.00</option>
-					<option value="145" price="2222">Case +$2,222.00</option>
-				</select>
-			</div>
-		</dd>
-        </dl>	
+		{{/if}}			
     {{/each}}
 	</dl>
-	</div>
+</div>
 </script>
 <!-- 使用 cordova 插件要用到，不能删除 -->
-<script src="cordova.js"></script>
+<!--<script src="cordova.js"></script>-->
 <script src="js/assets.js"></script>
 <script src="js/config.js"></script>
 <script src="js/productdetail.js"></script>

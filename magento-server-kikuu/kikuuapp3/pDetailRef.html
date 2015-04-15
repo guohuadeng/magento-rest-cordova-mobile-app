@@ -1,68 +1,5 @@
-<div class="product-options" id="product-options-wrapper">
-    <script type="text/javascript">
-//<![CDATA[
-var DateOption = Class.create({
-
-    getDaysInMonth: function(month, year)
-    {
-        var curDate = new Date();
-        if (!month) {
-            month = curDate.getMonth();
-        }
-        if (2 == month && !year) { // leap year assumption for unknown year
-            return 29;
-        }
-        if (!year) {
-            year = curDate.getFullYear();
-        }
-        return 32 - new Date(year, month - 1, 32).getDate();
-    },
-
-    reloadMonth: function(event)
-    {
-        var selectEl = event.findElement();
-        var idParts = selectEl.id.split("_");
-        if (idParts.length != 3) {
-            return false;
-        }
-        var optionIdPrefix = idParts[0] + "_" + idParts[1];
-        var month = parseInt($(optionIdPrefix + "_month").value);
-        var year = parseInt($(optionIdPrefix + "_year").value);
-        var dayEl = $(optionIdPrefix + "_day");
-
-        var days = this.getDaysInMonth(month, year);
-
-        //remove days
-        for (var i = dayEl.options.length - 1; i >= 0; i--) {
-            if (dayEl.options[i].value > days) {
-                dayEl.remove(dayEl.options[i].index);
-            }
-        }
-
-        // add days
-        var lastDay = parseInt(dayEl.options[dayEl.options.length-1].value);
-        for (i = lastDay + 1; i <= days; i++) {
-            this.addOption(dayEl, i, i);
-        }
-    },
-
-    addOption: function(select, text, value)
-    {
-        var option = document.createElement('OPTION');
-        option.value = value;
-        option.text = text;
-
-        if (select.options.add) {
-            select.options.add(option);
-        } else {
-            select.appendChild(option);
-        }
-    }
-});
-dateOption = new DateOption();
-//]]>
-</script>
-
+<div class="product-options add-to-cart-options__container-inner popup" id="product-options-wrapper">
+            
     <script type="text/javascript">
     //<![CDATA[
     var optionFileUpload = {
@@ -217,104 +154,25 @@ dateOption = new DateOption();
             container.addClassName('validation-passed');
         }
     }
-    var opConfig = new Product.Options({"67":{"price":15,"oldPrice":15,"priceValue":"15.0000","type":"fixed","excludeTax":15,"includeTax":15},"62":{"148":{"price":1,"oldPrice":1,"priceValue":"1.0000","type":"fixed","excludeTax":1,"includeTax":1},"146":{"price":2,"oldPrice":2,"priceValue":"2.0000","type":"fixed","excludeTax":2,"includeTax":2},"147":{"price":3,"oldPrice":3,"priceValue":"3.0000","type":"fixed","excludeTax":3,"includeTax":3}},"63":{"150":{"price":11,"oldPrice":11,"priceValue":"11.0000","type":"fixed","excludeTax":11,"includeTax":11},"151":{"price":22,"oldPrice":22,"priceValue":"22.0000","type":"fixed","excludeTax":22,"includeTax":22},"149":{"price":33,"oldPrice":33,"priceValue":"33.0000","type":"fixed","excludeTax":33,"includeTax":33}},"60":{"143":{"price":111,"oldPrice":111,"priceValue":"111.0000","type":"fixed","excludeTax":111,"includeTax":111},"141":{"price":222,"oldPrice":222,"priceValue":"222.0000","type":"fixed","excludeTax":222,"includeTax":222},"142":{"price":333,"oldPrice":333,"priceValue":"333.0000","type":"fixed","excludeTax":333,"includeTax":333}},"61":{"144":{"price":1111,"oldPrice":1111,"priceValue":"1111.0000","type":"fixed","excludeTax":1111,"includeTax":1111},"145":{"price":2222,"oldPrice":2222,"priceValue":"2222.0000","type":"fixed","excludeTax":2222,"includeTax":2222}}});
+    var opConfig = new Product.Options({"67":{"price":1029025.5,"oldPrice":1029025.5,"priceValue":"555.0000","type":"fixed","excludeTax":1029025.5,"includeTax":1029025.5},"62":{"148":{"price":1854.1,"oldPrice":1854.1,"priceValue":"1.0000","type":"fixed","excludeTax":1854.1,"includeTax":1854.1},"146":{"price":3708.2,"oldPrice":3708.2,"priceValue":"2.0000","type":"fixed","excludeTax":3708.2,"includeTax":3708.2},"147":{"price":5562.3,"oldPrice":5562.3,"priceValue":"3.0000","type":"fixed","excludeTax":5562.3,"includeTax":5562.3}},"63":{"150":{"price":20395.1,"oldPrice":20395.1,"priceValue":"11.0000","type":"fixed","excludeTax":20395.1,"includeTax":20395.1},"151":{"price":40790.2,"oldPrice":40790.2,"priceValue":"22.0000","type":"fixed","excludeTax":40790.2,"includeTax":40790.2},"149":{"price":61185.3,"oldPrice":61185.3,"priceValue":"33.0000","type":"fixed","excludeTax":61185.3,"includeTax":61185.3}},"60":{"143":{"price":205805.1,"oldPrice":205805.1,"priceValue":"111.0000","type":"fixed","excludeTax":205805.1,"includeTax":205805.1},"141":{"price":411610.2,"oldPrice":411610.2,"priceValue":"222.0000","type":"fixed","excludeTax":411610.2,"includeTax":411610.2},"142":{"price":617415.3,"oldPrice":617415.3,"priceValue":"333.0000","type":"fixed","excludeTax":617415.3,"includeTax":617415.3}},"61":{"144":{"price":2059905.1,"oldPrice":2059905.1,"priceValue":"1111.0000","type":"fixed","excludeTax":2059905.1,"includeTax":2059905.1},"145":{"price":4119810.2,"oldPrice":4119810.2,"priceValue":"2222.0000","type":"fixed","excludeTax":4119810.2,"includeTax":4119810.2}}});
     //]]>
     </script>
-    <dl class="last">
-            <dt><label>普通文本</label>
-    <span class="price-notice">+<span class="price">$15.00</span></span></dt>
-<dd>
-    <div class="input-box">
-            <input type="text" onchange="opConfig.reloadPrice()" id="options_67_text" class="input-text  product-custom-option" name="options[67]" value="">
-            </div>
-</dd>
-            
-<dt><label class="required"><em>*</em>下拉框</label></dt>
-<dd>
-    <div class="input-box">
-        <select name="options[62]" id="select_62" class=" required-entry product-custom-option" title="" onchange="opConfig.reloadPrice()"><option value="">-- Please Select --</option><option value="148" price="1">Black +$1.00</option><option value="146" price="2">Golden +$2.00</option><option value="147" price="3">White +$3.00</option></select>                                </div>
-</dd>
-            
-<dt><label class="required"><em>*</em>勾选框</label></dt>
-<dd>
-    <div class="input-box">
-        <ul id="options-63-list" class="options-list"><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_2" value="150" price="11"><span class="label"><label for="options_63_2">crashProof <span class="price-notice">+<span class="price">$11.00</span></span></label></span><script type="text/javascript">$('options_63_2').advaiceContainer = 'options-63-container';$('options_63_2').callbackFunction = 'validateOptionsCallback';</script></li><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_3" value="151" price="22"><span class="label"><label for="options_63_3">dustProof <span class="price-notice">+<span class="price">$22.00</span></span></label></span><script type="text/javascript">$('options_63_3').advaiceContainer = 'options-63-container';$('options_63_3').callbackFunction = 'validateOptionsCallback';</script></li><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_4" value="149" price="33"><span class="label"><label for="options_63_4">waterProof <span class="price-notice">+<span class="price">$33.00</span></span></label></span><script type="text/javascript">$('options_63_4').advaiceContainer = 'options-63-container';$('options_63_4').callbackFunction = 'validateOptionsCallback';</script></li></ul>                                    <span id="options-63-container"></span>
-                        </div>
-</dd>
-            
-<dt><label class="required"><em>*</em>选项框</label></dt>
-<dd>
-    <div class="input-box">
-        <ul id="options-60-list" class="options-list"><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_2" value="143" price="111"><span class="label"><label for="options_60_2">16G mincard <span class="price-notice">+<span class="price">$111.00</span></span></label></span><script type="text/javascript">$('options_60_2').advaiceContainer = 'options-60-container';$('options_60_2').callbackFunction = 'validateOptionsCallback';</script></li><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_3" value="141" price="222"><span class="label"><label for="options_60_3">4G mincard <span class="price-notice">+<span class="price">$222.00</span></span></label></span><script type="text/javascript">$('options_60_3').advaiceContainer = 'options-60-container';$('options_60_3').callbackFunction = 'validateOptionsCallback';</script></li><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_4" value="142" price="333"><span class="label"><label for="options_60_4">8G mincard <span class="price-notice">+<span class="price">$333.00</span></span></label></span><script type="text/javascript">$('options_60_4').advaiceContainer = 'options-60-container';$('options_60_4').callbackFunction = 'validateOptionsCallback';</script></li></ul>                                    <span id="options-60-container"></span>
-                        </div>
-</dd>
-            
-<dt><label class="required"><em>*</em>多选栏</label></dt>
-<dd class="last">
-    <div class="input-box">
-        <select name="options[61][]" id="select_61" class="multiselect required-entry product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()"><option value="144" price="1111">Battery +$1,111.00</option><option value="145" price="2222">Case +$2,222.00</option></select>                                </div>
-</dd>
-        </dl>
-
-<script type="text/javascript">
-//<![CDATA[
-enUS = {"m":{"wide":["January","February","March","April","May","June","July","August","September","October","November","December"],"abbr":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]}}; // en_US locale reference
-Calendar._DN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]; // full day names
-Calendar._SDN = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]; // short day names
-Calendar._FD = 1; // First day of the week. "0" means display Sunday first, "1" means display Monday first, etc.
-Calendar._MN = ["January","February","March","April","May","June","July","August","September","October","November","December"]; // full month names
-Calendar._SMN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]; // short month names
-Calendar._am = "AM"; // am/pm
-Calendar._pm = "PM";
-
-// tooltips
-Calendar._TT = {};
-Calendar._TT["INFO"] = "About the calendar";
-
-Calendar._TT["ABOUT"] =
-"DHTML Date/Time Selector\n" +
-"(c) dynarch.com 2002-2005 / Author: Mihai Bazon\n" +
-"For latest version visit: http://www.dynarch.com/projects/calendar/\n" +
-"Distributed under GNU LGPL. See http://gnu.org/licenses/lgpl.html for details." +
-"\n\n" +
-"Date selection:\n" +
-"- Use the \xab, \xbb buttons to select year\n" +
-"- Use the " + String.fromCharCode(0x2039) + ", " + String.fromCharCode(0x203a) + " buttons to select month\n" +
-"- Hold mouse button on any of the above buttons for faster selection.";
-Calendar._TT["ABOUT_TIME"] = "\n\n" +
-"Time selection:\n" +
-"- Click on any of the time parts to increase it\n" +
-"- or Shift-click to decrease it\n" +
-"- or click and drag for faster selection.";
-
-Calendar._TT["PREV_YEAR"] = "Prev. year (hold for menu)";
-Calendar._TT["PREV_MONTH"] = "Prev. month (hold for menu)";
-Calendar._TT["GO_TODAY"] = "Go Today";
-Calendar._TT["NEXT_MONTH"] = "Next month (hold for menu)";
-Calendar._TT["NEXT_YEAR"] = "Next year (hold for menu)";
-Calendar._TT["SEL_DATE"] = "Select date";
-Calendar._TT["DRAG_TO_MOVE"] = "Drag to move";
-Calendar._TT["PART_TODAY"] = ' (' + "Today" + ')';
-
-// the following is to inform that "%s" is to be the first day of week
-Calendar._TT["DAY_FIRST"] = "Display %s first";
-
-// This may be locale-dependent. It specifies the week-end days, as an array
-// of comma-separated numbers. The numbers are from 0 to 6: 0 means Sunday, 1
-// means Monday, etc.
-Calendar._TT["WEEKEND"] = "0,6";
-
-Calendar._TT["CLOSE"] = "Close";
-Calendar._TT["TODAY"] = "Today";
-Calendar._TT["TIME_PART"] = "(Shift-)Click or drag to change value";
-
-// date formats
-Calendar._TT["DEF_DATE_FORMAT"] = "%b %e, %Y";
-Calendar._TT["TT_DATE_FORMAT"] = "%B %e, %Y";
-
-Calendar._TT["WK"] = "Week";
-Calendar._TT["TIME"] = "Time:";
-//]]>
-</script>
-            <p class="required">* Required Fields</p>
-    </div>
+    <dl>
+            <div class="form__field">
+    <label class="form__label">普通文本</label>
+    <span class="price-notice">+<span class="price">TSh1,029,025.50</span></span>            <input type="text" onchange="opConfig.reloadPrice()" id="options_67_text" class="form__textfield textfield  product-custom-option" name="options[67]" value="">
+        </div>            <div class="form__field form__field--required">
+    <label class="form__label form__label--required">下拉框</label>
+    <select name="options[62]" id="select_62" class=" required-entry product-custom-option" title="" onchange="opConfig.reloadPrice()"><option value="">-- Please Select --</option><option value="148" price="1854.1">Black +TSh1,854.10</option><option value="146" price="3708.2">Golden +TSh3,708.20</option><option value="147" price="5562.3">White +TSh5,562.30</option></select>                </div>            <div class="form__field form__field--required">
+    <label class="form__label form__label--required">勾选框</label>
+    <ul id="options-63-list" class="options-list"><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_2" value="150" price="20395.1"><label for="options_63_2">crashProof <span class="price-notice">+<span class="price">TSh20,395.10</span></span></label></li><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_3" value="151" price="40790.2"><label for="options_63_3">dustProof <span class="price-notice">+<span class="price">TSh40,790.20</span></span></label></li><li><input type="checkbox" class="checkbox  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[63][]" id="options_63_4" value="149" price="61185.3"><label for="options_63_4">waterProof <span class="price-notice">+<span class="price">TSh61,185.30</span></span></label></li></ul>                        <span id="options-63-container"></span>
+            </div>            <div class="form__field form__field--required">
+    <label class="form__label form__label--required">选项框</label>
+    <ul id="options-60-list" class="options-list"><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_2" value="143" price="205805.1"><label for="options_60_2">16G mincard <span class="price-notice">+<span class="price">TSh205,805.10</span></span></label></li><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_3" value="141" price="411610.2"><label for="options_60_3">4G mincard <span class="price-notice">+<span class="price">TSh411,610.20</span></span></label></li><li><input type="radio" class="radio  validate-one-required-by-name product-custom-option" onclick="opConfig.reloadPrice()" name="options[60]" id="options_60_4" value="142" price="617415.3"><label for="options_60_4">8G mincard <span class="price-notice">+<span class="price">TSh617,415.30</span></span></label></li></ul>                        <span id="options-60-container"></span>
+            </div>            <div class="form__field form__field--required">
+    <label class="form__label form__label--required">多选栏</label>
+    <select name="options[61][]" id="select_61" class="multiselect required-entry product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()"><option value="144" price="2059905.1">Battery +TSh2,059,905.10</option><option value="145" price="4119810.2">Case +TSh4,119,810.20</option></select>                </div>        </dl>
+            <p class="add-to-cart-options__submit-wrapper">
+                <button type="button" onclick="window.productAddToCartFormPopup.submit()" class="green-button" style="background-color:#F4A137;">Add to Cart</button>
+            </p>
+        </div>

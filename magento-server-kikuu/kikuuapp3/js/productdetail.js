@@ -71,18 +71,34 @@ function ready() {
             type: 'get',
             url: defines.baseUrl + '/restconnect/products/getcustomoption/productid/' + entity_id,
             dataType: 'json', // 注意：JSONP <-- P (lowercase)
-            success: function (option) { 
-				$.each(option, function(i,item) {
-					$("#debug").append(item.custom_option_type+"一级</br>");
-					
-					$.each(item.custom_option_value, function(j,item2) {
-						$("#debug").append(item2.default_price+"二级</br>");
-							
-							});						
-						});
-				
+            success: function (option) { 	
+				var items = $.map(option, function(item) {
+					//做form控件类型处理，让Handlebars方便的使用if else
+					if (item.custom_option_type == "field")
+						item.is_field = 1;	
+					else if (item.custom_option_type == "drop_down")	{						
+						item.is_drop_down = 1;
+						}
+					else if (item.custom_option_type == "checkbox")
+						item.is_checkbox = 1;
+					else if (item.custom_option_type == "radio")
+						item.is_radio = 1;
+					else if (item.custom_option_type == "multiple")
+						item.is_multiple = 1;
+					//具体只处理上面5种，以下4种不处理
+					else if (item.custom_option_type == "area")
+						item.is_area = 1;
+					else if (item.custom_option_type == "date")
+						item.is_date = 1;
+					else if (item.custom_option_type == "date_time")
+						item.is_date_time = 1;
+					else if (item.custom_option_type == "file")
+						item.is_file = 1;
+					return(item);
+					});
                 $('#productOption').html(Handlebars.compile(productOptionTpl)({
-                    option: option
+                    options: items,
+					entity_id: entity_id
                 }));
 				},
             error: function (jqXHR) {

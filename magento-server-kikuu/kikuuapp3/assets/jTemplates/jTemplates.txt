@@ -1,0 +1,303 @@
+﻿-----------------------------------
+-   jTemplates 0.8.4 by tPython   -
+-  http://jtemplates.tpython.com  -
+-----------------------------------
+
+
+Tags:
+{|CODE|} - evaluate COND
+{#if |COND|}..{#elseif |COND|}..{#else}..{#/if}
+{#foreach |VAR| as |NAME| [begin=|CODE|] [count=|CODE|] [step=|CODE|]}..{#else}..{#/for}
+{#foreach |FUNC| as |NAME| [begin=|CODE|] [end=|CODE|] [count=|CODE|] [step=|CODE|]}..{#else}..{#/for}
+{#for |VAR| = |CODE| to |CODE| [step=|CODE|]}..{#else}..{#/for}
+{#continue}
+{#break}
+{#include |NAME| [root=|VAR|]}
+{#param name=|NAME| value=|CODE|}
+{#var |CODE|}
+{#cycle values=|ARRAY|}
+{#ldelim}
+{#rdelim}
+{#literal}..{#/literal}
+{*..*} - comment
+
+where:
+|CODE|   - JavaScript code
+|COND|   - JavaScript condition
+|NAME|   - String
+|NUMBER| - Number
+|ARRAY|  - Array
+|VAR|    - Variable
+|FUNC|   - Function
+
+--------------------------------------------------------------------------------
+
+Templates:
+{#template <name> [<param1>=<arg1>] [<paramX>=<argX>]}
+..
+{#/template <name>}
+
+Main template:
+{#template MAIN}
+..
+{#/template MAIN}
+
+--------------------------------------------------------------------------------
+
+Tag's details:
+
+|VAR| and |CODE| and |COND| can use:
+ $T - data
+ $P - parameters
+ $Q - HTML Element
+
+|VAR:foreach| & |VAR:for|:
+ $index
+ $iteration
+ $first
+ $last
+ $total
+ $key - key in object
+ $typeof - type of element
+examples:
+ $T.item$index
+ $T.item$key
+
+Members:
+ $T.<name>
+examples:
+ $T.name
+ $T.id
+
+Tables:
+ $T[<index>]
+examples:
+ $T[0]
+ $T[1]
+
+--------------------------------------------------------------------------------
+
+Plugin to jQuery:
+jQuery jQuery.fn.setTemplate(String template, [Array includes], [Object settings]);
+jQuery jQuery.fn.setTemplate(Template template);
+jQuery jQuery.fn.setTemplateURL(String url, [Array includes], [Object settings]);
+jQuery jQuery.fn.setTemplateElement(String elementName, [Array includes], [Object settings]);
+
+Template jQuery.createTemplate(String template, [Array includes], [Object settings]);
+Template jQuery.createTemplateURL(String url, [Array includes], [Object settings]);
+Template jQuery.getTemplate(Element element);
+string jQuery.processTemplateToText(Template template, [Object data], [Object parameter]);
+
+Number jQuery.fn.hasTemplate();
+
+jQuery jQuery.fn.removeTemplate();
+
+jQuery jQuery.fn.setParam(String name, Object value);
+
+jQuery jQuery.fn.processTemplate(Object data, [Object parameters]);
+jQuery jQuery.fn.processTemplateURL(String url, [Object parameters], [Object options]);
+
+Updater jQuery.fn.processTemplateStart(String url, Array param, Integer interval, [Array args], [Object options]);
+jQuery jQuery.fn.processTemplateStop();
+
+jQuery.jTemplatesDebugMode(Boolean value);
+
+--------------------------------------------------------------------------------
+
+Template's settings:
+disallow_functions - forbid use functions in data $T [default: false, depend on: clone_data, clone_params]
+filter_data - replace chars: <, >, &, ' and " in data $T to HTML entities [default: true, depend on: clone_data]
+filter_params - replace chars: <, >, &, ' and " in parameters $P to HTML entities [default: false, depend on: clone_params]
+runnable_functions - automatically run function (from data) inside {} [default: false]
+clone_data - clone input data [default: true]
+clone_params - clone input parameters [default: true]
+f_cloneData - Function used to data cloning [default: TemplateUtils.cloneData]
+f_escapeString - Function used to escape strings [default: TemplateUtils.escapeHTML]
+f_parseJSON - Function used to parse JSON [defaults are: jQuery.parseJSON (when disallow_functions) or TemplateUtils.parseJSON (when not disallow_functions)]
+
+--------------------------------------------------------------------------------
+
+Callbacks and options:
+
+* jQuery.fn.processTemplateURL:
+type - 'GET' or 'POST', default: 'GET'
+data - Data to be sent to the server. Default: undefined
+dataFilter - A function to be used to handle the raw response data of XMLHttpRequest. Default: undefined
+async - asynchronous AJAX, default: true
+cache - use cache, default: false
+timeout - Set a local timeout in ms for the request.
+on_success [event] - Run after success
+on_error [event] - Run on error
+on_complete [event] - Run after success and error
+
+--------------------------------------------------------------------------------
+
+Internal Templates API:
+Template::Template(String template, [Array includes], [Array settings]);
+void Template::setTemplate(String template, [Array includes]);
+String Template::get(Object data, Object parameters, HTMLElement element, Number deep);
+void Template::setParam(String name, Object value);
+Template.DEBUG_MODE
+
+--------------------------------------------------------------------------------
+
+XHTML with embedded Templates.
+How to embedded the template:
+1) Simple:
+	<textarea id="name" style="display:none">
+		... templates ...
+	</textarea>
+
+2) Valid XHTML 1.1:
+	<p style="display:none"><textarea id="name" rows="0" cols="0"><![CDATA[
+		... templates ...
+	]]></textarea></p>
+
+3) Using comment:
+<p style="display:none"><textarea id="name" rows="0" cols="0"><!--
+	... templates ...
+--></textarea></p>
+
+--------------------------------------------------------------------------------
+
+Known bugs:
+- comments has higher priority than literals
+- literal does not work good when template is embedded with XHTML document
+- ajax-based methods does not work in Opera Mini with data compression enabled
+
+--------------------------------------------------------------------------------
+
+Changelog:
+
+0.8.4 (25.01.2013):
+- fix bug with multiple {#literal}
+- small changes
+
+0.8.3 (06.08.2012):
+- compability with jQuery up to 1.8/1.9
+- fix bug with elseif..else
+- small changes
+
+0.8.2 (21.05.2012):
+- improve recursive template
+- processTemplate no longer create a copy of HTML elements
+- remove $Q.version, you can use Template.version
+- fixed the problem with some android browsers
+- fixed the problem with IE7 and some CSS styles
+- fixed the problem with subtemplates in some cases
+
+0.8.1 (31.01.2012):
+- fixed bug with #for and IE 6/7, improve performance
+- set default type 'GET' for setTemplateURL() and createTemplateURL()
+- change: method processTemplateURL use jQuery.ajaxSettings
+
+0.8 (27.11.2011):
+- add {#var}
+- dedicated environment for eval()
+- fix problem with using characters '{' and '}' inside template block {...}
+- change default DEBUG_MODE to false
+- add loop limit FOREACH_LOOP_LIMIT
+- add Template function handler: f_parseJSON with default method TemplateUtils.parseJSON
+- some small changes
+
+0.7.8 (02.04.2009):
+- add {#break} and {#continue}
+- new function: jQuery.processTemplateToText
+- new function: jQuery.getTemplate
+- restore: #foreach will have access to all content (not only loop variable)
+- fix compatibility with jQuery.noConflict
+- some other small fixes
+
+0.7.5 (30.08.2008):
+- add options and callbacks for processTemplateURL and processTemplateStart
+- allow to use <!-- --> instead <[CDATA[ ]]> as template container (due to issue with cascading textarea)
+- allow to define own function for clones data and filters strings
+- add debug mode (when off - disable most off errors)
+- fix a bug with FOREACH over Object and toString
+
+0.7.0 (11.05.2008):
+- tag {#for...}
+- clone_data & clone_params
+- fix a bug with 'runnable functions' and toString in IE
+
+0.6.9 (11.05.2008):
+- function as loop in foreach (till function return undefined)
+- embedded settings in subtemplates
+- remove backwards compatibility
+
+0.6.8 (10.05.2008):
+- fix a bug with filtering data in subtemplates
+
+0.6.7 (10.05.2008):
+- chainable functions
+
+0.6.6 (06.01.2008):
+- fixed bug: {#cycle} not work correctly between templates in multitemplate mode
+- code cleanup
+
+0.6.5 (05.01.2008):
+- new: embedded templates
+- new function: setTemplateElement(String elementName, Array includes, Object settings)
+
+0.6.0 (25.12.2007):
+- add #foreach over object
+- new |VAR:foreach|:
+  $key
+	$typeof
+- allow function in data by default (disallow_functions = false)
+- automatically run function (from data) inside {} ("runnable function")
+- add setting: runnable_functions (default: false)
+- fix a bug with pseudo-attributes |VAR:foreach| like: $index, $total...
+  new syntax for |VAR:foreach|, example:
+	 $T.item.$index -> $T.item$index
+
+0.5.1 (04.12.2007):
+- fix bug with #cycle
+
+0.5.0 (19.09.2007):
+- update documentations
+- add removeTemplate()
+
+0.4.5 (18.09.2007):
+- compatibility with jQuery 1.2.1 (does not work with 1.2)
+- block {} return empty string instead of 'undefined', so code in {} does not need to return any value
+- disable cache in processTemplateURL
+- small fixed
+
+0.4.3 (25.08.2007):
+- major bugfix with variables scope (thanks to: S. Keshavarzi)
+
+0.4.2 (16.08.2007):
+- compatibility with $.noConflict() (need more tests)
+
+0.4.1 (27.07.2007):
+- add jQuery.fn.hasTemplate
+
+0.4: (27.07.2007):
+- improve security
+  Add filters to encode HTML entities and detect function in data.
+- add settings: disallow_functions, filter_data, filter_params
+- jTemplates use clone of data and parameters, so original data won't be changed after processing.
+
+0.3: (17.07.2007):
+- LiveRefresh:
+  - processTemplateStart()
+  - processTemplateStop()
+
+0.2.2: (14.07.07)
+- add {#elseif}
+
+0.2.1: (14.07.07)
+- fix issue with include (bug with attribute 'root')
+
+0.2.0: (12.07.07)
+- MultiTemplates
+- fix bug with literal
+- memory usage reduce & speed up
+- some more...
+
+
+
+--------------------------------------------------------------------------------
+--
+Tomasz Gloc, 2007-2013

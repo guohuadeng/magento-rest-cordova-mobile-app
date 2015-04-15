@@ -13,7 +13,9 @@
         'bower_components/store2/dist/store2.min.js',
         'bower_components/momentjs/moment.js',
         'bower_components/swiper/dist/js/swiper.jquery.min.js',
-        'bower_components/jquery.lazyload/jquery.lazyload.js'
+        'bower_components/jquery.lazyload/jquery.lazyload.js',
+		//要在模板中使用if else判断语句，用这个方便
+        //'assets/jTemplates/jquery-jtemplates.js',
     ];
 
     for (var i = 0; i < scripts.length; i++) {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Customers</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery-jtemplates.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      //set template
+      $("#CustomersList").setTemplateElement("Template-List");
+      //add parameter using to calculate "age"
+      $("#CustomersList").setParam("year", 2012);
+      //process template
+      $("#CustomersList").processTemplateURL("data.json");
+      
+      //set template for detailed info
+      $("#CustomerDetails").setTemplateElement("Template-Details");
+    });
+    
+    //show customer detail, run from template
+    function ShowDetails(cust) {
+      //process a template
+      $("#CustomerDetails").processTemplate(cust);
+    }
+  </script>
+</head>
+
+<body>
+
+  <!-- Templates -->
+  <p style="display:none"><textarea id="Template-List" rows="0" cols="0"><!--
+    {#template MAIN}
+      <table>
+        <tr class="{#cycle values=['bcEEC','bcCEE']}">
+          <td class="header">Details</td>
+          <td class="header">Name</td>
+          <td class="header">Age</td>
+        </tr>
+        {#foreach $T.Customers as Cust}
+          {#include ROW root=$T.Cust}
+        {#/for}
+      </table>
+    {#/template MAIN}
+    
+    {#template ROW}
+      <tr class="{#cycle values=['bcEED','bcDEE']}">
+        <td><a href="#" onclick="ShowDetails({#var $T})">SELECT</a></td>
+        <td>{$T.FirstName} {$T.LastName}</td>
+        <td>{$P.year-$T.Born}</td>
+      </tr>
+    {#/template ROW}
+  --></textarea></p>
+  
+  <p style="display:none"><textarea id="Template-Details" rows="0" cols="0"><!--
+    <table>
+      <tr><td class="header">First Name</td><td>{$T.FirstName}</td></tr>
+      <tr><td class="header">Last Name</td><td>{$T.LastName}</td></tr>
+      <tr><td class="header">Born</td><td>{$T.Born}</td></tr>
+      <tr><td class="header">E-mail</td><td>{$T.Email.link('mailto:'+$T.Email)}</td></tr>
+    </table>
+  --></textarea></p>
+
+  <!-- Output elements -->
+  <div id="CustomersList" class="Content"></div>
+  <div id="CustomerDetails" class="Content"></div>
+  
+</body>
+</html>

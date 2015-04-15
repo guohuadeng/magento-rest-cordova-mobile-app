@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <title>Items</title>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery-jtemplates.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $.getJSON('data.json', function(data) {
+        var Items = data.Items;
+        var Bom = Items[0].BOM; //sample data
+        
+        $("#ItemBOM").setTemplateElement("Template-BOM");
+        $("#ItemBOM").processTemplate(Bom);
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Templates -->
+  <p style="display:none"><textarea id="Template-BOM" rows="0" cols="0"><!--
+{*
+Main template
+*}
+{#template MAIN}
+  <b>BOM: {$T.Name}</b>
+  <div>
+  {#include entry root=$T.Elements}
+  </div>
+{#/template MAIN}
+
+{*
+Recursed subtemplate
+*}
+{#template entry}
+  <ul>
+  {#foreach $T as entry}
+    <li>{$T.entry.Qty} {$T.entry.Name}</li>
+    {#if $T.entry.Elements}{#include entry root=$T.entry.Elements}{#/if}
+  {#/for}
+  </ul>
+{#/template entry}
+  --></textarea></p>
+  
+  <!-- Output elements -->
+  <div id="ItemBOM" class="Content"></div>
+  
+</body>
+</html>
