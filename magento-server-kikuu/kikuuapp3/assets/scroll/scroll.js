@@ -42,14 +42,14 @@ function initPageScroll(options) {
     };
 	
 	function hidehead(){
-		$(".swiper-container").css("top",0);
-		$(".bar-nav").css("display","none");
+		$("#header-pagination").css("top",0);
+		$("#header-fload").addClass("none");
 		$(".products-grid").css("margin-top","-39px");
 	}
 	
 	function showhead(){
-		$(".swiper-container").css("top","44px");
-		$(".bar-nav").css("display","block");
+		$("#header-pagination").css("top","44px");
+		$("#header-fload").removeClass("none");
 		$(".products-grid").css("margin-top","5px");
 	}
 	

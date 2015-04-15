@@ -18,11 +18,16 @@ class SkyMazon_RestConnect_CustomerController extends Mage_Core_Controller_Front
 	public function loginAction() {
 		$session = Mage::getSingleton ( 'customer/session' );
 		if (Mage::getSingleton ( 'customer/session' )->isLoggedIn ()) {
-			$session->logout ( $username, $password );
+			$session->logout ();
 		}
 		$username = Mage::app ()->getRequest ()->getParam ( 'username' );
-		$password = Mage::app ()->getRequest ()->getParam ( 'password' );		
-		$session->login ( $username, $password );
-		echo $this->statusAction ();
+		$password = Mage::app ()->getRequest ()->getParam ( 'password' );
+		if(!$session->login ( $username, $password )){
+			echo 'wrong username or password.';
+		}else{
+			echo $this->statusAction ();
+		}		
+		
+		
 	}
 } 

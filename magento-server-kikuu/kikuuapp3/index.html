@@ -8,17 +8,17 @@
     <link href="css/common.css" rel="stylesheet">
 </head>
 <body>
-<header class="header-index bar bar-nav out">
+<header class="header-index bar bar-nav out" id="header-fload">
     <a class="menu-toggle icon fa fa-bars pull-left"></a>
     <a href="search.html" class="icon fa fa-search pull-left"></a>
-    <a href="detail.html?title=My Shopping Cart&url=http://skymazon.sunpop.cn/checkout/cart/" data-formdata="fromui=app" id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
+    <a href="detail.html?title=My Shopping Cart&url=http://skymazon.sunpop.cn/checkout/cart/" data-formdata="" id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
     <a class="icon fa fa-qrcode pull-right qrcode"></a>
     <h2 class="title"><img src="images/logo.png" width="40%"></h2>
 </header>
 
 <div class="page-loading loading"></div>
 
-<div class="header-index swiper-container swiper-pagination">
+<div class="header-index swiper-container swiper-pagination" id="header-pagination">
     <div class="swiper-wrapper">
     </div>
 </div>
@@ -31,10 +31,10 @@
 </div>
 
 <div class="tools none">
-    <a href="http://skymazon.sunpop.cn/sales/order/history/" data-formdata="fromui=app" data-ajax="false">
+    <a href="http://skymazon.sunpop.cn/sales/order/history/" data-formdata="" data-ajax="false">
         <i class="fa fa-user"></i>
     </a> |
-    <a href="http://skymazon.sunpop.cn/wishlist/" data-formdata="fromui=app" data-ajax="false">
+    <a href="http://skymazon.sunpop.cn/wishlist/" data-formdata="" data-ajax="false">
         <i class="fa fa-heart"></i>
     </a>
 </div>
@@ -115,8 +115,9 @@
 </script>
 		
 
-<!-- 使用 cordova 插件要用到，不能删除 -->
+<!-- 使用 cordova 插件要用到，不能删除，发布时增加 --
 <script src="cordova.js"></script>
+-- 使用 cordova 插件要用到，不能删除，发布时增加 -->
 <script src="js/assets.js"></script>
 <script src="js/config.js"></script>
 <script src="js/index.js"></script>
