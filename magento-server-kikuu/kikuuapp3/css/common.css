@@ -99,6 +99,7 @@ a:active {
 
 .cbp-spmenu h3 span.icon {
     font-size: 36px;
+    padding-right: 30px;
     color: #ccc;
     vertical-align: middle;
 }
@@ -110,7 +111,7 @@ a:active {
 .cbp-spmenu h3 .icon-close {
     color: #000;
 	font-size: 1.2em;
-	padding: 10px;
+	padding: 7px 7px 13px 7px;
 	position: absolute;
 	top: 0;
 	right: -50px;
