@@ -6,7 +6,7 @@
 
 (function (window) {
 
-    var baseUrl = 'http://skymazon.sunpop.cn',
+    var baseUrl = 'http://www.kikuu.com',
 		cur_entity_id;	//当前查看产品id，可能没用，留着
 
     window.defines = {
