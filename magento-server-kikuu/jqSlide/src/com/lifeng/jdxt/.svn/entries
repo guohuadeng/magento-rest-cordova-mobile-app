@@ -1,52 +1,0 @@
-10
-
-dir
-34
-svn://192.168.254.136/jdxt/src/com/lifeng/jdxt
-svn://192.168.254.136
-
-
-
-2013-08-18T08:41:27.427838Z
-34
-weijie
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-73638621-c1fd-9841-b4ad-0d0206818624
-
-test
-dir
-
-service
-dir
-
-dao
-dir
-
-servlet
-dir
-
-vo
-dir
-
-filter
-dir
-
-util
-dir
-
-po
-dir
-

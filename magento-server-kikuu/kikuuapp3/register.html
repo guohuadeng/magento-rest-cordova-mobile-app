@@ -19,6 +19,7 @@
 <script type="text/javascript" src="js_register/quo.js"></script>
 <script type="text/javascript" src="js_register/fastclick.js"></script>
 <script type="text/javascript" src="js_register/app.js"></script>
+<script type="text/javascript" src="js/define.js"></script>
 <link rel="stylesheet" type="text/css" href="css/font.css" media="all">
 </head>
 <body orient="landscape">
@@ -29,51 +30,10 @@
     <div id="customer_navigation_popup" class="nav_iphone customer-cart-ajax panel panel--from-bottom popup-form" style="display: block; top: 0px; opacity: 1;">
       <div id="customer_ajax_container">
         <div class="customer-account nav__list-container panel__container">
-          <div class="nav__list customer-account-login is-shadow-showed is-shadowed">
-            <form action="http://skymazon.sunpop.cn/awmobile2/customer/loginPost/" method="post" id="user_login_form" class="nav__list-inner">
-              <input name="form_key" type="hidden" value="bfVX0t8BTAPNohZS">
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <p class="form__field form__field--required"> 
-                <!--<label for="email" class="form__label form__label--required">Email Address</label>-->
-                <input type="email" placeholder="Email or Member ID" class="form__textfield textfield validate-email required-entry" name="login[username]" id="email" value="" title="Email Address">
-              </p>
-              <!-- .form__field -->
-              <p class="form__field form__field--required"> 
-                <!--<label for="pass" class="form__label form__label--required">Password</label>-->
-                <input placeholder="Password" class="form__textfield textfield required-entry validate-password" type="password" name="login[password]" id="pass" title="Password">
-              </p>
-              <!-- .form__field -->
-              <p class="form__submit-wrapper"> <a id="forgot_pass_link" href="javascript:void(0);">Forgot Password?</a> </p>
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <button type="submit" title="Login" class="form__submit button continue" style="background-color:#F4A137; margin-top:10px;" onClick="window.customerAccount.login()">Login</button>
-              <p></p>
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <p class="form__submit-wrapper" style="text-align:center;">New Customer? </p>
-              <p class="form__submit-wrapper">&nbsp;</p>
-              <button id="create_form_link" class="create_form_link button" type="button" title="Create an Account" onClick="">Create an Account</button>
-              
-              <!-- .form__submit-wrapper -->
-            </form>
-            <div class="nav__list-shadow"></div>
-          </div>
-          <div class="nav__list nav__list--subcategory customer-account-forgotpassword">
-            <form action="http://skymazon.sunpop.cn/awmobile2/customer/forgotpasswordpost/" method="post" id="user_forgotpassword_form" class="nav__list-inner">
-              <p class="form-notice">Please enter your email below and we will send you a new password.</p>
-              <p class="form__field form__field--required"> 
-                <!--<label for="email_address" class="form__label form__label--required">Email Address</label>-->
-                <input type="email" placeholder="Email Address" class="form__textfield textfield validate-email required-entry" name="email" id="email_address" value="" title="Email Address">
-              </p>
-              <!-- .form__field -->
-              <p class="form__submit-wrapper">
-                <button type="submit" title="Submit" class="form__submit button continue" onClick="window.customerAccount.forgot()">Submit</button>
-              </p>
-              <!-- .form__submit-wrapper -->
-            </form>
-          </div>
           <div class="nav__list nav__list--subcategory customer-account-register is-opened js-active">
             <div class="nav__list-inner customer-account-register-container">
               <div class="customer-form-register-before"> </div>
-              <form action="http://skymazon.sunpop.cn/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
+              <form action="/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
                 <input type="hidden" name="success_url" value="">
                 <input type="hidden" name="error_url" value="">
                 <p class="form__field form__field--required"> 
@@ -140,7 +100,7 @@
                 </p>
                 <!-- .form__submit-wrapper -->
               </form>
-              <a class="create_form_link button" href="detail.html?title=Login&amp;url=login.html?fromui=app" style="height:40px; line-height:40px; padding:0;">Back To Login</a> </div>
+              <a class="create_form_link button" href="login.html" style="height:40px; line-height:40px; padding:0;">Back To Login</a> </div>
           </div>
         </div>
       </div>
@@ -180,6 +140,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	Event.observe(window, 'load', function(e){
+		document.querySelector("#user_create_form").action = defines.baseUrl + '/awmobile2/customer/createpost/';
 		window.customerAccount.setRegisterForm('user_create_form');				
 		window.customerAccount.setRegisterTitle("Register");
 	});
@@ -224,7 +185,7 @@
 		document.getElementById("btnValidation").onclick=function(){time(this);}  
 
 	       //发送短信请求
-		var smsurl = 'http://skymazon.sunpop.cn/sendsms.php';
+		var smsurl = defines.baseUrl + '/sendsms.php';
 		function sendsms(smsurl,smscode){ 
 		   new Ajax.Request(smsurl, {
 			method: 'GET',

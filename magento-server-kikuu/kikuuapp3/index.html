@@ -11,7 +11,7 @@
 <header class="header-index bar bar-nav out" id="header-fload">
     <a class="menu-toggle icon fa fa-bars pull-left"></a>
     <a href="search.html" class="icon fa fa-search pull-left"></a>
-    <a href="detail.html?title=My Shopping Cart&frameUrl=http://skymazon.sunpop.cn/checkout/cart/" data-formdata="" id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
+    <a href="" data-formdata="" id="cartIcon" class="icon fa fa-shopping-cart pull-right"></a>
     <a class="icon fa fa-qrcode pull-right qrcode"></a>
     <h2 class="title"><img src="images/logo.png" width="40%"></h2>
 </header>
@@ -45,10 +45,10 @@
 </div>
 
 <div class="tools none">
-    <a href="http://skymazon.sunpop.cn/sales/order/history/" data-formdata="" data-ajax="false">
+    <a href="/sales/order/history/" id="orderIcon" data-formdata="" data-ajax="false">
         <i class="fa fa-user"></i>
     </a> |
-    <a href="http://skymazon.sunpop.cn/wishlist/" data-formdata="" data-ajax="false">
+    <a href="/wishlist/" id="wishIcon" data-formdata="" data-ajax="false">
         <i class="fa fa-heart"></i>
     </a>
 </div>
@@ -57,7 +57,7 @@
     <h3>
         <span class="login_false">
             <span class="icon icon-person"></span>
-            <a href="login.html">Login</a> | <a href="detail.html?title=Register&amp;frameUrl=http://skymazon.sunpop.cn/kikuuapp3/register.html">Register</a>
+            <a href="login.html">&nbsp;Login&nbsp;</a> | &nbsp;<a href="detail.html" data-formdata="title=Register&frameUrl=register.html" data-ajax="fasle">Register</a>
         </span>
         <span class="login_true userinfo">
             <img src="" width="36" height="36">
@@ -71,8 +71,6 @@
 <div class="menu-bottom"></div>
 
 <!--Handlebars.js模版-->
-<!--Handlebars.js模版放在script标签中，保留了html原有层次结构,模版中要写一些操作语句-->
-<!--id可以用来唯一确定一个模版,type是模版固定的写法-->
 <!--######菜单列表 ######-->
 <script id="menu-template" type="text/x-handlebars-template">
     {{#each menus}}
@@ -97,31 +95,30 @@
     </div>
     {{/each}}
 </script>
-
 <!--######商品列表部分, 1column ######-->
 <script id="item-template" type="text/x-handlebars-template">
     {{#each items}}
     <div class="item">
         <div class="item-inner">
-            <a href="productFrame.html" data-formdata="frameUrl=productDetail.html&entity_id={{entity_id}}&share=true" data-reload="root" data-ajax="true">
+			<!--###### rest详情页的父Frame ######-->
+			<a href="detail.html?title={{name}}&frameUrl={{url_key}}&share=true"  data-reload="root">
             <div class="product-image">
                 <img class="lazy small-image" data-original="{{image_url}}" alt="{{name}}">
             </div>
             </a>
 
-            <div class="product-info">
+            <div class="product-info">           		
                 <div class="product-name">
-					<!--###### rest详情页的父Frame ######-->
-                    <a href="detail.html?title={{name}}&frameUrl={{url_key}}&share=true"  data-reload="root">{{name}}</a>
+					<a href="productFrame.html" data-formdata="frameUrl=productDetail.html&entity_id={{entity_id}}&share=true" data-reload="root" data-ajax="true">{{name}}</a>
                 </div>
 
                 <div class="product-price">
                     <div class="price-box">
                         <span class="special-price">
                             <span class="special-price">
-                                <span class="price">${{final_price_with_tax}}</span> 
+                                <span class="price">Tsh{{final_price_with_tax}}</span> 
                                 &nbsp;
-                                <span class="old-price">${{regular_price_with_tax}}</span>
+                                <span class="old-price">Tsh{{regular_price_with_tax}}</span>
                             </span>
                         </span>
                         <span class="discount {{price_percent_class}}">

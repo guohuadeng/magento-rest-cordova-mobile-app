@@ -111,7 +111,7 @@ a:active {
 .cbp-spmenu h3 .icon-close {
     color: #000;
 	font-size: 1.2em;
-	padding: 5px 5px 6px 5px !important;
+	padding: 5px 6px 6px 5px !important;
 	position: absolute;
 	top: -44px;
 	left: 0px;
@@ -283,6 +283,7 @@ a:active {
     margin-top: 10px;
     clear: both;
 	text-align: center;
+    padding-right: 20%;
 }
 
 #dailySale .price-box .price,

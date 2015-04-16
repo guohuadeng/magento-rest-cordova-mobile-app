@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="checkbox.phtml" server="skymazon.sunpop.cn" local="130720464355521465" remote="130706852400000000" Dst="0" />
-<file name="multi.phtml" server="skymazon.sunpop.cn" local="130720464357543999" remote="130706852400000000" Dst="0" />
-<file name="radio.phtml" server="skymazon.sunpop.cn" local="130720464357554012" remote="130706852400000000" Dst="0" />
-<file name="select.phtml" server="skymazon.sunpop.cn" local="130720464357564029" remote="130706852400000000" Dst="0" />
+<file name="checkbox.phtml" server="skymazon.sunpop.cn" local="130736627363051449" remote="130722735000000000" Dst="0" />
+<file name="multi.phtml" server="skymazon.sunpop.cn" local="130736627363071587" remote="130722735000000000" Dst="0" />
+<file name="radio.phtml" server="skymazon.sunpop.cn" local="130736627363081507" remote="130722735000000000" Dst="0" />
+<file name="select.phtml" server="skymazon.sunpop.cn" local="130736627364223007" remote="130722735000000000" Dst="0" />
+<file name="checkbox.phtml" server="207.226.141.198" local="130736627363051449" remote="130736801400000000" Dst="0" />
+<file name="select.phtml" server="207.226.141.198" local="130736627364223007" remote="130736801400000000" Dst="0" />
+<file name="radio.phtml" server="207.226.141.198" local="130736627363081507" remote="130736801400000000" Dst="0" />
+<file name="multi.phtml" server="207.226.141.198" local="130736627363071587" remote="130736801400000000" Dst="0" />
 </dwsync>

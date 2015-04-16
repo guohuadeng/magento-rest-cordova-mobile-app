@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="default.phtml" server="skymazon.sunpop.cn" local="130720464422985629" remote="130706853000000000" Dst="0" />
-<file name="nominal.phtml" server="skymazon.sunpop.cn" local="130720464423005652" remote="130706853000000000" Dst="0" />
-<file name="tax.phtml" server="skymazon.sunpop.cn" local="130720464423005652" remote="130706853000000000" Dst="0" />
+<file name="default.phtml" server="skymazon.sunpop.cn" local="130736627494895695" remote="130722735600000000" Dst="0" />
+<file name="nominal.phtml" server="skymazon.sunpop.cn" local="130736627496376015" remote="130722735600000000" Dst="0" />
+<file name="tax.phtml" server="skymazon.sunpop.cn" local="130736627496386081" remote="130722735600000000" Dst="0" />
+<file name="default.phtml" server="207.226.141.198" local="130736627494895695" remote="130736802000000000" Dst="0" />
+<file name="nominal.phtml" server="207.226.141.198" local="130736627496376015" remote="130736802000000000" Dst="0" />
+<file name="tax.phtml" server="207.226.141.198" local="130736627496386081" remote="130736802000000000" Dst="0" />
 </dwsync>

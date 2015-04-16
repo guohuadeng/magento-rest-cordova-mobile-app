@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="list.phtml" server="skymazon.sunpop.cn" local="130721930053815858" remote="130720899600000000" Dst="0" />
-<file name="price_msrp.phtml" server="skymazon.sunpop.cn" local="130720464381714279" remote="130706852400000000" Dst="0" />
-<file name="price_msrp_item.phtml" server="skymazon.sunpop.cn" local="130720464381724150" remote="130706852400000000" Dst="0" />
-<file name="price_msrp_noform.phtml" server="skymazon.sunpop.cn" local="130720464381754196" remote="130706852400000000" Dst="0" />
-<file name="view.phtml" server="skymazon.sunpop.cn" local="130729861895893444" remote="130729863000000000" Dst="0" />
+<file name="list.phtml" server="skymazon.sunpop.cn" local="130736627404275663" remote="130722821400000000" Dst="0" />
+<file name="price_msrp.phtml" server="skymazon.sunpop.cn" local="130736627406309582" remote="130722821400000000" Dst="0" />
+<file name="price_msrp_item.phtml" server="skymazon.sunpop.cn" local="130736627406319331" remote="130722821400000000" Dst="0" />
+<file name="price_msrp_noform.phtml" server="skymazon.sunpop.cn" local="130736627406329363" remote="130722821400000000" Dst="0" />
+<file name="view.phtml" server="skymazon.sunpop.cn" local="130736627430676581" remote="130729863000000000" Dst="0" />
+<file name="list.phtml" server="207.226.141.198" local="130736822812931130" remote="130736849400000000" Dst="0" />
+<file name="price_msrp.phtml" server="207.226.141.198" local="130736822814272707" remote="130736849400000000" Dst="0" />
+<file name="price_msrp_item.phtml" server="207.226.141.198" local="130736822815804698" remote="130736849400000000" Dst="0" />
+<file name="price_msrp_noform.phtml" server="207.226.141.198" local="130736822817296505" remote="130736849400000000" Dst="0" />
+<file name="view.phtml" server="207.226.141.198" local="130736822859439199" remote="130736849400000000" Dst="0" />
+<file name="list.phtml" server="120.24.88.210" local="130736822812931130" remote="130722821400000000" Dst="0" />
+<file name="price_msrp.phtml" server="120.24.88.210" local="130736822814272707" remote="130722821400000000" Dst="0" />
+<file name="price_msrp_item.phtml" server="120.24.88.210" local="130736822815804698" remote="130722821400000000" Dst="0" />
+<file name="price_msrp_noform.phtml" server="120.24.88.210" local="130736822817296505" remote="130722821400000000" Dst="0" />
+<file name="view.phtml" server="120.24.88.210" local="130736822859439199" remote="130729863000000000" Dst="0" />
 </dwsync>

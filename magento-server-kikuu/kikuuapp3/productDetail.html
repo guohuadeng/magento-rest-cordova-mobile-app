@@ -69,7 +69,7 @@
 <!-- 自定义选项，动态价格相关 复杂385，http://skymazon.sunpop.cn/kikuuapp3/productDetail.html?entity_id=385-->
 <script id="productOption-template" type="text/x-handlebars-template">
 <div class="product-options add-to-cart-options__container-inner popup" id="product-options-wrapper">
-	<form action="http://skymazon.sunpop.cn/restconnect/carts/add/" method="post" id="product_addtocart_form">
+	<form action={{defines.baseUrl}}+"/restconnect/carts/add/" method="post" id="product_addtocart_form">
 	<input name="form_key" type="hidden" value="这里不知道生成规则及有什么用，7a6Opst51esbvpxN">
 	<div class="no-display">
 		<input type="hidden" name="product" value="{{entity_id}}">

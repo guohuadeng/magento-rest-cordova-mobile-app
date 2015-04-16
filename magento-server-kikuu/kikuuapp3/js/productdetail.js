@@ -52,8 +52,10 @@ function ready() {
             dataType: 'json',
             success: function (product) {
 				//处理为带千位","，去除小数点
-                product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
-                product.regular_price_with_tax = fmoney(product.regular_price_with_tax,0);
+                //product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
+                //product.regular_price_with_tax = fmoney(product.regular_price_with_tax,0);
+				product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(0);
+				product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(0);
 
                 $('#productInfo').html(Handlebars.compile(productInfoTpl)({
                     product: product

@@ -18,11 +18,12 @@
 <file name="Sm_Tablisting.xml" server="skymazon.sunpop.cn" local="130707363000000000" remote="130707363000000000" Dst="-1" />
 <file name="Amasty_Base.xml" server="skymazon.sunpop.cn" local="130722736200000000" remote="130722736200000000" Dst="-1" />
 <file name="Amasty_Customerattr.xml" server="skymazon.sunpop.cn" local="130722736200000000" remote="130722736200000000" Dst="-1" />
-<file name="AW_Ajaxlogin.xml" server="skymazon.sunpop.cn" local="130725448339206946" remote="130725448200000000" Dst="-1" />
-<file name="SkyMazon_Customer.xml" server="skymazon.sunpop.cn" local="130725425953486626" remote="130725425400000000" Dst="-1" />
-<file name="SkyMazon_RestConnect.xml" server="skymazon.sunpop.cn" local="130717251000000000" remote="130717251000000000" Dst="-1" />
+<file name="AW_Ajaxlogin.xml" server="skymazon.sunpop.cn" local="130736719832856653" remote="130736719200000000" Dst="0" />
+<file name="SkyMazon_Customer.xml" server="skymazon.sunpop.cn" local="130736653119284639" remote="130725425400000000" Dst="0" />
+<file name="SkyMazon_RestConnect.xml" server="skymazon.sunpop.cn" local="130736653122228318" remote="130717251000000000" Dst="0" />
 <file name="Brim_PageCache.xml" server="skymazon.sunpop.cn" local="130711285200000000" remote="130711285200000000" Dst="-1" />
-<file name="SkyMazon_Tweaks.xml" server="skymazon.sunpop.cn" local="130725446596997605" remote="130725446400000000" Dst="-1" />
-<file name="Mage_Api2.xml" server="skymazon.sunpop.cn" local="130706405400000000" remote="130706405400000000" Dst="0" />
-<file name="Mage_Api.xml" server="skymazon.sunpop.cn" local="130706405400000000" remote="130706405400000000" Dst="0" />
+<file name="SkyMazon_Tweaks.xml" server="skymazon.sunpop.cn" local="130736653122238198" remote="130725446400000000" Dst="0" />
+<file name="Aschroder_SMTPPro.xml" server="207.226.141.198" local="130736218800000000" remote="130736218800000000" Dst="0" />
+<file name="AW_Mobile2.xml" server="207.226.141.198" local="130736807692690094" remote="130736807400000000" Dst="0" />
+<file name="AW_All.xml" server="207.226.141.198" local="130736798040077912" remote="130736797800000000" Dst="0" />
 </dwsync>

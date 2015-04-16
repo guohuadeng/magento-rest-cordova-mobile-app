@@ -35,18 +35,38 @@ class SkyMazon_RestConnect_SearchController extends Mage_Core_Controller_Front_A
 			// $collection = Mage::getModel ( "catalogsearch/query" )->getResultCollection ();
 			$collection = $query->getResultCollection ();
 			$i = 1;
-			foreach ( $collection as $o ) {
-				echo "<strong>Product Order:" . $i . "</strong><br/>";
-				echo "Product Entity_Id: " . $o->getId () . "<br/>";
-				echo "Product Price: " . $o->getPrice () . "<br/>";
-				$i ++;
-				echo "----------------------------------<br/>";
-			}
+// 			foreach ( $collection as $o ) {
+// 				echo "<strong>Product Order:" . $i . "</strong><br/>";
+// 				echo "Product Entity_Id: " . $o->getId () . "<br/>";
+// 				echo "Product Price: " . $o->getPrice () . "<br/>";
+// 				$i ++;
+// 				echo "----------------------------------<br/>";
+// 			}
 			// $this->loadLayout ();
 			// $this->_initLayoutMessages ( 'catalog/session' );
 			// $this->_initLayoutMessages ( 'checkout/session' );
 			// $this->renderLayout ();
-			
+			$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
+		    $currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
+			foreach($collection as $product){
+			    $product = Mage::getModel ( 'catalog/product' )->load (  $product->getId () );
+			    $productlist [] = array (
+        			'entity_id' => $product->getId (),
+        			'sku' => $product->getSku (),
+        			'name' => $product->getName (),
+        			'news_from_date' => $product->getNewsFromDate (),
+        			'news_to_date' => $product->getNewsToDate (),
+        			'special_from_date' => $product->getSpecialFromDate (),
+        			'special_to_date' => $product->getSpecialToDate (),
+        			'image_url' => $product->getImageUrl (),
+        			'url_key' => $product->getProductUrl (),
+        			'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+        			'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+        			'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol ()
+    			);
+    			$i ++;
+			}
+			echo json_encode($productlist);
 			if (! Mage::helper ( 'catalogsearch' )->isMinQueryLength ()) {
 				$query->save ();
 			}

@@ -33,8 +33,10 @@ function ready() {
             if (defines.user) {
                 $menus.find('.login_true').show();
                 $menus.find('.login_false').hide();
-                $menus.find('.userinfo img').attr('src', defines.baseUrl +
-                    '/media/customer' + defines.user.avatar);
+				if (defines.user.avatar) {
+					$menus.find('.userinfo img').attr('src', defines.baseUrl +
+						'/media/customer' + defines.user.avatar);
+					}
                 $menus.find('.userinfo span').text(defines.user.name);
             } else {
                 $menus.find('.login_true').hide();
@@ -45,6 +47,8 @@ function ready() {
 
     // 用户用户状态显示菜单
     function showMenus(menus) {
+		//设置cart的web指向
+		$('#cartIcon').attr ('href','detail.html?title=My Shopping Cart&frameUrl=' + defines.baseUrl +'/checkout/cart/');
         $.each(menus, function (i, item) {
             item.url = '#c' + item.category_id;
         });
@@ -168,8 +172,8 @@ function ready() {
                 item.price_percent_class = 'none';
                 item.final_price_with_tax = item.regular_price_with_tax;
             }
-            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
-            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
+            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(0);
+            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(0);
             return item;
         });
         $el[func](Handlebars.compile(itemTpl)({
@@ -192,6 +196,7 @@ function ready() {
 
 	    // index页
         if ($this.hasClass('page-index')) {
+			initUser();	//有时在web上登录了，就要再看一下menu中菜单的变化情况，这样menu中不会突然变化
             currentPage = $this.index();
             bannerSwiper.slideTo(currentPage);
             $headerIndex.removeClass('out');
@@ -212,7 +217,7 @@ function ready() {
         }
 
         // login页
-        if ($this.hasClass('page-login')) {
+        if ($this.hasClass('page-login')) {		
             $this.find('[name="login"]').off('click').click(function () {
                 var username = $this.find('[name="username"]').val(),
                     password = $this.find('[name="password"]').val();
@@ -220,12 +225,20 @@ function ready() {
                 servers.login(username, password, function (res) {
                     if (res) {
                         history.back();
-                        initUser();
+                        //initUser(); 改在 into index里处理了
                     } else {
                         alert('Username or password error!');
                     }
                 });
             });
+        }
+        // forgot password页
+        if ($this.hasClass('page-forgot-password')) {			
+			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseUrl+'/awmobile2/customer/forgotpasswordpost/');
+        }
+        // register 页
+        if ($this.hasClass('page-login')) {		
+			$this.find('[id="user_create_form"]').attr('action',defines.baseUrl+'/awmobile2/customer/createpost/');
         }
 
 	    // detail页，product-frame页处理

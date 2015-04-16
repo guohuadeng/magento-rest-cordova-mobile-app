@@ -4063,4 +4063,5 @@ label{
 	text-align:center;
 	line-height:60px;
 	border-left:1px solid #ccc;
+    visibility: hidden;
 	}

@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="boolean.phtml" server="skymazon.sunpop.cn" local="130720464437443817" remote="130706853000000000" Dst="0" />
-<file name="date.phtml" server="skymazon.sunpop.cn" local="130720464437463843" remote="130706853000000000" Dst="0" />
-<file name="file.phtml" server="skymazon.sunpop.cn" local="130720464439526353" remote="130706853000000000" Dst="0" />
-<file name="image.phtml" server="skymazon.sunpop.cn" local="130720464439536279" remote="130706853000000000" Dst="0" />
-<file name="multiline.phtml" server="skymazon.sunpop.cn" local="130720464439546289" remote="130706853000000000" Dst="0" />
-<file name="multiselect.phtml" server="skymazon.sunpop.cn" local="130720464441568811" remote="130706853000000000" Dst="0" />
-<file name="select.phtml" server="skymazon.sunpop.cn" local="130720464441568811" remote="130706853000000000" Dst="0" />
-<file name="text.phtml" server="skymazon.sunpop.cn" local="130720464441578824" remote="130706853000000000" Dst="0" />
-<file name="textarea.phtml" server="skymazon.sunpop.cn" local="130720464443751544" remote="130706853000000000" Dst="0" />
+<file name="boolean.phtml" server="skymazon.sunpop.cn" local="130736627525912989" remote="130722735600000000" Dst="0" />
+<file name="date.phtml" server="skymazon.sunpop.cn" local="130736627525923005" remote="130722735600000000" Dst="0" />
+<file name="file.phtml" server="skymazon.sunpop.cn" local="130736627525933037" remote="130722735600000000" Dst="0" />
+<file name="image.phtml" server="skymazon.sunpop.cn" local="130736627527980862" remote="130722735600000000" Dst="0" />
+<file name="multiline.phtml" server="skymazon.sunpop.cn" local="130736627527980862" remote="130722735600000000" Dst="0" />
+<file name="multiselect.phtml" server="skymazon.sunpop.cn" local="130736627528000889" remote="130722735600000000" Dst="0" />
+<file name="select.phtml" server="skymazon.sunpop.cn" local="130736627530043530" remote="130722735600000000" Dst="0" />
+<file name="text.phtml" server="skymazon.sunpop.cn" local="130736627530053456" remote="130722735600000000" Dst="0" />
+<file name="textarea.phtml" server="skymazon.sunpop.cn" local="130736627530073477" remote="130722735600000000" Dst="0" />
+<file name="boolean.phtml" server="207.226.141.198" local="130736627525912989" remote="130736802000000000" Dst="0" />
+<file name="date.phtml" server="207.226.141.198" local="130736627525923005" remote="130736802000000000" Dst="0" />
+<file name="file.phtml" server="207.226.141.198" local="130736627525933037" remote="130736802000000000" Dst="0" />
+<file name="image.phtml" server="207.226.141.198" local="130736627527980862" remote="130736802000000000" Dst="0" />
+<file name="multiline.phtml" server="207.226.141.198" local="130736627527980862" remote="130736802000000000" Dst="0" />
+<file name="multiselect.phtml" server="207.226.141.198" local="130736627528000889" remote="130736802000000000" Dst="0" />
+<file name="select.phtml" server="207.226.141.198" local="130736627530043530" remote="130736802000000000" Dst="0" />
+<file name="text.phtml" server="207.226.141.198" local="130736627530053456" remote="130736802000000000" Dst="0" />
+<file name="textarea.phtml" server="207.226.141.198" local="130736627530073477" remote="130736802000000000" Dst="0" />
 </dwsync>

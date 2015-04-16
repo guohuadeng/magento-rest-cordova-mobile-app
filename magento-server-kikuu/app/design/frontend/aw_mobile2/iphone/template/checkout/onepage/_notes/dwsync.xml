@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="agreements.phtml" server="skymazon.sunpop.cn" local="130720464404282300" remote="130706852400000000" Dst="0" />
-<file name="billing.phtml" server="skymazon.sunpop.cn" local="130720464406324842" remote="130706852400000000" Dst="0" />
-<file name="failure.phtml" server="skymazon.sunpop.cn" local="130720464406324842" remote="130706852400000000" Dst="0" />
-<file name="failure_top.phtml" server="skymazon.sunpop.cn" local="130720464408357380" remote="130706852400000000" Dst="0" />
-<file name="link.phtml" server="skymazon.sunpop.cn" local="130720464408357380" remote="130706839800000000" Dst="0" />
-<file name="login.phtml" server="skymazon.sunpop.cn" local="130720464408377407" remote="130706852400000000" Dst="0" />
-<file name="payment.phtml" server="skymazon.sunpop.cn" local="130720464410420041" remote="130706898000000000" Dst="0" />
-<file name="review.phtml" server="skymazon.sunpop.cn" local="130720464414635304" remote="130706852400000000" Dst="0" />
-<file name="shipping.phtml" server="skymazon.sunpop.cn" local="130720464416737832" remote="130706852400000000" Dst="0" />
-<file name="shipping_method.phtml" server="skymazon.sunpop.cn" local="130720464418830440" remote="130706897400000000" Dst="0" />
-<file name="success_top.phtml" server="skymazon.sunpop.cn" local="130720464418820579" remote="130706853000000000" Dst="0" />
-<file name="top.phtml" server="skymazon.sunpop.cn" local="130720464420873084" remote="130706853000000000" Dst="0" />
+<file name="agreements.phtml" server="skymazon.sunpop.cn" local="130736627468695850" remote="130722735600000000" Dst="0" />
+<file name="billing.phtml" server="skymazon.sunpop.cn" local="130736627474112622" remote="130722735600000000" Dst="0" />
+<file name="failure.phtml" server="skymazon.sunpop.cn" local="130736627474138062" remote="130722735600000000" Dst="0" />
+<file name="failure_top.phtml" server="skymazon.sunpop.cn" local="130736627476150598" remote="130722735600000000" Dst="0" />
+<file name="link.phtml" server="skymazon.sunpop.cn" local="130736627476150598" remote="130722735600000000" Dst="0" />
+<file name="login.phtml" server="skymazon.sunpop.cn" local="130736627476180632" remote="130722735600000000" Dst="0" />
+<file name="payment.phtml" server="skymazon.sunpop.cn" local="130736627478435682" remote="130722735600000000" Dst="0" />
+<file name="review.phtml" server="skymazon.sunpop.cn" local="130736627484004891" remote="130722735600000000" Dst="0" />
+<file name="shipping.phtml" server="skymazon.sunpop.cn" local="130736627486177606" remote="130722735600000000" Dst="0" />
+<file name="shipping_method.phtml" server="skymazon.sunpop.cn" local="130736627492823182" remote="130722735600000000" Dst="0" />
+<file name="success_top.phtml" server="skymazon.sunpop.cn" local="130736627492843115" remote="130722735600000000" Dst="0" />
+<file name="top.phtml" server="skymazon.sunpop.cn" local="130736627492843115" remote="130722735600000000" Dst="0" />
+<file name="agreements.phtml" server="207.226.141.198" local="130736627468695850" remote="130736802000000000" Dst="0" />
+<file name="billing.phtml" server="207.226.141.198" local="130736627474112622" remote="130736802000000000" Dst="0" />
+<file name="failure.phtml" server="207.226.141.198" local="130736627474138062" remote="130736802000000000" Dst="0" />
+<file name="failure_top.phtml" server="207.226.141.198" local="130736627476150598" remote="130736802000000000" Dst="0" />
+<file name="login.phtml" server="207.226.141.198" local="130736627476180632" remote="130736802000000000" Dst="0" />
+<file name="link.phtml" server="207.226.141.198" local="130736627476150598" remote="130736802000000000" Dst="0" />
+<file name="payment.phtml" server="207.226.141.198" local="130736627478435682" remote="130736802000000000" Dst="0" />
+<file name="review.phtml" server="207.226.141.198" local="130736627484004891" remote="130736802000000000" Dst="0" />
+<file name="shipping.phtml" server="207.226.141.198" local="130736627486177606" remote="130736802000000000" Dst="0" />
+<file name="shipping_method.phtml" server="207.226.141.198" local="130736627492823182" remote="130736802000000000" Dst="0" />
+<file name="success_top.phtml" server="207.226.141.198" local="130736627492843115" remote="130736802000000000" Dst="0" />
+<file name="top.phtml" server="207.226.141.198" local="130736627492843115" remote="130736802000000000" Dst="0" />
 </dwsync>
