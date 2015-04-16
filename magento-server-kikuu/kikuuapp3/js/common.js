@@ -73,7 +73,7 @@ function toggleMenu(e) {
 	
 	$('.menu-bottom').toggle();
 }
-
+//第一次进入
 function checkFirstTime() {
     var $firstTime = $('#firstTime');
 
