@@ -236,13 +236,16 @@ function ready() {
         if ($this.hasClass('page-forgot-password')) {			
 			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseUrl+'/awmobile2/customer/forgotpasswordpost/');
         }
-        // register 页
-        if ($this.hasClass('page-login')) {		
-			$this.find('[id="user_create_form"]').attr('action',defines.baseUrl+'/awmobile2/customer/createpost/');
-        }
+		
 
 	    // detail页，product-frame页处理
         if ($this.hasClass('page-detail')) {
+            if (query.title == 'Register') {
+				//$this.find('.detail-back').attr('href', '#');
+				}
+			else {
+				//$this.find('.detail-back').attr('href', '');
+				}
             if (query.frameUrl) {
 				if (query.entity_id) {
 					query.frameUrl = query.frameUrl + '?entity_id=' + query.entity_id;

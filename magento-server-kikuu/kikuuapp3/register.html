@@ -34,7 +34,7 @@
             <div class="nav__list-inner customer-account-register-container">
               <div class="customer-form-register-before"> </div>
               <form action="/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
-                <input type="hidden" name="success_url" value="">
+                <input type="hidden" name="success_url" id="success_url" value="">
                 <input type="hidden" name="error_url" value="">
                 <p class="form__field form__field--required"> 
                   <!--<label class="form__label form__label--required">Mobile Number</label>-->
@@ -141,6 +141,7 @@
 	//<![CDATA[
 	Event.observe(window, 'load', function(e){
 		document.querySelector("#user_create_form").action = defines.baseUrl + '/awmobile2/customer/createpost/';
+		document.querySelector("#success_url").value = defines.baseUrl + '/customer/account/';
 		window.customerAccount.setRegisterForm('user_create_form');				
 		window.customerAccount.setRegisterTitle("Register");
 	});
@@ -170,7 +171,7 @@
 					if(wait == 30){
 						//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
 						rnum = rand(8999)+1000;
-					        sendsms(smsurl,rnum);
+					    // sendsms(smsurl,rnum);
 					}
 					wait--;  
 					setTimeout(function() {  
