@@ -14,7 +14,7 @@
         cur_entity_id: cur_entity_id,
         user: null,
         state: 'index',
-        productsLimit: 20, // 产品页每次请求时取的商品
+        productsLimit: 50, // 产品页每次请求时取的商品
 		
         menus: [{
             name: 'Home',
