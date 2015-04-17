@@ -130,8 +130,8 @@ function ready() {
 			} 
 		}
 	//构造页面
-    showImg(entity_id);
     showInfo(entity_id);
+    showImg(entity_id);
     showOption(entity_id);
 }
 

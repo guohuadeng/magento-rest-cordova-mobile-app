@@ -6,7 +6,7 @@
 
 (function (window) {
 
-    var baseSite = 'http://www.kikuu.com',
+    var baseSite = 'http://skymazon.sunpop.cn',
 		baseLang = '/en',
 		baseUrl = baseSite + baseLang,
 		cur_entity_id;	//当前查看产品id，可能没用，留着
