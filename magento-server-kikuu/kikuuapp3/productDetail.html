@@ -21,8 +21,19 @@
         <div class="productForm">
 			<div id="productOption" class="optionInfo"></div>
         </div>
-        <p>&nbsp;</p>        <p>&nbsp;</p>
+        <p>&nbsp;</p> 
 	</div>  
+    
+	<footer class="bar bar-standard bar-footer">
+	<div class="add_to_cart_all_l">
+		<a id="shopping_cart" href="javascript:void(0)" class="header__link header__link--cart none">
+			<span class="items-in-cart"></span>
+		</a>
+	<button type="ajax" class="button add-to-cart__submit js-add-to-cart green-button validation-passed" onClick="addToCart();">
+						Add To Cart</button>	
+	</div>
+	</footer>
+    
 </div>
 
 <!-- 详情 rest 页 -->
@@ -77,8 +88,7 @@
 <!-- 自定义选项，动态价格相关 复杂385，http://skymazon.sunpop.cn/kikuuapp3/productDetail.html?entity_id=385-->
 <script id="productOption-template" type="text/x-handlebars-template">
 <div class="product-options add-to-cart-options__container-inner popup" id="product-options-wrapper">
-	<form action={{defines.baseUrl}}+"/restconnect/carts/add/" method="post" id="product_addtocart_form">
-	<input name="form_key" type="hidden" value="这里不知道生成规则及有什么用，7a6Opst51esbvpxN">
+	<form action="{{baseUrl}}/restconnect/cart/add/" method="post" id="product_addtocart_form">
 	<div class="no-display">
 		<input type="hidden" name="product" value="{{entity_id}}">
 	</div>
@@ -165,18 +175,11 @@
 		{{/if}}			
     {{/each}}
 	</dl>
-	<input type="hidden" value="1" class="add-to-cart__quantity validation-passed" name="qty">
-	</form>
-	<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
-	<footer class="bar bar-standard bar-footer">
-	<div class="add_to_cart_all_l">
-		<a id="shopping_cart" href="javascript:void(0)" class="header__link header__link--cart">
-			<span class="items-in-cart"></span>
-		</a>
-	<button type="submit" class="button add-to-cart__submit js-add-to-cart green-button validation-passed" onclick="$('#product_addtocart_form').submit()">
-						Add To Cart</button>	
+	<div class="form__field {{#if is_require}} form__field--required {{/if}}">	
+		<label class="form__label form__label--required">Qty</label>	
+		<input type="" value="1" class="add-to-cart__quantity validation-passed" name="qty">
 	</div>
-	</footer>
+	</form>
 </div>
 </script>
 

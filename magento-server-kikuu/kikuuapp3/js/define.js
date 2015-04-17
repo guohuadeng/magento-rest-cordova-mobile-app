@@ -10,7 +10,7 @@
 		baseLang = 'en',
 		baseUrl = baseSite + '/' +baseLang,
 		cur_entity_id;	//当前查看产品id，可能没用，留着
-
+	
     window.defines = {
 		baseSite: baseSite,
 		baseLang: baseLang,
@@ -82,4 +82,9 @@
         }*/
 		]
     };
+	//此次定义为动态价格实现，先不处理
+	window.opConfig = {};
+	opConfig.reloadPrice = function ()	{
+		};
+		
 })(window);

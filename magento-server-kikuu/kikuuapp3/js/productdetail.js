@@ -38,6 +38,9 @@ function ready() {
     // end 产品图片列表--------	*/
     //产品详情
     function showInfo(entity_id) {
+		servers.cartGetQty(function (info) {			
+				$('.items-in-cart').html(info.items_qty);
+			});
 		servers.getProductRest(entity_id, function (product) {
 			//处理为带千位","，去除小数点
 			//product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
@@ -81,11 +84,26 @@ function ready() {
 				});
 			$('#productOption').html(Handlebars.compile(productOptionTpl)({
 				options: items,
-				entity_id: entity_id
+				entity_id: entity_id,				
+				baseUrl: defines.baseUrl
 				}));
 			});
         };
-    ///end 产品选项
+    ///end 产品选项	
+
+    //产品加入购物车
+    function addToCart() {	
+		var queryString = $('#product_addtocart_form').formSerialize();
+		servers.cartAdd(queryString, function (info) {
+			var res = info.result,
+				qty = info.items_qty;
+			if (res = 'success') 
+				$('#shopping_cart').html(info.items_qty);
+			else 
+				alert( 'Please specify the product required options. ')
+			})
+        };
+    ///end 加入购物车
 	
     function handleOption($el, func, list) {
         // 处理返回数据
@@ -133,6 +151,22 @@ function ready() {
     showInfo(entity_id);
     showImg(entity_id);
     showOption(entity_id);
+	//$('#product_addtocart_form').bind("post",addToCart());
 }
 
 $(document).ready(ready);
+	
+
+//产品加入购物车
+function addToCart() {	
+	var queryString = $('#product_addtocart_form').formSerialize();
+	servers.cartAdd(queryString, function (info) {
+		var res = info.result,
+			qty = info.items_qty;
+		if (res = 'success') 
+			$('.items-in-cart').html(info.items_qty);
+		else 
+			alert( 'Please specify the product required options. ')
+		})
+	};
+///end 加入购物车

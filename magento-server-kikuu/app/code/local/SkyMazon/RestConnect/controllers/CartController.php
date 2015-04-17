@@ -191,18 +191,18 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 
 			$cart->save ();
 			
-			$items_qty = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+			$items_qty =  floor(Mage::getModel('checkout/cart')->getQuote()->getItemsQty());
 
-			$result = "{'result':'success'";
-			$result .= ", 'items_qty ': '" . $items_qty  . "'}";
+			$result = '{"result":"success"';
+			$result .= ', "items_qty": "'  . $items_qty  . '"}';
 
 			echo $result;
 
 		} catch ( Exception $e ) {
 
-			$result = "{'result':'error'";
+			$result = '{"result":"error"';
 
-			$result .= ", 'message': '" . $e->getMessage () . "'}";
+			$result .= ', "message": "' . $e->getMessage () . '"}';
 
 			echo $result;
 
@@ -210,6 +210,13 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 
 	}
 
+	public function getQtyAction() {			
+			$items_qty = floor(Mage::getModel('checkout/cart')->getQuote()->getItemsQty());
+			$result = '{"items_qty": "'  . $items_qty  . '"}';
+
+			echo $result;
+		}
+		
 	public function test2Action() {
 
 		$product = Mage::getModel ( 'catalog/product' )->load ( Mage::app ()->getRequest ()->getParam ( 'product', 0 ) );

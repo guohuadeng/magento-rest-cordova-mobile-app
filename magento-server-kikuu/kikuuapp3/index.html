@@ -101,7 +101,7 @@
     <div class="item">
         <div class="item-inner">
 			<!--###### rest详情页的父Frame ######-->
-			<a href="detail.html?title={{name}}&frameUrl={{url_key}}&share=true"  data-reload="root">
+			<a href="productFrame.html" data-formdata="frameUrl=productDetail.html&entity_id={{entity_id}}&share=true" data-reload="root" data-ajax="true">
             <div class="product-image">
                 <img class="lazy small-image" data-original="{{image_url}}" alt="{{name}}">
             </div>
@@ -109,7 +109,7 @@
 
             <div class="product-info">           		
                 <div class="product-name">
-					<a href="productFrame.html" data-formdata="frameUrl=productDetail.html&entity_id={{entity_id}}&share=true" data-reload="root" data-ajax="true">{{name}}</a>
+					<a href="detail.html?title={{name}}&frameUrl={{url_key}}&share=true"  data-reload="root">{{name}}</a>
                 </div>
 
                 <div class="product-price">

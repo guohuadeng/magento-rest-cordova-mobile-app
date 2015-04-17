@@ -26,7 +26,7 @@
 <file name="register.html" server="120.24.88.210" local="130736891845942589" remote="130737687600000000" Dst="0" />
 <file name="package.json" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
 <file name="pDetailRef.html" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
-<file name="productDetail.html" server="207.226.141.198" local="130737598398838667" remote="130737598200000000" Dst="0" />
+<file name="productDetail.html" server="207.226.141.198" local="130737855868519161" remote="130737855600000000" Dst="0" />
 <file name="productDetail_bak.html" server="207.226.141.198" local="130735875057009758" remote="130736871000000000" Dst="0" />
 <file name="productDetail_embed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
 <file name="productEmbed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
@@ -34,10 +34,10 @@
 <file name="register.html" server="207.226.141.198" local="130736891845942589" remote="130736891400000000" Dst="0" />
 <file name="search.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
 <file name="searchResult.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
-<file name="index.html" server="207.226.141.198" local="130737598948845877" remote="130737614400000000" Dst="0" />
+<file name="index.html" server="207.226.141.198" local="130737831177637589" remote="130737838800000000" Dst="0" />
 <file name="detail.html" server="207.226.141.198" local="130735875056789484" remote="130736875200000000" Dst="0" />
-<file name="index.html" server="120.24.88.210" local="130737685544019065" remote="130737687600000000" Dst="0" />
-<file name="productDetail.html" server="120.24.88.210" local="130737659585198582" remote="130737659400000000" Dst="0" />
+<file name="index.html" server="120.24.88.210" local="130737831177637589" remote="130737831000000000" Dst="0" />
+<file name="productDetail.html" server="120.24.88.210" local="130737830036241623" remote="130737829800000000" Dst="0" />
 <file name="bower.json" server="120.24.88.210" local="130735875055085478" remote="130737687600000000" Dst="0" />
 <file name="detail.html" server="120.24.88.210" local="130735875056789484" remote="130737687600000000" Dst="0" />
 <file name="forgot_password.html" server="120.24.88.210" local="130736738178288534" remote="130737687600000000" Dst="0" />
