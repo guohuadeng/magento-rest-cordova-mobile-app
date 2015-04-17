@@ -90,12 +90,7 @@ function initPageScroll(options) {
             },
             onScrollEnd: function () {
                 $el.find('scroller').trigger('scroll');
-				
-                if (this.distY > -50) {
-					showhead();
-                    return;
-                }
-				
+								
                 if (this.distX < -100) {
                     options.onRight(page.id, i);
                     return;

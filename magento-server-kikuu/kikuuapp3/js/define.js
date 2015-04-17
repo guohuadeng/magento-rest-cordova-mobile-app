@@ -58,17 +58,28 @@
         }, {
             id: 'bestSeller',
             cmd: 'best_seller',
-            title: 'Best Seller',
+			title: 'New Arrival',	//使用新品new arrival
             pullRefresh: true,
             num: 1,
             total: 0
-        }, {
+        }
+		/* 换成new，而coming soon 因接口问题，停用
+			{
+            id: 'bestSeller',
+            cmd: 'best_seller',
+            title: 'Best Seller'
+            pullRefresh: true,
+            num: 1,
+            total: 0
+        }
+		, {
             id: 'comingSoon',
             cmd: 'coming_soon',
             title: 'Coming Soon',
             pullRefresh: true,
             num: 1,
             total: 0
-        }]
+        }*/
+		]
     };
 })(window);
