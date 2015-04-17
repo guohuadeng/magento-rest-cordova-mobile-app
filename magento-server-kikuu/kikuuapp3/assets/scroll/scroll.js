@@ -69,32 +69,38 @@ function initPageScroll(options) {
                     $pd.attr('class', 'pullDown flip')
                         .find('.pullDownLabel')
                         .text('Release to refresh...');
-                } else if (this.y >= 5) {
+                } else if (this.y >= 15) {
                     $pd.show()
                         .attr('class', 'pullDown')
                         .find('.pullDownLabel')
                         .text('Pull down to refresh...');
-					showhead();
                 } else if (this.y < 0){
 					$pd.hide();
-					hidehead();	
 				} else {
                     $pd.hide();
-					showhead();
                 }
+				
+                if (this.y >= 2) {
+					showhead();
+                } else if (this.y < -15){
+					hidehead();	
+				} 				
 				
                 pullActionDetect.check(scroll, $el.find('.pullUp'), 1);
             },
             onScrollEnd: function () {
                 $el.find('scroller').trigger('scroll');
 				
+                if (this.distY > -50) {
+					showhead();
+                    return;
+                }
+				
                 if (this.distX < -100) {
-					//showhead();
                     options.onRight(page.id, i);
                     return;
                 }
                 if (this.distX > 100) {
-					//showhead();
                     options.onLeft(page.id, i);
                     return;
                 }
