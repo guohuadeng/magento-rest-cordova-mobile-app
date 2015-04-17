@@ -26,4 +26,10 @@
 <file name="Aschroder_SMTPPro.xml" server="207.226.141.198" local="130736218800000000" remote="130736218800000000" Dst="0" />
 <file name="AW_Mobile2.xml" server="207.226.141.198" local="130736807692690094" remote="130736807400000000" Dst="0" />
 <file name="AW_All.xml" server="207.226.141.198" local="130736798040077912" remote="130736797800000000" Dst="0" />
+<file name="SkyMazon_Customer.xml" server="120.24.88.210" local="130736995679115471" remote="130725425400000000" Dst="0" />
+<file name="SkyMazon_RestConnect.xml" server="120.24.88.210" local="130736995681959039" remote="130717251000000000" Dst="0" />
+<file name="SkyMazon_Tweaks.xml" server="120.24.88.210" local="130736995686644887" remote="130725446400000000" Dst="0" />
+<file name="SkyMazon_Customer.xml" server="207.226.141.198" local="130736995679115471" remote="130737004200000000" Dst="0" />
+<file name="SkyMazon_RestConnect.xml" server="207.226.141.198" local="130736995681959039" remote="130737004200000000" Dst="0" />
+<file name="SkyMazon_Tweaks.xml" server="207.226.141.198" local="130736995686644887" remote="130737004200000000" Dst="0" />
 </dwsync>

@@ -164,16 +164,16 @@ function ready() {
             var fromDate = new Date(moment(item.special_from_date, 'YYYY-MM-DD HH:mm:ss')),
                 toDate = new Date(moment(item.special_to_date, 'YYYY-MM-DD HH:mm:ss')),
                 date = new Date();
-            if (+fromDate <= +date && +date <= +toDate) {
+            //if (+fromDate <= +date && +date <= +toDate) {
                 item.price_percent = ~~(-100 * (item.regular_price_with_tax -
                     item.final_price_with_tax) / item.regular_price_with_tax);
                 item.price_percent_class = '';
-            } else {
-                item.price_percent_class = 'none';
-                item.final_price_with_tax = item.regular_price_with_tax;
-            }
-            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(0);
-            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(0);
+            //} else {
+				if (item.final_price_with_tax == item.regular_price_with_tax)
+	                item.price_percent_class = 'none';              
+            //}
+            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
+            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
             return item;
         });
         $el[func](Handlebars.compile(itemTpl)({

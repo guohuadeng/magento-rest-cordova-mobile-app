@@ -8,4 +8,15 @@
 <file name="ProductsController.php" server="skymazon.sunpop.cn" local="130736627214193657" remote="130735399200000000" Dst="0" />
 <file name="CartsController.php" server="skymazon.sunpop.cn" local="130735909342322564" remote="130735909200000000" Dst="0" />
 <file name="SearchController.php" server="skymazon.sunpop.cn" local="130736627214193657" remote="130735852200000000" Dst="0" />
+<file name="IndexController.php" server="207.226.141.198" local="130736995946537516" remote="130737004200000000" Dst="0" />
+<file name="CustomerController.php" server="120.24.88.210" local="130736995945315841" remote="130735764000000000" Dst="0" />
+<file name="IndexController.php" server="120.24.88.210" local="130736995946537516" remote="130733706600000000" Dst="0" />
+<file name="MenuController.php" server="120.24.88.210" local="130736995948039249" remote="130731398400000000" Dst="0" />
+<file name="ProductsController.php" server="120.24.88.210" local="130736995949621239" remote="130735399200000000" Dst="0" />
+<file name="SearchController.php" server="120.24.88.210" local="130736995951133135" remote="130735852200000000" Dst="0" />
+<file name="CartsController.php" server="207.226.141.198" local="130735909342322564" remote="130737004200000000" Dst="0" />
+<file name="CustomerController.php" server="207.226.141.198" local="130736995945315841" remote="130737004200000000" Dst="0" />
+<file name="ProductsController.php" server="207.226.141.198" local="130736995949621239" remote="130737004200000000" Dst="0" />
+<file name="MenuController.php" server="207.226.141.198" local="130736995948039249" remote="130737004200000000" Dst="0" />
+<file name="SearchController.php" server="207.226.141.198" local="130736995951133135" remote="130737004200000000" Dst="0" />
 </dwsync>
