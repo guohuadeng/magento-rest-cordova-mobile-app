@@ -6,10 +6,14 @@
 
 (function (window) {
 
-    var baseUrl = 'http://www.kikuu.com',
+    var baseSite = 'http://www.kikuu.com',
+		baseLang = '/en',
+		baseUrl = baseSite + baseLang,
 		cur_entity_id;	//当前查看产品id，可能没用，留着
 
     window.defines = {
+		baseSite: baseSite,
+		baseLang: baseLang,
         baseUrl: baseUrl,
         cur_entity_id: cur_entity_id,
         user: null,

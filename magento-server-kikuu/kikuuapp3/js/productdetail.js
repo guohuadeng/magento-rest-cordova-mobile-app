@@ -17,97 +17,74 @@ function ready() {
 
     //产品图片列表
     function showImg(entity_id) {
-        $.ajax({
-            type: 'get',
-            url: defines.baseUrl + '/api/rest/products/' + entity_id + '/images',
-            dataType: 'json',
-            success: function (imglist) {
-                productSwiper = new Swiper('.product-swiper-container', {
-                    pagination: '.product-swiper-container .swiper-pagination',
-                    slidesPerView: 1,
-                    centeredSlides: true,
-                    parallax: true,
-                    paginationClickable: true,
-                    preloadImages: true
-                    //lazyLoading: true    // Enable lazy loading
-                });
-                var iHtml;
-                $.each(imglist, function (i, item) {
-                    productSwiper.appendSlide(sprintf('<div class="swiper-slide"><img class="small-image" src="%s" alt="Kikuu.com"></div>', item.url));
-                });
-                productSwiper.slideTo(0);
-            },
-            error: function (jqXHR) {
-//					alert('Please check the network!');
-            }
-        });
-    }
+		servers.getProductImg(entity_id, function (imglist) {
+			productSwiper = new Swiper('.product-swiper-container', {
+				pagination: '.product-swiper-container .swiper-pagination',
+				slidesPerView: 1,
+				centeredSlides: true,
+				parallax: true,
+				paginationClickable: true,
+				preloadImages: true
+				//lazyLoading: true    // Enable lazy loading
+				});
+			var iHtml;
+			$.each(imglist, function (i, item) {
+				productSwiper.appendSlide(sprintf('<div class="swiper-slide"><img class="small-image" src="%s" alt="Kikuu.com"></div>', item.url));
+				});
+			productSwiper.slideTo(0);
+            	});
+    	}
 
     // end 产品图片列表--------	*/
     //产品详情
     function showInfo(entity_id) {
-        $.ajax({
-            type: 'get',
-            url: defines.baseUrl + '/restconnect/products/getproductdetail/productid/' + entity_id,
-            dataType: 'json',
-            success: function (product) {
-				//处理为带千位","，去除小数点
-                //product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
-                //product.regular_price_with_tax = fmoney(product.regular_price_with_tax,0);
-				product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(0);
-				product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(0);
+		servers.getProductRest(entity_id, function (product) {
+			//处理为带千位","，去除小数点
+			//product.final_price_with_tax = fmoney(product.final_price_with_tax,0);
+			//product.regular_price_with_tax = fmoney(product.regular_price_with_tax,0);
+			product.final_price_with_tax = parseFloat(product.final_price_with_tax).toFixed(0);
+			product.regular_price_with_tax = parseFloat(product.regular_price_with_tax).toFixed(0);
 
-                $('#productInfo').html(Handlebars.compile(productInfoTpl)({
-                    product: product
-                }));
-            },
-            error: function (jqXHR) {
-//					alert('Please check the network!');
-            }
-        });
-    }
+			$('#productInfo').html(Handlebars.compile(productInfoTpl)({
+				product: product
+				}));
+			});
+        };
+
     //end 产品详情
     //产品选项
     function showOption(entity_id) {
-        $.ajax({
-            type: 'get',
-            url: defines.baseUrl + '/restconnect/products/getcustomoption/productid/' + entity_id,
-            dataType: 'json', // 注意：JSONP <-- P (lowercase)
-            success: function (option) { 	
-				var items = $.map(option, function(item) {
-					//做form控件类型处理，让Handlebars方便的使用if else
-					if (item.custom_option_type == "field")
-						item.is_field = 1;	
-					else if (item.custom_option_type == "drop_down")	{						
-						item.is_drop_down = 1;
-						}
-					else if (item.custom_option_type == "checkbox")
-						item.is_checkbox = 1;
-					else if (item.custom_option_type == "radio")
-						item.is_radio = 1;
-					else if (item.custom_option_type == "multiple")
-						item.is_multiple = 1;
-					//具体只处理上面5种，以下4种不处理
-					else if (item.custom_option_type == "area")
-						item.is_area = 1;
-					else if (item.custom_option_type == "date")
-						item.is_date = 1;
-					else if (item.custom_option_type == "date_time")
-						item.is_date_time = 1;
-					else if (item.custom_option_type == "file")
-						item.is_file = 1;
-					return(item);
-					});
-                $('#productOption').html(Handlebars.compile(productOptionTpl)({
-                    options: items,
-					entity_id: entity_id
-                }));
-				},
-            error: function (jqXHR) {
-                alert('Please check the network!');
-            }
-        });
-    }
+		servers.getProductOption(entity_id, function (option) {
+			var items = $.map(option, function(item) {
+				//做form控件类型处理，让Handlebars方便的使用if else
+				if (item.custom_option_type == "field")
+					item.is_field = 1;	
+				else if (item.custom_option_type == "drop_down")	{						
+					item.is_drop_down = 1;
+					}
+				else if (item.custom_option_type == "checkbox")
+					item.is_checkbox = 1;
+				else if (item.custom_option_type == "radio")
+					item.is_radio = 1;
+				else if (item.custom_option_type == "multiple")
+					item.is_multiple = 1;
+				//具体只处理上面5种，以下4种不处理
+				else if (item.custom_option_type == "area")
+					item.is_area = 1;
+				else if (item.custom_option_type == "date")
+					item.is_date = 1;
+				else if (item.custom_option_type == "date_time")
+					item.is_date_time = 1;
+				else if (item.custom_option_type == "file")
+					item.is_file = 1;
+				return(item);
+				});
+			$('#productOption').html(Handlebars.compile(productOptionTpl)({
+				options: items,
+				entity_id: entity_id
+				}));
+			});
+        };
     ///end 产品选项
 	
     function handleOption($el, func, list) {

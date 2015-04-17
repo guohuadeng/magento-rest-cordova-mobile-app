@@ -15,12 +15,12 @@
         menus: defines.baseUrl + '/restconnect/?cmd=menu',
         products: defines.baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
         products_search: defines.baseUrl + '/restconnect/search/?q=%s',
-        product_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
-        products_info: defines.baseUrl + '/api/rest/products/%s',
+        products_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
+        product_rest: defines.baseSite + '/api/rest/products/%s',
         //product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
-        product_img: defines.baseUrl + '/api/rest/products/%s/images/',
+        product_img: defines.baseSite + '/api/rest/products/%s/images/',
         product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中
-        product_option: defines.baseUrl + '/restconnect/products/getcustomeoption/productid/%s'
+        product_option: defines.baseUrl + '/restconnect/products/getcustomoption/productid/%s'
     };
 
     window.servers = {};
@@ -71,7 +71,7 @@
     servers.getProductsDetail = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.product_detail, id),
+            url: sprintf(url.products_detail, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -82,7 +82,7 @@
     servers.getProductsRest = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.product_rest, id),
+            url: sprintf(url.products_rest, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -93,7 +93,7 @@
     servers.getProductsImg = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.product_img, id),
+            url: sprintf(url.products_img, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -104,7 +104,7 @@
     servers.getProductsAttr = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.product_attr, id),
+            url: sprintf(url.products_attr, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -115,7 +115,7 @@
     servers.getProductsOption = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.product_option, id),
+            url: sprintf(url.products_option, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
