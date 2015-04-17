@@ -21,7 +21,8 @@
         product_img: defines.baseSite + '/api/rest/products/%s/images/',
         product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中
         product_option: defines.baseUrl + '/restconnect/products/getcustomoption/productid/%s',
-        cart_add: defines.baseUrl + '/restconnect/cart/add/'	//直接post到这个接口就返回参数
+        cart_add: defines.baseUrl + '/restconnect/cart/add/',	//直接post到这个接口就返回参数
+        cart_get_qty: defines.baseUrl + '/restconnect/cart/getQty'	//直接post到这个接口就返回参数
     };
 
     window.servers = {};
@@ -124,17 +125,25 @@
         });
     };
 	
-    servers.cartAdd = function (formId, callback) {
-		$(formId).submit(function() {  
-	        $(this).ajaxSubmit(options);  
-    		});  
-        var options = {
-			//beforeSubmit:  showRequest,  //提交前处理 
-			//success:       showResponse,  //处理完成 
-			dataType:  'json',
-			url: url.cart_add,
-            success: callback
-	        }
+    servers.cartAdd = function (para, callback) {	
+		$.ajax({
+			type: 'POST',
+			url: sprintf(url.cart_add),
+			data: para,
+			dataType: 'json',
+			success: callback,
+			error: error
+		});
+	};
+	
+    servers.cartGetQty = function (callback) {	
+		$.ajax({
+			type: 'get',
+			url: sprintf(url.cart_get_qty),
+			dataType: 'json',
+			success: callback,
+			error: error
+		});
 	};
 
     // 统一处理 API 请求错误
