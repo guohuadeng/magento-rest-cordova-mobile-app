@@ -20,7 +20,8 @@
         //product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
         product_img: defines.baseSite + '/api/rest/products/%s/images/',
         product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中
-        product_option: defines.baseUrl + '/restconnect/products/getcustomoption/productid/%s'
+        product_option: defines.baseUrl + '/restconnect/products/getcustomoption/productid/%s',
+        cart_add: defines.baseUrl + '/restconnect/cart/add/'	//直接post到这个接口就返回参数
     };
 
     window.servers = {};
@@ -34,7 +35,7 @@
             username: username,
             password: password
         }, callback).fail(function () {
-            alert('Username or password is error!');
+            alert('Please check the Username or Password!');
         });
     };
 
@@ -122,6 +123,19 @@
             error: error
         });
     };
+	
+    servers.cartAdd = function (formId, callback) {
+		$(formId).submit(function() {  
+	        $(this).ajaxSubmit(options);  
+    		});  
+        var options = {
+			//beforeSubmit:  showRequest,  //提交前处理 
+			//success:       showResponse,  //处理完成 
+			dataType:  'json',
+			url: url.cart_add,
+            success: callback
+	        }
+	};
 
     // 统一处理 API 请求错误
     function error(err) {
