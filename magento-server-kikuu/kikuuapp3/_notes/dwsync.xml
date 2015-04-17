@@ -26,7 +26,7 @@
 <file name="register.html" server="120.24.88.210" local="130736856175634039" remote="130736856000000000" Dst="0" />
 <file name="package.json" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
 <file name="pDetailRef.html" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
-<file name="productDetail.html" server="207.226.141.198" local="130736683098581479" remote="130736871000000000" Dst="0" />
+<file name="productDetail.html" server="207.226.141.198" local="130737598398838667" remote="130737598200000000" Dst="0" />
 <file name="productDetail_bak.html" server="207.226.141.198" local="130735875057009758" remote="130736871000000000" Dst="0" />
 <file name="productDetail_embed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
 <file name="productEmbed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
@@ -34,6 +34,8 @@
 <file name="register.html" server="207.226.141.198" local="130736891845942589" remote="130736891400000000" Dst="0" />
 <file name="search.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
 <file name="searchResult.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
-<file name="index.html" server="207.226.141.198" local="130736875366446473" remote="130736875200000000" Dst="0" />
+<file name="index.html" server="207.226.141.198" local="130737598948845877" remote="130737614400000000" Dst="0" />
 <file name="detail.html" server="207.226.141.198" local="130735875056789484" remote="130736875200000000" Dst="0" />
+<file name="index.html" server="120.24.88.210" local="130737598948845877" remote="130737598800000000" Dst="0" />
+<file name="productDetail.html" server="120.24.88.210" local="130737614078345408" remote="130737613800000000" Dst="0" />
 </dwsync>

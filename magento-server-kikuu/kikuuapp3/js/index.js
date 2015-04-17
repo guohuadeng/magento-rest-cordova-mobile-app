@@ -172,8 +172,8 @@ function ready() {
 				if (item.final_price_with_tax == item.regular_price_with_tax)
 	                item.price_percent_class = 'none';              
             //}
-            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(2);
-            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(2);
+            item.final_price_with_tax = parseFloat(item.final_price_with_tax).toFixed(0);
+            item.regular_price_with_tax = parseFloat(item.regular_price_with_tax).toFixed(0);
             return item;
         });
         $el[func](Handlebars.compile(itemTpl)({

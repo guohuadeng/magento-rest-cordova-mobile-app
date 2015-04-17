@@ -15,8 +15,8 @@
         menus: defines.baseUrl + '/restconnect/?cmd=menu',
         products: defines.baseUrl + '/restconnect/?cmd=%s&limit=%s&page=%s',
         products_search: defines.baseUrl + '/restconnect/search/?q=%s',
-        products_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
-        product_rest: defines.baseSite + '/api/rest/products/%s',
+        product_detail: defines.baseUrl + '/catalog/product/view/id/%s', //这个是直接详情页面
+        product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
         //product_rest: defines.baseUrl + '/restconnect/products/getproductdetail/productid/%s',
         product_img: defines.baseSite + '/api/rest/products/%s/images/',
         product_attr: defines.baseUrl + '/restconnect/products/getcustomeattr/productid/%s', //开发中
@@ -68,10 +68,10 @@
         });
     };
 
-    servers.getProductsDetail = function (id, callback) {
+    servers.getProductDetail = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.products_detail, id),
+            url: sprintf(url.product_detail, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -79,10 +79,10 @@
         });
     };
 
-    servers.getProductsRest = function (id, callback) {
+    servers.getProductRest = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.products_rest, id),
+            url: sprintf(url.product_rest, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -90,10 +90,10 @@
         });
     };
 
-    servers.getProductsImg = function (id, callback) {
+    servers.getProductImg = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.products_img, id),
+            url: sprintf(url.product_img, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -101,10 +101,10 @@
         });
     };
 
-    servers.getProductsAttr = function (id, callback) {
+    servers.getProductAttr = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.products_attr, id),
+            url: sprintf(url.product_attr, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,
@@ -112,10 +112,10 @@
         });
     };
 
-    servers.getProductsOption = function (id, callback) {
+    servers.getProductOption = function (id, callback) {
         $.ajax({
             type: 'get',
-            url: sprintf(url.products_option, id),
+            url: sprintf(url.product_option, id),
             contentType: 'application/json',
             dataType: 'json',
             success: callback,

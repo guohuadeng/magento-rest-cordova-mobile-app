@@ -39,11 +39,19 @@
 				</span>
 				<span class="old-price">Tsh&nbsp;{{regular_price_with_tax}}</span>
 			</div>
-			<p>{{{description}}}</p>
+			<div class="tabs__labels-wrapper">
+        		<ul class="tabs__labels">
+                <li id="product_tabs_details" class="tabs__label is-current" style="width: 100%;"><span class="tab-title">Details</span></li>
+				<li id="product_tabs_related" class="tabs__label none" style="width: 50%;"><span class="tab-title">Related</span></li>
+                </ul>
+			</div>		
+			<div class="product__description">
+				{{{description}}}	
+			</div>
 		</div>
     {{/with}}
 </script>
-<!-- 详情 rest 页 -->
+<!-- 详情 attr 属性页 -->
 <script id="productAttr-template" type="text/x-handlebars-template">
     {{#with product}}
 		<div id="productAttr-{{entity_id}}">
