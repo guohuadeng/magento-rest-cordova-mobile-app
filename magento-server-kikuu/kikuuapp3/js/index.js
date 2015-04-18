@@ -48,7 +48,7 @@ function ready() {
     // 用户用户状态显示菜单
     function showMenus(menus) {
 		//设置cart的web指向
-		$('#cartIcon').attr ('href',defines.baseWeb +'/checkout/cart/');
+		$('#cartIcon').attr ('href','detail.html?title=My Shopping Cart&frameUrl=' + defines.baseWeb +'/checkout/cart/');
         $.each(menus, function (i, item) {
             item.url = '#c' + item.category_id;
         });
