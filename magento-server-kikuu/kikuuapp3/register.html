@@ -140,8 +140,8 @@
 <script type="text/javascript">
 	//<![CDATA[
 	Event.observe(window, 'load', function(e){
-		document.querySelector("#user_create_form").action = defines.baseUrl + '/awmobile2/customer/createpost/';
-		document.querySelector("#success_url").value = defines.baseUrl + '/customer/account/';
+		document.querySelector("#user_create_form").action = defines.baseWeb + '/awmobile2/customer/createpost/';
+		document.querySelector("#success_url").value = defines.baseWeb + '/customer/account/';
 		window.customerAccount.setRegisterForm('user_create_form');				
 		window.customerAccount.setRegisterTitle("Register");
 	});
@@ -186,7 +186,7 @@
 		document.getElementById("btnValidation").onclick=function(){time(this);}  
 
 	       //发送短信请求
-		var smsurl = defines.baseUrl + '/sendsms.php';
+		var smsurl = defines.baseSite + '/sendsms.php';
 		function sendsms(smsurl,smscode){ 
 		   new Ajax.Request(smsurl, {
 			method: 'GET',

@@ -85,7 +85,8 @@ function ready() {
 			$('#productOption').html(Handlebars.compile(productOptionTpl)({
 				options: items,
 				entity_id: entity_id,				
-				baseUrl: defines.baseUrl
+				baseUrl: defines.baseUrl,
+				baseApi: defines.baseApi
 				}));
 			});
         };

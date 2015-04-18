@@ -34,7 +34,7 @@ function ready() {
                 $menus.find('.login_true').show();
                 $menus.find('.login_false').hide();
 				if (defines.user.avatar) {
-					$menus.find('.userinfo img').attr('src', defines.baseUrl +
+					$menus.find('.userinfo img').attr('src', defines.baseSite +
 						'/media/customer' + defines.user.avatar);
 					}
                 $menus.find('.userinfo span').text(defines.user.name);
@@ -48,7 +48,7 @@ function ready() {
     // 用户用户状态显示菜单
     function showMenus(menus) {
 		//设置cart的web指向
-		$('#cartIcon').attr ('href','detail.html?title=My Shopping Cart&frameUrl=' + defines.baseUrl +'/checkout/cart/');
+		$('#cartIcon').attr ('href','detail.html?title=My Shopping Cart&frameUrl=' + defines.baseWeb +'/checkout/cart/');
         $.each(menus, function (i, item) {
             item.url = '#c' + item.category_id;
         });
@@ -234,7 +234,7 @@ function ready() {
         }
         // forgot password页
         if ($this.hasClass('page-forgot-password')) {			
-			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseUrl+'/awmobile2/customer/forgotpasswordpost/');
+			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseWeb+'/customer/forgotpasswordpost/');
         }
 		
 

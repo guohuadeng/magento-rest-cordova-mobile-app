@@ -88,7 +88,7 @@
 <!-- 自定义选项，动态价格相关 复杂385，http://skymazon.sunpop.cn/kikuuapp3/productDetail.html?entity_id=385-->
 <script id="productOption-template" type="text/x-handlebars-template">
 <div class="product-options add-to-cart-options__container-inner popup" id="product-options-wrapper">
-	<form action="{{baseUrl}}/restconnect/cart/add/" method="post" id="product_addtocart_form">
+	<form action="{{baseApi}}/restconnect/cart/add/" method="post" id="product_addtocart_form">
 	<div class="no-display">
 		<input type="hidden" name="product" value="{{entity_id}}">
 	</div>

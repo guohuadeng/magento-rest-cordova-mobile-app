@@ -33,7 +33,7 @@ function initEvents() {
         cordova.plugins.barcodeScanner.scan(
             function (result) {
                 if (result.format === 'QR_CODE' && confirm(result.text)) {
-                    if (result.text.indexOf(defines.baseUrl) !== -1) {
+                    if (result.text.indexOf(defines.baseSite) !== -1) {
                         location.href = result.text;
                     } else {
                         navigator.app.loadUrl(result.text, {openExternal: true});

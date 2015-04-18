@@ -26,12 +26,12 @@
 <file name="register.html" server="120.24.88.210" local="130736891845942589" remote="130737687600000000" Dst="0" />
 <file name="package.json" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
 <file name="pDetailRef.html" server="207.226.141.198" local="130735875056999745" remote="130736871000000000" Dst="0" />
-<file name="productDetail.html" server="207.226.141.198" local="130737855868519161" remote="130737855600000000" Dst="0" />
+<file name="productDetail.html" server="207.226.141.198" local="130737904181223082" remote="130737904200000000" Dst="0" />
 <file name="productDetail_bak.html" server="207.226.141.198" local="130735875057009758" remote="130736871000000000" Dst="0" />
 <file name="productDetail_embed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
 <file name="productEmbed.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
 <file name="productFrame.html" server="207.226.141.198" local="130735875057019771" remote="130736871000000000" Dst="0" />
-<file name="register.html" server="207.226.141.198" local="130736891845942589" remote="130736891400000000" Dst="0" />
+<file name="register.html" server="207.226.141.198" local="130737955891624444" remote="130737955800000000" Dst="0" />
 <file name="search.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
 <file name="searchResult.html" server="207.226.141.198" local="130735875057029782" remote="130736871000000000" Dst="0" />
 <file name="index.html" server="207.226.141.198" local="130737831177637589" remote="130737838800000000" Dst="0" />
@@ -50,4 +50,5 @@
 <file name="productFrame.html" server="120.24.88.210" local="130735875057019771" remote="130737687600000000" Dst="0" />
 <file name="search.html" server="120.24.88.210" local="130735875057029782" remote="130737687600000000" Dst="0" />
 <file name="searchResult.html" server="120.24.88.210" local="130735875057029782" remote="130737687600000000" Dst="0" />
+<file name="forgot_password.html" server="207.226.141.198" local="130736738178288534" remote="130737904200000000" Dst="0" />
 </dwsync>
