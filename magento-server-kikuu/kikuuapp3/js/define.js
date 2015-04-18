@@ -9,9 +9,9 @@
     var baseSite = 'http://www.kikuu.com',
 		baseLang = 'en',
 		appView = 'm',
-		baseUrl = baseSite,// + '/' +baseLang,	//这个即将废除，用baseApi来
-		baseApi = baseSite,// + '/' +baseLang,	//这是默认Api地址
-		baseWeb = baseSite,// + '/' +appView,
+		baseUrl = baseSite + '/' +baseLang,	//这个即将废除，用baseApi来
+		baseApi = baseSite + '/' +baseLang,	//这是默认Api地址
+		baseWeb = baseSite + '/' +appView,
 		cur_entity_id = '';	//当前查看产品id，可能没用，留着
 	
     window.defines = {

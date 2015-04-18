@@ -15,7 +15,7 @@
         'bower_components/momentjs/moment.js',
         'bower_components/swiper/dist/js/swiper.jquery.min.js',
         'bower_components/jquery.lazyload/jquery.lazyload.js',
-        'assets/jquery-ajaxform/jquery.form.js',
+        'assets/jquery-ajaxform/jquery.form.js'
 		//要在模板中使用if else判断语句，用这个方便
         //'assets/jTemplates/jquery-jtemplates.js',
     ];
