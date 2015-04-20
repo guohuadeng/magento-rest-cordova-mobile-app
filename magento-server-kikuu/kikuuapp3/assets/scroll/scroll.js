@@ -80,17 +80,17 @@ function initPageScroll(options) {
                     $pd.hide();
                 }
 				
-                if (this.y >= 2) {
+                if (this.distY > 50) {
 					showhead();
-                } else if (this.y < -15){
+                } else if (this.distY < -50){
 					hidehead();	
-				} 				
+				} 			
 				
                 pullActionDetect.check(scroll, $el.find('.pullUp'), 1);
             },
             onScrollEnd: function () {
                 $el.find('scroller').trigger('scroll');
-								
+					
                 if (this.distX < -100) {
                     options.onRight(page.id, i);
                     return;

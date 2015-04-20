@@ -1170,16 +1170,18 @@ a.product-card span.label {
 	}
 .product-card__size{
 	color:#999;
-	margin-top:4px;}
+	margin-top:4px;
+    visibility:hidden; }
 .product-card__selected-options{
 	width:100%;
 	font-size:16px;
 	color:#999;
 	text-align:left;
-	margin-top:5px;}
+	margin-top:15px;}
 .product-original__price{
 	color:#999;
-	text-decoration:line-through;}
+	text-decoration:line-through;
+    text-align:center;}
 .product-card__title-inner {
     display: block;
     display: -webkit-box;

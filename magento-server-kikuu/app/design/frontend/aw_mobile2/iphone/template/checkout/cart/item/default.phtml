@@ -39,10 +39,7 @@
         <div class="product-card__info">
             <h3 class="product-card__title">
                 <?php if ($this->hasProductUrl()): ?>
-                    <a class="product-card__title-link" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" href="<?php echo $this->getProductUrl() ?>"><?php echo $this->htmlEscape($this->getProductName()) ?></a>
-                <?php else:?>
                     <?php echo $this->htmlEscape($this->getProductName()) ?>
-                <?php endif;?>
                 <p class="product-card__size">size:36</p>
             </h3>
             <div class="product-card__selected-options">

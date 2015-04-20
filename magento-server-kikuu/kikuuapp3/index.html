@@ -76,7 +76,6 @@
     {{#each menus}}
     <li class="table-view-cell {{class_name}}"><a href="{{url}}">{{name}}</a></li>
     {{/each}}
-    <li class="table-view-cell demoDesign"><a href="fa/index.html" data-ajax="false">Demo Design</a></li>
 </script>
 
 <script id="slide-template" type="text/x-handlebars-template">
@@ -110,7 +109,7 @@
 
             <div class="product-info">           		
                 <div class="product-name">
-					<a href="detail.html?title={{name}}&frameUrl={{url_key}}&share=true"  data-reload="root">{{name}}</a>
+					{{name}}
                 </div>
 
                 <div class="product-price">
