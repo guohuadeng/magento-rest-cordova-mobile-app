@@ -28,19 +28,12 @@
 <div class="shopping-cart__item">
     <div class="shopping-cart__product product-card">
         <p class="product-card__image-wrapper">
-            <?php if ($this->hasProductUrl()): ?>
-                <a class="product-card__image-link" href="<?php echo $this->getProductUrl() ?>">
                     <img class="product-card__image" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" src="<?php echo $this->getProductThumbnail()->resize(90); ?>">
-                </a>
-            <?php else:?>
-                <img class="product-card__image" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" src="<?php echo $this->getProductThumbnail()->resize(90); ?>">
-            <?php endif;?>
         </p>
         <div class="product-card__info">
             <h3 class="product-card__title">
-                <?php if ($this->hasProductUrl()): ?>
                     <?php echo $this->htmlEscape($this->getProductName()) ?>
-                <p class="product-card__size">size:36</p>
+                <p class="product-card__size"></p>
             </h3>
             <div class="product-card__selected-options">
                 <p class="product-card__price">
@@ -50,7 +43,7 @@
                         <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
                     <?php endif; ?>
                 </p>
-                <p class="product-original__price">$2680</p>               
+                <p class="product-original__price"></p>               
             </div>
         </div>
         <div class="shopping-item-controls">
