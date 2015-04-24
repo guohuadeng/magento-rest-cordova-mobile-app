@@ -177,7 +177,8 @@ function ready() {
             return item;
         });
         $el[func](Handlebars.compile(itemTpl)({
-            items: items
+            items: items,
+			baseWeb: defines.baseWeb
         }));
         var $cb = $el.find('.cb');
         $cb = $cb.length ? $cb : $('<div class="cb"></div>');

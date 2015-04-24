@@ -34,4 +34,14 @@
 <file name="config.js" server="120.24.88.210" local="130735875056909632" remote="130737687600000000" Dst="0" />
 <file name="util.js" server="120.24.88.210" local="130735875056929649" remote="130737687600000000" Dst="0" />
 <file name="jquery.form.js" server="207.226.141.198" local="130737981164108989" remote="130737981000000000" Dst="0" />
+<file name="app.js" server="demo.sunpop.cn" local="130743712193194935" remote="130743861600000000" Dst="0" />
+<file name="config.js" server="demo.sunpop.cn" local="130743712193204945" remote="130743861600000000" Dst="0" />
+<file name="define.js" server="demo.sunpop.cn" local="130743853986966744" remote="130743861600000000" Dst="0" />
+<file name="index.js" server="demo.sunpop.cn" local="130743918455867784" remote="130743918000000000" Dst="0" />
+<file name="jquery.form.js" server="demo.sunpop.cn" local="130743712193214958" remote="130743861600000000" Dst="0" />
+<file name="productdetail.js" server="demo.sunpop.cn" local="130743712193224971" remote="130743861600000000" Dst="0" />
+<file name="server.js" server="demo.sunpop.cn" local="130743712193224971" remote="130743861600000000" Dst="0" />
+<file name="util.js" server="demo.sunpop.cn" local="130743712193224971" remote="130743861600000000" Dst="0" />
+<file name="common.js" server="demo.sunpop.cn" local="130743712193204945" remote="130743861600000000" Dst="0" />
+<file name="assets.js" server="demo.sunpop.cn" local="130743712193194935" remote="130743861600000000" Dst="0" />
 </dwsync>

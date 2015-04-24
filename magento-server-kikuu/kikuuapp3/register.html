@@ -33,7 +33,7 @@
           <div class="nav__list nav__list--subcategory customer-account-register is-opened js-active">
             <div class="nav__list-inner customer-account-register-container">
               <div class="customer-form-register-before"> </div>
-              <form action="/awmobile2/customer/createpost/" method="post" id="user_create_form" class="form">
+              <form action="/customer/account/createpost/" method="post" id="user_create_form" class="form">
                 <input type="hidden" name="success_url" id="success_url" value="">
                 <input type="hidden" name="error_url" value="">
                 <p class="form__field form__field--required"> 
@@ -140,7 +140,7 @@
 <script type="text/javascript">
 	//<![CDATA[
 	Event.observe(window, 'load', function(e){
-		document.querySelector("#user_create_form").action = defines.baseWeb + '/awmobile2/customer/createpost/';
+		document.querySelector("#user_create_form").action = defines.baseWeb + '/customer/account/createpost/';
 		document.querySelector("#success_url").value = defines.baseWeb + '/customer/account/';
 		window.customerAccount.setRegisterForm('user_create_form');				
 		window.customerAccount.setRegisterTitle("Register");

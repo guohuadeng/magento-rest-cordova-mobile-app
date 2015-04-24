@@ -6,7 +6,7 @@
 
 (function (window) {
 
-    var baseSite = 'http://www.kikuu.com',
+    var baseSite = 'http://demo.sunpop.cn',
 		baseLang = 'en',
 		appView = 'm',
 		baseUrl = baseSite + '/' +baseLang,	//这个即将废除，用baseApi来

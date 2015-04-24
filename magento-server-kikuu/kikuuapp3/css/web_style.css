@@ -3220,7 +3220,7 @@ input[type="checkbox"]:checked + label
 }
 
 .validation-code{
-	width:42%;
+	width:35%;
 }
 
 #checkoutSteps .textfield{

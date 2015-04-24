@@ -51,4 +51,20 @@
 <file name="search.html" server="120.24.88.210" local="130735875057029782" remote="130737687600000000" Dst="0" />
 <file name="searchResult.html" server="120.24.88.210" local="130735875057029782" remote="130737687600000000" Dst="0" />
 <file name="forgot_password.html" server="207.226.141.198" local="130736738178288534" remote="130737904200000000" Dst="0" />
+<file name="bower.json" server="demo.sunpop.cn" local="130743712191212457" remote="130743861600000000" Dst="0" />
+<file name="detail.html" server="demo.sunpop.cn" local="130743712193064774" remote="130743861600000000" Dst="0" />
+<file name="forgot_password.html" server="demo.sunpop.cn" local="130743712193104827" remote="130743861600000000" Dst="0" />
+<file name="gulpfile.js" server="demo.sunpop.cn" local="130743712193104827" remote="130743861600000000" Dst="0" />
+<file name="index.html" server="demo.sunpop.cn" local="130743920762924439" remote="130743920400000000" Dst="0" />
+<file name="login.html" server="demo.sunpop.cn" local="130743712193305071" remote="130743861600000000" Dst="0" />
+<file name="package.json" server="demo.sunpop.cn" local="130743712193315081" remote="130743861600000000" Dst="0" />
+<file name="pDetailRef.html" server="demo.sunpop.cn" local="130743712193315081" remote="130743861600000000" Dst="0" />
+<file name="productDetail.html" server="demo.sunpop.cn" local="130743907314210199" remote="130743907200000000" Dst="0" />
+<file name="productDetail_bak.html" server="demo.sunpop.cn" local="130743712193325095" remote="130743861600000000" Dst="0" />
+<file name="productDetail_embed.html" server="demo.sunpop.cn" local="130743712193325095" remote="130743861600000000" Dst="0" />
+<file name="productFrame.html" server="demo.sunpop.cn" local="130743712193335108" remote="130743861600000000" Dst="0" />
+<file name="register.html" server="demo.sunpop.cn" local="130743911039834026" remote="130743910800000000" Dst="0" />
+<file name="productEmbed.html" server="demo.sunpop.cn" local="130743712193325095" remote="130743861600000000" Dst="0" />
+<file name="search.html" server="demo.sunpop.cn" local="130743712193335108" remote="130743861600000000" Dst="0" />
+<file name="searchResult.html" server="demo.sunpop.cn" local="130743712193345118" remote="130743861600000000" Dst="0" />
 </dwsync>
