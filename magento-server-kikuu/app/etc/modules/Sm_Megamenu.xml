@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Sm_Megamenu>
-            <active>false</active>
-            <codePool>local</codePool>
-        </Sm_Megamenu>
-    </modules>
-</config> 

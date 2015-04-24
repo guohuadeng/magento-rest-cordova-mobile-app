@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <AW_Ajaxlogin>
-            <active>true</active>
-            <codePool>local</codePool>
-        </AW_Ajaxlogin>
-    </modules>
-</config>

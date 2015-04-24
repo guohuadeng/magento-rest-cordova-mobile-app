@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <SkyMazon_Tweaks>
-            <active>false</active>
-            <codePool>local</codePool>
-        </SkyMazon_Tweaks>
-    </modules>
-</config>
