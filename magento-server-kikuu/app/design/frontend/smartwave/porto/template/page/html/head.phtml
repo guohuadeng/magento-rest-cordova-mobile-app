@@ -1,0 +1,44 @@
+<meta http-equiv="Content-Type" content="<?php echo $this->getContentType() ?>" />
+<?php if($meta_title=$this->getMetaTitle()): ?>
+<title><?php echo htmlspecialchars($meta_title) ?></title>
+<?php else: ?>
+<title><?php echo $this->getTitle() ?></title>
+<?php endif; ?>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+
+<?php //Include Google fonts character subsets (such as extended latin, cyrillic)
+    $theme = Mage::helper('porto');
+    $charSubset = '&subset=latin';
+    $d = $theme->getCfgSectionDesign();
+    if (isset($d['font']['primary_char_latin_ext']) && $d['font']['primary_char_latin_ext']==1 )
+        $charSubset .= ',latin-ext';
+    if (isset($d['font']['custom_char_subset']) && $d['font']['custom_char_subset'])
+        $charSubset .= ','.$d['font']['custom_char_subset'];
+    $font_sizes = "%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic";
+?>
+<?php if ($d['font']['custom'] && $d['font']['primary_font_family_group'] == 'google'): ?>
+<link rel="stylesheet" href='//fonts.useso.com/css?family=<?php echo str_replace(' ', '+', $d['font']['primary_font_family']).$font_sizes; echo $charSubset; ?>' type='text/css' />
+<?php else: ?>
+<link rel="stylesheet" href="//fonts.useso.com/css?family=Open+Sans%3A300%2C300italic%2C400%2C400italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&amp;v1&amp;subset=latin%2Clatin-ext" type="text/css" media="screen"/>
+<?php endif;?>
+<link href='//fonts.useso.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'/>
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getChildHtml() ?>
+<?php echo $this->helper('core/js')->getTranslatorScript() ?>
+<?php echo $this->getIncludes() ?>
+<script type="text/javascript">
+    wow = new WOW(
+      {
+        animateClass: 'animated',
+        offset:       100
+      }
+    );
+    wow.init();
+</script>
+
+<!--<?php echo "Porto Magento Theme: v".Mage::getConfig()->getModuleConfig("Smartwave_Porto")->version; ?>-->

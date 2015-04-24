@@ -1,0 +1,108 @@
+<?php
+/**
+ Made by Smartwave.
+ */
+?>
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $popup = Mage::getStoreConfig('porto_settings/newsletter_popup',$code);
+?>
+<script type="text/javascript">
+    jQuery(function($) {
+        var check_cookie = $.cookie('newsletter_popup');
+        if(check_cookie == null || check_cookie == 'shown') {
+            beginNewsletterForm();
+        }
+        $('#newsletter_popup_dont_show_again').on('change', function(){
+            if($(this).length){        
+                var check_cookie = $.cookie('newsletter_popup');
+                if(check_cookie == null || check_cookie == 'shown') {
+                    $.cookie('newsletter_popup','dontshowitagain');            
+                }
+                else
+                {
+                    $.cookie('newsletter_popup','shown');
+                    beginNewsletterForm();
+                }
+            } else {
+                $.cookie('newsletter_popup','shown');
+            }
+        }); 
+    });
+
+function beginNewsletterForm() {
+    jQuery.fancybox({
+        'padding': '0px',
+        'autoScale': true,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'type': 'inline',
+        'href': '#newsletter_popup',
+        'onComplete': function() {
+            $.cookie('newsletter_popup', 'shown');
+        },
+        'tpl': { 
+            closeBtn: '<a title="Close" class="fancybox-item fancybox-close fancybox-newsletter-close" href="javascript:;"></a>' 
+        }
+    });
+    jQuery('#newsletter_popup').trigger('click');
+}
+
+</script>
+<style type="text/css">
+<?php
+    if($popup["newsletter_custom_style"]){
+        echo $popup["newsletter_custom_style"];
+    }
+?>
+#newsletter_popup{
+<?php
+    if($popup["newsletter_width"]){
+        echo "width:".$popup["newsletter_width"].";";
+    }
+    if($popup["newsletter_height"]){
+        echo "height:".$popup["newsletter_height"].";";
+    }
+    if($popup["newsletter_bg_color"]){
+        echo "background-color:".$popup["newsletter_bg_color"].";";
+    }
+    if(isset($popup["newsletter_bg_image"]) && $popup["newsletter_bg_image"]){
+?>
+    background-image:url(<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA)."porto/newsletter_popup/".$popup['newsletter_bg_image'];?>);
+<?php
+    }
+?>
+}
+</style>
+<div class="block block-subscribe" id="newsletter_popup">
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-popup-validate-detail" onsubmit="setNewsletterCookie()">
+        <div class="block-content">
+            <?php
+                if($popup["show_logo"]){
+            ?>
+                    <img src="<?php echo $this->getSkinUrl($popup["show_logo"]); ?>" alt="" />
+            <?php
+                }
+            ?>
+            <?php echo $popup['newsletter_content']; ?>
+            <div class="input-box">
+                <input type="text" name="email" id="newsletter_popup_email" title="<?php echo $this->__('Sign up for our newsletter') ?>" class="input-text required-entry validate-email" placeholder="<?php echo $this->__("Email Address"); ?>" />
+                <button type="submit" title="<?php echo $this->__('Go!') ?>" class="button"><span><span><?php echo $this->__('Go!') ?></span></span></button>
+                <div class="clearer"></div>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterpopupSubscriberFormDetail = new VarienForm('newsletter-popup-validate-detail');
+        document.getElementById("newsletter-popup-validate-detail").onsubmit=function(){
+            jQuery.cookie('newsletter_popup','dontshowitagain');
+        }
+    //]]>
+    </script>
+    <div class="subscribe-bottom">
+        <input type="checkbox" id="newsletter_popup_dont_show_again"/>
+        <label for="newsletter_popup_dont_show_again"><?php echo $this->__("Don't show this popup again"); ?></label>
+    </div>
+</div>

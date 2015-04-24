@@ -1,0 +1,27 @@
+/** 
+ * ISAAC Priceslider
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    ISAAC
+ * @package     ISAAC_Priceslider
+ * @copyright   Copyright (c) 2011 ISAAC Software Solutions B.V. (http://www.isaac.nl)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ * @author      Aad Mathijssen, Sam Berghmans
+ * @version     1.0.0
+ */
+
+.header .form-search #cat { width: 118px; float:left; margin-right: 2px;}
+.header .form-search #search { width: 97px; float: left; margin-right: 2px; }
+.header .form-search label { width: 22px; float: left; }
+#search_mini_form .header .form-search button.button { float: right; margin-right: 8px; }

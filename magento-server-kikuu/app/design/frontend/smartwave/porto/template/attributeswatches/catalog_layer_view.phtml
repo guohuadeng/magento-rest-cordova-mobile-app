@@ -1,0 +1,70 @@
+<?php
+/**
+ * Category layered navigation
+ *
+ * @see Mage_Catalog_Block_Layer_View
+ */
+?>
+<?php if ($this->canShowBlock()): ?>
+    <div class="block block-layered-nav">
+        <div class="block-content">
+            <?php echo $this->getStateHtml() ?>
+            <?php if ($this->getLayer()->getState()->getFilters()): ?>
+                <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+            <?php endif; ?>
+            <?php if ($this->canShowOptions()): ?>
+                <dl id="narrow-by-list">
+                    <?php
+                    $_filters = $this->getFilters();
+                    $_attributes_with_swatches = Mage::getStoreConfig("attributeswatches/layerednavigation/attributes") . "," . Mage::getStoreConfig("attributeswatches/layerednavigation/hidelabel");
+                    $_attributes_with_swatches = array_unique(explode(",", $_attributes_with_swatches));
+                    ?>
+                    <?php foreach ($_filters as $_filter): ?>
+                        <?php
+                        if ($_filter->getItemsCount()):
+                            $_info = $_filter->getAttributeModel();
+                            if ($_info) {
+                                $_code = $_info->getAttributeCode();
+                                if (in_array($_code, $_attributes_with_swatches)) {
+                                    $_filter->setTemplate("attributeswatches/catalog_layer_filter_swatches.phtml");
+                                }
+                            }
+                            ?>
+                            <dt><?php echo $this->__($_filter->getName()) ?></dt>
+                            <dd><?php echo $_filter->getHtml() ?></dd>
+            <?php endif; ?>
+                <?php endforeach; ?>
+                </dl>
+                <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+                <script type="text/javascript">
+                    jQuery(function($){
+                        $(".block-layered-nav dt").click(function(){
+                            if($(this).next("dd").css("display") == "none"){
+                                $(this).next("dd").slideDown(200);
+                                $(this).removeClass("closed");
+                            } else {
+                                $(this).next("dd").slideUp(200);
+                                $(this).addClass("closed");
+                            }
+                        });
+                    });
+                </script>
+    <?php endif; ?>
+        </div>
+    </div>
+    <!-- to preselect the swatches according to the selected option in the layered navigation -->
+    <?php
+    /*if (Mage::getStoreConfig("attributeswatches/layerednavigation/switchimages")) {
+        $_configurable_attribute = Mage::getStoreConfig("attributeswatches/productlist/attributes");
+        /* get selected value based on attribute */
+       /* $_val = trim($this->getRequest()->getParam($_configurable_attribute));
+        if ($_val) {
+            ?>
+            <script type="text/javascript">
+                _FILTER_SELECTED_OPTION = "<?php echo $_configurable_attribute . "-" . $_val; ?>";
+            </script>            
+        <?php
+        }
+    }*/
+    ?>
+<?php endif; ?>

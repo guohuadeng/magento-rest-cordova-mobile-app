@@ -1,0 +1,65 @@
+<?php if ($posts = $this->getRecent()): ?>
+<div class="block block-from-blog">
+    <div class="block-title">
+        <strong><span><?php echo Mage::helper('blog')->__('Recent Posts'); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul>
+        <?php foreach ($posts as $post): ?>
+            <li>
+                <!-- 
+                <div class="post-image">
+                <?php
+                    if($post_image = $post->getImage()){
+                ?>
+                    <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$post_image; ?>" alt=""/>
+                <?php
+                    }
+                ?>
+                </div>
+                <a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a>
+                <div class="post-time"><?php echo Mage::helper('core')->formatDate($post->getCreatedTime(), 'long', false); ?></div>
+                <div class="comments-count"><?php echo $post->getCommentCount(); ?>&nbsp;<?php echo $this->__('Comment(s)'); ?></div>
+                <div class="clear"></div>
+                -->
+
+                <div class="blog-date">
+                    <div><?php echo $post->getDay(); ?></div>
+                    <div><?php echo $post->getMonthShort(); ?></div>
+                </div>
+                <!--
+                <div class="blog-post-likes">
+                    <div class="blog-like">&nbsp;</div>
+                    <div>39</div>
+                </div>
+                -->
+                <div class="blog-content-logo">
+                    <?php
+                        if($post_image = $post->getImage()){
+                    ?>
+                        <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$post_image; ?>" alt=""/>
+                    <?php
+                        }
+                    ?>
+                </div>
+                <div class="blog-content-details">
+                    <h3><?php echo $post->getTitle(); ?></h3>
+                    <div class="add-info">
+                        <div class="blog-author-info"><?php echo $post->getUser(); ?></div>
+                        <div class="blog-author-comment"><?php echo $post->getCommentCount(); ?>&nbsp;<?php echo $this->__('Comment(s)'); ?></div>
+                    </div>
+                    <div class="post-content"><?php echo $post->getPostContent(); ?></div>
+                    
+                    <a class="more-link" href="<?php echo $post->getAddress(); ?>">Read more &gt;</a>
+                </div>
+            </li>
+        <?php endforeach; ?>
+        </ul>
+    </div>    
+</div>
+<script type="text/javascript">// <![CDATA[
+                    jQuery(function($) {
+                        $('.block-from-blog ul').bxSlider({auto: false, autoStart: false, autoHover: false, mode:'horizontal', speed:1000, pager: false , minSlides: 2,  maxSlides: 2,  slideWidth: 480,  slideMargin: 15});
+                    });
+// ]]></script>
+<?php endif; ?>

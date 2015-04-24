@@ -1,0 +1,28 @@
+<div class="recent-posts">
+<?php if ($posts = $this->getRecent()): ?>
+<div class="owl-carousel">
+<?php foreach ($posts as $post): ?>
+    <div class="item">
+        <div class="post-date">
+            <span class="day"><?php echo $post->getDay(); ?></span>
+            <span class="month"><?php echo $post->getMonthShort(); ?></span>
+        </div>
+        <div class="postTitle">
+            <h2><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+        </div>
+        <div class="post-image">
+        <?php
+            if($post_image = $post->getImage()){
+        ?>
+            <img src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA).$post_image; ?>" alt=""/>
+        <?php
+            }
+        ?>
+        </div>
+        <div class="postContent"><?php echo $post->getShortContent(); ?></div>
+        <div class="clear"></div>
+    </div>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+</div>

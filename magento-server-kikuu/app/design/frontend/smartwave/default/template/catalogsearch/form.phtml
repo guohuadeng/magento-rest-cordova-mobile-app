@@ -1,0 +1,21 @@
+<?php echo $this->getChildHtml(); ?>
+<script type="text/javascript">
+//<![CDATA[
+<?php if ($this->helper('catalogcategorysearch')->isCategoryPage() || $this->helper('catalogcategorysearch')->isSearchResultsPage()) : ?>
+    Event.observe(window, 'load', function(){
+        $$('select#<?php echo $this->helper('catalogcategorysearch')->getCategoryParamName() ?> option').each(function(o) {
+            if (o.value == '<?php echo $this->getCurrentlySelectedCategoryId() ?>') {
+                o.selected = true;
+                throw $break;
+            }
+        });
+        escapedQueryText = '<?php echo $this->helper('catalogsearch')->getEscapedQueryText() ?>';
+        if (escapedQueryText !== '') {
+            $('search').value = escapedQueryText;
+        }
+    });
+<?php endif; ?>
+    var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+    searchForm.initAutocomplete('<?php echo $this->helper('catalogsearch')->getSuggestUrl() ?>', 'search_autocomplete');
+//]]>
+</script>

@@ -1,0 +1,43 @@
+<?php
+$socialfeeds = $this->helper('socialfeeds');
+
+$fb_result = $socialfeeds->getFBFans();
+if ($fb_result) : ?>
+<?php 
+    $fb_profile = $fb_result['profile'];
+    $fb_fans = $fb_result['fans'];
+    $fb_limit = $fb_result['limit'];
+?>
+
+
+<div class="block block-facebook-like ">
+        <div class="block-title">
+            <strong>
+                <span><?php echo $this->__('Facebook') ?></span>
+                <a target="_blank" href="<?php echo $fb_profile['link'] ?>" class="btn-like f-right" title="<?php echo $fb_profile['name'] ?>">
+                    <?php echo $this->__('Like!') ?>
+                </a>
+            </strong>
+        </div>
+
+        <div class="block-content">
+            <p><?php echo $fb_profile['likes'] ?> <?php echo $this->__('people like') ?> <a target="_blank" href="<?php echo $fb_profile['link'] ?>" title="<?php echo $fb_profile['name'] ?>"><?php echo $fb_profile['name'] ?></a></p>
+            <div class="clearfix fb-persons">
+                <?php echo $fb_fans ?>
+            </div>
+        </div>
+    </div>                
+
+    
+ <script type="text/javascript">
+   jQuery( ".block-facebook-like .block-title" ).click(function() {
+       winWidth = jQuery(window).innerWidth();
+       if( winWidth < 767){
+            jQuery(".block-facebook-like .block-title").toggleClass("open");
+            jQuery( ".block-facebook-like .block-content" ).slideToggle( "slow", function() {
+            // Animation complete.
+            });
+       }
+});
+</script>
+<?php endif; ?>

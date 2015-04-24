@@ -1,0 +1,129 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $aspect_ratio = Mage::getStoreConfig("porto_settings/category/aspect_ratio",$code);
+    $ratio_width = Mage::getStoreConfig("porto_settings/category/ratio_width",$code);
+    $ratio_height = Mage::getStoreConfig("porto_settings/category/ratio_height",$code);
+?>
+<?php if($this->getItems()->getSize()): ?>
+<div class="block block-related">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Related Products') ?></span></strong>
+    </div>
+    <div class="block-content">
+        <p class="block-subtitle"><?php echo $this->__('Check items to add to the cart or') ?>&nbsp;<a href="#" onclick="selectAllRelated(this); return false;"><?php echo $this->__('select all') ?></a></p>
+        <div class="owl-carousel owl-theme" id="block-related">
+        <?php
+            $i = 0;
+            $items = $this->getItems();
+            $count = count($items);
+        ?>
+            <div class="item">
+        <?php foreach($items as $_item): ?>
+        <?php
+            $i++;
+        ?>
+                <div class="product">
+                    <?php if(!$_item->isComposite() && $_item->isSaleable()): ?>
+                        <?php if (!$_item->getRequiredOptions()): ?>
+                            <input type="checkbox" class="checkbox related-checkbox" id="related-checkbox<?php echo $_item->getId() ?>" name="related_products[]" value="<?php echo $_item->getId() ?>" />
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="<?php echo $_item->getProductUrl() ?>" title="<?php echo $this->escapeHtml($_item->getName()) ?>" class="product-image"><img src="<?php if($aspect_ratio):?><?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(200);?><?php else: ?><?php echo $this->helper('catalog/image')->init($_item, 'thumbnail')->resize($ratio_width,$ratio_height); ?><?php endif; ?>" alt="<?php echo $this->escapeHtml($_item->getName()) ?>" /></a>
+                        </div>
+                        <div class="product-details col-xs-6">
+                            <p class="product-name"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></p>
+                            <?php 
+                            if (Mage::helper('catalog')->isModuleEnabled('Mage_Review')):
+                            if($_item->getRatingSummary()): 
+                            ?>
+                            <?php 
+                                $review_html = $this->getReviewsSummaryHtml($_item, 'short');
+                                if($review_html){
+                                    echo $review_html;
+                                }else{
+                            ?>
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:0"></div>
+                                    </div>
+                                </div>
+                            <?php                            
+                                }
+                            ?>
+                            <?php else: ?>
+                                <div class="ratings">
+                                    <div class="rating-box">
+                                        <div class="rating" style="width:0"></div>
+                                    </div>
+                                </div>
+                            <?php 
+                            endif; 
+                            endif;
+                            ?>
+                            <?php echo $this->getPriceHtml($_item, true, '-related') ?>
+                        </div>
+                    </div>
+                </div>
+        <?php
+            if($i % 3 == 0 && $i<$count)
+                echo '</div><div class="item">';
+        ?>
+        <?php endforeach ?>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
+    $$('.related-checkbox').each(function(elem){
+        Event.observe(elem, 'click', addRelatedToProduct)
+    });
+
+    var relatedProductsCheckFlag = false;
+    function selectAllRelated(txt){
+        if (relatedProductsCheckFlag == false) {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = true;
+            });
+            relatedProductsCheckFlag = true;
+            txt.innerHTML="<?php echo $this->__('unselect all') ?>";
+        } else {
+            $$('.related-checkbox').each(function(elem){
+                elem.checked = false;
+            });
+            relatedProductsCheckFlag = false;
+            txt.innerHTML="<?php echo $this->__('select all') ?>";
+        }
+        addRelatedToProduct();
+    }
+
+    function addRelatedToProduct(){
+        var checkboxes = $$('.related-checkbox');
+        var values = [];
+        for(var i=0;i<checkboxes.length;i++){
+            if(checkboxes[i].checked) values.push(checkboxes[i].value);
+        }
+        if($('related-products-field')){
+            $('related-products-field').value = values.join(',');
+        }
+    }
+    jQuery(function($){
+        $("#block-related").owlCarousel({
+            navigation : true, // Show next and prev buttons
+            slideSpeed : 300,
+            paginationSpeed : 400,
+            singleItem:true,
+            pagination:false,
+            <?php if (!Mage::getStoreConfig("porto_settings/general/rtl",$code)) : ?>
+            navigationText:["<i class='icon-left-open'></i>","<i class='icon-right-open'></i>"]
+            <?php else : ?>
+            navigationText:["<i class='icon-right-open'></i>","<i class='icon-left-open'></i>"]
+            <?php endif; ?>
+        });
+    });
+    //]]>
+    </script>
+</div>
+<?php endif ?>

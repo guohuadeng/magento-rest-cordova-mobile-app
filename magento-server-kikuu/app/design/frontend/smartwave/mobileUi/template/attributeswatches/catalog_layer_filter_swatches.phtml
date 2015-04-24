@@ -1,0 +1,77 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Template for filter items block
+ *
+ * @see Mage_Catalog_Block_Layer_Filter
+ */
+//Mage::getModel("attributeswatches/attributeswatches")->load($product->getColor(), "option_id")->getFilename();
+/* get list of option id's */
+$_option_ids = array();
+foreach ($this->getItems() as $_item) {
+    $_option_ids[] = $_item->getValue();
+}
+$_swatches = Mage::getModel('attributeswatches/attributeswatches')->getCollection()->addFieldToFilter('main_table.option_id', array('in' => $_option_ids));
+$_swatches_values = array();
+foreach ($_swatches->getItems() as $_option) {
+    //echo $_swatch->getId() . $_swatch->getFilename() . "--";
+    $_swatch = "";
+    if ($_option->getMode() == 2) {
+        $_swatch = "background-color:#" . $_option->getColor();
+    } elseif ($_option->getMode() == 1) {
+        if($_option->getFilename())
+            $_swatch = "background-image:url('" . Mage::getBaseUrl('media') . 'attributeswatches/' . $_option->getFilename() . "');";
+    }
+    $_swatches_values[$_option->getOptionId()] = $_swatch;
+}
+
+$_model = $this->getAttributeModel();
+if ($_model)
+    $_code = $_model->getAttributeCode();
+$_hidelabel = Mage::getStoreConfig("attributeswatches/layerednavigation/hidelabel");
+$_hidelabel = array_unique(explode(",", $_hidelabel));
+$_class_hide = "swatches show-label";
+if (in_array($_code, $_hidelabel))
+    $_class_hide = "swatches hide-label";
+?>
+<ol id="layered-navigation-<?php echo $_code; ?>" class="<?php echo $_class_hide; ?>">
+    <?php foreach ($this->getItems() as $_item): ?>
+        <li>
+            <?php if ($_item->getCount() > 0): ?>
+                <a title="<?php echo $_item->getLabel() ?>" href="<?php echo $this->urlEscape($_item->getUrl()) ?>">
+                <?php endif; ?>
+                <?php if (isset($_swatches_values[$_item->getValue()])): ?>
+                    <div class="layered-navigation-swatch" style="<?php echo $_swatches_values[$_item->getValue()]; ?>">&nbsp;</div>
+                <?php endif; ?>
+                <span class="layered-navigation-item-label"><?php echo $_item->getLabel() ?></span>
+                <?php if ($_item->getCount() > 0): ?>
+                </a>
+            <?php endif; ?>
+        </li>
+    <?php endforeach ?>
+</ol>

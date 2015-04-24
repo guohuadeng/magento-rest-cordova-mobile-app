@@ -1,0 +1,21 @@
+
+<form id="search_mini_form" action="<?php echo $this->helper('catalogsearch')->getResultUrl() ?>" method="get">
+    <div class="form-search">
+        <label for="search"><?php echo $this->__('Search:') ?></label>
+        <?php $categorySearchHelper = $this->helper('catalogcategorysearch'); ?>
+        <select id="<?php echo $categorySearchHelper->getCategoryParamName() ?>" name="<?php echo $categorySearchHelper->getCategoryParamName() ?>">
+            <option value=""><?php echo $this->__('All Categories') ?></option>
+            <?php foreach ($this->getSearchableCategories() as $mainCategory): ?>
+                <option value="<?php echo $mainCategory->getEntityId()?>"><?php echo $mainCategory->getName() ?></option>
+                <?php if ($categorySearchHelper->showSubCategories()) : ?>
+                    <?php foreach ($this->getSearchableSubCategories($mainCategory) as $category) : ?>
+                        <option value="<?php echo $category->getEntityId()?>"><?php echo $categorySearchHelper->getIndentationText() . $category->getName()?></option>
+                    <?php endforeach;?>
+                <?php endif ?>
+            <?php endforeach;?>
+        </select>
+        <input id="search" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" class="input-text" />
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+    </div>
+</form>

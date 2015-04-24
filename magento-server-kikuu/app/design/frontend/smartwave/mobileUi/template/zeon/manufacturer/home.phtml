@@ -1,0 +1,59 @@
+<?php /**
+ * zeonsolutions inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.zeonsolutions.com/shop/license-enterprise.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * This package designed for Magento ENTERPRISE edition
+ * =================================================================
+ * zeonsolutions does not guarantee correct work of this extension
+ * on any other Magento edition except Magento ENTERPRISE edition.
+ * zeonsolutions does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   design
+ * @package    base_default
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2013 zeonsolutions.Inc. (http://www.zeonsolutions.com)
+ * @license    http://www.zeonsolutions.com/shop/license-enterprise.txt
+ */ ?>
+<?php $_manufacturersCollection = $this->getManufacturersCollection(); ?>
+<div class="shop-by-manufacturer">
+    <h2 class="filter-title">
+        <span class="content"><strong><?php echo $this->__('Shop By Manufacturer') ?></strong></span>
+        <a class="f-right" href="<?php echo $this->getUrl('manufacturers') ?>"><?php echo $this->__('View All') ?></a>
+    </h2>
+    <div id="shop_by_manufacturer" class="owl-carousel owl-theme">
+        <?php $_iterator = 0; ?>
+        <?php foreach ($_manufacturersCollection as $_manufacturer): ?>
+            <div class="item">
+                <a href="<?php echo $this->getUrl('manufacturers' . '/' . $_manufacturer->getIdentifier()) ?>" title="<?php echo $_manufacturer->getManufacturer() ?>"><img alt="<?php echo $_manufacturer->getManufacturerLogo() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'manufacturer' . '/' . $_manufacturer->getManufacturerLogo() ?>"/></a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <script type="text/javascript">
+    jQuery(function($){
+        $("#shop_by_manufacturer").owlCarousel({
+            lazyLoad: true,
+            itemsCustom: [ [0, 1], [320, 1], [480, 2], [640, 3], [768, 4], [992, 5], [1200, 6] ],
+            responsiveRefreshRate: 50,
+            slideSpeed: 200,
+            paginationSpeed: 500,
+            scrollPerPage: false,
+            stopOnHover: true,
+            rewindNav: true,
+            rewindSpeed: 600,
+            pagination: true,
+            navigation: false,
+            autoPlay: true
+        });
+    });
+    </script>
+</div>

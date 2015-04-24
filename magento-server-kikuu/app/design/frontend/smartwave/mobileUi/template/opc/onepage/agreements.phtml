@@ -1,0 +1,48 @@
+<?php
+/**
+ * @see Mage_Checkout_Block_Agreements
+ */
+?>
+
+<?php if (!$this->getAgreements()) return; ?>
+<form action="" id="checkout-agreements" onsubmit="return false;">
+<ol class="checkout-agreements">
+<?php foreach ($this->getAgreements() as $_a): ?>
+    <li>
+        <div id="agreement-block-<?php echo $_a->getId();?>" class="agreement-content <?php if (Mage::helper('opc')->getTermsType()):?>hidden<?php endif?>"<?php echo ($_a->getContentHeight() ? ' style="height:' . $_a->getContentHeight() . '"' : '')?>>
+            <?php if ($_a->getIsHtml()):?>
+                <?php echo $_a->getContent() ?>
+            <?php else:?>
+                <?php echo nl2br($this->htmlEscape($_a->getContent())) ?>
+            <?php endif; ?>
+        </div>
+        <p class="agree">
+            <input type="checkbox" id="agreement-<?php echo $_a->getId()?>" name="agreement[<?php echo $_a->getId()?>]" value="1" title="<?php echo $this->htmlEscape($_a->getCheckboxText()) ?>" class="checkbox" />
+            <a class="view-agreement" data-id="<?php echo $_a->getId();?>"><?php echo $_a->getIsHtml() ? $_a->getCheckboxText() : $this->htmlEscape($_a->getCheckboxText()) ?></a>
+            
+            
+        </p>
+    </li>
+<?php endforeach ?>
+</ol>
+</form>
+
+<?php if (Mage::helper('opc')->getTermsType()):?>
+<div class="md-modal md-effect-7" id="modal-agreement">
+	<div class="md-content">
+			<div class="md-modal-header">
+				<button type="button" class="close">&times;</button>
+				<h4 id="agreement-title"></h4>
+			</div>	
+			<div class="md-content-wrapper" id="agreement-modal-body">
+				
+				
+				
+			</div>
+			<div class="md-modal-footer">
+				<button type="button" class="button close"><span><span>Close</span></span></button>  
+			</div>
+	</div>
+</div>
+<div class="md-overlay"></div>	
+<?php endif;?>

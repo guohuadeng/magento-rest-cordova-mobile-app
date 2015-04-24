@@ -1,0 +1,27 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+?>
+<form id="search_mini_form" action="<?php echo str_replace("https://","//",str_replace("http://","//",$this->helper('catalogsearch')->getResultUrl())) ?>" method="get">
+    <div class="form-search <?php if(!Mage::getStoreConfig("catalogcategorysearch/general/enabled", $code)): ?>no-padding<?php endif; ?>">
+        <label for="search"><?php echo $this->__('Search:') ?></label>
+        <?php $categorySearchHelper = $this->helper('catalogcategorysearch'); ?>
+        <input id="search" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" class="input-text" />
+        <?php if(Mage::getStoreConfig("catalogcategorysearch/general/enabled", $code)): ?>
+        <select id="<?php echo $categorySearchHelper->getCategoryParamName() ?>" name="<?php echo $categorySearchHelper->getCategoryParamName() ?>">
+            <option value=""><?php echo $this->__('All Categories') ?></option>
+            <?php foreach ($this->getSearchableCategories() as $mainCategory): ?>
+                <option value="<?php echo $mainCategory->getEntityId()?>"><?php echo $mainCategory->getName() ?></option>
+                <?php if ($categorySearchHelper->showSubCategories()) : ?>
+                    <?php foreach ($this->getSearchableSubCategories($mainCategory) as $category) : ?>
+                        <option value="<?php echo $category->getEntityId()?>"><?php echo $categorySearchHelper->getIndentationText() . $category->getName()?></option>
+                    <?php endforeach;?>
+                <?php endif ?>
+            <?php endforeach;?>
+        </select>
+        <?php endif; ?>
+        <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><i class="icon-search"></i></button>
+        <div id="search_autocomplete" class="search-autocomplete"></div>
+        <div class="clearer"></div>
+    </div>
+</form>

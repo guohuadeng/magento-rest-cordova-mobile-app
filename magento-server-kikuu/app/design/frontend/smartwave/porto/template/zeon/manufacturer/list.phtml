@@ -1,0 +1,46 @@
+<?php /**
+ * zeonsolutions inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.zeonsolutions.com/shop/license-enterprise.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * This package designed for Magento ENTERPRISE edition
+ * =================================================================
+ * zeonsolutions does not guarantee correct work of this extension
+ * on any other Magento edition except Magento ENTERPRISE edition.
+ * zeonsolutions does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   design
+ * @package    base_default
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2013 zeonsolutions.Inc. (http://www.zeonsolutions.com)
+ * @license    http://www.zeonsolutions.com/shop/license-enterprise.txt
+ */ ?>
+<?php $_manufacturersCollection = $this->getManufacturersCollection(); ?>
+<?php $_columnCount = 6; ?>
+<div>
+    <div class="page-title">
+        <h1><?php echo $this->__('Manufacturers') ?></h1>
+    </div>
+    <?php $i = 0;
+    foreach ($_manufacturersCollection as $_manufacturer): ?>
+        <?php if ($i++ % $_columnCount == 0): ?>
+            <ul class="manufaturers-grid first odd">
+            <?php endif ?>
+            <li class="item<?php if (($i - 1) % $_columnCount == 0): ?> first<?php elseif ($i % $_columnCount == 0): ?> last<?php endif; ?>">
+                <a href="<?php echo $this->getUrl('manufacturers' . '/' . $_manufacturer->getIdentifier()) ?>" title="<?php echo $_manufacturer->getManufacturer() ?>"><img alt="<?php echo $_manufacturer->getManufacturerLogo() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'manufacturer' . '/' . $_manufacturer->getManufacturerLogo() ?>"></a>
+                <h2><a href="<?php echo $this->getUrl('manufacturers' . '/' . $_manufacturer->getIdentifier()) ?>" title="<?php echo $_manufacturer->getManufacturer() ?>"><?php echo $_manufacturer->getManufacturer(); ?></a></h2>
+            </li>
+            <?php if ($i % $_columnCount == 0 || $i == count($_manufacturersCollection)): ?>
+            </ul>
+        <?php endif ?>
+    <?php endforeach; ?>
+</div>

@@ -1,0 +1,17 @@
+<?php $menuHelper = Mage::helper('megamenu'); ?>
+<div class="fixed-header-area fixed-menu-type hidden-xs">
+    <div class="fixed-header">
+        <div class="container">
+            <div class="menu-wrapper">
+                <div class="menu-all-pages-container">
+                    <ul class="menu">
+                        <?php echo $menuHelper->getMenuContent(); ?>
+                    </ul>
+                    <div class="cart-area">
+                        <?php echo $this->getChildHtml('sticky.minicart'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

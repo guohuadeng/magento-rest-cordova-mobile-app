@@ -1,0 +1,45 @@
+ 
+<?php $posts = $this->getPosts(); ?>
+<?php if (count($posts)): ?>
+
+<?php foreach ($posts as $post): ?>
+    <div class="postWrapper">
+        <?php if($banner_content = $post->getBannerContent()): ?>
+        <div class="postBanner">
+        <?php
+            echo $banner_content;
+        ?>
+        </div>
+        <?php endif; ?>
+        <div class="post-date">
+            <span class="day"><?php echo $post->getDay(); ?></span>
+            <span class="month"><?php echo $post->getMonthShort(); ?></span>
+        </div>
+        <div class="postTitle">
+            <h2><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+        </div>
+        <div class="postContent"><?php echo $post->getPostContent(); ?></div>
+
+        <div class="postDetails">
+            <span><i class="icon-calendar"></i><?php echo $post->getCreatedTime(); ?></span>
+            <span><i class="icon-user"></i><?php echo $this->__("By"); ?> <?php echo $post->getUser(); ?></span>
+            <span><i class="icon-tag"></i><?php echo $this->getTagsHtml($post) ?></span>
+            <?php if ($this->getCommentsEnabled()): ?>
+                <span><i class="icon-chat"></i><a href="<?php echo $post->getAddress(); ?>#commentBox" ><?php echo $post->getCommentCount(); ?> Comments</a></span>
+            <?php endif; ?>
+            <?php $postCats = $post->getCats(); ?>
+            <?php if (!empty($postCats)): ?>
+                <span><i class="icon-folder-open"></i>
+                <?php foreach ($postCats as $data): ?>
+                    <a href="<?php echo $data['url']; ?>"><?php echo $data['title']; ?></a>
+                <?php endforeach; ?>
+                </span>
+            <?php endif; ?>
+        </div>
+        <?php echo $this->getBookmarkHtml($post) ?>
+    </div>
+<?php endforeach; ?> 
+<?php echo $this->getChildHtml('smartwave_blog_comments_toolbar'); ?>
+<?php else: ?>  
+    <p class="note-msg"><?php echo Mage::helper('blog')->__('No Posts in this Category.'); ?></p>
+<?php endif; ?>

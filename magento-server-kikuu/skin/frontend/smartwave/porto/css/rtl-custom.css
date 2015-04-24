@@ -1,0 +1,81 @@
+.owl-top-narrow #category-slider-demo-7 .owl-controls{left:-2px}
+
+/* tooltip for demo */
+@-webkit-keyframes tooltip-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tooltip-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes tooltip-color {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #333;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@keyframes tooltip-color {
+  0% {
+    color: #fff;
+  }
+  50% {
+    color: #333;
+  }
+  100% {
+    color: #fff;
+  }
+}
+@-webkit-keyframes tooltip-color-white {
+  0% {
+    color: #444;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #444;
+  }
+}
+@keyframes tooltip-color-white {
+  0% {
+    color: #444;
+  }
+  50% {
+    color: #fff;
+  }
+  100% {
+    color: #444;
+  }
+}
+.header .demo-tooltip,.footer .demo-tooltip{position:absolute;left:15px;top:5px;z-index:9;width:20px}
+.footer .demo-tooltip{top:-20px}
+a.tooltip-icon{border:1px solid #fff;color:#fff;border-radius:50%;display:block;width:20px;height:20px;text-align:center;line-height:20px;font-size:10px;-webkit-transition: all 0.2s ease-in-out;-moz-transition: all 0.2s ease-in-out;-ms-transition: all 0.2s ease-in-out;-o-transition: all 0.2s ease-in-out;transition: all 0.2s ease-in-out;-webkit-animation: tooltip-animation 1s ease-in infinite;-moz-animation: tooltip-animation 1s ease-in infinite;-ms-animation: tooltip-animation 1s ease-in infinite;animation: tooltip-animation 1s ease-in infinite;}
+.header-container.type2 a.tooltip-icon,.header-container.type3 a.tooltip-icon,.header-container.type4 a.tooltip-icon,.header-container.type5 a.tooltip-icon,.header-container.type6 a.tooltip-icon,.header-container.type7 a.tooltip-icon,.header-container.type8 a.tooltip-icon{color:#000;border-color:#000}
+
+
+.tooltip-popup{position:absolute;left:-10px;top:30px;width:300px;background-color:#111;box-shadow:0 0 8px rgba(255,255,255,.5);padding:20px;border-radius:10px;font-size:12px;line-height:1.4;color:#fff;text-align:right}
+.tooltip-popup h4{font-size:16px;color:#fff}
+.tooltip-popup p{margin-bottom:10px;color:#fff}
+.tooltip-popup em{font-size:10px}
+a.tooltip-close{position:absolute;left:10px;top:10px;color:#fff}
+.footer-middle>.container{position:relative}

@@ -1,0 +1,97 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $_productCollection=$this->getLoadedProductCollection();
+    $_helper = $this->helper('catalog/output');
+?>
+<?php if(!$_productCollection->count()): ?>
+<p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
+<?php else: ?>
+<div class="filter-products owl-top-narrow">
+    <?php $_collectionSize = $_productCollection->count() ?>
+    <div class="products small-list sidebar-list owl-carousel owl-theme">
+    <?php $i=0; foreach ($_productCollection as $_product): ?>
+    <?php
+        if(($i%3) == 0){
+    ?>
+            <div class="item">
+    <?php
+        }
+            $i++;
+    ?>
+                <div class="item-area">
+                <div class="product-image-area">
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image">
+                        <img src="<?php if(Mage::getStoreConfig("porto_settings/category/aspect_ratio",$code)):?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(150);?><?php else: ?><?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(Mage::getStoreConfig("porto_settings/category/ratio_width",$code),Mage::getStoreConfig("porto_settings/category/ratio_height",$code)); ?><?php endif; ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>"/>
+                    </a>
+                </div>
+                <div class="details-area">
+                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
+                    <?php 
+                    if (Mage::helper('catalog')->isModuleEnabled('Mage_Review')):
+                    if($_product->getRatingSummary()): 
+                    ?>
+                    <?php 
+                        $review_html = $this->getReviewsSummaryHtml($_product, 'short');
+                        if($review_html){
+                            echo $review_html;
+                        }else{
+                    ?>
+                        <div class="ratings">
+                            <div class="rating-box">
+                                <div class="rating" style="width:0"></div>
+                            </div>
+                        </div>
+                    <?php                            
+                        }
+                    ?>
+                    <?php else: ?>
+                        <div class="ratings">
+                            <div class="rating-box">
+                                <div class="rating" style="width:0"></div>
+                            </div>
+                        </div>
+                    <?php 
+                    endif; 
+                    endif;
+                    ?>
+                    <?php echo $this->getPriceHtml($_product, true) ?>
+                </div>
+                <div class="clearer"></div>
+            </div>
+            <?php
+                if(($i % 3) == 0 || $i == $_collectionSize){
+            ?>
+            </div>
+            <?php
+                }
+            ?>
+        <?php endforeach ?>
+        </div>
+</div>
+<script type="text/javascript">
+    jQuery(function($){
+     
+        var sidebar_owl = $(".small-list.sidebar-list.owl-carousel");
+        sidebar_owl.owlCarousel({
+            lazyLoad: true,
+            singleItem: true,
+            responsiveRefreshRate: 50,
+            slideSpeed: 200,
+            paginationSpeed: 500,
+            scrollPerPage: true,
+            stopOnHover: true,
+            rewindNav: true,
+            rewindSpeed: 600,
+            pagination: false,
+            navigation: true,
+            <?php if (!Mage::getStoreConfig("porto_settings/general/rtl",$code)) : ?>
+            navigationText:["<i class='icon-left-open'></i>","<i class='icon-right-open'></i>"]
+            <?php else : ?>
+            navigationText:["<i class='icon-right-open'></i>","<i class='icon-left-open'></i>"]
+            <?php endif; ?>
+        });
+     
+    });
+</script>
+<?php endif; ?>

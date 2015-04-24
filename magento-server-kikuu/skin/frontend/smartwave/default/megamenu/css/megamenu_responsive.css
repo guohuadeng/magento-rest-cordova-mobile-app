@@ -1,0 +1,11 @@
+@media (max-width: 979px)  {
+    .fixed-header .menu-icon {
+        float: left;
+        position: relative;
+        top: 11px;
+        left: 10px;
+    }
+    .fixed-header .menu{
+        display: none;
+    }
+}

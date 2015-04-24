@@ -1,0 +1,19 @@
+<?php
+/**
+ * Customer Paypalauth Identity Login Section template
+ *
+ */
+?>
+<div class="content new-users col-1" style="min-height: 0px">
+	<h2><?php echo $this->__('Log In Using Your PayPal account') ?></h2>
+	<p><?php echo $this->__('Log in quickly, easily and safely with Log in with PayPal ') ?></p>
+    <ul style="list-style: disc outside none;padding-left: 18px;">
+        <li><?php echo $this->__('Avoid the hassle of filling in yet another registration form') ?></li>
+        <li><?php echo $this->__('Just one password to remember') ?></li>
+    </ul>
+</div>
+<div class="buttons-set" style="text-align: left;">
+    <a id="login-with-paypal" href="<?php echo Mage::helper('opc/paypal')->getLoginUrl();?>" title="Login with PayPal"></a>
+</div>
+
+

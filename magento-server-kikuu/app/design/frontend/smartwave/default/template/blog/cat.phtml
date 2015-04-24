@@ -1,0 +1,39 @@
+ 
+<?php $posts = $this->getPosts(); ?>
+<?php if (count($posts)): ?>
+
+<?php foreach ($posts as $post): ?>
+    <div class="postWrapper">
+        <?php
+            if($banner_content = $post->getBannerContent()){
+        ?>
+
+        <div class="postBanner">
+            <div class="postDate for-mobile"><div><?php echo $post->getDay(); ?></div></div>
+            <?php echo $banner_content; ?>
+        </div>
+        <?php
+            }
+        ?>
+        <div class="postDetails">
+            <div class="postDate for-desktop"><div><?php echo $post->getDay(); ?><br/><?php echo $post->getMonthShort(); ?></div></div>
+            <div class="postBy"><?php echo $post->getUser(); ?></div>
+            <div class="postTags"><?php echo $this->getTagsHtml($post) ?></div>
+            <?php if ($this->getCommentsEnabled()): ?>
+            <div class="postComments">
+                <a href="<?php echo $post->getAddress(); ?>#commentBox" ><?php echo $post->getCommentCount(); ?>&nbsp;<?php echo $this->__('Comments'); ?></a>
+            </div>
+            <?php endif; ?>
+        </div>
+        <div class="postTitle">
+            <h2><a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a></h2>
+        </div>
+        <div class="postContent">
+           <?php echo $post->getPostContent(); ?>
+        </div>
+    </div>
+<?php endforeach; ?> 
+<?php echo $this->getChildHtml('smartwave_blog_comments_toolbar'); ?>
+<?php else: ?>  
+    <p class="note-msg"><?php echo Mage::helper('blog')->__('No Posts in this Category.'); ?></p>
+<?php endif; ?>

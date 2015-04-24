@@ -1,0 +1,210 @@
+<?php
+/**General Options*/
+	$plugin_enabled = $this->getPluginEnabledStatus();
+	$pubid = $this->getPubId();
+	$menu_version = 300;
+	
+/**Custom Share*/		
+	$custom_url = $this->getCustomUrl();
+	$custom_title = $this->getCustomTitle();	
+	$custom_description = $this->getCustomDescription();
+	
+	if($custom_url != ""):
+		$custom_share = "addthis:url='".$custom_url."' addthis:title='".$custom_title."' addthis:description='".$custom_description."'";
+	else:
+		$custom_share = "";
+	endif;			
+	
+/**API COnfig Options*/	
+	$services_exclude = $this->getExcludeServices();
+	$services_compact = $this->getCompactServices();
+	$services_expanded = $this->getExpandedServices();
+	$ui_click = $this->getUiClick();
+	$ui_delay = $this->getUiDelay();
+	$ui_hover_direction = $this->getUiHover();
+	$ui_open_windows = $this->getUiOpenWindows();
+	$ui_language = $this->getUiLanguage();
+	$ui_offset_top = $this->getUiOffsetTop();
+	$ui_offset_left = $this->getUiOffsetLeft();
+	$ui_use_css = $this->getUiCss();
+	$data_track_clickback = $this->getDataTrackClick();
+	$address_bar_share = $this->getAddressBarShare();	
+	$data_ga_tracker = $this->getDataGaTracker();
+
+	
+/**Custom Service*/
+	$services_custom_name = $this->getCustomServiceName();
+	$services_custom_url = $this->getCustomServiceUrl();
+	$services_custom_icon = $this->getCustomServiceIcon();	
+	
+?>
+<!-- Check whether the plugin is enabled -->
+<?php
+	if($plugin_enabled!=0):
+?>
+
+<!-- AddThis Button BEGIN -->
+
+<!-- AddThis API Config -->
+
+<script type='text/javascript'>
+var addthis_product = 'mag-1.0.1';
+var addthis_config 	= {
+<?php
+	if($pubid):
+		echo "pubid : '".$pubid."'\n";
+	else:
+		echo "pubid : 'unknown'\n";
+	endif;
+	if($services_exclude):
+		echo ", services_exclude : '".$services_exclude."'\n";
+	endif;
+	if($services_compact):
+		echo ", services_compact : '".$services_compact."'\n";
+	endif;
+	if($services_expanded):
+		echo ", services_expanded : '".$services_expanded."'\n";
+	endif;
+	if($services_custom_name && $services_custom_url):
+		echo ", services_custom : { name:'".$services_custom_name."', url:'".$services_custom_url."', icon:'".$services_custom_icon."' }\n";
+	endif;
+	if($ui_click == 0):
+		echo ", ui_click : true \n";
+	endif;
+	if($ui_delay):
+		echo ", ui_delay : '".$ui_delay."'\n";
+	endif;
+	if($ui_hover_direction != 0):
+		echo ", ui_hover_direction : '".$ui_hover_direction."'\n";
+	endif;
+	if($ui_open_windows == 1):
+		echo ", ui_open_windows : true \n";
+	endif;
+	if($ui_language != 'auto'):
+		echo ", ui_language : '".$ui_language."'\n";
+	endif;
+	if($ui_offset_top):
+		echo ", ui_offset_top : ".$ui_offset_top."\n";
+	endif;
+	if($ui_offset_left):
+		echo ", ui_offset_left : ".$ui_offset_left."\n";
+	endif;
+	if($ui_use_css == 0):
+		echo ", ui_use_css : false \n";
+	endif;
+	if($data_track_clickback == 0):
+		echo ", data_track_clickback : false \n";
+	endif;
+	if($address_bar_share == 1):
+		echo ", data_track_addressbar : true \n";
+	endif;
+	if($data_ga_tracker):
+		echo ", data_ga_tracker : '".$data_ga_tracker."'\n";
+	endif;
+?>
+
+}
+</script>
+<!-- AddThis API Config END -->
+<div class="sharing-tool-area">
+<?php
+
+	$button_style = $this->getButtonStyle();
+    switch($button_style)
+    {
+    	case 'style_1':               
+?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<?php
+		break; 	
+		case 'style_2':
+ ?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/tweet_button.html" style="width:95px; height:20px; float:left;"></iframe>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<?php
+		break; 	
+		case 'style_4':
+?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a href="https://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0d95b663c861f6" class="addthis_button_compact">Share</a>
+<span class="addthis_separator">|</span>
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+</div>
+<?php
+		break; 	
+		case 'style_5':
+?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a href="https://www.addthis.com/bookmark.php?v=250&amp;pubid=xa-4f0d960e09c42ec4" class="addthis_button_compact">Share</a>
+</div>
+<?php
+		break; 	
+		case 'style_6':
+?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+<?php
+		break; 	
+		case 'style_7':
+?>
+<div class="addthis_toolbox addthis_default_style " <?php echo $custom_share?>>
+<a class="addthis_counter"></a>
+</div>
+<?php
+		break; 	
+		case 'style_8':
+?>
+<a class="addthis_button" href="https://www.addthis.com/bookmark.php?v=250" <?php echo $custom_share?>>
+<img src="https://s7.addthis.com/static/btn/sm-plus.gif" alt="Bookmark and Share" style="border:0"/></a>
+<?php
+		break; 	
+		case 'style_9':
+ 			$custom_button_url = $this->getCustomButtonUrl();
+?>
+<a class="addthis_button" href="https://www.addthis.com/bookmark.php?v=250" <?php echo $custom_share?>>
+<img src="<?php echo $custom_button_url ?>" alt="Bookmark and Share" style="border:0"/></a>
+<?php
+		break; 		
+		case 'style_10':
+ 			$custom_button_code = $this->getCustomButtonCode();
+ 			echo $custom_button_code;
+		
+		break; 	 	
+		default:
+?>
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style" <?php echo $custom_share?>>
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>  
+<?php
+ 	}//switch ends	
+?>
+</div>
+<script type="text/javascript" src="https://s7.addthis.com/js/<?php echo $menu_version;?>/addthis_widget.js"></script>
+<!-- AddThis Button END -->
+<?php
+endif; //if plugin not enabled
+?>
+<style type="text/css">
+#at3win #at3winheader h3 {
+	text-align:left !important;
+}
+</style>

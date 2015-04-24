@@ -1,0 +1,260 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+/**
+ * Product media data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ */
+?>
+<?php
+$_product = $this->getProduct();
+$_helper = $this->helper('catalog/output');
+
+$_small_image_width = 100;
+$_small_image_height = 100;
+$_large_image_width = 600;
+$_large_image_height = 600;
+$_zoom_image_width = 1200;
+$_zoom_image_height = 1200;
+?>
+
+<?php
+/* if fancybox plugin is enabled */
+if (Mage::getStoreConfig('attributeswatches/lightbox/enabled')):
+    ?>
+    <script type="text/javascript">
+        //<![CDATA[
+        // Check if fancybox is actually installed
+        jQuery(function(){
+            if (jQuery.fancybox != undefined) {
+                jQuery("#main-image-link, a#fancybox-link").on("click",function() {
+                    //console.debug("sdfsd");
+                    /* create array of images */
+                    _images = new Array();
+                    _first_image = jQuery("a#main-image-link").attr("href");
+                    _images.push({
+                        "href": _first_image ,
+                        "title": jQuery("a#main-image-link").attr("title")
+                    });
+                    jQuery("a.fancybox:visible").each(function(){
+                        if(jQuery(this).attr("rel")!="" && jQuery(this).attr("rel")!=_first_image ){
+                            _images.push({
+                                "href": jQuery(this).attr("rel") ,
+                                "title": jQuery(this).attr("title")
+                            });
+                        }
+                    });
+                    jQuery.fancybox.open(
+                    _images,
+                    {
+                        "openEffect":"none",
+                        "closeEffect":  "none",
+                        "nextEffect": "fade",
+                        "prevEffect":"fade"
+                    });
+                    return false;
+                });
+            }
+        }); 
+        //]]>
+    </script>
+<?php endif; ?>
+
+<?php
+/* if fancybox plugin is enabled */
+$_cloudzoom_options = "";
+if (Mage::getStoreConfig('attributeswatches/cloudzoom/enabled')):
+
+    $_cloudzoom_options = "position:'right', adjustX:20, adjustY:-3, tint:'#FFFFFF', softFocus:1, smoothMove:5, tintOpacity:0.8";
+    ?>
+
+    <!-- Call quick start function. -->
+    <script type="text/javascript">
+        //<![CDATA[
+        jQuery(document).ready(function(){
+            if (jQuery.fn.CloudZoom!== undefined) {
+                jQuery('#main-image-link').CloudZoom();
+                if (jQuery.fancybox != undefined) { /* show button to display the lightbox */
+                    jQuery("#fancybox-link").show();
+                }
+            }
+        });
+        //]]>
+    </script>
+<?php endif; ?>
+
+<?php if (Mage::getStoreConfig('attributeswatches/cloudzoom/enabled') || Mage::getStoreConfig('attributeswatches/lightbox/enabled')): ?>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
+    <p class="product-image">
+        <a class="fancybox-main cloud-zoom" id="main-image-link" href="<?php echo $this->helper('catalog/image')->init($_product, 'image')->resize($_zoom_image_width, $_zoom_image_height); ?>" rel="<?php echo $_cloudzoom_options; ?>">
+    <?php
+    $_img = '<img class="cloudzoom" id="image" src="' . $this->helper('catalog/image')->init($_product, 'image')->resize($_large_image_width, $_large_image_height) . '" alt="' . $this->htmlEscape($this->getImageLabel()) . '" title="' . $this->htmlEscape($this->getImageLabel()) . '" />';
+    echo $_helper->productAttribute($_product, $_img, 'image');
+    ?></a><a id='fancybox-link' href='#'><?php echo $this->__("+ Enlarge"); ?></a>
+    </p>
+        <?php else: ?>
+    <p class="product-image">
+        <a class="fancybox-main" id="main-image-link" href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" title="<?php echo $this->htmlEscape($this->getImageLabel()); ?>">
+    <?php
+    $_img = '<img id="image" src="' . $this->helper('catalog/image')->init($_product, 'image')->resize($_large_image_width, $_large_image_height) . '" alt="' . $this->htmlEscape($this->getImageLabel()) . '" title="' . $this->htmlEscape($this->getImageLabel()) . '" />';
+    echo $_helper->productAttribute($_product, $_img, 'image');
+    ?></a><a id='fancybox-link' href='#'><?php echo $this->__("+ Enlarge"); ?></a>
+    </p>
+        <?php endif; ?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+    <div class="more-views">
+        <h2><?php echo $this->__('More Views') ?></h2>
+        <ul>
+    <?php foreach ($this->getGalleryImages() as $_image): ?>
+                <li  class="<?php echo $_image->getAssociatedAttributes(); ?> product-image-thumbs" <?php if ($_image->getDisabled()): ?>style="display:none;"<?php endif; ?>>
+                    <a class="fancybox" href="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($_large_image_width, $_large_image_height); ?>" rel="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($_zoom_image_width, $_zoom_image_height); ?>" title="<?php echo $this->htmlEscape($_image->getLabel()) ?>"><img src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize($_small_image_width, $_small_image_height); ?>" width="<?php echo $_small_image_width; ?>" height="<?php echo $_small_image_height; ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>" /></a>
+                </li>
+    <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+<?php endif; ?>
+<?php if (!Mage::getStoreConfig('attributeswatches/cloudzoom/enabled') && !Mage::getStoreConfig('attributeswatches/lightbox/enabled')): ?>
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+?>
+<?php
+    $aspect_ratio = Mage::getStoreConfig("porto_settings/product_view/aspect_ratio", $code);
+    $ratio_width = 600;
+    $ratio_height = 600;
+    if(Mage::getStoreConfig("porto_settings/product_view/ratio_width", $code))
+        $ratio_width = Mage::getStoreConfig("porto_settings/product_view/ratio_width", $code);
+    if(!$aspect_ratio){
+        if(Mage::getStoreConfig("porto_settings/product_view/ratio_height", $code))
+            $ratio_height = Mage::getStoreConfig("porto_settings/product_view/ratio_height", $code);
+    }
+    $ratio = $ratio_height / $ratio_width;
+    $rnd_str = rtrim(base64_encode(md5(microtime())),"=");
+?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<ul id="etalage_<?php echo $rnd_str; ?>">
+<?php foreach ($this->getGalleryImages() as $_image): ?>
+    <li>
+        <?php
+            if(!$aspect_ratio)
+                $image_src = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($ratio_width, $ratio_height);
+            else
+                $image_src = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);
+        ?>
+        <a rel="gallery" class="fancy-images fancy-images_<?php echo $rnd_str; ?>" href="<?php echo $image_src; ?>"><span class="glyphicon glyphicon-search"></span></a>
+        <img class="etalage_thumb_image" src="<?php echo $image_src; ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+        <img class="etalage_source_image" src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(100, 100*$ratio)?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+    </li>
+<?php endforeach; ?>
+</ul>
+<?php else: ?>
+<ul id="etalage_<?php echo $rnd_str; ?>">
+    <li>
+        <?php
+            if(!$aspect_ratio)
+                $image_src = $this->helper('catalog/image')->init($_product, 'image')->resize($ratio_width, $ratio_height);
+            else
+                $image_src = $this->helper('catalog/image')->init($_product, 'image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);
+        ?>
+        <a class="fancy-images fancy-images_<?php echo $rnd_str; ?>" href="<?php echo $image_src; ?>"><span class="glyphicon glyphicon-search"></span></a>
+        <img class="etalage_thumb_image" src="<?php echo $image_src; ?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+        <img class="etalage_source_image" src="<?php echo (!$aspect_ratio)?$this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(100, $ratio_height/$ratio_width*100):$this->helper('catalog/image')->init($_product, 'image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(100);?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+    </li>
+</ul>
+<?php endif; ?>
+<div class="etalage-control">
+<?php if (!Mage::getStoreConfig("porto_settings/general/rtl",$code)) : ?>
+    <a href="javascript:void(0)" class="etalage-prev"><i class="icon-angle-left"></i></a>
+    <a href="javascript:void(0)" class="etalage-next"><i class="icon-angle-right"></i></a>
+<?php else: ?>
+    <a href="javascript:void(0)" class="etalage-prev"><i class="icon-angle-right"></i></a>
+    <a href="javascript:void(0)" class="etalage-next"><i class="icon-angle-left"></i></a>
+<?php endif; ?>
+</div>
+<?php
+    $zoom_disabled = Mage::getStoreConfig("porto_settings/product_view/disable_product_zoom", $code);
+    $zoom_type = Mage::getStoreConfig("porto_settings/product_view/zoom_type", $code);
+?>
+<div class="product-view-zoom-area">
+</div>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        reloadEtalage();
+        <?php if(!$zoom_disabled): ?>
+        jQuery(".product-img-box .etalage li.etalage_thumb").zoom({
+        <?php if($zoom_type == 1): ?>
+            target: jQuery(".product-view-zoom-area"),
+        <?php endif; ?>
+            touch:false
+        });
+        <?php endif; ?>
+        setTimeout(function(){reloadEtalage();}, 500);
+        jQuery(window).resize(function(e){
+            reloadEtalage();
+            var width = jQuery(this).width();
+        });
+        jQuery('.etalage-prev').on('click', function(){ etalage_<?php echo $rnd_str; ?>_previous(); });
+        jQuery('.etalage-next').on('click', function(){ etalage_<?php echo $rnd_str; ?>_next(); });
+        jQuery("a.fancy-images_<?php echo $rnd_str; ?>").fancybox();
+        function reloadEtalage(){
+            var width = jQuery('.product-view .product-img-box').width()-8;
+            var src_img_width = <?php echo $ratio_width; ?>;
+            var src_img_height = "auto";
+            var ratio_width = <?php echo $ratio_width; ?>;
+            var ratio_height = <?php echo $ratio_height; ?>;
+
+            var height = "auto";
+            jQuery('#etalage_<?php echo $rnd_str; ?>').etalage({
+                thumb_image_width: width,
+                thumb_image_height: height,
+                source_image_width: src_img_width,
+                source_image_height: src_img_height,
+                zoom_area_width: width,
+                zoom_area_height: height,
+                zoom_enable: false,
+                small_thumbs:4,
+                smallthumb_hide_single: false,
+                smallthumbs_position: 'bottom',
+                small_thumbs_width_offset: 0,
+                show_icon: false,
+                autoplay: false
+            });
+
+            var first_img = jQuery("#etalage_<?php echo $rnd_str; ?> img.etalage_thumb_image").first();
+            var tmp_img = jQuery('<img src="" alt=""/>');
+            tmp_img.attr("src",first_img.attr("src"));
+            tmp_img.unbind("load");
+            tmp_img.bind("load",function(){
+                jQuery("#etalage_<?php echo $rnd_str; ?>").height(Math.round(width*this.naturalHeight/this.naturalWidth+8)+"px");
+            });
+        }
+    });
+</script>
+<div class="clear"></div>
+<?php endif; ?>

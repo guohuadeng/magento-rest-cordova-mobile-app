@@ -1,0 +1,55 @@
+<?php
+$socialfeeds = $this->helper('socialfeeds');
+
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$_enable = Mage::getStoreConfig('socialfeeds/flickr/smartwave_flickrphotos_enabled', $code);
+if($_enable==1){
+    $api_key = Mage::getStoreConfig('socialfeeds/flickr/smartwave_flickrphotos_apikey', $code);
+    $count = Mage::getStoreConfig('socialfeeds/flickr/smartwave_flickrphotos_count', $code);
+    $photoset_id = Mage::getStoreConfig('socialfeeds/flickr/smartwave_flickrphotos_photosetid', $code);
+    try {
+        $photoset = $socialfeeds->file_get_contents_curl("https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=".$api_key."&photoset_id=".$photoset_id."&format=rest");
+
+        $photoset_xml = new SimpleXMLElement($photoset);
+        
+        if($photoset_xml['stat'] == 'ok'){
+?>
+<div class="block block-flickr-photos">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Flickr Stream') ?></span></strong>
+    </div>
+    <div class="block-content">
+<?php
+            $i = 0;
+            foreach($photoset_xml->photoset->photo as $photo){
+                if($i >= $count){ continue; }
+                $photo_size = $socialfeeds->file_get_contents_curl("https://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=".$api_key."&photo_id=".$photo['id']."&format=rest");
+                $photo_size_xml = new SimpleXMLElement($photo_size);
+                if($photo_size_xml['stat'] == 'ok'){
+                    $sizes_xml = $photo_size_xml->sizes;
+                    $sizes_children = $sizes_xml->children();
+                    $photo_square = $sizes_children[0];
+                    $image_url = $photo_square['source'];
+                    $photo_info = $socialfeeds->file_get_contents_curl("https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=".$api_key."&photo_id=".$photo['id']."&format=rest");
+                    $photo_info_xml = new SimpleXMLElement($photo_info);
+                    $photo_url = $image_url;
+                    $photo_title = '';
+                    if($photo_info_xml['stat'] == 'ok'){
+                         $photo_url = (string)$photo_info_xml->photo->urls->url;
+                         $photo_title = (string)$photo_info_xml->photo->title;
+                    }
+                    echo '<a href="'.$photo_url.'" class="flickr-image" target="_blank"><img src="'.$image_url.'" title="'.$photo_title.'" alt="'.$photo_title.'"/></a>';
+                    $i++;
+                }
+            }
+?>
+    </div>
+</div>
+<?php
+        }
+    } catch ( Exception $e ) {
+        echo "";
+    }
+}
+?>

@@ -1,0 +1,51 @@
+<?php echo $this->getChildHtml('sticky.nav') ?>
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $custom_block = Mage::getStoreConfig('porto_settings/header/static_block', $code);
+?>
+<div class="header-container type7">
+    <div class="top-links-container">
+        <div class="top-links container">
+            <?php
+                $store_currency = $this->getChildHtml('store_currency');
+                $store_language = $this->getChildHtml('store_language');
+				$compare_link = $this->getChildHtml('compare_link');
+            ?>
+            <?php echo $store_currency; ?>
+            <?php if($store_currency && $store_language):?>
+            <span class="split"></span>
+            <?php endif; ?>
+            <?php echo $store_language; ?>
+            <?php if(($store_currency || $store_language) && $compare_link):?>
+            <span class="split"></span>
+            <?php endif; ?>
+			<?php echo $compare_link; ?>
+            <div class="top-links-area">
+                <div class="top-links-icon"><a href="javascript:void(0)"><?php echo $this->__("links"); ?></a></div>
+                <?php echo $this->getChildHtml('topLinks'); ?>
+            </div>
+            <p class="welcome-msg"><?php echo $this->getChildHtml('welcome'); ?> <?php echo $this->getAdditionalHtml(); ?></p>
+            <div class="clearer"></div>
+        </div>
+    </div>
+    <div class="header container">
+        <?php if ($this->getIsHomePage()):?>
+        <h1 class="logo"><strong><?php echo $this->getLogoAlt(); ?></strong><a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a></h1>
+        <?php else:?>
+        <a href="<?php echo $this->getUrl(''); ?>" title="<?php echo $this->getLogoAlt(); ?>" class="logo"><strong><?php echo $this->getLogoAlt(); ?></strong><img src="<?php echo $this->getLogoSrc(); ?>" alt="<?php echo $this->getLogoAlt(); ?>" /></a>
+        <?php endif; ?>
+        <div class="search-area">
+            <a href="javascript:void(0)" class="search-icon"><i class="icon-search"></i></a>
+            <?php echo $this->getChildHtml('topSearch'); ?>
+            <div class="menu-icon"><a href="javascript:void(0)"><i class="fa fa-bars"></i></a></div>
+            <?php echo $this->getChildHtml('topMenu') ?>
+        </div>
+        <div class="cart-area">
+            <?php echo '<div class="custom-block">'.$this->getLayout()->createBlock('cms/block')->setBlockId($custom_block)->toHtml().'</div>'; ?>
+            <?php echo $this->getChildHtml('minicart'); ?>
+        </div>
+        <?php echo $this->getChildHtml("demo_header_tooltip"); ?>
+    </div>
+</div>
+<?php echo $this->getChildHtml('mobile.nav') ?>

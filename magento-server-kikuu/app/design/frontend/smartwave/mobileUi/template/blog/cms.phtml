@@ -1,0 +1,5 @@
+<?php if ($posts = $this->getRecent()): ?>
+    <?php foreach ($posts as $post): ?>
+        <a href="<?php echo $post->getAddress(); ?>" ><?php echo $post->getTitle(); ?></a><br />
+    <?php endforeach; ?>
+<?php endif; ?>

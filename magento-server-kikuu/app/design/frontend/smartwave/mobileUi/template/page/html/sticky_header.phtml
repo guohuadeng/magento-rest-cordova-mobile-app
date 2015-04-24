@@ -1,0 +1,34 @@
+<script type="text/javascript">
+	jQuery(function($){
+		var scrolled = false;
+		$(window).scroll(function(){
+            if(!$(".header-container").hasClass("type12")){
+			    if(140<$(window).scrollTop() && !scrolled){
+				    $('.header-container').addClass("sticky-header");
+				    var minicart = $('.header-container .mini-cart').html();
+				    $('.header-container .menu-wrapper').append('<div class="mini-cart">'+minicart+'</div>');
+				    $('.header-container .header-wrapper > div').each(function(){
+					    if($(this).hasClass("container")){
+						    $(this).addClass("already");
+					    } else {
+						    $(this).addClass("container");
+					    }
+				    });
+				    scrolled = true;
+			    }
+			    if(140>=$(window).scrollTop() && scrolled){
+				    $('.header-container').removeClass("sticky-header");
+				    $('.header-container .menu-wrapper .mini-cart').remove();
+				    scrolled = false;
+				    $('.header-container .header-wrapper > div').each(function(){
+					    if($(this).hasClass("already")){
+						    $(this).removeClass("already");
+					    } else {
+						    $(this).removeClass("container");
+					    }
+				    });
+			    }
+            }
+		});
+	});
+</script>

@@ -1,0 +1,14 @@
+<?php
+    $qwHelper = Mage::helper('quickview');
+    $_dialogWidth   = $qwHelper->getDialogWidth();
+    $_dialogHeight  = $qwHelper->getDialogHeight();	
+?>
+<script type="text/javascript">
+//<![CDATA[
+	if (typeof EM == 'undefined') EM = {};
+	EM.Quickview = {
+		QS_FRM_WIDTH    :"<?php echo $_dialogWidth?>",
+		QS_FRM_HEIGHT   : "<?php echo $_dialogHeight?>"
+	};
+//]]	
+</script> 

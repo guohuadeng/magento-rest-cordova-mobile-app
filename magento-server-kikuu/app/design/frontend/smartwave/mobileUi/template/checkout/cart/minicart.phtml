@@ -1,0 +1,52 @@
+<div class="mini-cart">
+    <?php
+        $store = Mage::app()->getStore();
+        $code  = $store->getCode();
+        $display_subtotal_price = Mage::getStoreConfig("tax/cart_display/subtotal", $code);
+    ?>
+    <?php $_cartQty = $this->getSummaryCount(); ?>
+    <?php
+        if(!$_cartQty) $_cartQty = 0;
+        $_subtotal = $this->helper('checkout')->formatPrice(Mage::getSingleton('checkout/cart')->getQuote()->getGrandTotal())
+    ?>
+    <?php $_items = $this->getRecentItems() ?>
+    <a href="javascript:void(0)" class="mybag-link"><i class="icon-mini-cart"></i><span class="cart-info"><span class="cart-qty"><?php echo $_cartQty ?></span><span><?php echo $this->__('item(s)') ?></span></span></a>
+        <div class="topCartContent block-content theme-border-color">
+            <div class="inner-wrapper"><?php /*extra div to smooth slideUp and slideDown*/ ?>
+                <?php $_items = $this->getRecentItems() ?>
+                <?php if(count($_items)): ?>
+                    <ol class="mini-products-list">
+                        <?php foreach($_items as $_item): ?>
+                            <?php echo $this->getItemHtml($_item) ?>
+                        <?php endforeach; ?>
+                    </ol>
+                    <div class="totals">
+                        <span class="label"><?php echo $this->__('Total')?>: </span>
+                        <span class="price-total"><?php echo $_subtotal ?></span>
+                    </div>
+                    <div class="actions">
+                        <a class="btn btn-default" href="<?php echo $this->getUrl('checkout/cart'); ?>"><i class="icon-basket"></i><?php echo $this->__('View Cart') ?></a>
+                <?php if($_cartQty && $this->isPossibleOnepageCheckout()): ?>
+                        <a class="btn btn-default" href="<?php echo $this->getCheckoutUrl(); ?>"><i class="icon-right-thin"></i><?php echo $this->__('Checkout') ?></a>
+                <?php endif; ?>
+                        <div class="clearer"></div>
+                    </div>
+                <?php else: ?>
+                    <p class="cart-empty">
+                        <?php echo $this->__('You have no items in your shopping cart.'); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+        </div>
+<script type="text/javascript">
+    jQuery(function($){
+        $('.mini-cart').mouseover(function(e){
+            $(this).children('.topCartContent').fadeIn(200);
+            return false;
+        }).mouseleave(function(e){
+            $(this).children('.topCartContent').fadeOut(200);
+            return false;
+        });
+    });
+</script>
+</div>

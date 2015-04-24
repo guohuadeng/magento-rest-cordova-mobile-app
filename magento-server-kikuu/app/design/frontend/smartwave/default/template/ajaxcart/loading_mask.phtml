@@ -1,0 +1,38 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+?>
+<div id="loading-mask">
+<div class ="background-overlay"></div>
+	<p id="loading_mask_loader" class="loader">
+        <i class="ajax-loader large animate-spin"></i>
+	</p>
+</div>
+<div id="after-loading-success-message">
+	<div class ="background-overlay"></div>
+	<div id="success-message-container" class="loader" ><?php echo $this->__("Product was successfully added to your shopping cart.") ?>
+	<br/><br/>
+	<button type="button" name="finish_and_checkout" id="finish_and_checkout" class="button btn-cart" ><span><span>
+	<?php $gotocarttext = Mage::getStoreConfig('ajaxcart/addtocart/gotocarttext', $code);?>
+	<?php if (!empty($gotocarttext)): ?>
+		<?php echo $gotocarttext; ?>
+	<?php else:?>
+		<?php echo $this->__("Go to cart page") ?>
+	<?php endif;?>
+	</span></span></button>
+	<br/><br/>
+	<button type="button" name="continue_shopping" id="continue_shopping" class="button btn-cart" >
+	<span><span>
+	<?php $continueshoppingtext = Mage::getStoreConfig('ajaxcart/addtocart/continueshoppingtext', $code);?>
+	<?php if (!empty($continueshoppingtext)): ?>
+		<?php echo $continueshoppingtext; ?>
+	<?php else:?>
+		<?php echo $this->__("Continue shopping") ?>
+	<?php endif;?>
+	</span></span></button>
+    </div>
+</div>	
+<script type='text/javascript'>
+	jQuery('#finish_and_checkout').click(function(){location.href = '<?php echo $this->getUrl('checkout/cart') ?>'});
+	jQuery('#continue_shopping').click(function(){jQuery('#after-loading-success-message').fadeOut();}); 
+</script>

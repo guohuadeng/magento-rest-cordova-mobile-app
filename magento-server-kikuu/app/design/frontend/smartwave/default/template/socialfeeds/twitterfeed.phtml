@@ -1,0 +1,66 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+    $_enabled = Mage::getStoreConfig('socialfeeds/twitter/enabled', $code);
+    $_widgetid = Mage::getStoreConfig('socialfeeds/twitter/widgetkey', $code);
+    $_screen_name = Mage::getStoreConfig('socialfeeds/twitter/screen_name', $code);
+    $_showcounts = Mage::getStoreConfig('socialfeeds/twitter/show_counts', $code);
+    if($_enabled && $_widgetid){
+?>
+
+
+<script type="text/javascript">
+function handleTweets(tweets){
+    var x = tweets.length;
+    var n = 0;
+    var element = document.getElementById('feed-container');
+    var html = '<ul>';
+    while(n < x) {
+      html += '<li>' + tweets[n] + '</li>';
+      n++;
+    }
+    html += '</ul>';
+    element.innerHTML = html;
+}
+function dateFormater(date) {
+    Date.now = Date.now || function() { return +new Date; };
+    datevalue = Date.now() - date;
+    
+    years = Math.floor(datevalue / (365*60*60*24*1000));
+    months = Math.floor(datevalue / (30*60*60*24*1000));
+    days = Math.floor(datevalue / (60*60*24*1000));
+    hours = Math.floor(datevalue / (60*60*1000));    
+    minutes  = Math.floor(datevalue / 60*1000);
+    seconds = Math.floor(datevalue/1000); 
+    
+    if ( days != 0 )  {
+        result = '<?php echo $this->__('about')?> '+ days + ' <?php echo $this->__('days ago')?>';
+    }
+    else if (hours != 0 ) {
+            result =  '<?php echo $this->__('about')?> ' + hours + ' <?php echo $this->__('hours ago')?>';
+    }
+    else if( minutes !=0 ) {
+            result = '<?php echo $this->__('about')?> '+ minutes + ' <?php $this->__('minutes ago')?>';
+    }
+    else {
+            result = '<?php echo $this->__('about')?> ' + seconds + ' <?php $this->__('seconds ago')?>';
+    }
+    return result;
+}
+
+jQuery(document).ready(function(){
+    var widgetid = '<?php echo $_widgetid ?>';
+    var showcounts = <?php echo $_showcounts ?>;
+    twitterFetcher.fetch(widgetid, 'feed-container', showcounts, true, false, true, dateFormater, true);
+   
+});
+</script>
+<div class="block block-tweets">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Latest Tweets') ?></span></strong>
+    </div>
+    <div class="block-content" id="feed-container"></div>
+</div>
+<?php
+    }  
+?>

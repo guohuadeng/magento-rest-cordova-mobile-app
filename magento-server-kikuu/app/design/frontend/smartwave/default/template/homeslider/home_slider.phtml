@@ -1,0 +1,19 @@
+<?php
+$store = Mage::app()->getStore();
+$code = $store->getCode();
+$enabled = Mage::getStoreConfig('homeslider/general/enabled', $code);
+$type = Mage::getStoreConfig('homeslider/general/type', $code);
+$static_block_id = Mage::getStoreConfig('homeslider/general/static_block_id', $code);
+if($enabled == 1){
+?>
+<div id="slideshow">
+<?php
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId($static_block_id)->toHtml();
+?>
+</div>
+<?php    
+} else {
+?>
+<?php
+}
+?>

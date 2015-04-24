@@ -1,0 +1,26 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+    $_enabled = Mage::getStoreConfig('socialicons/general/enabled', $code);
+    $_width = Mage::getStoreConfig('socialicons/options/icon_width', $code);
+    $_height = Mage::getStoreConfig('socialicons/options/icon_height', $code);
+    
+    $_links = array();
+    for($i = 1; $i <= 9; $i++){
+        if(Mage::getStoreConfig("socialicons/options/icon".$i."_visible",$code)){
+            $_links[] = array("url"=>Mage::getStoreConfig("socialicons/options/icon".$i."_url",$code), "image_position"=>Mage::getStoreConfig("socialicons/options/icon".$i."_image_position",$code) , "title"=>Mage::getStoreConfig("socialicons/options/icon".$i."_title",$code) , "class"=>Mage::getStoreConfig("socialicons/options/icon".$i."_class",$code));
+            
+        }
+    }
+    if($_enabled){
+?>
+<div class="social-icons">
+<?php
+   foreach($_links as $_link){
+       echo '<a href="'.$_link['url'].'" style="background-position:'.$_link['image_position'].'; width:'.$_width.'; height:'.$_height.';" class="'.$_link['class'].'" title="'.$_link['title'].'" target="_blank">&nbsp;</a>';
+   }
+?>
+</div>
+<?php
+    }
+?>

@@ -1,0 +1,34 @@
+<div class="col-2">
+    <div class="box">
+        <div class="box-title">
+            <h3><?php echo $this->__('PayPal Account') ?></h3>
+        </div>
+        <div class="box-content">
+            <div>
+                <?php if(!$this->getPaypalCustomerEmail()): ?>
+                    <p><?php echo $this->__('Log in quickly, easily and safely with Log in with PayPal') ?></p>
+                    <ul style="list-style: disc outside none;padding-left: 18px;">
+                        <li><?php echo $this->__('Avoid the hassle of filling in yet another registration form') ?></li>
+                        <li><?php echo $this->__('Just one password to remember') ?></li>
+                    </ul>
+                    <br />
+                    <button type="button" id="linkWithPaypal" title="<?php echo $this->__('Link Account') ?>" class="button"><span><span><?php echo $this->__('Link Account') ?></span></span></button>
+                <?php else: ?>
+                <?php echo $this->__('PayPal Linked Account: '); echo $this->getPaypalCustomerEmail() ?><br />
+                <a href="<?php echo $this->getUnlinkUrl()?>" id="unLinkWithPaypal"><?php echo $this->__('Unlink') ?></a>
+                <?php endif; ?>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    if ($('linkWithPaypal')) {
+        Event.observe('linkWithPaypal', 'click', link);
+    }
+    function link() {
+        mywindow = window.open('<?php echo $this->getAuthLoginUrl() ?>', "_PPIdentityWindow_", "location=1,status=0,scrollbars=0,width=400,height=550"); return false;
+    }
+//]]>
+</script>

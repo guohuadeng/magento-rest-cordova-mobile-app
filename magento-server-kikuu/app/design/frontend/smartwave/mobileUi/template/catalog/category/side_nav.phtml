@@ -1,0 +1,25 @@
+<?php $menuHelper = Mage::helper('megamenu'); ?>
+<div class="side-block">
+    <div class="menu-all-pages-container">
+        <ul class="menu">
+            <?php echo $menuHelper->getMobileMenuContent(); ?>
+        </ul>
+    </div>
+</div>
+<script type="text/javascript">
+jQuery(function($){
+    $(".home-side-menu-type2 .side-block ul.menu li.menu-parent-item>a").before('<a class="open-child" href="javascript:void(0)"><i class="icon-down-dir"></i></a>');
+    $(".home-side-menu-type2>.side-block ul.menu a.open-child").click(function(){
+        if($(this).parent().hasClass("opened")){
+            $(this).parent().removeClass("opened");
+            $(this).parent().children("ul").slideUp();
+            $(this).children("i.icon-up-dir").addClass("icon-down-dir").removeClass("icon-up-dir");
+        } else {
+            $(this).parent().addClass("opened");
+            $(this).parent().children("ul").slideDown();
+            $(this).children("i.icon-down-dir").addClass("icon-up-dir").removeClass("icon-down-dir");
+        }
+    });
+});
+
+</script>

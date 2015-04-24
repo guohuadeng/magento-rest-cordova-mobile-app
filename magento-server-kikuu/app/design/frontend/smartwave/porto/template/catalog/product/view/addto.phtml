@@ -1,0 +1,18 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_wishlistSubmitUrl = $this->helper('wishlist')->getAddUrl($_product); ?>
+
+<ul class="add-to-links">
+<?php if ($this->helper('wishlist')->isAllow()) : ?>
+    <li><a href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" class="link-wishlist"><i class="icon-wishlist"></i></a></li>
+<?php endif; ?>
+<?php
+    $_compareUrl = $this->helper('catalog/product_compare')->getAddUrl($_product);
+?>
+<?php if(Mage::getStoreConfig("porto_settings/category/compare", $code) && $_compareUrl) : ?>
+    <li><a href="<?php echo $_compareUrl ?>" class="link-compare"><i class="icon-compare"></i></a></li>
+<?php endif; ?>
+</ul>

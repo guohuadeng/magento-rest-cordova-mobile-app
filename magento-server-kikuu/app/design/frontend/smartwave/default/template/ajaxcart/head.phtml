@@ -1,0 +1,7 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+?>
+<style type="text/css">
+	<?php echo Mage::getStoreConfig('ajaxcart/general/custom_css', $code);?>
+</style>

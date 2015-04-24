@@ -1,0 +1,15 @@
+<?php $menuHelper = Mage::helper('megamenu'); ?>
+<?php $menuData = $menuHelper->getMenuData(); extract($menuData); ?>
+<ul class="menu side-menu">
+    <?php echo $menuHelper->getMenuContent(); ?>
+</ul>
+<script type="text/javascript">
+//<![CDATA[
+var SW_MENU_POPUP_WIDTH = <?php echo $_popupWidth; ?>;
+jQuery(function($){
+    $('.menu.side-menu').et_menu({
+        type: "default"
+    });
+});
+//]]>
+</script>

@@ -1,0 +1,71 @@
+<?php
+$storeId = Mage::app()->getStore()->getId();
+//Get category model
+$_category = Mage::getModel('catalog/category')->setStoreId($storeId);
+$_cat = $_category->load(Mage::app()->getStore()->getRootCategoryId());
+?>
+<?php
+    function getChildrenCategoriesHtmlContent($_category){
+        $children = explode( ",", $_category->getChildren() );
+        $content = '';
+        $content .= '<li class="';
+        if(!$children[0])
+            $content .= 'has-no-children';
+        else
+            $content .= 'has-children';
+        $content .= '">';
+        $content .= '<a href="'.$_category->getUrl().'" ';
+        $content .= '>'.$_category->getName().'</a>';
+        if($children[0]){
+            $content .= '<a href="javascript:void(0)" class="plus"><i class="icon-plus-squared"></i></a>';
+            $content .= '<ul>';
+            foreach($children as $child){
+                $_subcat = Mage::getModel( 'catalog/category' )->load( $child );
+                $content .= getChildrenCategoriesHtmlContent($_subcat);
+            }
+            $content .= '</ul>';
+        }
+        $content .= '</li>';
+        return $content;
+    }
+?>
+<div class="block block-category-nav">
+    <div class="block-title">
+        <strong><span><?php echo $this->__("Category") ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="category-list">
+            <?php
+                $children = explode( ",", $_cat->getChildren() );
+                foreach($children as $child){
+                    $_category = Mage::getModel( 'catalog/category' )->load( $child );
+                    echo getChildrenCategoriesHtmlContent($_category);
+                }
+            ?>
+        </ul>
+    </div>
+<script type="text/javascript">
+    jQuery(function($){
+        $(".block.block-category-nav .block-title strong").click(function(){
+            if($(this).hasClass("closed")){
+                $(".block.block-category-nav .block-content").slideDown();
+                $(this).removeClass("closed");
+            } else {
+                $(".block.block-category-nav .block-content").slideUp();
+                $(this).addClass("closed");
+            }
+        });
+        $(".block.block-category-nav .category-list a.plus").click(function(){
+            if($(this).parent().hasClass("opened")){
+                $(this).parent().children("ul").slideUp();
+                $(this).parent().removeClass("opened");
+                $(this).children("i.icon-minus-squared").removeClass("icon-minus-squared").addClass("icon-plus-squared");
+            } else {
+                $(this).parent().children("ul").slideDown();
+                $(this).parent().addClass("opened");
+                $(this).children("i.icon-plus-squared").removeClass("icon-plus-squared").addClass("icon-minus-squared");
+            }
+        });
+    });
+</script>
+</div>

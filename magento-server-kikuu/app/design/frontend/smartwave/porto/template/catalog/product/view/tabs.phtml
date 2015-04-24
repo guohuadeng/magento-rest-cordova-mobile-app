@@ -1,0 +1,66 @@
+<?php
+    $helper = Mage::helper("porto");
+    $product_id = Mage::registry("current_product")->getId();
+?>
+<div class="product-tabs">
+    <ul>
+        <?php $i = 0; ?>
+        <?php foreach ($this->getTabs() as $_index => $_tab): ?>
+            <?php if($this->getChildHtml($_tab['alias'])): ?>
+                <li id="tab_<?php echo $_tab['alias'] ?>" class="<?php echo ($i==0)?' active first':''?>"><a href="#"><?php echo $_tab['title']?></a></li>
+                <?php $i++; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <?php
+            for($i=1;$i<=5;$i++){
+                $custom_tab = "attribute_tab_".$i;
+                if($helper->isEnabledTab("attribute", $custom_tab, $product_id)){
+        ?>
+                <li id="tab_<?php echo $custom_tab ?>"><a href="#"><?php echo $helper->getTabTitle("attribute", $custom_tab, $product_id)?></a></li>
+        <?php
+                }
+            }
+        ?>
+        <?php
+            for($i=1;$i<=5;$i++){
+                $custom_tab = "static_block_tab_".$i;
+                if($helper->isEnabledTab("static_block", $custom_tab, $product_id)){
+        ?>
+                <li id="tab_<?php echo $custom_tab ?>"><a href="#"><?php echo $helper->getTabTitle("static_block", $custom_tab, $product_id)?></a></li>
+        <?php
+                }
+            }
+        ?>
+    </ul>
+    <div class="clearer"></div>
+    <?php foreach ($this->getTabs() as $_index => $_tab): ?>
+        <?php if($this->getChildHtml($_tab['alias'])): ?>
+            <div class="tab-content" id="tab_<?php echo $_tab['alias'] ?>_contents"><?php echo $this->getChildHtml($_tab['alias']) ?></div>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <?php
+            for($i=1;$i<=5;$i++){
+                $custom_tab = "attribute_tab_".$i;
+                if($helper->isEnabledTab("attribute", $custom_tab, $product_id)){
+        ?>
+                <div class="tab-content" id="tab_<?php echo $custom_tab ?>_contents"><?php echo $helper->getTabContents("attribute", $custom_tab, $product_id)?></div>
+        <?php
+                }
+            }
+        ?>
+        <?php
+            for($i=1;$i<=5;$i++){
+                $custom_tab = "static_block_tab_".$i;
+                if($helper->isEnabledTab("static_block", $custom_tab, $product_id)){
+        ?>
+                <div class="tab-content" id="tab_<?php echo $custom_tab ?>_contents"><?php echo $helper->getTabContents("static_block", $custom_tab, $product_id)?></div>
+        <?php
+                }
+            }
+        ?>
+    <script type="text/javascript">
+    //<![CDATA[
+    new Varien.Tabs('.product-tabs ul');
+    //]]>
+    </script>
+</div>

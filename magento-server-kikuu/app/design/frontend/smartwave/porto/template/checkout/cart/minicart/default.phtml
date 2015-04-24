@@ -1,0 +1,81 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$_item = $this->getItem();
+$isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
+//$canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
+$aspect_ratio = Mage::getStoreConfig("porto_settings/category/aspect_ratio",$code);
+$ratio = 1;
+if($aspect_ratio && Mage::getStoreConfig("porto_settings/category/ratio_width",$code) > 0)
+    $ratio = Mage::getStoreConfig("porto_settings/category/ratio_height",$code)/Mage::getStoreConfig("porto_settings/category/ratio_width",$code);
+?>
+<li class="item">
+    <?php if ($this->hasProductUrl()): ?>
+        <a href="<?php echo $this->getProductUrl()?>" title="<?php echo $this->htmlEscape($this->getProductName()) ?>" class="product-image"><img src="<?php if($aspect_ratio):?><?php echo $this->getProductThumbnail()->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80);?><?php else: ?><?php echo $this->getProductThumbnail()->resize(80,80*$ratio); ?><?php endif; ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /></a>
+    <?php else: ?>
+        <span class="product-image"><img src="<?php if($aspect_ratio):?><?php echo $this->getProductThumbnail()->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(80);?><?php else: ?><?php echo $this->getProductThumbnail()->resize(80,80*$ratio); ?><?php endif; ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /></span>
+    <?php endif; ?>
+    <div class="product-details">
+        <p class="product-name">
+            <?php if ($this->hasProductUrl()): ?>
+                <a href="<?php echo $this->getProductUrl() ?>">
+            <?php endif; ?>
+                <?php echo $this->htmlEscape($this->getProductName()) ?>
+            <?php if ($this->hasProductUrl()): ?>
+                </a>
+            <?php endif; ?>
+        </p>
+        <?php if ($_options = $this->getOptionList()):?>
+        <div class="option-detail">
+            <dl class="item-options">
+                <?php foreach ($_options as $_option) : ?>
+                <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
+                <dd>
+                    <?php if (is_array($_option['value'])): ?>
+                    <?php echo nl2br(implode("\n", $_option['value'])) ?>
+                    <?php else: ?>
+                    <?php echo $_option['value'] ?>
+                    <?php endif; ?>
+                </dd>
+                <?php endforeach; ?>
+            </dl>
+            <a href="#" onclick="return false;" class="details"><?php echo $this->__('Details') ?></a>
+        </div>
+        <?php endif; ?>
+
+        <p class="qty-price">
+            <?php echo $this->getQty();?> X 
+             <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                    <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()+$_item->getWeeeTaxAppliedAmount()+$_item->getWeeeTaxDisposition()); ?>
+                <?php else: ?>
+                    <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
+                <?php endif; ?>
+                <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <?php echo $this->__("(Excl. Tax)"); ?>
+                <?php endif; ?>
+             <?php endif; ?>
+             <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
+                <?php $_incl = $this->helper('checkout')->getPriceInclTax($_item); ?>
+                <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <?php echo "&nbsp;&nbsp;"; ?>
+                <?php endif; ?>
+                <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
+                    <?php echo $this->helper('checkout')->formatPrice($_incl+$_item->getWeeeTaxAppliedAmount()); ?>
+                <?php else: ?>
+                    <?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxDisposition()) ?>
+                <?php endif; ?>
+                <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
+                    <?php echo $this->__("(Incl. Tax)"); ?>
+                <?php endif; ?>
+              <?php endif; ?>
+        </p>
+        <?php
+            $delete_url=$this->getDeleteUrl();
+            if(strpos($delete_url,'uenc')>-1)
+                $delete_url=substr($delete_url,0,strpos($delete_url,'uenc')-1);
+        ?>
+        <a href="<?php echo $delete_url ?>" title="<?php echo $this->__('Remove This Item') ?>" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the shopping cart?') ?>');" class="btn-remove"><i class="icon-cancel"></i></a>
+    </div>
+    <div class="clearer"></div>
+</li>

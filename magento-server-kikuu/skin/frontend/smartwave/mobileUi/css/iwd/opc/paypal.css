@@ -1,0 +1,4 @@
+a.paypal-auth,
+#login-with-paypal{text-decoration: none;background: url('https://www.paypalobjects.com/webstatic/en_US/developer/docs/lipp/loginwithpaypalbutton.png') no-repeat scroll 0 0 transparent; display: inline-block;height: 34px;width: 152px;}
+
+.paypal-or { border-bottom:1px solid #ddd;border-top:1px solid #ddd; padding:5px 0 5px; margin:10px 0 10px; }

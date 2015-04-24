@@ -1,0 +1,116 @@
+<?php
+$_product = $this->getProduct();
+$_json_config = $this->getJsonConfig();
+
+print_r($_json_config);
+
+?>
+<?php if ($_product->isSaleable() && count($_json_config["attributes"])): ?>
+    <!--h3 class="options-title"><?php //echo $this->__("Available Options");    ?></h3-->
+    <dl>
+        <?php foreach ($_json_config["attributes"] as $_attribute): ?>
+            <dt id="label-attribute-<?php echo $_attribute["id"] ?>"><label><?php echo $_attribute["label"] ?><span class="required">&nbsp;*</span></label><span class="selected-label">&nbsp;</span>   </dt>
+            <dd<?php /* if ($_attribute->decoratedIsLast){   ?> class="last"<?php } */ ?>>
+                <?php if ($_attribute["swatches_type"] == "image" || $_attribute["swatches_type"] == "label") {
+                    ?>
+                    <div id="attribute-<?php echo $_attribute["id"] ?>-container" class="product-swatches-container">
+                        <ul id="swatches-options-<?php echo $_attribute["id"] ?>"<?php if ($_attribute["swatches_type"] == "image")
+                echo ' class="has-swatches"' ?>>
+                                <?php
+                                foreach ($_attribute["options"] as $_option) {
+                                    ?>
+                                <li>
+                                    <?php
+                                    if ($_attribute["swatches_type"] == "image") {
+                                        $_target_image = "#";
+                                        $_swatch_image = "";
+                                        //if ($_option["swatches_image"]) {
+                                        $_swatch_image = "<img src='" . $_option["swatches_image"] . "' title='" . $_product->getName() . " - " . $_option["label"] . "' alt='" . $_product->getName() . " - " . $_option["label"] . "'/>";
+                                        $_image_product = Mage::getModel('catalog/product')->load($_option["products"][0]);
+                                        //$_target_image = $this->helper('catalog/image')->init($_image_product, 'image')->resize(400);
+                                        $_zimage = $this->helper('catalog/image')->init($_image_product, 'image'); //->resize(300,null);
+                                        //}
+                                        //$_zimage = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile()); //->resize(300,null);
+                                        $_zimage->__toString();
+                                        $_height = $_zimage->getOriginalHeight();
+                                        $_width = $_zimage->getOriginalWidth();
+                                        $_ratio = 1;
+                                        if ($_height > 0)
+                                            $_ratio = $_height / $_width;
+                                        $_large_img_height = 370 * $_ratio;
+                                        ?>
+                                        <a class="" title="<?php echo $_option["label"] ?>" val="<?php echo $_option["id"] ?>" id="swatches_option_value_<?php echo $_option["id"] ?>" href="<?php echo $_zimage ?>" rev="<?php echo $_zimage->resize(370, $_large_img_height) ?>">
+                                            <?php
+                                            echo "<img src='" . $this->helper('catalog/image')->init($_image_product, 'image')->constrainOnly(TRUE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(50, 0) . "' title='" . $_option["label"] . "' alt='" . $_option["label"] . "'/>";
+                                            ?>
+                                        </a>
+                                        <span class="tooltip-container"><span class="tooltip"><span><?php echo $_option["label"] ?></span></span></span>
+
+                                    <?php } else {
+                                        ?>
+                                        <a class="" title="<?php echo $_option["label"] ?>"  val="<?php echo $_option["id"] ?>" id="swatches_option_value_<?php echo $_option["id"] ?>" href="#">
+                                            <?php echo $_option["label"] ?>
+                                        </a>
+                                    <?php } ?>
+                                </li>
+                                <?php
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                <?php } ?>
+                <div class="input-box">
+                    <select name="super_attribute[<?php echo $_attribute["id"] ?>]" id="attribute<?php echo $_attribute["id"] ?>" class="configurable-option-select required-entry super-attribute-select  swatches-type-<?php echo $_attribute["swatches_type"]; ?>">
+                        <option><?php echo $this->__('Choose an Option...') ?></option>
+                    </select>
+                </div>
+            </dd>
+        <?php endforeach; ?>
+    </dl>
+    <?php
+    /*  echo "<pre>";
+      print_r($_json_config);
+      echo "</pre>"; */
+    ?>
+    <script type="text/javascript">
+        /* added by Mango */
+        //var _zoomProductId = '<?php echo $_product->getId(); ?>';
+        var mng_Config = <?php echo Mage::helper('core')->jsonEncode($_json_config); ?>;
+        var spConfig = new Product.Config(mng_Config);
+        /*spConfig.configureElement = function(element){
+            /*from original code*/
+         /*   this.reloadOptionLabels(element);
+         //   if(element.value){
+                this.state[element.config.id] = element.value;
+                if(element.nextSetting){
+                    element.nextSetting.disabled = false;
+                    this.fillSelect(element.nextSetting);
+                    this.resetChildren(element.nextSetting);
+                }
+            }
+            else {
+                this.resetChildren(element);
+            }
+            this.reloadPrice();
+            /*from orignal code*/
+         /*          alert("sdfs")                 ;
+            window.enableSwatchesOptions ( element.config.id);
+            //window.resetLabels(element.config.id);
+       /* }*/
+            
+             
+             
+               
+        /*.live("mouseenter",function(){
+           }
+        alert("sdfsdfsd");
+        jQuery("#product-view-right-column").fadeOut();
+    }).live("mouseleave",function(){
+         jQuery("#product-view-right-column").fadeIn();
+    }); */
+                
+   // });
+            
+    </script>
+<?php endif; ?>
+<?php //echo $this->getJsonConfig()   ?>

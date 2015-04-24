@@ -1,0 +1,35 @@
+<?php
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$custom_block = Mage::getStoreConfig('porto_settings/header/static_block_2', $code);
+$menu_title = Mage::getStoreConfig('porto_settings/header/menu_title', $code);
+?>
+<div class="header-wrapper">
+        <div class="container">
+            <div class="menu-wrapper">
+                <div class="dropdown-menu">
+                    <div class="menu-container">
+                        <a href="javascript:void(0)"><i class="fa fa-bars"></i><?php echo $menu_title; ?></a>
+                        <?php $menuHelper = Mage::helper('megamenu'); ?>
+                        <?php $menuData = $menuHelper->getMenuData(); extract($menuData); ?>
+                        <ul class="menu side-menu">
+                            <?php echo $menuHelper->getMenuContent(); ?>
+                        </ul>
+                        <script type="text/javascript">
+                            //<![CDATA[
+                            var SW_MENU_POPUP_WIDTH = <?php echo $_popupWidth; ?>;
+                            jQuery(function($){
+                                $('.menu.side-menu').et_menu({
+                                    type: "default"
+                                });
+                            });
+                            //]]>
+                        </script>
+                    </div>
+                </div>
+                <div class="custom-menu-block">
+                    <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId($custom_block)->toHtml(); ?>
+                </div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,32 @@
+.social-icons {
+  float: right; }
+  .social-icons span.label {
+    line-height: 30px;
+    font-size: 13px;
+    color: #8b8c8d;
+    display: inline-block;
+    padding: 0; }
+  .social-icons a {
+    background: url(../images/social-icons-sprite.png) 0 0 no-repeat;
+    width: 30px;
+    height: 30px;
+    background-color: #000;
+    display: inline-block;
+    text-indent: -9999px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    margin-left: 10px;
+    line-height: 30px; }
+    .social-icons a:hover {
+      background: url(../images/social-icons-hover-sprite.png) 0 0 no-repeat;
+      width: 30px;
+      height: 30px;
+      background-color: #E0E0E0;
+      display: inline-block;
+      text-indent: -9999px;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      margin-left: 10px;
+      line-height: 30px; }

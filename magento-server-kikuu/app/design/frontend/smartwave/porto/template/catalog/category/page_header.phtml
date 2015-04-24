@@ -1,0 +1,19 @@
+<?php
+    $_helper    = Mage::helper('catalog/output');
+    $_category  = Mage::registry('current_category');
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    if($_description=$_category->getDescription()){
+?>
+<div class="category-banner">
+<?php
+        echo $_helper->categoryAttribute($_category, $_description, 'description');
+?>
+</div>
+<?php
+    }else if(Mage::getStoreConfig("porto_settings/header/type",$code) == "10"){
+?>
+<div class="page-header">&nbsp;</div>
+<?php
+    }
+?>

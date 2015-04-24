@@ -1,0 +1,55 @@
+.main-container{padding-bottom:0}
+.col-main{padding-bottom:13px}
+.footer-bottom a.logo{margin-right:30px}
+.footer-bottom .custom-block{margin-left:30px}
+.footer .container{padding-left:30px;padding-right:30px}
+.footer-top,.footer-middle,.footer-bottom{width:1024px;margin:0 auto;max-width:100%;}
+.search-area{height:34px;}
+.header .form-search #search{padding:7px 20px;height:32px}
+.header .form-search #cat{height:32px;line-height:28px;right:34px}
+.header .form-search button.button{width:34px;height:32px}
+.main.container {background-color:#fff;padding-top:13px;margin-bottom:13px}
+.menu.side-menu>li.menu-full-width .nav-sublist-dropdown{width:755px}
+.header-container.type10 { width: 1024px; margin: 0 auto; }
+.header-container.type10 .container { width: 1024px; }
+.homepage-bar{padding:0 15px}
+@media (max-width:1069px){
+	.menu.side-menu>li.menu-full-width .nav-sublist-dropdown{width:708px}
+	.header-container.type10 { width: 940px }
+	.header-container.type10 .container { width: 940px; padding-left:15px; padding-right:15px; }
+	.header-container.type10 .header .form-search{width:410px}
+
+	#banner-slider-demo-10 .item .content{right:4.1%;bottom:20.5%}
+	#banner-slider-demo-10 .item .content>span{font-size:20px;margin-right:32px;}
+	#banner-slider-demo-10 .item .content>a.btn-default{font-size:12px}
+}
+@media (max-width:991px){
+	.header-container.type10 { width: 720px }
+	.header-container.type10 .container { width: 720px }
+	.header-container.type10 .header .search-area .form-search{width:310px;border:5px solid #ccc}
+}
+@media (max-width:768px){
+	.top-container .container{padding:0}
+	.header-container.type10 { width: auto }
+	.header-container.type10 .container { width: auto }
+
+	#banner-slider-demo-10 .item .content{right:4.1%;bottom:15.5%}
+	#banner-slider-demo-10 .item .content>span{font-size:14px;margin-right:15px;}
+	#banner-slider-demo-10 .item .content>a.btn-default{font-size:9px}
+}
+@media (max-width:640px){
+	.footer-bottom .custom-block{margin:0}
+}
+@media (min-width:768px){
+	.footer-top,.footer-middle,.footer-bottom{width:720px}
+	.main.container {width:720px}
+}
+@media (min-width:992px){
+	.footer-top,.footer-middle,.footer-bottom{width:940px}
+	.main.container {width:940px}
+}
+@media (min-width:1070px){
+	.container {width: 1054px}
+	.footer-top,.footer-middle,.footer-bottom{width:1024px}
+	.main.container {width:1024px}
+}

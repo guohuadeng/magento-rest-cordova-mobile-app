@@ -1,0 +1,52 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<p class="left"><a class="login-trigger signin-modal theme-bg-color" data-modal="modal-login"><?php echo $this->__('LOGIN')?></a></p>
+
+<div class="md-modal md-effect-7" id="modal-login">
+	<div class="md-content">
+			<div class="md-modal-header">
+				<button type="button" class="close">&times;</button>
+				<h4><?php echo $this->__('Login to your Account')?></h4>
+			</div>	
+			<div class="md-content-wrapper">
+				<form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+		      		<?php echo $this->getBlockHtml('formkey'); ?>
+			        <div>
+						<ul class="form-list">
+							<li>
+								<label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+								<div class="input-box">
+									<input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+								</div>
+							</li>
+						<li>
+							<label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+							<div class="input-box">
+								<input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+							</div>
+						</li>
+						
+						</ul>				
+					</div>
+					<input name="context" type="hidden" value="checkout" />
+				</form>
+				
+				<?php echo $this->getChildhtml('forgotPassword');?>
+			</div>
+			<div class="md-modal-footer">
+				<div id="login-button-set">
+					<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left restore-account"><?php echo $this->__('Forgot Your Password?') ?></a>	        
+					<button type="button" class="button btn btn-primary"><span><span><?php echo $this->__('Login') ?></span></span></button>
+				</div>	
+				<div id="forgotpassword-button-set" style="display:none">		        	
+		        	<p class="back-link"><a href="<?php echo $this->helper('customer')->getLoginUrl() ?>"><small>&laquo; </small><?php echo $this->__('Back to Login') ?></a></p>
+		        	<button type="button" title="<?php echo $this->__('Submit') ?>" class="button btn"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+    			</div>
+			</div>
+	</div>
+</div>
+<div class="md-overlay"></div>	
+<script type="text/javascript">
+    //<![CDATA[
+        var dataForm1 = new VarienForm('login-form', true);
+    //]]>
+</script>

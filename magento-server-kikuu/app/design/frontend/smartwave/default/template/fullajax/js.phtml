@@ -1,0 +1,67 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+
+    $except = Mage::getStoreConfig('fullajax/general/except', $code);
+    $except_form = Mage::getStoreConfig('fullajax/general/except_form', $code);
+?>
+<script type="text/javascript">
+var page_loaded = false;
+jQuery(function($){
+    var except = "<?php echo $except; ?>";
+    $("a").each(function(){
+        var b = $(this).attr('href');
+        myhost = new RegExp(location.host);
+        var ev = $._data(this,'events');
+        var flg = true;
+        var current_a = $(this);
+        if(except){
+            $(except).each(function(){
+                if($(this).is(current_a)){
+                    flg = false;
+                    return;
+                }
+            });
+        }
+        if((b != '#') && (b != '') && (b !== undefined) && (myhost.test(b) == true || b.slice(0, 1) == "/") && ($(this).attr("onClick") == undefined) && (b.indexOf("javascript:")==-1) && !(ev && ev.click) && flg){
+            $(this).unbind('click').click(function (a) {
+                a.preventDefault();
+                reloadData(b)
+            });
+        }
+    });
+    var c = {success: showResponse};
+    $(document).on('submit', 'form', function(e) {
+        if($(this).hasClass('no-ajax')) return true; // non-ajax
+        var form_id = $(this).attr("id");
+        var except_ids = "<?php echo $except_form; ?>";
+        var arr=except_ids.split(",");
+        if( form_id && arr && form_id.indexOf(arr)>-1) return true;
+
+        // Do it with ajax
+        e.preventDefault();
+        $('#fullajax_loader').show();
+        $(this).ajaxSubmit(c);
+    });
+    window.onpopstate = function(event) {
+
+        /**
+         * This was breaking the back button on the first press.
+         * Unsure why it's here, but skipping the first block fixes the problem.
+         * Toggle this if if other errors popup.
+         */
+
+        //if(false && !page_loaded){
+        if(!page_loaded){
+            page_loaded = true;
+        } else {
+            $("#fullajax_loader").show();
+            console.log("pathname: "+location.pathname);
+
+            $.ajax({url: location.pathname,data:{fullpageajax:true},success: showResponse,error: function() {
+                window.location.href = a
+            }});
+        }
+    };
+});
+</script>

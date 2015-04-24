@@ -1,0 +1,37 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2014 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+
+/* @var Mage_Wishlist_Model_Item $item */
+$item = $this->getItem();
+$product = $item->getProduct();
+$store = Mage::app()->getStore();
+$code  = $store->getCode();
+$aspect_ratio = Mage::getStoreConfig("porto_settings/category/aspect_ratio",$code);
+$ratio = ($aspect_ratio || (!$aspect_ratio && Mage::getStoreConfig("porto_settings/category/ratio_width",$code) == 0))?1:(Mage::getStoreConfig("porto_settings/category/ratio_height",$code)/Mage::getStoreConfig("porto_settings/category/ratio_width",$code));
+?>
+<a class="product-image" href="<?php echo $this->getProductUrl($item) ?>" title="<?php echo $this->escapeHtml($product->getName()) ?>">
+    <img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(80, 80*$ratio); ?>" width="80" height="<?php echo 80*$ratio ?>" alt="<?php echo $this->escapeHtml($product->getName()) ?>" />
+</a>

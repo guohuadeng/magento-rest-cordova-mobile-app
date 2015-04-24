@@ -1,0 +1,199 @@
+<script type="text/javascript">
+	var data = "";
+	var active = false;
+	jQuery(function($){
+		if($('body').find('#resultLoading').attr('id') != 'resultLoading'){
+		$('.main').append('<div id="resultLoading" style="display:none"><div><?php if($this->loadingImage): ?><img src="<?php echo $this->loadingImage ?>"><?php else: ?><i class="ajax-loader large animate-spin"></i><?php endif; ?><div><?php echo $this->loadingText ?></div></div><div class="bg"></div></div>');}
+		var height = $('.main').outerHeight();
+		var width = $('.main').outerWidth();
+		$('.ui-slider-handle').css('cursor','pointer');
+		
+		$('#resultLoading').css({
+			'width':'100%',
+			'height':'100%',
+			'position':'fixed',
+			'z-index':'10000000',
+			'top':'0',
+			'left':'0'
+		});	
+		$('#resultLoading .bg').css({
+			'background':'<?php echo $this->overlayColor; ?>',
+			'opacity':'<?php echo $this->overlayOpacity ?>',
+			'width':'100%',
+			'height':'100%',
+			'position':'absolute',
+			'top':'0'
+		});
+		$('#resultLoading>div:first').css({
+			'width': '100%',
+			'text-align': 'center',
+			'position': 'absolute',
+			'left': '0',
+			'top': '50%',
+			'font-size':'16px',
+			'z-index':'10',
+			'color':'<?php echo $this->loadingTextColor ?>'
+			
+		});
+		
+		<?php if($this->ajaxLayered): ?>        
+        $('.block-layered-nav a').on('click', function(e){if(!$(this).parent().hasClass('slider-range')){sliderAjax($(this).attr('href'));}e.preventDefault();});        
+        <?php endif; ?>
+        
+        <?php if($this->ajaxToolbar): ?>
+        $('.toolbar a').on('click', function(e){ if($(this).attr('href')){var url=$(this).attr('href');sliderAjax(url);} e.preventDefault();});
+        $('.toolbar select').removeAttr('onchange');
+        $('.toolbar select').on('change', function(e){var url=$(this).val();sliderAjax(url);e.preventDefault();});
+        <?php endif; ?>
+		
+		
+	});
+
+<?php if($this->ajaxSlider || $this->ajaxLayered || $this->ajaxToolbar): ?>
+/*DONOT EDIT THIS CODE*/
+var old_class;
+function sliderAjax(url) {
+    if (!active) {
+        active = true;
+        jQuery(function($) {
+            if($(".col-main .products-grid").attr("class"))
+                old_class = $(".col-main .products-grid").attr("class");
+            oldUrl = url;
+            $('#resultLoading .bg').height('100%');
+            $('#resultLoading').fadeIn(300);
+            var param = "ajaxcatalog=true";
+            if(url.indexOf("?")==-1)
+                param = "?"+param;
+            else
+                param = "&"+param;
+            try {
+                $('body').css('cursor', 'wait');
+                $.ajax({
+                    url: url+param,
+                    dataType: 'json',
+                    type: 'post',
+                    data: data,
+                    success: function(data) {                        
+						callback();
+                        if (data.viewpanel) {
+                            if ($('.block-layered-nav')) {
+                                $('.block-layered-nav').empty();
+                                $('.block-layered-nav').replaceWith(data.viewpanel)
+                            }
+                        }
+                        if (data.productlist) {
+                            $('.col-main .category-products').empty();
+                            $('.col-main .category-products').replaceWith(data.productlist)
+                        }
+                        $(".col-main .category-products").scrollToMe();
+                        var hist = url.split('?');
+                        if(window.history && window.history.pushState){
+							window.history.pushState('GET', data.title, url);
+						}
+                        $('body').find('.toolbar select').removeAttr('onchange');
+                        $('#resultLoading .bg').height('100%');
+                        $('#resultLoading').fadeOut(300);
+                        $('body').css('cursor', 'default');
+                        $('body').find('.toolbar select').removeAttr('onchange');
+                        $('#resultLoading .bg').height('100%');
+                        $('#resultLoading').fadeOut(300);
+                        $('body').css('cursor', 'default');
+                        <?php if($this->ajaxLayered): ?>                        
+                        $('.block-layered-nav a').on('click', function(e){if(!$(this).parent().hasClass('slider-range')){sliderAjax($(this).attr('href'));}e.preventDefault();});
+                        <?php endif; ?>
+                        
+                        
+                        <?php if($this->ajaxToolbar): ?>
+                        $('.toolbar a').on('click', function(e){ e.preventDefault(); if($(this).attr('href')){var url=$(this).attr('href');sliderAjax(url);}});
+                        $('.toolbar select').removeAttr('onchange');
+                        $('.toolbar select').on('change', function(e){var url=$(this).val();sliderAjax(url);e.preventDefault();});
+                        <?php endif; ?>
+                        $("a.product-image img.defaultImage").each(function(){
+                            var default_img = $(this).attr("src");
+                            if(!default_img)
+                                default_img = $(this).attr("data-src");
+                            var thumbnail_img = $(this).parent().children("img.hoverImage").attr("src");
+                            if(!thumbnail_img)
+                                thumbnail_img = $(this).parent().children("img.hoverImage").attr("data-src");
+                            if(default_img){
+                                if(default_img.replace("/small_image/","/thumbnail/")==thumbnail_img){
+                                    $(this).parent().children("img.hoverImage").remove();
+                                    $(this).removeClass("defaultImage");
+                                }
+                            }
+                        });
+                        /* moving action links into product image area */
+                        $(".move-action .item .details-area .actions").each(function(){
+                            $(this).parent().parent().children(".product-image-area").append($(this));
+                        });
+                        if(old_class)
+                            $(".col-main .products-grid").attr("class", old_class);
+                        <?php
+                            $store = Mage::app()->getStore();
+                            $code  = $store->getCode();
+
+                            $except = Mage::getStoreConfig('fullajax/general/except', $code);
+                            if(Mage::getStoreConfig('fullajax/general/enabled', $code)){
+                        ?>
+                        var page_loaded = false;
+                        var except = "<?php echo $except; ?>";
+                        $("a").each(function(){
+                            var b = $(this).attr('href');
+                            myhost = new RegExp(location.host);
+                            var ev = $._data(this,'events');
+                            var flg = true;
+                            var current_a = $(this);
+                            if(except){
+                                $(except).each(function(){
+                                    if($(this).is(current_a)){
+                                        flg = false;
+                                        return;
+                                    }
+                                });
+                            }
+                            if((b != '#') && (b != '') && (b !== undefined) && (myhost.test(b) == true || b.slice(0, 1) == "/") && ($(this).attr("onClick") == undefined) && (b.indexOf("javascript:")==-1) && !(ev && ev.click) && flg){
+                                $(this).unbind('click').click(function (a) {
+                                    a.preventDefault();
+                                    reloadData(b)
+                                });
+                            }
+                        });
+                        var c = {success: showResponse};
+                        window.onpopstate = function(event) {
+
+                            /**
+                             * This was breaking the back button on the first press.
+                             * Unsure why it's here, but skipping the first block fixes the problem.
+                             * Toggle this if if other errors popup.
+                             */
+
+                            //if(false && !page_loaded){
+                            if(!page_loaded){
+                                page_loaded = true;
+                            } else {
+                                $("#fullajax_loader").show();
+                                console.log("pathname: "+location.pathname);
+
+                                $.ajax({url: location.pathname,data:{fullpageajax:true},success: showResponse,error: function() {
+                                    window.location.href = a
+                                }});
+                            }
+                        };
+                        <?php
+                            }
+                        ?>
+                    }
+                })
+            } catch (e) {}
+        });
+        active = false
+    }
+    return false
+}
+<?php endif; ?> 
+
+function callback(){
+	<?php echo $this->getCallbackJs(); ?>	
+}
+</script>
+

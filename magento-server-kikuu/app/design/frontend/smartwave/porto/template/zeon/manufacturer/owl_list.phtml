@@ -1,0 +1,9 @@
+<?php $_manufacturersCollection = $this->getManufacturersCollection(); ?>
+<div class="owl-carousel owl-theme">
+    <?php $_iterator = 0; ?>
+    <?php foreach ($_manufacturersCollection as $_manufacturer): ?>
+        <div class="item">
+            <a href="<?php echo $this->getUrl('manufacturers' . '/' . $_manufacturer->getIdentifier()) ?>" title="<?php echo $_manufacturer->getManufacturer() ?>"><img alt="<?php echo $_manufacturer->getManufacturerLogo() ?>" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'manufacturer' . '/' . $_manufacturer->getManufacturerLogo() ?>"/></a>
+        </div>
+    <?php endforeach; ?>
+</div>

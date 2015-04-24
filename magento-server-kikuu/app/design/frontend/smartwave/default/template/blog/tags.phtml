@@ -1,0 +1,14 @@
+<?php if (Mage::getStoreConfig(Smartwave_Blog_Helper_Config::XML_TAGCLOUD_SIZE) && $this->getCollection()->count()): ?>
+<div class="block block-blog-tags">
+    <div class="block-title">
+        <strong><span><?php echo Mage::helper('blog')->__('Tag Cloud'); ?></span></strong>
+    </div>
+    <div class="block-content">
+        <ul class="tagcloud">
+            <?php foreach ($this->getCollection() as $tag): ?>
+                <li><a class="tag-count-<?php echo $this->getTagWeight($tag) ?>" href="<?php echo $this->getTagHref($tag) ?>"><?php echo $tag->getTag() ?></a></li>
+            <?php endforeach; ?>  
+        </ul>
+    </div>
+</div>
+<?php endif; ?>

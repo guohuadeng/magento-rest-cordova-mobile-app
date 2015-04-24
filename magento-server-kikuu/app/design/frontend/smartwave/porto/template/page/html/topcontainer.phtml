@@ -1,0 +1,13 @@
+<?php
+echo $this->getChildHtml("page.header");
+$breadcrumbs = $this->getChildHtml("breadcrumbs");
+if ($breadcrumbs) :
+?>
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row">
+        <?php echo $breadcrumbs; ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

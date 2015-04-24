@@ -1,0 +1,112 @@
+<?php
+    $_product = $this->getProduct();
+    $_helper = $this->helper('catalog/output');
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+?>
+<?php
+    $aspect_ratio = Mage::getStoreConfig("porto_settings/product_view/aspect_ratio", $code);
+    $ratio_width = 600;
+    $ratio_height = 600;
+    if(Mage::getStoreConfig("porto_settings/product_view/ratio_width", $code))
+        $ratio_width = Mage::getStoreConfig("porto_settings/product_view/ratio_width", $code);
+    if(!$aspect_ratio){
+        if(Mage::getStoreConfig("porto_settings/product_view/ratio_height", $code))
+            $ratio_height = Mage::getStoreConfig("porto_settings/product_view/ratio_height", $code);
+    }
+    $ratio = $ratio_height / $ratio_width;
+    $rnd_str = rtrim(base64_encode(md5(microtime())),"=");
+?>
+<?php if (count($this->getGalleryImages()) > 0): ?>
+<ul id="etalage_<?php echo $rnd_str; ?>">
+<?php foreach ($this->getGalleryImages() as $_image): ?>
+    <li>
+        <?php
+            if(!$aspect_ratio)
+                $image_src = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize($ratio_width, $ratio_height);
+            else
+                $image_src = $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);
+        ?>
+        <a rel="gallery" class="fancy-images fancy-images_<?php echo $rnd_str; ?>" href="<?php echo $image_src; ?>"><span class="glyphicon glyphicon-search"></span></a>
+        <img class="etalage_thumb_image" src="<?php echo $image_src; ?>" alt=""/>
+        <img class="etalage_source_image" src="<?php echo $this->helper('catalog/image')->init($_product, 'thumbnail', $_image->getFile())->resize(100, 100*$ratio)?>" alt="<?php echo $this->htmlEscape($_image->getLabel()) ?>"/>
+    </li>
+<?php endforeach; ?>
+</ul>
+<?php else: ?>
+<ul id="etalage_<?php echo $rnd_str; ?>">
+    <li>
+        <?php
+            if(!$aspect_ratio)
+                $image_src = $this->helper('catalog/image')->init($_product, 'image')->resize($ratio_width, $ratio_height);
+            else
+                $image_src = $this->helper('catalog/image')->init($_product, 'image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize($ratio_width);
+        ?>
+        <a class="fancy-images fancy-images_<?php echo $rnd_str; ?>" href="<?php echo $image_src; ?>"><span class="glyphicon glyphicon-search"></span></a>
+        <img class="etalage_thumb_image" src="<?php echo $image_src; ?>" alt=""/>
+        <img class="etalage_source_image" src="<?php echo (!$aspect_ratio)?$this->helper('catalog/image')->init($_product, 'image')->resize(100, $ratio_height/$ratio_width*100):$this->helper('catalog/image')->init($_product, 'image')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(100);?>" alt="<?php echo $this->htmlEscape($this->getImageLabel()) ?>" />
+    </li>
+</ul>
+<?php endif; ?>
+<div class="etalage-control">
+<?php if (!Mage::getStoreConfig("porto_settings/general/rtl",$code)) : ?>
+    <a href="javascript:void(0)" class="etalage-prev"><i class="icon-angle-left"></i></a>
+    <a href="javascript:void(0)" class="etalage-next"><i class="icon-angle-right"></i></a>
+<?php else: ?>
+    <a href="javascript:void(0)" class="etalage-prev"><i class="icon-angle-right"></i></a>
+    <a href="javascript:void(0)" class="etalage-next"><i class="icon-angle-left"></i></a>
+<?php endif; ?>
+</div>
+<script type="text/javascript">
+	var zoom_enabled = false;
+    jQuery(document).ready(function(){
+        reloadEtalage();
+		<?php if(!Mage::getStoreConfig("porto_settings/product_view/disable_product_zoom", $code)): ?>
+        jQuery(".product-img-box .etalage li.etalage_thumb").zoom({touch:false});
+		zoom_enabled = true;
+		<?php endif; ?>
+        setTimeout(function(){reloadEtalage();}, 500);
+        jQuery(window).resize(function(e){
+            reloadEtalage();
+            var width = jQuery(this).width();
+        });
+        jQuery('.etalage-prev').on('click', function(){ etalage_<?php echo $rnd_str; ?>_previous(); });
+        jQuery('.etalage-next').on('click', function(){ etalage_<?php echo $rnd_str; ?>_next(); });
+        jQuery("a.fancy-images_<?php echo $rnd_str; ?>").fancybox();
+        function reloadEtalage(){
+            var width = jQuery('.product-view .product-img-box').width()-8;
+            var src_img_width = <?php echo $ratio_width; ?>;
+            var src_img_height = "auto";
+            var ratio_width = <?php echo $ratio_width; ?>;
+            var ratio_height = <?php echo $ratio_height; ?>;
+            
+            var height = "auto";
+			jQuery('#etalage_<?php echo $rnd_str; ?> img.gallery-image').remove();
+            jQuery('#etalage_<?php echo $rnd_str; ?>').etalage({
+                thumb_image_width: width,
+                thumb_image_height: height,
+                source_image_width: src_img_width,
+                source_image_height: src_img_height,
+                zoom_area_width: width,
+                zoom_area_height: height,
+                zoom_enable: false,
+                small_thumbs:4,
+                smallthumb_hide_single: false,
+                smallthumbs_position: 'bottom',
+                small_thumbs_width_offset: 0,
+                show_icon: false,
+                autoplay: false
+            });
+            
+            var first_img = jQuery("#etalage_<?php echo $rnd_str; ?> img.etalage_thumb_image").first();
+            var tmp_img = jQuery('<img src="" alt=""/>');
+            tmp_img.attr("src",first_img.attr("src"));
+            tmp_img.unbind("load");
+            tmp_img.bind("load",function(){
+                jQuery("#etalage_<?php echo $rnd_str; ?>").height(Math.round(width*this.naturalHeight/this.naturalWidth+8)+"px");
+            });
+        }
+    });
+</script>
+<div class="clear"></div>
+<?php echo $this->getChildHtml("after"); ?>

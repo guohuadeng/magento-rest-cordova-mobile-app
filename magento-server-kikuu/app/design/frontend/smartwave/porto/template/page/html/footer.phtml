@@ -1,0 +1,170 @@
+<?php
+    $store = Mage::app()->getStore();
+    $code  = $store->getCode();
+    $footer = Mage::getStoreConfig('porto_settings/footer',$code);
+    $footer_class = ($footer['fixed_position_footer_enabled'])?" fixed-position":"";
+?>
+<div class="footer-container <?php echo $footer_class; ?>">
+    <div class="footer">
+    <?php
+        if( $footer['footer_top_enabled'] ){
+    ?>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                    <?php
+                        $area = 'footer_top_block';
+                        $type = $footer[$area];
+                        if( $type== 'twitter' ){
+                            echo $this->getChildHtml('tweets');
+                        }
+                        if( $type == 'custom' ){
+                            echo $this->getLayout()->createBlock('cms/block')->setBlockId($footer['footer_top_custom'])->toHtml();
+                        }
+
+                    ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php
+        }
+        if( $footer['footer_middle_enabled'] ){
+    ?>
+        <div class="footer-middle">
+            <div class="container">
+            <?php
+                if( $footer['footer_ribbon_enabled'] ){
+            ?>
+                <div class="footer-ribbon">
+                    <span><?php echo $footer['footer_ribbon_text'] ?></span>
+                </div>
+            <?php
+                }
+            ?>
+                <div class="row">
+                <?php
+                    for( $i = 1; $i <= 4; $i++ ){
+                        $area = 'footer_middle_column_'.$i;
+                        $type = $footer[$area];
+                        if( $type ){
+                            echo '<div class="col-sm-'.$footer[$area.'_size'].'">';
+                        }
+                        if( $type == 'custom' ){
+                            echo $this->getLayout()->createBlock('cms/block')->setBlockId($footer[$area.'_custom'])->toHtml();
+                        }
+                        if( $type == 'newsletter' ){
+                            echo $this->getChildHtml('footer.newsletter');
+                        }
+                        if( $type== 'facebook' ){
+                            echo $this->getChildHtml('facebook_fans');
+                        }
+                        if( $type== 'flickr' ){
+                            echo $this->getChildHtml('flickr');
+                        }
+                        if( $type== 'twitter' ){
+                            echo Mage::getSingleton("core/layout")->getBlock("tweets")->setTemplate("socialfeeds/footer_middle_twitterfeed.phtml")->toHtml();
+                        }
+                        if( $type ){
+                            echo '</div>';
+                        }
+                ?>
+                <?php
+                    }
+                ?>
+                </div>
+                <?php echo $this->getChildHtml("demo_footer_tooltip"); ?>
+            </div>
+        </div>
+    <?php
+        }
+        if( $footer['footer_middle_2_enabled'] ){
+    ?>
+        <div class="footer-middle footer-middle-2">
+            <div class="container">
+                <div class="row">
+                <?php
+                    for( $i = 1; $i <= 4; $i++ ){
+                        $area = 'footer_middle_2_column_'.$i;
+                        $type = $footer[$area];
+                        if( $type ){
+                            echo '<div class="col-sm-'.$footer[$area.'_size'].'">';
+                        }
+                        if( $type == 'custom' ){
+                            echo $this->getLayout()->createBlock('cms/block')->setBlockId($footer[$area.'_custom'])->toHtml();
+                        }
+                        if( $type == 'newsletter' ){
+                            echo $this->getChildHtml('footer.newsletter');
+                        }
+                        if( $type== 'facebook' ){
+                            echo $this->getChildHtml('facebook_fans');
+                        }
+                        if( $type== 'flickr' ){
+                            echo $this->getChildHtml('flickr');
+                        }
+                        if( $type ){
+                            echo '</div>';
+                        }
+                ?>
+                <?php
+                    }
+                ?>
+                </div>
+            </div>
+        </div>
+    <?php
+        }
+        if( $footer['footer_bottom_enabled'] ){
+    ?>
+        <div class="footer-bottom">
+            <div class="container">
+                <?php
+                if($footer['footer_logo']){
+                ?>
+                    <a href="<?php echo $this->getUrl('') ?>" class="logo"><img src="<?php echo $this->getSkinUrl($footer['footer_logo']); ?>" alt=""/></a>
+                <?php
+                }
+                if($footer['footer_bottom_socialicons']){
+                ?>
+                <?php echo $this->getChildHtml('socialicons'); ?>
+                <?php
+                }
+                if($footer['footer_bottom_custom_block'] && $footer['footer_bottom_custom_block_id']){
+                    echo '<div class="custom-block">'.$this->getLayout()->createBlock('cms/block')->setBlockId($footer['footer_bottom_custom_block_id'])->toHtml().'</div>';
+                }
+                ?>
+                <?php
+                if($footer['footer_bottom_custom_block_2'] && $footer['footer_bottom_custom_block_id_2']){
+                    echo '<div class="custom-block f-right">'.$this->getLayout()->createBlock('cms/block')->setBlockId($footer['footer_bottom_custom_block_id_2'])->toHtml().'</div>';
+                }
+                ?>
+                <address><?php echo $footer['copyrights'] ?></address>
+            </div>
+        </div>
+    <?php
+        }
+    ?>
+    </div>
+</div>
+<a href="#" id="totop"><i class="icon-up-open"></i></a>
+<script type="text/javascript">
+    var windowScroll_t;
+    jQuery(window).scroll(function(){
+        clearTimeout(windowScroll_t);
+        windowScroll_t = setTimeout(function(){
+            if(jQuery(this).scrollTop() > 100){
+                jQuery('#totop').fadeIn();
+            }else{
+                jQuery('#totop').fadeOut();
+            }
+        }, 500);
+    });
+    jQuery('#totop').click(function(){
+        jQuery('html, body').animate({scrollTop: 0}, 600);
+        return false;
+    });
+    jQuery(function($){
+        $(".cms-index-index .footer-container.fixed-position .footer-top,.cms-index-index .footer-container.fixed-position .footer-middle").remove();
+    });
+</script>

@@ -1,0 +1,23 @@
+<?php
+    $qwHelper = Mage::helper('quickview');
+    $_dialogWidth   = $qwHelper->getDialogWidth();
+    $_dialogHeight  = $qwHelper->getDialogHeight();	
+	$currentUrl     =  Mage::helper("core/url")->getCurrentUrl();
+	if (strpos($currentUrl,'index.php') !== false) {
+		$url = $this->getUrl();
+	}else{
+
+		$url = str_replace('index.php/','',$this->getUrl());
+	}
+?>
+<script type="text/javascript">
+//<![CDATA[
+	if (typeof EM == 'undefined') EM = {};
+	EM.Quickview = {
+		BASE_URL        : "<?php echo $url?>",
+		QS_FRM_WIDTH    :"<?php echo $_dialogWidth?>",
+		QS_FRM_HEIGHT   : "<?php echo $_dialogHeight?>",
+		QS_IMG          : "<?php echo $this->getSkinUrl('quickview/images/md_quickview_preview.png'); ?>"
+	};
+//]]	
+</script> 

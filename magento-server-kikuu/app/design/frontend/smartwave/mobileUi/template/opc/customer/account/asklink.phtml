@@ -1,0 +1,102 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * Additional customer login form template for Paypalauth Identity extension
+ *
+ * @see Mage_Customer_Block_Form_Login
+ */
+?>
+<div class="account-create">
+    <div class="page-title">
+        <h1><?php echo $this->__('Link Your %s Account to PayPal Account Login', Mage::app()->getStore()->getFrontendName()) ?></h1>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <div id="select-step">
+    	<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__(Mage::app()->getStore()->getFrontendName()) ?></h2>
+			<button type="button" class="button" onclick="showLinkForm()"><span><span><?php echo $this->__('I Have An Account') ?></span></span></button>
+            <button type="button" class="button" onclick="showRegisterForm();"><span><span><?php echo $this->__("I Don't Have An Account") ?></span></span></button>
+	    </div>    
+    </div>
+    
+
+    
+    <form action="<?php echo $this->getAskLinkPostActionUrl() ?>" method="post" id="login-form" style="display:none">
+        <div class="fieldset">
+            <h2 class="legend"><?php echo $this->__(Mage::app()->getStore()->getFrontendName()) ?></h2>
+            
+            <p><?php echo $this->__('Please enter your %s login information one last time to link it with your PayPal account log in. You will use your PayPal login to enter %s and access your previous order history.', Mage::app()->getStore()->getFrontendName(), Mage::app()->getStore()->getFrontendName(), Mage::app()->getStore()->getFrontendName()) ?></p>
+            <ul class="form-list" >
+                <li>
+                    <label for="email" class="required"><em>*</em><?php echo $this->__('Email Address') ?></label>
+                    <div class="input-box">
+                        <input type="text" name="login[username]" value="" id="email" class="input-text required-entry validate-email" title="<?php echo $this->__('Email Address') ?>" />
+                    </div>
+                </li>
+                <li>
+                    <label for="pass" class="required"><em>*</em><?php echo $this->__('Password') ?></label>
+                    <div class="input-box">
+                        <input type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="<?php echo $this->__('Password') ?>" />
+                    </div>
+                </li>
+            </ul>
+            <div class="buttons-set">
+                <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+                <a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>                
+                <button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+                <a class="right" title="<?php echo $this->__('Back') ?>" onclick="back();" style="margin-right:20px;cursor:pointer"><?php echo $this->__('Back') ?></a>                              
+            </div>
+        </div>
+    </form>
+    
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+        if ($('cancel')) {
+           Event.observe('cancel', 'click', removeValidation);
+        }
+        function removeValidation() {
+            $('email').className = '';
+            $('pass').className = '';
+        }
+
+        function showRegisterForm(){
+           setLocation('<?php echo $this->getAskLinkPostActionUrl();?>');
+        }
+        function showLinkForm(){
+       	 	$('select-step').hide();
+       	 	$('login-form').show();
+        }
+        function back(){
+        	$('select-step').show();
+       	 	$('login-form').hide();
+        }
+            
+    //]]>
+    </script>
+</div>
