@@ -1,0 +1,12 @@
+cp splash.png android/splash/drawable-port-xxxhdpi-screen.png
+cp splash.png android/splash/drawable-land-xhdpi-screen.png
+cp splash.png android/splash/drawable-port-ldpi-screen.png
+cp splash.png android/splash/drawable-port-hdpi-screen.png
+cp splash.png android/splash/drawable-land-xxhdpi-screen.png
+cp splash.png android/splash/drawable-land-mdpi-screen.png
+cp splash.png android/splash/drawable-port-xhdpi-screen.png
+cp splash.png android/splash/drawable-port-xxhdpi-screen.png
+cp splash.png android/splash/drawable-land-xxxhdpi-screen.png
+cp splash.png android/splash/drawable-land-hdpi-screen.png
+cp splash.png android/splash/drawable-port-mdpi-screen.png
+cp splash.png android/splash/drawable-land-ldpi-screen.png
