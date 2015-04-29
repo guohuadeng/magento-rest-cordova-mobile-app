@@ -38,6 +38,11 @@ blockquote{quotes:none}
 q:before,
 q:after{content:''}
 small,big{font-size:1em}
+
+/* Content mobile product detail*/
+.product-collateral img{width: 100%;}
+/* end Content mobile product detail*/
+
 /* Lists */
 ul,ol{list-style:none;margin:0;padding:0}
 

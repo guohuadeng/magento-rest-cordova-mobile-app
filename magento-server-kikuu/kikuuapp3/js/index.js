@@ -219,6 +219,7 @@ function ready() {
 
         // login页
         if ($this.hasClass('page-login')) {		
+            //$this.find('[id="forgot_pass_link"]').attr('href',defines.baseWeb + '/customer/account/forgotpassword/');		
             $this.find('[name="login"]').off('click').click(function () {
                 var username = $this.find('[name="username"]').val(),
                     password = $this.find('[name="password"]').val();
@@ -235,7 +236,7 @@ function ready() {
         }
         // forgot password页
         if ($this.hasClass('page-forgot-password')) {			
-			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseWeb+'/customer/forgotpasswordpost/');
+			$this.find('[id="user_forgotpassword_form"]').attr('action',defines.baseWeb+'/customer/account/forgotpasswordpost/');
         }
 		
 

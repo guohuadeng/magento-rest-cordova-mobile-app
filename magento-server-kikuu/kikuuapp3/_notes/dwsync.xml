@@ -67,4 +67,6 @@
 <file name="productEmbed.html" server="demo.sunpop.cn" local="130743712193325095" remote="130743861600000000" Dst="0" />
 <file name="search.html" server="demo.sunpop.cn" local="130743712193335108" remote="130743861600000000" Dst="0" />
 <file name="searchResult.html" server="demo.sunpop.cn" local="130743712193345118" remote="130743861600000000" Dst="0" />
+<file name="login.html" server="www.kikuu.com" local="130744164428375288" remote="130744164600000000" Dst="0" />
+<file name="forgot_password.html" server="www.kikuu.com" local="130744170291029704" remote="130744170000000000" Dst="0" />
 </dwsync>

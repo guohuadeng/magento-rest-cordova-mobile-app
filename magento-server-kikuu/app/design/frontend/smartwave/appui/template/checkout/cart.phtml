@@ -6,18 +6,6 @@
  */
 ?>
 <div class="cart">
-    <div class="page-title title-buttons">
-        <h1><?php echo $this->__('Shopping Cart') ?></h1>
-        <?php if(!$this->hasError()): ?>
-            <ul class="checkout-types">
-                <?php foreach ($this->getMethods('top_methods') as $method): ?>
-                    <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
-                        <li><?php echo $methodHtml; ?></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-9">

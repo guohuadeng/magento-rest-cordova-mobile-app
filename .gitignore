@@ -2,6 +2,9 @@
 s.*.doc
 s.*.docx
 s.*.pdf
+s.*.xls
+s.*.xlsx
+s.*.*
 ~$.*
 
 # Dw Sync
