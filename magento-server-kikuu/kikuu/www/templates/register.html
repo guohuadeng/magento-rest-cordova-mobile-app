@@ -1,55 +1,165 @@
-<ion-modal-view>
+<ion-view view-title="Register">
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">Register</h1>
     <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+      <button class="button button-clear" ng-click="closeRegister()">Close</button>
     </div>
   </ion-header-bar>
-  <ion-content class="main container">
-    <form ng-submit="doLogin()" method="post" id="login-form">
-      <div class="list">    
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="registered-users form-wrap">
-                    <div class="content">
-                        <h2>Registered Customers</h2>
-                        <p>If you have an account with us, please log in.</p>
-                        <ul class="form-list">
-                            <li>
-                                <label for="email" class="required"><em>*</em>Email Address</label>
-                                <div class="input-box">
-                                    <input ng-model="loginData.username" type="text" name="login[username]" value="" id="email" class="input-text required-entry validate-email" title="Email Address">
-                                </div>
-                            </li>
-                            <li>
-                                <label for="pass" class="required"><em>*</em>Password</label>
-                                <div class="input-box">
-                                    <input ng-model="loginData.password" type="password" name="login[password]" class="input-text required-entry validate-password" id="pass" title="Password">
-                                </div>
-                            </li>
-                            <li>
-	                        <a href="http://demo.sunpop.cn/m/customer/account/forgotpassword/" class="f-left">Forgot Your Password?</a>
-                            </li>
+  <ion-content>
+  <div class="main container">
+
+	<div class="account-create">
+            <form action="http://demo.sunpop.cn/m/customer/account/createpost/" method="post" id="form-validate">
+        <div class="fieldset">
+            <input type="hidden" name="success_url" value="">
+            <input type="hidden" name="error_url" value="">
+            <h2 class="legend">Personal Information</h2>            
+            <!-- 短信验证.form__field -->
+            <div class="fieldset">
+                <ul class="form-list">
+                    <li class="fields">       
+                        <div class="input-box">     
+                        <fieldset id="amcustomerattr19" class="amcustomerattr">
+                        <input placeholder="Mobile Number*" id="default_mobile_number" name="amcustomerattr[default_mobile_number]" value="" class=" required-entry input-text required-entry" type="text">
+                        </fieldset>
+                    </div></li>
+                    <li class="fields">
+                        <div class="field">
+                            <div class="input-box">
+                                <input placeholder="Validation Code*" type="Validation_Code" name="Validation_Code" id="Validation_Code" title="Validation_Code" class="input-text required-entry validate-number">
+                            </div>
+                      <input type="button" id="btnValidation" value="Get Validation Code" class="form_validation button">
+                        </div>
+                        </li></ul></div>
+                    
+                
+            </div>
+            <!-- end 短信验证.form__field-->
+            <ul class="form-list">
+                <li class="wide">
+                    <div class="input-box">
+                        <input placeholder="Email Address*" type="text" name="email" id="email_address" value="" title="Email Address" class="input-text validate-email required-entry">
+                    </div>
+                </li>
+                <li class="fields">
+                    <div class="customer-name">
+    <div class="field name-firstname">
+        <div class="input-box">
+            <input placeholder="First Name*" type="text" id="firstname" name="firstname" value="" title="First Name" maxlength="255" class="input-text required-entry">
+        </div>
+    </div>
+    <div class="field name-lastname">
+        <div class="input-box">
+            <input placeholder="Last Name*" type="text" id="lastname" name="lastname" value="" title="Last Name" maxlength="255" class="input-text required-entry">
+        </div>
+    </div>
+</div>
+                </li>
+                                                                                        <li><label for="gender" class="required"><em>*</em>Gender</label>
+<div class="input-box">
+    <select id="gender" name="gender" title="Gender" class="validate-select">
+                                    <option value="" selected="selected"></option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+            </select>
+</div>
+</li>
                         </ul>
-                    </div>
-                    <div class="buttons-set">
-                        <button type="submit" class="button button-full button-assertive" title="Login" name="send" id="send2">Login</button>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="new-users form-wrap">
-                            <div class="content">
-                                <h2>New Customers</h2>
-                                <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
-                            </div>
-                            <div class="buttons-set">
-                                <button type="button" title="Create an Account" class="button button-full button-assertive" onclick="window.location='http://demo.sunpop.cn/m/customer/account/create/';">Create an Account</button>
-                            </div>
+        	<div class="fieldset">
+            <ul class="form-list">
+                <li class="fields">
+                    <div class="field">
+                        <div class="input-box">
+                            <input placeholder="Password*" type="password" name="password" id="password" title="Password" class="input-text required-entry validate-password">
                         </div>
                     </div>
-                </div>
+                    <div class="field">
+                        <div class="input-box">
+                            <input placeholder="Confirm Password*" type="password" name="confirmation" title="Confirm Password" id="confirmation" class="input-text required-entry validate-cpassword">
+                        </div>
+                    </div>
+                </li>                                
+            </ul>
         </div>
-	    </div>
-      </div>
-    </form>
+        <div class="buttons-set">
+            <button type="submit" id="btnSubmit" title="Submit" class="button"><span><span>Submit</span></span></button>
+        </div>        
+        </form>
+      </div>          
+    
+</div>
+
   </ion-content>
-</ion-modal-view>
+</ion-view>
+
+<script type="text/javascript">
+		//生成随机数验证码
+		rnd.today=new Date();
+		rnd.seed=rnd.today.getTime();
+		function rnd() {
+		　　　　rnd.seed = (rnd.seed*9301+49297) % 233280;
+		　　　　return rnd.seed/(233280.0);
+		};
+		function rand(number) {
+		　　　　return Math.ceil(rnd()*number);
+		};
+		// end central randomizer. -->
+		
+		var wait=30;  
+		var rnum=8888;
+		function time(o) {  
+				if (wait == 0 ) {  
+					o.removeAttribute("disabled");            
+					o.value="Get A Free Validation Code";
+					wait = 30;  				       
+				}else{   
+					if(wait == 30){
+						//此处加ajax发短信，http://sendsms?mobile num=11212&content=aaa+'rynm'
+						rnum = rand(8999)+1000;
+					    // sendsms(smsurl,rnum);
+					}
+					wait--;  
+					setTimeout(function() {  
+						time(o)  
+					},  1000)  
+					o.setAttribute("disabled", true);
+					//调试期，直接显示验证码 
+					o.value="["+rnum+"]Wait ...(" + wait + "s)"; 
+				}  
+			}  
+			
+		document.getElementById("btnValidation").onclick=function(){time(this);}  
+		document.getElementById("btnSubmit").onclick=function(){checkcode();} 
+
+	       //发送短信请求
+//		var smsurl = defines.baseSite + '/sendsms.php';
+		var smsurl = '/sendsms.php';
+		function sendsms(smsurl,smscode){ 
+		   new Ajax.Request(smsurl, {
+			method: 'GET',
+			crossSite: true,
+			parameters: 'mobile='+document.getElementById('default_mobile_number').value+'&content=您好，您的短信验证码是：'+smscode+'【美联软通】',
+                        contentType: 'application/x-www-form-urlencoded',
+			onSuccess: function(text) {  
+			    // yourtext = text.responseText.evalJSON(true);  
+			    //process something  
+			},  
+			onFailure: function() {  
+			    return false;  
+			},  
+			onException: function() {  
+			    return false;  
+			}  
+		    });  
+		  
+		    return true;
+		} 
+
+		//验证码检测
+		function checkcode(){
+		   var smscode = document.getElementById('Validation_Code').value;
+		   if(rnum !=smscode){
+			document.getElementById('Validation_Code').value="Wrong Code";
+		   }
+		}
+</script> 
