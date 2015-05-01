@@ -5,7 +5,7 @@
         <?php if(!$_product->isGrouped()): ?>
         <label for="qty"><?php echo $this->__('Qty:') ?></label>
         <div class="qty-holder">
-            <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+            <input type="text" name="qty" id="qty" maxlength="12" value="1" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
             <div class="qty-changer">
                 <a href="javascript:void(0)" class="qty_inc"><i class="icon-up-dir"></i></a>
                 <a href="javascript:void(0)" class="qty_dec"><i class="icon-down-dir"></i></a>
