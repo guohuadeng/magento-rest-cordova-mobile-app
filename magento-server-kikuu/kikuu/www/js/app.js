@@ -68,7 +68,7 @@ angular.module('app', [
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/lists/daily_sale/Daily%20Sale');
+        $urlRouterProvider.otherwise('/app/lists');
     })
 
     .directive('onFinishRender', function ($timeout) {
