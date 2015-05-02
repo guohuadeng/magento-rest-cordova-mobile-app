@@ -5,8 +5,9 @@
       <button class="button button-clear" ng-click="closeLogin()">Close</button>
     </div>
   </ion-header-bar>
-  <ion-content class="main container">
-    <form ng-submit="doLogin()" method="post" id="login-form">
+  <ion-content>
+  <div class="main container">
+    <form ng-submit="doLogin()" id="login-form">
       <div class="list">    
         <div class="row">
             <div class="col-sm-6">
@@ -33,7 +34,7 @@
                         </ul>
                     </div>
                     <div class="buttons-set">
-                        <button type="submit" class="button button-full button-assertive" title="Login" name="send" id="send2">Login</button>
+                        <button type="submit" class="button button-full button-assertive" title="Login" name="send" id="send">Login</button>
                     </div>
                     <div class="col-sm-6">
                         <div class="new-users form-wrap">
@@ -51,5 +52,6 @@
 	    </div>
       </div>
     </form>
+    </div>
   </ion-content>
 </ion-modal-view>
