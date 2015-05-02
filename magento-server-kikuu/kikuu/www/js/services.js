@@ -1,21 +1,26 @@
-angular.module('app.services', ['ngResource'])
+function Service($rootScope) {
 
-    .factory('MenuService', function ($resource, Config) {
-        return $resource(Config.baseUrl + '/restconnect/?cmd=menu');
-    })
+    var base = 'http://demo.sunpop.cn/en',
+        api = {
+            menus: base + '/restconnect/?cmd=menu',
+            products: base + '/restconnect/'
+        };
 
-    .factory('UserService', function ($resource, Config) {
-        return $resource(Config.baseUrl + '/restconnect/customer/status');
-    })
+    $rootScope.service = {
+        get: function ($scope, key, params, callback) {
+            if (typeof params === 'function') {
+                callback = params;
+                params = null;
+            }
 
-    .factory('LoginService', function ($resource, Config) {
-        return $resource(Config.baseUrl + '/restconnect/customer/login');
-    })
+            var url = api[key];
 
-    .factory('LogoutService', function ($resource, Config) {
-        return $resource(Config.baseUrl + '/customer/account/logout');
-    })
-
-    .factory('ProductsService', function ($resource, Config) {
-        return $resource(Config.baseUrl + '/restconnect/');
-    });
+            $.get(url, params, function (res) {
+                $scope[key] = $.parseJSON(res);
+                if (typeof callback === 'function') {
+                    callback($scope[key]);
+                }
+            });
+        }
+    }
+}

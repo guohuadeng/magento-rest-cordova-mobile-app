@@ -1,6 +1,5 @@
 angular.module('app.config', [])
     .constant('Config', {
-        baseUrl: 'http://demo.sunpop.cn/en',
         frames: {
             register: {
                 title: 'Register',

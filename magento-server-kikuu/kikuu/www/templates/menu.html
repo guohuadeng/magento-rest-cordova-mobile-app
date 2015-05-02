@@ -29,13 +29,7 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
-                <ion-item nav-clear menu-close href="#/app/lists/daily_sale/Daily%20Sale">
-                    Daily Sale
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/lists/best_seller/New%20Arrival">
-                    New Arrival
-                </ion-item>
-                <ion-item ng-repeat="menu in menus" nav-clear menu-close href="#/app/lists/{{menu.category_id}}/{{menu.name}}">
+                <ion-item ng-repeat="menu in menus" nav-clear menu-close>
                     {{menu.name}}
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="exit()">

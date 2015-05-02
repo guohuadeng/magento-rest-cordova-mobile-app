@@ -1,9 +1,7 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, MenuService, UserService, LoginService) {
-        $scope.user = UserService.get();
-
-        $scope.menus = MenuService.query();
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal) {
+        $rootScope.service.get($scope, 'menus');
 
         // Form data for the login modal
         $scope.loginData = {};
@@ -27,7 +25,7 @@ angular.module('app.controllers', [])
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            LoginService.get($scope.loginData);
+
         };
 
         $scope.exit = function () {
@@ -37,22 +35,39 @@ angular.module('app.controllers', [])
         };
     })
 
-    .controller('ListsCtrl', function ($scope, $stateParams, ProductsService) {
+    .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
         $scope.parseInt = parseInt;
-        $scope.title = $stateParams.title;
-
-        var params = {
-            limit: 50,
-            page: 1
+        $scope.update = function () {
+            $ionicSlideBoxDelegate.update();
         };
+        $scope.$on('ngRepeatFinished', function () {
+            $scope.update();
+        });
 
-        if (isNaN(+$stateParams.id)) {
-            params.cmd = $stateParams.id;
-        } else {
-            params.cmd = 'catalog';
-            params.categoryid = +$stateParams.id;
-        }
-        $scope.lists = ProductsService.query(params);
+        $rootScope.service.get($scope, 'menus', function () {
+            $scope.slides = $scope.menus.slice(0);
+            $scope.$apply();
+        });
+
+        $scope.onSlideMove = function (data) {
+            var slide = $scope.slides[data.index];
+
+            if (slide.hasInit) {
+                return;
+            }
+
+            var params = {
+                limit: 50,
+                page: 1,
+                cmd: 'catalog',
+                categoryid: +slide.category_id
+            };
+            $rootScope.service.get($scope, 'products', params, function (lists) {
+                slide.lists = lists;
+                slide.hasInit = true;
+                $scope.$apply();
+            });
+        };
     })
 
     .controller('DetailCtrl', function ($scope, $stateParams) {

@@ -1,28 +1,40 @@
-<ion-view view-title="{{title}}">
-    <ion-content>
-        <div class="products-grid">
-            <div class="product" ng-repeat="product in lists">
-                <div class="product-inner">
-                    <a>
-                        <div class="product-image">
-                            <img class="lazy small-image"
-                                 src="{{product.image_url}}"
-                                 data-original="{{product.image_url}}"
-                                 alt="{{product.name}}">
-                        </div>
-                    </a>
+<ion-view view-title="Kikuu">
+    <ion-content scroll="false">
+        <tab-slide-box>
+            <div class="tsb-icons">
+                <div class="tsb-ic-wrp">
+                    <ion-scroll direction="x" class="tsb-hscroll">
+                        <a ng-repeat="menu in menus" href="javascript:;" on-finish-render="update()">
+                            {{menu.name}}
+                        </a>
+                    </ion-scroll>
+                </div>
+            </div>
+            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+                <ion-slide ng-repeat="slide in slides" style="height:100%">
+                    <ion-scroll style="height:100%">
+                        <div class="products-grid">
+                            <div class="product" ng-repeat="product in slide.lists">
+                                <div class="product-inner">
+                                    <a>
+                                        <div class="product-image">
+                                            <img class="lazy small-image"
+                                                 src="{{product.image_url}}"
+                                                 data-original="{{product.image_url}}"
+                                                 alt="{{product.name}}">
+                                        </div>
+                                    </a>
 
-                    <div class="product-info">
-                        <div class="product-name">
-                            <a href="">{{product.name}}</a>
-                        </div>
+                                    <div class="product-info">
+                                        <div class="product-name">
+                                            <a href="">{{product.name}}</a>
+                                        </div>
 
-                        <div class="product-price">
-                            <div class="price-box">
+                                        <div class="product-price">
+                                            <div class="price-box">
                             <span class="special-price">
                                 <span class="special-price">
                                     <span class="price">Tsh{{product.final_price_with_tax}}</span>
-                                    &nbsp;
                                     <span class="old-price">Tsh{{product.regular_price_with_tax}}</span>
                                 </span>
                             </span>
@@ -33,11 +45,15 @@
                                         product.regular_price_with_tax)}}%
                                 </span>
                             </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </ion-scroll>
+                </ion-slide>
+            </ion-slide-box>
+        </tab-slide-box>
     </ion-content>
 </ion-view>
