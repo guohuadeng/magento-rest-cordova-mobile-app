@@ -36,6 +36,29 @@ angular.module('app.controllers', [])
     })
 
     .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
+        var getList = function (slide, type, callback) {
+            if (type === 'load') {
+                slide.page++;
+            } else {
+                slide.page = 1;
+            }
+
+            var params = {
+                limit: 50,
+                page: slide.page,
+                cmd: 'catalog',
+                categoryid: +slide.category_id
+            };
+            $rootScope.service.get($scope, 'products', params, function (lists) {
+                slide.lists = lists;
+                slide.hasInit = true;
+                $scope.$apply();
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            });
+        };
+
         $scope.parseInt = parseInt;
         $scope.update = function () {
             $ionicSlideBoxDelegate.update();
@@ -50,22 +73,20 @@ angular.module('app.controllers', [])
         });
 
         $scope.onSlideMove = function (data) {
+            if (isNaN(data.index)) {
+                return;
+            }
             var slide = $scope.slides[data.index];
 
             if (slide.hasInit) {
                 return;
             }
+            getList(slide, 'refresh');
+        };
 
-            var params = {
-                limit: 50,
-                page: 1,
-                cmd: 'catalog',
-                categoryid: +slide.category_id
-            };
-            $rootScope.service.get($scope, 'products', params, function (lists) {
-                slide.lists = lists;
-                slide.hasInit = true;
-                $scope.$apply();
+        $scope.doRefresh = function (index) {
+            getList($scope.slides[index], 'refresh', function () {
+                $scope.$broadcast('scroll.refreshComplete');
             });
         };
     })

@@ -13,6 +13,10 @@
             <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
                 <ion-slide ng-repeat="slide in slides" style="height:100%">
                     <ion-scroll style="height:100%">
+                        <ion-refresher
+                                pulling-text="Pull to refresh..."
+                                on-refresh="doRefresh($index)">
+                        </ion-refresher>
                         <div class="products-grid">
                             <div class="product" ng-repeat="product in slide.lists">
                                 <div class="product-inner">
