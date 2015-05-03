@@ -1,6 +1,5 @@
-<?php 
+<?php
 
-print_r(gethostbynamel("www.baidu.com"));
-print_r(gethostbynamel("www.sina.com.cn"));
+// Show all information, defaults to INFO_ALL
+phpinfo();
 ?>
-<?php phpinfo()?>
