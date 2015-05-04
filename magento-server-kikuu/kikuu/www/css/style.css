@@ -7,6 +7,13 @@
     url('../fonts/opensans-regular-webfont.svg') format('svg');
     font-weight: 200;
 }
+.container	{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .none {
     display: none;
 }

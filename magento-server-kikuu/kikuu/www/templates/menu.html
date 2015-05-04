@@ -17,8 +17,8 @@
             <h3>
                 <span>
                     <span class="fa fa-user"></span>
-                    <a ng-click="login()"> Login </a> |
-                    <a nav-clear menu-close href="#app/frame/register">Register</a>
+                    <a menu-close ng-click="login()"> Login </a> |
+                    <a nav-clear menu-close href="#app/register">Register</a>
                 </span>
                 <span class="none">
                     <img src="" width="36" height="36">
@@ -29,6 +29,9 @@
         </ion-header-bar>
         <ion-content>
             <ion-list>
+                <ion-item nav-clear menu-close>
+                    <a nav-clear menu-close href="#app/product">Test Product Detail</a>
+                </ion-item>
                 <ion-item ng-repeat="menu in menus" nav-clear menu-close>
                     {{menu.name}}
                 </ion-item>

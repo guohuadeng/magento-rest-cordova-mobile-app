@@ -90,7 +90,11 @@ angular.module('app.controllers', [])
             });
         };
     })
+		//产品统一用这个名 Product
+    .controller('ProductCtrl', function ($scope, $stateParams) {
 
+    })
+		
     .controller('DetailCtrl', function ($scope, $stateParams) {
 
     })

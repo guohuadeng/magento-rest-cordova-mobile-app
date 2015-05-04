@@ -28,6 +28,15 @@ angular.module('app', [
                 controller: 'AppCtrl'
             })
 
+            .state('app.register', {
+                url: '/register',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/register.html'
+                    }
+                }
+            })
+
             .state('app.search', {
                 url: '/search',
                 views: {
@@ -36,7 +45,6 @@ angular.module('app', [
                     }
                 }
             })
-
             .state('app.lists', {
                 url: '/lists',
                 views: {
@@ -47,6 +55,16 @@ angular.module('app', [
                 }
             })
 
+            .state('app.product', {
+                url: '/product',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/product.html',
+                        controller: 'ProductCtrl'
+                    }
+                }
+            })
+						
             .state('app.detail', {
                 url: '/detail/:id',
                 views: {
