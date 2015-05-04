@@ -47,19 +47,16 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 		$cart->getQuote ()->collectTotals ()->save ();
 		$cartInfo = array ();
 		$cartInfo ['is_virtual'] = Mage::helper ( 'checkout/cart' )->getIsVirtualQuote ();
-		$cartInfo ['cart_items'] = $this->getCartItems ();
-		$cartInfo ['messages'] = sizeof ( $this->errors ) ? $this->errors : $this->getMessage ();
+		$cartInfo ['cart_items'] = $this->_getCartItems ();
+		$cartInfo ['messages'] = sizeof ( $this->errors ) ? $this->errors : $this->_getMessage ();
 		$cartInfo ['cart_items_count'] = Mage::helper ( 'checkout/cart' )->getSummaryCount ();
-		$cartInfo ['payment_methods'] = $this->getPaymentInfo ();
+		$cartInfo ['payment_methods'] = $this->_getPaymentInfo ();
 		$cartInfo ['allow_guest_checkout'] = Mage::helper ( 'checkout' )->isAllowedGuestCheckout ( $cart->getQuote () );
 		
-		echo json_encode ( array (
-				true,
-				'0x0000',
-				$cartInfo 
-		) );
+		echo json_encode ($cartInfo); 
+	
 	}
-	public function getMessage() {
+	public function _getMessage() {
 		$cart = Mage::getSingleton ( 'checkout/cart' );
 		if (!Mage::getSingleton('checkout/type_onepage')->getQuote()->hasItems()) {
 			$this->errors[] = 'Cart is empty!';
@@ -80,7 +77,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 	
 		return $this->errors;
 	}
-	private function getPaymentInfo() {
+	private function _getPaymentInfo() {
 		$cart = Mage::getSingleton ( 'checkout/cart' );
 		$methods = $cart->getAvailablePayment();
 		foreach ($methods as $method) {
@@ -91,15 +88,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 	
 		return array();
 	}
-	protected function getAvailablePayment() {
-		$block = Mage::getBlockSingleton('Checkout/Onepage_Payment_Methods');
-		if ($block) {
-			return $block->getMethods();
-		}
-	
-		return array();
-	}
-	public function getCartItems() {
+	public function _getCartItems() {
 		$cartItemsArr = array ();
 		$cart = Mage::getSingleton ( 'checkout/cart' );
 		$quote = $cart->getQuote ();
@@ -117,7 +106,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 			$cartItemArr ['item_title'] = strip_tags ( $item->getProduct ()->getName () );
 			$cartItemArr ['qty'] = $item->getQty ();
 			$cartItemArr ['thumbnail_pic_url'] = ( string ) Mage::helper('catalog/image')->init($item->getProduct(), 'thumbnail')->resize ( 75 );
-			
+			$cartItemArr ['custom_option']=$this->_getCustomOptions($item);
 			if ($displayCartPriceExclTax || $displayCartBothPrices) {
 				if (Mage::helper ( 'weee' )->typeOfDisplay ( $item, array (
 						0,
@@ -148,7 +137,24 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 			array_push ( $cartItemsArr, $cartItemArr );
 		}
 		
-		echo json_encode($cartItemsArr);
+		return $cartItemsArr;
+	}
+	protected function _getCustomOptions($item){
+		$session = Mage::getSingleton('checkout/session');
+		$options=$item->getProduct()->getTypeInstance(true)->getOrderOptions($item->getProduct());
+		$result=array();
+		if($options){
+			if(isset($options['options'])){
+				$result=array_merge($result,$options['options']);
+			}
+			if(isset($options['additional_options'])){
+				$result=$result=array_merge($result,$options['additional_options']);
+			}
+			if(!empty($options['attributes_info'])){
+				$result=$result=array_merge($result,$options['attributes_info']);
+			}
+		}
+		return $result;
 	}
 	public function getQtyAction() {
 		$items_qty = floor ( Mage::getModel ( 'checkout/cart' )->getQuote ()->getItemsQty () );
