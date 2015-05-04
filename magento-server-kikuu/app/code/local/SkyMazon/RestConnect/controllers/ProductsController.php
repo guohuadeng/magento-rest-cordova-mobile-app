@@ -67,4 +67,33 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 		);
 		echo json_encode ( $productdetail );
 	}
+	public function gettest(){
+		$attributes = Mage::getSingleton('eav/config')->getEntityType(Mage_Catalog_Model_Product::ENTITY)->getAttributeCollection();
+		// Localize attribute label (if you need it)
+		$attributes->addStoreLabel(Mage::app()->getStore()->getId());
+		// Loop over all attributes
+		foreach ($attributes as $attr) {
+			/* @var $attr Mage_Eav_Model_Entity_Attribute */
+			// get the store label value
+			$label = $attr->getStoreLabel() ? $attr->getStoreLabel() : $attr->getFrontendLabel();
+			echo "Attribute: {$label}\n<br>";
+			// If it is an attribute with predefined values
+			if ($attr->usesSource()) {
+	
+			// Get all option values ans labels
+			$options = $attr->getSource()->getAllOptions();
+	
+			// Output all option labels and values
+			foreach ($options as $option)
+			{
+			echo "&nbsp;&nbsp;&nbsp;&nbsp;{$option['label']} =========> (Value {$option['value']})\n<br>";
+				}
+			}
+			else
+			{
+			// Just for clarification of the debug code
+				echo "    No select or multiselect attribute\n<br>";
+			}
+		}
+	}
 } 

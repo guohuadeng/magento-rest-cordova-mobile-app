@@ -6,7 +6,7 @@
     </div>
 	</ion-header-bar>
   <ion-content>
-    <div class="list registered-users">
+    <div class="list registered-users padding">
     	<form ng-submit="doLogin()" id="login-form">
         <label class="item item-input">
           <span class="input-label">Email</span>
@@ -22,11 +22,12 @@
     	</form>      
 		</div>
             
-    <div class="container">
+    <div class="padding">
 			<h2>New Customers</h2>
-      <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>    
-						<button type="button" title="Create an Account" class="button button-outline button-block button-assertive" onclick="window.location='#app/register';">Create an Account</button>
-
+      <p class="padding-horizontal">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p> 
+	    <div class="padding">         
+				<button type="button" title="Create an Account" class="button button-outline button-block button-assertive " onclick="window.location='#app/register';">Create an Account</button>
+      </div>
     </div>
   </ion-content>
 </ion-modal-view>

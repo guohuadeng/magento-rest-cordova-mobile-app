@@ -190,10 +190,8 @@ class SkyMazon_RestConnect_CartsController extends Mage_Core_Controller_Front_Ac
 			$session->setCartWasUpdated ( true );
 
 			$cart->save ();
-			
-			$totalQuantity = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
 
-			$result = "{'result':'success'} {totalQuantity}";
+			$result = "{'result':'success'}";
 
 			echo $result;
 

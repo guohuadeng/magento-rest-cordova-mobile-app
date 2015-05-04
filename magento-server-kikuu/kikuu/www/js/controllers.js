@@ -94,6 +94,10 @@ angular.module('app.controllers', [])
     .controller('ProductCtrl', function ($scope, $stateParams) {
 
     })
+		//产品选项
+    .controller('ProductOptionCtrl', function ($scope, $stateParams) {
+
+    })
 		
     .controller('DetailCtrl', function ($scope, $stateParams) {
 

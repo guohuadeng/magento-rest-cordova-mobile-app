@@ -1,5 +1,71 @@
 <ion-view view-title="Product Detail">
   <ion-content>
-    <h1>Detail</h1>
+		<!-- img swiper -->
+		<div class="product-swiper-container">
+      <ion-slide-box show-pager="true" on-slide-changed="">
+        <ion-slide>
+          <img class="lazy small-image"
+               src="img/ionic.png"
+                data-original="http://www.kikuu.com/media/catalog/product/_/-/_-1_1.jpg"
+               >
+        </ion-slide>
+        <ion-slide>          
+        	<img class="lazy small-image"
+          	   src="http://www.kikuu.com/media/wysiwyg/5555.jpg"
+               >
+        </ion-slide>
+        <ion-slide>        
+        	<img class="lazy small-image"
+          	   src="http://www.kikuu.com/media/catalog/product/s/k/skirt_-1.png"
+               >
+          <div class="box pink"><h1>PINK</h1></div>
+        </ion-slide>
+      </ion-slide-box>
+  	</div>
+		<!-- end img swiper -->
+    <div class="card">
+    <h4>Product Name</h4>
+    <div class="price-box padding-horizontal">			
+				<span class="special-price">
+					<span class="price-label">Special Price</span>
+					<span class="price">Tsh&nbsp;92870</span>
+					&nbsp;
+				</span>
+				<span class="old-price">Tsh&nbsp;116088</span>
+			</div>      
+   		<div class="qty-holder">      
+      <div class="item item-input-inset">
+      	<span class="input-label">Quantity*:</span>
+				<button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
+				<label class="item-input">
+        	<input type="number" name="qty" id="qty"  value="1" title="Qty">
+		    </label>
+				<button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
+  </div>    
+      </div>
+        
+        
+    <div class="item item-text-wrap">
+      <div class="tab-content" id="tab_description_tabbed_contents">    <h2>产品描述</h2>
+    <div class="std">
+        <p><span>The Magic Walker brand is geared towards the fashionable&lrm;,&lrm; modern women&lrm;;&lrm; tough and strong&lrm;,&lrm; who follows her own rules&lrm;.&lrm; This collection of denim jeans is versatile and made from high&lrm;-quality material&lrm;,&lrm; created to suit any personal taste&lrm;.&lrm;</span></p>
+<p class="strong mbs">Specifications of Blue Jeans</p>
+<p class="strong mbs"><span>SKU: &nbsp;TTTTTTT</span></p>
+<p class="strong mbs"><span>Main material: Denim</span></p>
+<p><img alt="" src="http://www.kikuu.com/media/wysiwyg/_-1_.png"><img alt="" src="http://www.kikuu.com/media/wysiwyg/_-1.png">&nbsp;</p>    </div>
+</div>
+      
+    </div>
+    <div class="item item-divider">
+      I'm a Footer in a Card!
+    </div>
+  </div>
+  <p>&nbsp;</p>
+  
   </ion-content>
+  
+  <div class="bar bar-footer bar-stable cart_block">
+    <a class="button button-large cart_block_left button-outline button-assertive ion-android-cart">12</a>
+    <a class="button cart_block_right button-assertive">Add to Cart</a>
+  </div>
 </ion-view>
