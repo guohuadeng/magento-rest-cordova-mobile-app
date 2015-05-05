@@ -21,6 +21,10 @@ img	{
     display: none;
 }
 
+.title img {
+    max-height: 100%;
+}
+
 /* menus */
 .menu .bar {
     height: 68px;
@@ -62,7 +66,7 @@ img	{
     height: 100%;
 }
 
-/******************** grid product *********************/
+/******************** grid item *********************/
 .products-grid {
     margin-top: 5px;
     margin-right: 10px;
@@ -131,15 +135,6 @@ img	{
     padding: 0 1.25%;
     min-height: 220px;
 }
-
-#wrapper .swiper-container {
-    display: block;
-}
-
-.swiper-container img {
-    max-width: 100%;
-}
-
 
 .products-grid .product img {
     max-width: 100%;
@@ -303,3 +298,82 @@ img	{
     }
 /*
 /*end product cart*/
+/********************* tools ********************/
+.tools {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    z-index: 101;
+    background: #000;
+    opacity: 0.6;
+    padding: 6px;
+    color: #333;
+    font-size: 30px;
+}
+
+/******************** detail *********************/
+.page {
+    padding: 5px;
+}
+
+.page-detail h1 {
+    text-overflow: ellipsis;
+    width: 70%;
+    overflow: hidden;
+    left: 15%;
+}
+
+.page-detail .bar-nav ~ .content {
+    margin-top: 44px;
+    padding-top: 0;
+}
+.page-detail .bar-nav {
+    position: fixed;
+    padding-top: 0;
+    z-index: 20;
+}
+
+.page-detail iframe {
+    position: absolute;
+    border: none;
+    width: 100%;    height: 100%;
+}
+.page-detail .detailInfo {
+    margin-top: 50px;
+}
+/********************product detail *********************/
+.page-product-detail h1 {
+    text-overflow: ellipsis;
+    width: 70%;
+    overflow: hidden;
+    left: 0px;
+}
+
+.page-product-detail .bar-nav ~ .content {
+    margin-top: 44px;    padding-top: 0;
+}
+.page-product-detail .bar-nav {
+    position: fixed;
+    padding-top: 0;
+    z-index: 20;
+}
+
+.page-product-detail iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.page-product-detail .detailInfo {
+    background-color: #ffffff;
+}
+.page-product-detail .detailInfo img {
+    max-width: 100%;
+}
+.productForm	{
+    padding-top: 20px;
+    padding-top: 20px;
+    width: 100%;
+    padding-bottom: 88px;
+    /* background-color: rgba(238, 238, 238, .9);*/
+    z-index:99;
+}

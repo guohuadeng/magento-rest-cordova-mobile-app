@@ -5,7 +5,7 @@ angular.module('app', [
         'app.config', 'app.controllers'
     ])
 
-    .run(function ($ionicPlatform, $rootScope) {
+    .run(function ($ionicPlatform, $rootScope, Config) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -16,7 +16,7 @@ angular.module('app', [
                 StatusBar.styleDefault();
             }
         });
-        Service($rootScope);
+        Service($rootScope, Config);
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {

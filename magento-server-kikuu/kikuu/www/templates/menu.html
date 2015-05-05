@@ -15,14 +15,14 @@
     <ion-side-menu side="left">
         <ion-header-bar class="menus bar-stable">
             <h3>
-                <span>
+                <span ng-if="!user">
                     <span class="fa fa-user"></span>
                     <a menu-close ng-click="login()"> Login </a> |
                     <a nav-clear menu-close href="#app/register">Register</a>
                 </span>
-                <span class="none">
-                    <img src="" width="36" height="36">
-                    <span></span>
+                <span ng-if="!!user">
+                    <img src="{{user.src}}" width="36" height="36">
+                    <span>{{user.name}}</span>
                 </span>
                 <span class="icon icon-close pull-right menu-close"></span>
             </h3>
@@ -35,7 +35,9 @@
                 <ion-item nav-clear menu-close>
                     <a nav-clear menu-close href="#app/productOption">Test Product Option</a>
                 </ion-item>
-                <ion-item ng-repeat="menu in menus" nav-clear menu-close>
+                <ion-item ng-repeat="menu in menus" nav-clear menu-close
+                          href="#app/lists"
+                          ng-click="setCatalog($index)">
                     {{menu.name}}
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="exit()">

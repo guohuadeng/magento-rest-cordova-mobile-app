@@ -95,7 +95,11 @@ angular.module('tabSlideBox', [])
 					}, 0);
 				}
 				function setPosition(index){
-					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")), icons = iconsDiv.find("a"), wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"), totalTabs = icons.length;
+					var iconsDiv = angular.element(ta.querySelector(".tsb-icons")),
+                        icons = iconsDiv.find("a"),
+                        wrap = iconsDiv[0].querySelector(".tsb-ic-wrp"),
+                        totalTabs = icons.length;
+
 					var scrollDiv = wrap.querySelector(".scroll");
 					
 					var middle = iconsDiv[0].offsetWidth/2;
@@ -125,8 +129,10 @@ angular.module('tabSlideBox', [])
 						var currentX = Math.abs(getX(scrollDiv.style.webkitTransform));
 						var leftOffset = 100;
 						var elementOffset = 40;
-						//If tabs are reaching right end or left end
-						if(((currentX + wrapWidth) < (curElLeft + curElWidth + elementOffset)) || (currentX > (curElLeft - leftOffset))){
+                        // fix first time bug
+                        currentX = isNaN(currentX) ? 0 : currentX;
+                        //If tabs are reaching right end or left end
+                        if(((currentX + wrapWidth) < (curElLeft + curElWidth + elementOffset)) || (currentX > (curElLeft - leftOffset))){
 							if(leftStr > 0){
 								leftStr = 0;
 							}

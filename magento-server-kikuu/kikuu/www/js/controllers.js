@@ -1,7 +1,27 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal) {
-        $rootScope.service.get($scope, 'menus');
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, Config) {
+        // 用户信息
+        $rootScope.service.get($scope, 'user', function () {
+            if ($scope.user) {
+                $scope.user.src = Config.baseUrl +
+                    '/media/customer' + $scope.user.avatar;
+            }
+        });
+        // 菜单处理
+        $rootScope.service.get($scope, 'menus', function () {
+            $scope.menus = [{
+                cmd: 'daily_sale',
+                name: 'Daily Sale'
+            }, {
+                cmd: 'best_seller',
+                name: 'New Arrival'
+            }].concat($scope.menus);
+            $scope.$broadcast('menusData', $scope.menus);
+        });
+        $scope.setCatalog = function (index) {
+            $scope.$broadcast('setCatalog', index);
+        };
 
         // Form data for the login modal
         $scope.loginData = {};
@@ -44,13 +64,23 @@ angular.module('app.controllers', [])
             }
 
             var params = {
-                limit: 50,
+                limit: 10,
                 page: slide.page,
-                cmd: 'catalog',
-                categoryid: +slide.category_id
+                cmd: slide.cmd || 'catalog'
             };
+            if (slide.category_id) {
+                params.categoryid = +slide.category_id;
+            }
             $rootScope.service.get($scope, 'products', params, function (lists) {
-                slide.lists = lists;
+                if (type === 'load') {
+                    if (lists) {
+                        slide.lists = slide.lists.concat(lists);
+                    } else {
+                        slide.loadOver = true;
+                    }
+                } else {
+                    slide.lists = lists;
+                }
                 slide.hasInit = true;
                 $scope.$apply();
                 if (typeof callback === 'function') {
@@ -62,16 +92,23 @@ angular.module('app.controllers', [])
         $scope.parseInt = parseInt;
         $scope.update = function () {
             $ionicSlideBoxDelegate.update();
+            setTimeout(function () {
+                $ionicSlideBoxDelegate.slide(0);
+            }, 10);
         };
         $scope.$on('ngRepeatFinished', function () {
             $scope.update();
         });
 
-        $rootScope.service.get($scope, 'menus', function () {
-            $scope.slides = $scope.menus.slice(0);
+        // 根据菜单生成 slides
+        $scope.$on('menusData', function (e, menus) {
+            $scope.menus = menus;
+            $scope.slides = menus.slice(0);
             $scope.$apply();
         });
-
+        $scope.$on('setCatalog', function (e, index) {
+            $ionicSlideBoxDelegate.slide(index);
+        });
         $scope.onSlideMove = function (data) {
             if (isNaN(data.index)) {
                 return;
@@ -87,6 +124,11 @@ angular.module('app.controllers', [])
         $scope.doRefresh = function (index) {
             getList($scope.slides[index], 'refresh', function () {
                 $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
+        $scope.loadMore = function (index) {
+            getList($scope.slides[index], 'load', function () {
+                $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         };
     })

@@ -1,4 +1,15 @@
 <ion-view view-title="Kikuu">
+    <ion-nav-title>
+        <img src="img/logo.png">
+    </ion-nav-title>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon fa fa-bars" menu-toggle="left"></button>
+        <a href="#app/search" class="button button-icon fa fa-search"></a>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon fa fa-qrcode"></button>
+        <button class="button button-icon fa fa-shopping-cart"></button>
+    </ion-nav-buttons>
     <ion-content scroll="false">
         <tab-slide-box>
             <div class="tsb-icons">
@@ -10,14 +21,15 @@
                     </ion-scroll>
                 </div>
             </div>
-            <ion-slide-box show-pager="false" on-slide-changed="slideHasChanged($index)">
+            <ion-slide-box show-pager="false" active-slide="activeSlide"
+                           on-slide-changed="slideHasChanged($index)">
                 <ion-slide ng-repeat="slide in slides" style="height:100%">
-                    <ion-scroll style="height:100%">
+                    <ion-scroll style="height:95%">
                         <ion-refresher
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">
                         </ion-refresher>
-                        <div class="products-grid">
+                        <ion-list class="products-grid">
                             <div class="product" ng-repeat="product in slide.lists">
                                 <div class="product-inner">
                                     <a>
@@ -36,25 +48,27 @@
 
                                         <div class="product-price">
                                             <div class="price-box">
-                            <span class="special-price">
-                                <span class="special-price">
-                                    <span class="price">Tsh{{product.final_price_with_tax}}</span>
-                                    <span class="old-price">Tsh{{product.regular_price_with_tax}}</span>
-                                </span>
-                            </span>
-                            <span class="discount {{price_percent_class}}">
-                                <span class="price">
-                                    {{parseInt(-100 * (product.regular_price_with_tax -
-                                        product.final_price_with_tax) /
-                                        product.regular_price_with_tax)}}%
-                                </span>
-                            </span>
+                                                <span class="special-price">
+                                                    <span class="special-price">
+                                                        <span class="price">Tsh{{product.final_price_with_tax}}</span> &nbsp; <span class="old-price">Tsh{{product.regular_price_with_tax}}</span>
+                                                    </span>
+                                                </span>
+                                                <span class="discount {{price_percent_class}}">
+                                                    <span class="price">
+                                                        {{parseInt(-100 * (product.regular_price_with_tax - product.final_price_with_tax) / product.regular_price_with_tax)}}%
+                                                    </span>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </ion-list>
+                        <ion-infinite-scroll
+                                ng-if="slide.hasInit && !slide.loadOver"
+                                on-infinite="loadMore($index)"
+                                distance="10%">
+                        </ion-infinite-scroll>
                     </ion-scroll>
                 </ion-slide>
             </ion-slide-box>
