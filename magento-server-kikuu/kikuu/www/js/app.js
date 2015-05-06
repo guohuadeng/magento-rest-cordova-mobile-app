@@ -28,6 +28,15 @@ angular.module('app', [
                 templateUrl: 'templates/menu.html',
                 controller: 'AppCtrl'
             })
+            .state('app.login', {
+                url: '/login',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/login.html',
+                        controller: 'LoginCtrl'
+                    }
+                }
+            })
             .state('app.lists', {
                 url: '/lists',
                 views: {
@@ -64,6 +73,7 @@ angular.module('app', [
                     }
                 }
             })
+						/*
             .state('app.register', {
                 url: '/register',
                 views: {
@@ -71,7 +81,7 @@ angular.module('app', [
                         templateUrl: 'templates/register.html'
                     }
                 }
-            })
+            }) */
             .state('app.search', {
                 url: '/search',
                 views: {
@@ -122,5 +132,6 @@ angular.module('app', [
                     });
                 }
             }
-        }
+        }				
+				
     });

@@ -37,6 +37,7 @@ angular.module('app.controllers', [])
             focusFirstInput : true
         }).then(function (modal) {
             $scope.modal = modal;
+            $scope.$broadcast('setLoginTab', 1);
         });
 
         // Triggered in the login modal to close it
@@ -45,7 +46,13 @@ angular.module('app.controllers', [])
         };
 
         // Open the login modal
-        $scope.login = function () {
+        $scope.login = function () {					
+          $scope.modal.show();
+          $scope.$broadcast('setLoginTab');
+        };
+        // Open the register modal
+        $scope.register = function () {
+            $scope.$broadcast('setRegisterTab');
             $scope.modal.show();
         };
 
@@ -71,6 +78,18 @@ angular.module('app.controllers', [])
             }
         };
     })
+		
+    .controller('LoginCtrl', function ($scope, $rootScope, $ionicTabsDelegate) {			
+			$scope.selectTabWithIndex = function(index) {
+				$ionicTabsDelegate.select(index);
+			}		
+        $scope.$on('setLoginTab', function () {
+					$ionicTabsDelegate.select(0);
+        });
+        $scope.$on('setRegisterTab', function () {
+					$ionicTabsDelegate.select(1);
+        });
+		})
 
     .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
         var getList = function (slide, type, callback) {
@@ -163,6 +182,7 @@ angular.module('app.controllers', [])
 
     .controller('SearchCtrl', function ($scope, $location) {
         $scope.model = {};
+				//angular.element('#search-input').trigger('focus');
         $scope.onSearch = function () {
             $location.path('app/search/' + $scope.model.text);
         };

@@ -1,0 +1,45 @@
+<ion-modal-view>
+<ion-tabs class="tabs-stable tabs-top">
+<ion-tab title="Login" icon-on="ion-ios-unlocked-outline" icon-off="ion-ios-unlocked">
+    <ion-header-bar>
+      <h1 class="title">Login</h1>
+      <div class="buttons">
+        <button class="button button-large button-outline button-assertive" ng-click="modal.hide()">Close</button>
+      </div>
+    </ion-header-bar>
+    <ion-content>
+      <div class="list registered-users padding">
+        <form ng-submit="doLogin()" id="login-form">
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email" placeholder="Email"  ng-model="loginData.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" placeholder="password"  ng-model="loginData.password">
+          </label>
+          <label class="item">
+            <button class="button button-full button-assertive" type="submit">Log in</button>
+          </label>       
+        </form>      
+      </div>
+              
+      <div class="padding">
+        <h2>New Customers</h2>
+        <p class="padding-horizontal">By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p> 
+        <div class="padding">         
+          <a type="button" title="Create an Account" class="button button-outline button-block button-assertive " ng-click="modal.hide()" href="#app/register">Create an Account</a>
+        </div>
+      </div>
+    </ion-content>
+    <!-- Tab 1 content -->
+  </ion-tab>
+
+  <ion-tab title="Register" icon-on="ion-ios-personadd-outline" icon-off="ion-ios-personadd">
+  asdfasdfasd
+    <!-- Tab 2 content -->
+  </ion-tab>  
+  
+</ion-tabs>
+
+</ion-modal-view>

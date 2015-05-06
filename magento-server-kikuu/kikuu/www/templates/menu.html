@@ -13,38 +13,69 @@
     </ion-side-menu-content>
 
     <ion-side-menu side="left">
-        <ion-header-bar class="menus bar-stable">
-            <h3>
-                <span ng-if="!user">
-                    <span class="fa fa-user"></span>
-                    <a menu-close ng-click="login()"> Login </a> |
-                    <a nav-clear menu-close href="#app/register">Register</a>
-                </span>
-                <span ng-if="!!user">
-                    <img src="{{user.avatar}}" width="36" height="36">
-                    <span>{{user.name}}({{user.email}})</span>
-                </span>
-                <span class="icon icon-close pull-right menu-close"></span>
-            </h3>
+        <ion-header-bar class="menus bar-light">
+          <span ng-if="!user">
+            <h2 class="padding">
+              <span class="ion-person"></span>
+              <a class="padding-horizontal" menu-close ng-click="login()"> Login </a> |
+              <a class="padding-horizontal" menu-close ng-click="register()">Register</a>
+            </h2>
+          </span>
+          <span ng-if="user">
+            <h3 class="padding">
+              <span ng-if="!user.avatar">
+                <span class="ion-person"></span>
+              </span>
+              <span ng-if="!!user.avatar">
+                <img src="{{user.avatar}}" width="48" height="48">
+              </span>
+              <span class="drawer-logined padding-horizontal">
+                <div>{{user.name}}</div>
+                <div>{{user.email}}</div>
+    			    </span>
+          	</h3>
+          </span>
+          <span class="icon icon-close pull-right menu-close"></span>
         </ion-header-bar>
-        <ion-content>
+        <ion-content class="menus-content">
             <ion-list>
-                <ion-item nav-clear menu-close>
-                    <a nav-clear menu-close href="#app/product">Test Product Detail</a>
-                </ion-item>
-                <ion-item nav-clear menu-close>
-                    <a nav-clear menu-close href="#app/productOption">Test Product Option</a>
-                </ion-item>
-                <ion-item ng-repeat="menu in menus" nav-clear menu-close
-                          href="#app/lists"
-                          ng-click="setCatalog($index)">
-                    {{menu.name}}
-                </ion-item>
+                  <a nav-clear menu-close href="#app/lists"
+                  	class="button button-full button-assertive icon icon-left ion-ios-home-outline"><span class="padding-horizontal">Home</span>
+                  </a>
+                <span ng-if="user">
+                  <a nav-clear menu-close href=""
+                  	class="button button-full button-light icon icon-left ion-ios-cloud-outline"><span class="padding-horizontal">My Account</span>
+                  </a>
+                  <a nav-clear menu-close href=""
+                  	class="button button-full button-light icon icon-left ion-ios-list-outline"><span class="padding-horizontal">My Order</span>
+                  </a>
+                  <a nav-clear menu-close href=""
+                  	class="button button-full button-light icon icon-left ion-ios-location-outline"><span class="padding-horizontal">My Address Book</span>
+                  </a>
+                  <a nav-clear menu-close href=""
+                  	class="button button-full button-light icon icon-left ion-android-favorite-outline"><span class="padding-horizontal">My Wishlish</span>
+                  </a>         
+                  <div class="item item-divider"></div>
+                </span>
+                <span ng-repeat="menu in menus" ng-switch on="menu.name">    
+                	<span ng-switch-when="Daily Sale"></span>    
+                  <span ng-switch-when="New Arrival"></span>
+                  <ion-item ng-switch-default nav-clear menu-close
+                            href="#app/lists"
+                            ng-click="setCatalog($index)" >{{menu.name}}
+                  </ion-item>
+                </span>
                 <ion-item ng-if="!!user" nav-clear menu-close ng-click="doLogout()">
                     Logout
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="exit()">
                     Exit
+                </ion-item>
+                <ion-item nav-clear menu-close>
+                    <a nav-clear menu-close href="#app/product">Test Product Detail</a>
+                </ion-item>
+                <ion-item nav-clear menu-close>
+                    <a nav-clear menu-close href="#app/productOption">Test Product Option</a>
                 </ion-item>
             </ion-list>
         </ion-content>

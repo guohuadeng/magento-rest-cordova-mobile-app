@@ -28,10 +28,12 @@ img	{
 }
 
 .title img {
-    max-height: 100%;
-    margin-top: 10px;
+    max-height: 40px;
+    margin-top: 4px;
 }
-
+.item-divider {
+  min-height: 16px;
+  }
 /* menus */
 .menu .bar {
     height: 68px;
@@ -39,15 +41,20 @@ img	{
 .menu .has-header {
     top: 68px;
 }
+.menus h2,
 .menus h3 {
-    font-size: 18px;
-    margin-top: 10px;
-    padding-left: 20px;
     line-height: 30px;
     color: #8a8a8a;
     font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
+.menus h2 img,
 .menus h3 img {
+    vertical-align: middle;
+}
+.menus h2 span,
+.menus h3 span {
     vertical-align: middle;
 }
 .menus a {
@@ -56,13 +63,41 @@ img	{
     text-decoration: none;
     color: #000;
 }
-.menus h3 span.fa-user {
-    font-size: 36px;
-    padding-right: 30px;
-    color: #ccc;
-    vertical-align: middle;
+.menus .drawer-logined {
+    font-size: 0.8em;
+    position: absolute;
+    top: 16px;
+    padding-left: 60px;
+    line-height: 1em;
+}
+.menus-content .button {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: left;
+}
+.menus-content a.button.icon:before {
+    width: 24px;
+    height: auto;
 }
 
+/* end menus */
+/* login and register */
+.login-container	.tab-nav{
+  	top: 0px;
+    border-bottom-width: 0px;
+    }
+.login-container	.tab-item.tab-item-active{
+    border-bottom: 1px solid #ef473a;
+    }
+.login-container .registered-users, .login-container .account-create{
+  	top: 44px;
+    }
+.account-create .item-radio .item-content {
+    padding: 6px 34px 16px 16px
+}
+
+
+/* end login and register */
 /* iframe */
 .frame .scroll {
     height: 100%;
