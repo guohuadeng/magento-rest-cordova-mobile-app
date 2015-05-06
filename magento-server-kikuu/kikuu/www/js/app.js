@@ -45,6 +45,15 @@ angular.module('app', [
                     }
                 }
             })
+
+            .state('app.cart', {
+                url: '/cart',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/cart.html'
+                    }
+                }
+            })
             .state('app.lists', {
                 url: '/lists',
                 views: {

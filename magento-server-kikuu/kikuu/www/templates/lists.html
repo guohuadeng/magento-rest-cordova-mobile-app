@@ -1,18 +1,18 @@
-<ion-view view-title="Kikuu">
+<ion-view view-title="Home">
     <ion-nav-title>
         <img src="img/logo.png">
     </ion-nav-title>
     <ion-nav-buttons side="left">
-        <button class="button button-icon fa fa-bars" menu-toggle="left"></button>
-        <a href="#app/search" class="button button-icon fa fa-search"></a>
+        <button class="button button-icon ion-android-menu" menu-toggle="left"></button>
+        <a href="#app/search" class="button button-icon ion-android-search"></a>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button class="button button-icon fa fa-qrcode"></button>
-        <button class="button button-icon fa fa-shopping-cart"></button>
+        <button class="button button-icon ion-qr-scanner"></button>
+        <a href="#app/cart" class="button button-icon ion-android-cart"></a>
     </ion-nav-buttons>
     <ion-content scroll="false">
         <tab-slide-box>
-            <div class="tsb-icons">
+            <div class="tsb-icons header-slide">
                 <div class="tsb-ic-wrp">
                     <ion-scroll direction="x" class="tsb-hscroll">
                         <a ng-repeat="menu in menus" href="javascript:;" on-finish-render="update()">
@@ -32,7 +32,7 @@
                         <ion-list class="products-grid">
                             <div class="product" ng-repeat="product in slide.lists">
                                 <div class="product-inner">
-                                    <a>
+                                    <a href="#app/product">
                                         <div class="product-image">
                                             <img class="lazy small-image"
                                                  src="{{product.image_url}}"
