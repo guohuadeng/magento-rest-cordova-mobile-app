@@ -22,7 +22,7 @@
                 </span>
                 <span ng-if="!!user">
                     <img src="{{user.src}}" width="36" height="36">
-                    <span>{{user.name}}</span>
+                    <span>{{user.name}}({{user.email}})</span>
                 </span>
                 <span class="icon icon-close pull-right menu-close"></span>
             </h3>
@@ -39,6 +39,9 @@
                           href="#app/lists"
                           ng-click="setCatalog($index)">
                     {{menu.name}}
+                </ion-item>
+                <ion-item ng-if="!!user" nav-clear menu-close ng-click="doLogout()">
+                    Logout
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="exit()">
                     Exit

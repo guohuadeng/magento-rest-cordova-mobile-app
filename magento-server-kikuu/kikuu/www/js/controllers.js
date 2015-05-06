@@ -2,13 +2,15 @@ angular.module('app.controllers', [])
 
     .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, Config) {
         // 用户信息
-        $rootScope.service.get('user', function (user) {
-            $scope.user = user;
-            if ($scope.user) {
-                $scope.user.src = Config.baseUrl +
-                    '/media/customer' + $scope.user.avatar;
-            }
-        });
+        $scope.getUser = function () {
+            $rootScope.service.get('user', function (user) {
+                $scope.user = user;
+                if ($scope.user) {
+                    $scope.user.src = Config.baseUrl +
+                        '/media/customer' + $scope.user.avatar;
+                }
+            });
+        };
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
             $scope.menus = [{
@@ -48,7 +50,18 @@ angular.module('app.controllers', [])
 
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
+            $rootScope.service.get('login', $scope.loginData, function (res) {
+                if (res.code || res.message) {
+                    alert(res.message || res.code);
+                    return;
+                }
+                $scope.user = res;
+                $scope.modal.hide();
+            });
+        };
 
+        $scope.doLogout = function () {
+            $rootScope.service.get('logout', $scope.getUser);
         };
 
         $scope.exit = function () {

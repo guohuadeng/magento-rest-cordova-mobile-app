@@ -29,7 +29,11 @@ function Service($rootScope, Config) {
 
             $.get(url, params, function (res) {
                 if (typeof callback === 'function') {
-                    callback($.parseJSON(res));
+                    try {
+                        callback($.parseJSON(res));
+                    } catch (e) {
+                        callback();
+                    }
                 }
             });
         }
