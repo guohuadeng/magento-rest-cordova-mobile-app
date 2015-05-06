@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html ng-app="sample-app" id="ng-app" class="js">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular directive: lazy image directive, inspired by TIF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- look inside this css to see how container and ratios work -->
+    <link rel="stylesheet" type="text/css" href="lazy-image-style.css" />
+    <style>
+
+    	/* Project specific css, only for this demo */
+    	body { 
+    		padding: 0; margin: 0; font: 16px "Lucida Sans Unicode","Lucida Grande",verdana,arial,sans-serif;
+    	}
+
+    	h1,
+    	a { color: #00a1de; }
+
+		.demo-image {
+			margin-bottom: 20px; 
+		}
+		.demo-wrapper {
+			width: 780px;
+			margin: 0 auto;
+		}
+		.demo-sample p { 
+			float: left;
+			width: 50%;
+		}
+		.demo-sample:after,
+		.demo-aspect:after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+		.demo-aspect {
+			list-style: none;
+			margin: 0 0 20px;
+			padding: 0;
+		}
+		.demo-aspect-ratio {
+			width: 180px;
+			float: left;
+			margin: 0 20px 10px 0;
+		}
+		.demo-aspect-last { margin-right: 0; }
+		.demo-aspect .afkl-lazy-wrapper {
+			display: block;
+			background-color: #eee;
+			font-size: 12px;
+		}
+		.demo-background-image {
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+			background-size: cover;
+			color: #fff;
+			padding: 10px;
+		}
+		.demo-link {
+			font-size: 85%;
+		}
+
+		.demo-container {
+			overflow-y: scroll;
+			width: 100%;
+			height: 400px;
+			border: 1px solid #ddd;
+		}
+		.demo-container-content {
+			width: 100%;
+		}
+	        .demo-container-content-positioned {
+	            position: relative;
+	        }
+	        .demo-container-content-positioned-parent {
+	            position: relative;
+	        }
+	        .demo-container-content-positioned-child {
+	            position: absolute;
+	            width: 100%;
+	        }
+		.demo-container-intro {
+			padding: 250px 0;
+			text-align: center;
+		}
+
+		.demo-no-use-of-aspect-ratio img {
+			width: auto;
+			max-width: 100%;
+		}
+
+		@media (max-width:768px){
+			body { padding: 0 5px; }
+			.demo-wrapper {
+				width: 100%;
+			}
+		}
+		@media (max-width:480px){
+			.demo-sample p {
+				width: auto;
+				float: none;
+				margin-bottom: 10px;
+			}
+		}
+	</style>
+
+</head>
+<body ng-controller="appCtrl" >
+<div afkl-lazy-image="http://placehold.it/936x936" 
+    class="afkl-lazy-wrapper afkl-img-ratio-1-1 own-classname"></div>
+    
+<div class="demo-wrapper">
+
+	<h1>&nbsp;</h1>
+	<h1>Angular lazy image directive</h1>
+
+	<p>Directive for loading responsive image when container (which is preventing reflow) is in viewport. Available as a bower component.</p>
+
+	<p>See <a href="https://github.com/afklm/ng-lazy-image">Github</a> for source.</p>
+
+	<h2>Example</h2>
+
+	<p>Resize, reload and scroll to see what gets actually loaded and when.</p>
+	<!-- This container is used for e2e tests, don't change urls -->
+    <div afkl-lazy-image="http://placehold.it/480x320/00a1de/ffffff 480w, http://placehold.it/768x512/00a1de/ffffff 768w, http://placehold.it/936x624/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2 demo-image demo-e2e-image"></div>
+
+    <p>Example showing another aspect ratio. The parent container always sets the max width available for the image to align.</p>
+
+    <div afkl-lazy-image="http://placehold.it/480x480 480w, http://placehold.it/768x768 768w, http://placehold.it/936x936 2x" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-image"></div>
+
+
+    <h3>Option to overrule offset and non lazy</h3>
+    <div class="demo-sample">
+    	<p><span afkl-lazy-image="http://placehold.it/480x240 480w, http://placehold.it/440x220 768w" class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image" afkl-lazy-image-options='{"nolazy": true}'></span></p>
+    	<p><span afkl-lazy-image="http://placehold.it/400x200" afkl-lazy-image-options='{"offset": 200}' class="afkl-lazy-wrapper afkl-img-ratio-4-2 demo-image"></span></p>
+    </div>
+
+    <h3>Option to set background image</h3>
+    <div afkl-lazy-image="http://placehold.it/480x200/00a1de/003145 480w, http://placehold.it/768x200/00a1de/003145 768w" class="demo-background-image" afkl-lazy-image-options='{"background": true}'>
+    	<p>This module can also set a background image.</p>
+    	<p>All you have to do is setting the options tag 'background' to true, which is false by default.</p>
+    	<p>In the background you now will see the correct image. You can set your own css on the container itself, only style 'background-image' is being set.</p>
+    </div>
+
+
+    <h3>Option to use aspect ratio's</h3>
+    <p>Browser reflow is bad, especially when lazy loading images. The container aspect ratio setup sets the correct image container height (so no total repainting takes place when image is appended) based on it's css class which uses aspect-ratio. If you want different aspect ratio's for different srcset setup then introduce your own classnames.</p>
+
+	<ul class="demo-aspect">
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-4-2">.afkl-img-ratio-4-2</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-16-9">.afkl-img-ratio-16-9</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-2">.afkl-img-ratio-3-2</div></li>
+		<li class="demo-aspect-ratio demo-aspect-last"><div class="afkl-lazy-wrapper afkl-img-ratio-4-3">.afkl-img-ratio-4-3</div></li>
+	</ul>
+	<ul class="demo-aspect">
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-3-4">.afkl-img-ratio-3-4</div></li>
+		<li class="demo-aspect-ratio"><div class="afkl-lazy-wrapper afkl-img-ratio-1-1">.afkl-img-ratio-1-1</div></li>
+	</ul>
+
+
+    <h3>Using image alt</h3>
+	<!-- example how to use image set using srcset and ratio -->
+	<div ng-repeat="image in images">
+
+		<div afkl-lazy-image="http://placehold.it/768x384/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1" afkl-lazy-image-options='{"alt": "blue bird"}'></div>
+
+	</div>
+
+
+    <h3>Check profiling</h3>
+	<!-- example how to use image set using srcset and ratio -->
+	<div ng-repeat="image in images">
+
+		<div afkl-lazy-image="{{image.srcset}}" class="afkl-lazy-wrapper afkl-img-ratio-{{image.ratio}}"></div>
+
+	</div>
+
+	<h3>Scrollable Container</h3>
+	<p>The image inside will not load until the container is scrolled into position.</p>
+	<div class="demo-container" afkl-image-container>
+		<div class="demo-container-content">
+			<div class="demo-container-intro">Scroll down to see the image</div>
+			<div afkl-lazy-image="http://placehold.it/936x677/8bb6b9/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+			<div afkl-lazy-image="http://placehold.it/936x468/41ba94/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-2-1"></div>
+			<div afkl-lazy-image="http://placehold.it/936x677/d7c199/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-3-2"></div>
+		</div>
+	</div>
+
+    <h3>Scrollable Container with positioned images</h3>
+    <p>The positioned images inside will not load until the container is scrolled into position.</p>
+    <div class="demo-container" afkl-image-container>
+        <div class="demo-container-content-positioned">
+            <div class="demo-container-intro">Scroll down to see the positioned images</div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="http://placehold.it/936x677/00a1de/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="http://placehold.it/936x468/fc425b/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="http://placehold.it/936x677/2df3d/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-container-content-positioned-child"></div>
+            </div>
+            <div class="demo-container-content-positioned-parent">
+                <div afkl-lazy-image="http://placehold.it/480x240/00a1de/ffffff 480w, http://placehold.it/936x468/4d681/ffffff" class="afkl-lazy-wrapper afkl-img-ratio-1-1 demo-container-content-positioned-child"></div>
+            </div>
+        </div>
+    </div>
+
+
+	<h3>Runtime image change after loaded</h3>
+	<div afkl-lazy-image="{{runtimeImageSrc}}" class="demo-no-use-of-aspect-ratio"></div>
+	<button ng-click="changeImage()">Change Now</button>
+
+	<p class="demo-link"><a href="#" ng-click="destroy()">Destroy $scope</a> (no leaks)</p>
+
+</div>
+
+<!-- only dependency is Angular -->
+<script src="vendor/angular.min.js"></script>
+<!-- our ng lazy image module -->
+<script src="lazy-image.js"></script>
+
+<!-- dummy app kickstarting our module -->
+<script src="js/app.js"></script>
+
+</body>
+</html>
