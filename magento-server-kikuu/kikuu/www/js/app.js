@@ -2,7 +2,8 @@
 // 'app' is the name of this angular module (also set in a <body> attribute in index.html)
 angular.module('app', [
         'ionic', 'tabSlideBox',
-        'app.config', 'app.controllers'
+        'app.config', 'app.controllers',
+        'app.filters'
     ])
 
     .run(function ($ionicPlatform, $rootScope, Config) {

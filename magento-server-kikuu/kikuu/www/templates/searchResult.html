@@ -26,7 +26,7 @@
                                 </span>
                                 <span class="discount {{price_percent_class}}">
                                     <span class="price">
-                                        {{parseInt(-100 * (product.regular_price_with_tax - product.final_price_with_tax) / product.regular_price_with_tax)}}%
+                                        {{product | discount}}
                                     </span>
                                 </span>
                             </div>

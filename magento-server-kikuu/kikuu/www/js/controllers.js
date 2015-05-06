@@ -92,7 +92,6 @@ angular.module('app.controllers', [])
             });
         };
 
-        $scope.parseInt = parseInt;
         $scope.update = function () {
             $ionicSlideBoxDelegate.update();
             setTimeout(function () {
