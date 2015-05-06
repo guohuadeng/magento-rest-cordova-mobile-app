@@ -29,7 +29,7 @@
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">
                         </ion-refresher>
-                        <ion-list class="products-grid">
+                        <ion-list class="products-grid {{slide.class_name}}">
                             <div class="product" ng-repeat="product in slide.lists">
                                 <div class="product-inner">
                                     <a href="#app/product">

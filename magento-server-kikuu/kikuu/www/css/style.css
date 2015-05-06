@@ -84,8 +84,7 @@ img	{
 }
 
 /* 特殊处理：一栏 #dailySale  #bestSeller */
-#dailySale .products-grid .product,
-#bestSeller .products-grid .product  {
+.products-grid.one-line .product  {
     margin-top: 10px;
     text-align: center;
     padding: 0;
@@ -94,41 +93,31 @@ img	{
     min-height: 250px;
 }
 
-#dailySale .products-grid .product .product-inner .product-info,
-#bestSeller .products-grid .product .product-inner .product-info {
+.products-grid.one-line .product .product-inner .product-info {
     /* width: 100%; */
     padding: 0px 10px 10px 10px;
 }
 /*-------for price---------*/
-#dailySale .products-grid .product .product-price,
-#bestSeller .products-grid .product .product-price {
+.products-grid.one-line .product .product-price {
     margin-top: 10px;
     clear: both;
     text-align: center;
     padding-right: 20%;
 }
 
-#dailySale .price-box .price,
-#dailySale .category-products .product .price-box .price,
-#bestSeller .price-box .price,
-#bestSeller .category-products .product .price-box .price {
+.one-line .price-box .price,
+.one-line .category-products .product .price-box .price {
     color: #e74c3c;
     font-size: 140%;
 }
-#dailySale .product .discount,
-#bestSeller .product .discount
-{
+.one-line .product .discount {
     position: absolute;
     left: 0px;
     top: -7px;
     font-size: 90%;
 }
-#dailySale .price-box .discount .price,
-#dailySale .product .product-price .discount .price,
-#dailySale .product .product-price .discount .price,
-#bestSeller .price-box .discount .price,
-#bestSeller .product .product-price .discount .price,
-#bestSeller .product .product-price .discount .price {
+.one-line .price-box .discount .price,
+.one-line .product .product-price .discount .price {
     background: #e35a32;
     color: #fff;
     width: 60px;

@@ -13,10 +13,12 @@ angular.module('app.controllers', [])
         $rootScope.service.get('menus', function (menus) {
             $scope.menus = [{
                 cmd: 'daily_sale',
-                name: 'Daily Sale'
+                name: 'Daily Sale',
+                class_name: 'one-line'
             }, {
                 cmd: 'best_seller',
-                name: 'New Arrival'
+                name: 'New Arrival',
+                class_name: 'one-line'
             }].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
