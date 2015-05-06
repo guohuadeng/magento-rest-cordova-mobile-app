@@ -14,10 +14,12 @@ class SkyMazon_RestConnect_CustomerController extends Mage_Core_Controller_Front
 		$customerinfo = array ();
 		if (Mage::getSingleton ( 'customer/session' )->isLoggedIn ()) {
 			$customer = Mage::getSingleton ( 'customer/session' )->getCustomer ();
+			$storeUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); 
+			$avatar = $storeUrl + $customer->getMyAvatar (); 
 			$customerinfo = array (
 					'name' => $customer->getName (),
 					'email' => $customer->getEmail (),
-					'avatar' => $customer->getMyAvatar (),
+					'avatar' => $storeUrl . "customer" . $customer->getMyAvatar (),
 					'tel' => $customer->getDefaultMobileNumber () 
 			);
 			echo json_encode ( $customerinfo );
