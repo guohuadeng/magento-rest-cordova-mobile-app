@@ -27,33 +27,6 @@ angular.module('app', [
                 templateUrl: 'templates/menu.html',
                 controller: 'AppCtrl'
             })
-
-            .state('app.register', {
-                url: '/register',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/register.html'
-                    }
-                }
-            })
-
-            .state('app.search', {
-                url: '/search',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/search.html'
-                    }
-                }
-            })
-
-            .state('app.cart', {
-                url: '/cart',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/cart.html'
-                    }
-                }
-            })
             .state('app.lists', {
                 url: '/lists',
                 views: {
@@ -63,7 +36,6 @@ angular.module('app', [
                     }
                 }
             })
-
             .state('app.product', {
                 url: '/product',
                 views: {
@@ -73,8 +45,7 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.productOption', {
-							//这个是要以model显示的，临时这么处理看效果先
+            .state('app.productOption', { //这个是要以model显示的，临时这么处理看效果先
                 url: '/productOption',
                 views: {
                     'menuContent': {
@@ -83,7 +54,6 @@ angular.module('app', [
                     }
                 }
             })
-						
             .state('app.detail', {
                 url: '/detail/:id',
                 views: {
@@ -93,7 +63,40 @@ angular.module('app', [
                     }
                 }
             })
-
+            .state('app.register', {
+                url: '/register',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/register.html'
+                    }
+                }
+            })
+            .state('app.search', {
+                url: '/search',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/search.html',
+                        controller: 'SearchCtrl'
+                    }
+                }
+            })
+            .state('app.searchResult', {
+                url: '/search/:text',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/searchResult.html',
+                        controller: 'SearchResultCtrl'
+                    }
+                }
+            })
+            .state('app.cart', {
+                url: '/cart',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/cart.html'
+                    }
+                }
+            })
             .state('app.frame', {
                 url: '/frame/:page',
                 views: {

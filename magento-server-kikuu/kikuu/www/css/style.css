@@ -7,6 +7,12 @@
     url('../fonts/opensans-regular-webfont.svg') format('svg');
     font-weight: 200;
 }
+/* ionic */
+.back-button > .back-text > .default-title,
+.back-button > .back-text > .previous-title {
+    display: none;
+}
+
 .container	{
     margin-right: auto;
     margin-left: auto;

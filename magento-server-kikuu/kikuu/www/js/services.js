@@ -3,11 +3,11 @@ function Service($rootScope, Config) {
     var api = {
         user: Config.baseUrl + '/restconnect/customer/status',
         menus: Config.baseUrl + '/restconnect/?cmd=menu',
-        products: Config.baseUrl + '/restconnect/'
+        products: Config.baseUrl + '/restconnect/',
+        login: Config.baseUrl + '/restconnect/customer/login',
+        logout: Config.baseUrl + '/customer/account/logout',
+        search: Config.baseUrl + '/restconnect/search'
         /*
-        login: defines.baseApi + '/restconnect/customer/login',
-        logout: defines.baseApi + '/customer/account/logout',
-        products_search: defines.baseApi + '/restconnect/search/?q=%s',
         product_detail: defines.baseWeb + '/catalog/product/view/id/%s', //这个是直接详情页面
         product_rest: defines.baseApi + '/restconnect/products/getproductdetail/productid/%s',
         product_img: defines.baseSite + '/api/rest/products/%s/images/',
@@ -19,7 +19,7 @@ function Service($rootScope, Config) {
     };
 
     $rootScope.service = {
-        get: function ($scope, key, params, callback) {
+        get: function (key, params, callback) {
             if (typeof params === 'function') {
                 callback = params;
                 params = null;
@@ -28,9 +28,8 @@ function Service($rootScope, Config) {
             var url = api[key];
 
             $.get(url, params, function (res) {
-                $scope[key] = $.parseJSON(res);
                 if (typeof callback === 'function') {
-                    callback($scope[key]);
+                    callback($.parseJSON(res));
                 }
             });
         }

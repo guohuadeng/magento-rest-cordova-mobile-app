@@ -2,21 +2,22 @@ angular.module('app.controllers', [])
 
     .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, Config) {
         // 用户信息
-        $rootScope.service.get($scope, 'user', function () {
+        $rootScope.service.get('user', function (user) {
+            $scope.user = user;
             if ($scope.user) {
                 $scope.user.src = Config.baseUrl +
                     '/media/customer' + $scope.user.avatar;
             }
         });
         // 菜单处理
-        $rootScope.service.get($scope, 'menus', function () {
+        $rootScope.service.get('menus', function (menus) {
             $scope.menus = [{
                 cmd: 'daily_sale',
                 name: 'Daily Sale'
             }, {
                 cmd: 'best_seller',
                 name: 'New Arrival'
-            }].concat($scope.menus);
+            }].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
         $scope.setCatalog = function (index) {
@@ -71,7 +72,7 @@ angular.module('app.controllers', [])
             if (slide.category_id) {
                 params.categoryid = +slide.category_id;
             }
-            $rootScope.service.get($scope, 'products', params, function (lists) {
+            $rootScope.service.get('products', params, function (lists) {
                 if (type === 'load') {
                     if (lists) {
                         slide.lists = slide.lists.concat(lists);
@@ -143,6 +144,21 @@ angular.module('app.controllers', [])
 		
     .controller('DetailCtrl', function ($scope, $stateParams) {
 
+    })
+
+    .controller('SearchCtrl', function ($scope, $location) {
+        $scope.model = {};
+        $scope.onSearch = function () {
+            $location.path('app/search/' + $scope.model.text);
+        };
+    })
+
+    .controller('SearchResultCtrl', function ($scope, $rootScope, $stateParams) {
+        $scope.text = $stateParams.text;
+        $rootScope.service.get('search', {q: $stateParams.text}, function (results) {
+            $scope.results = results;
+            $scope.$apply();
+        });
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {

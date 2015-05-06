@@ -1,0 +1,39 @@
+<ion-view view-title="Search: {{text}}">
+    <ion-content>
+        <ion-list class="products-grid">
+            <div class="product" ng-repeat="product in results">
+                <div class="product-inner">
+                    <a>
+                        <div class="product-image">
+                            <img class="lazy small-image"
+                                 src="{{product.image_url}}"
+                                 data-original="{{product.image_url}}"
+                                 alt="{{product.name}}">
+                        </div>
+                    </a>
+
+                    <div class="product-info">
+                        <div class="product-name">
+                            <a href="">{{product.name}}</a>
+                        </div>
+
+                        <div class="product-price">
+                            <div class="price-box">
+                                <span class="special-price">
+                                    <span class="special-price">
+                                        <span class="price">Tsh{{product.final_price_with_tax}}</span> &nbsp; <span class="old-price">Tsh{{product.regular_price_with_tax}}</span>
+                                    </span>
+                                </span>
+                                <span class="discount {{price_percent_class}}">
+                                    <span class="price">
+                                        {{parseInt(-100 * (product.regular_price_with_tax - product.final_price_with_tax) / product.regular_price_with_tax)}}%
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>
