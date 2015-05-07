@@ -27,6 +27,36 @@ img	{
     display: none;
 }
 
+.loading { /* more info: http://www.zhangxinxu.com/wordpress/?p=3357 */
+    width: 3px; height:3px;
+    border-radius: 100%;
+    box-shadow: 0 -10px 0 1px currentColor,           /* top, 1px expand */
+    10px 0px currentColor,                /* right */
+    0 10px currentColor,                  /* bottom */
+    -10px 0 currentColor,                 /* left */
+
+    -7px -7px 0 .5px currentColor,        /* left-top, 0.5px expand */
+    7px -7px 0 1.5px currentColor,        /* right-top, 1.5px expand */
+    7px 7px currentColor,                 /* right-bottom */
+    -7px 7px currentColor;                /* left-bottom */
+
+    -webkit-animation: spin 1s steps(8) infinite;
+    animation: spin 1s steps(8) infinite;
+    /*center*/
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
+}
+/* chrysanthemum loading effect */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .title img {
     max-height: 40px;
     margin-top: 4px;
@@ -125,6 +155,7 @@ img	{
     border: none;
     width: 100%;
     height: 100%;
+    position: absolute;
 }
 
 /******************** grid item *********************/
