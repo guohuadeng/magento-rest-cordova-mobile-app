@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate) {
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate, $timeout) {
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
@@ -70,6 +70,25 @@ angular.module('app.controllers', [])
 
         $scope.doLogout = function () {
             $rootScope.service.get('logout', $scope.getUser);
+        };
+
+        $scope.validationCodeDisabled = false;
+        $scope.getValidationCode = function () {
+            $scope.validationCodeDisabled = true;
+            $scope.validationCode = ~~(Math.random() * 8999) + 1000;
+            $scope.validateSeconds = 30;
+            var update = function () {
+                if ($scope.validateSeconds-- > 0) {
+                    $timeout(update, 1000);
+                } else {
+                    $scope.validationCodeDisabled = false;
+                }
+            };
+            update();
+        };
+
+        $scope.doRegister = function () {
+
         };
 
         $scope.exit = function () {

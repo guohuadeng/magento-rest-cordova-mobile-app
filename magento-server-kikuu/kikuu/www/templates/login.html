@@ -1,108 +1,122 @@
 <ion-modal-view>
-<div class="login-container">
-<ion-tabs class="tabs-stable tabs-top tabs-icon-left pane tabs-standard">
-	<ion-tab title="Login" icon-on="ion-ios-unlocked" icon-off="ion-ios-unlocked-outline">
-    <ion-content>
-      <div class="list registered-users padding">
-        <h2>Registered User</h2>
-        <form ng-submit="doLogin()" id="login-form">
-          <label class="item item-input">
-            <span class="input-label">Email</span>
-            <input type="email" placeholder="Email"  ng-model="loginData.username">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Password</span>
-            <input type="password" placeholder="password"  ng-model="loginData.password">
-          </label>
-          <label class="item">
-            <button class="button button-full button-assertive" type="submit">Log in</button>
-          </label>       
-        </form>
-      </div>          
-    </ion-content>
-    <!-- Tab 1 content -->
-  </ion-tab>
+    <div class="login-container">
+        <ion-tabs class="tabs-stable tabs-top tabs-icon-left pane tabs-standard">
+            <ion-tab title="Login" icon-on="ion-ios-unlocked" icon-off="ion-ios-unlocked-outline">
+                <ion-content>
+                    <div class="list registered-users padding">
+                        <h2>Registered User</h2>
 
-  <ion-tab title="Register" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">    
-    <ion-content>
-      <div class="list account-create padding">
-        <h2>New Customer</h2>
-			<form ng-submit="" action="http://demo.sunpop.cn/m/customer/account/createpost/" method="post" id="form-validate">            
-            <!-- 短信验证.form__field -->
-        <label class="item item-input">
-          <span class="input-label">Mobile Number*</span>
-            <div id="amcustomerattr19" class="amcustomerattr">
-              <input type="tel" placeholder="Input your mobile number"  id="default_mobile_number" name="amcustomerattr[default_mobile_number]" ng-model="registerData.mobile">
-            </div>
-        </label>
-        
-        <label class="item item-input">
-          <span class="input-label">Validation Code*</span>
-          <input type="text" placeholder="Validation Code*"  name="Validation_Code" id="Validation_Code"  ng-model="registerData.validation_Code">
-        </label>    
-        <label class="item"> 
-	        <div class="button-bar">
-          <span > </span> 
-          <button class="button button-outline button-assertive" id="btnValidation" value="Get Validation Code" >Get Validation Code</button>           
-          </div>  
-        </label>      
-         <!-- end 短信验证.form__field -->
-                
-        <div class="item item-divider">
-        </div>
-        <label class="item item-input">
-          <span class="input-label">Email Address*</span>
-          <input type="text" placeholder="Email Address*" ng-model="registerData.email" name="email" id="email_address" >
-        </label>            
-        
-        <label class="item item-input">
-          <span class="input-label">First Name*</span>
-          <input type="text" placeholder="First Name*"  ng-model="registerData.firstname" name="firstname" id="firstname" >
-        </label>   
-        
-        <label class="item item-input">
-          <span class="input-label">Last Name*</span>
-          <input type="text" placeholder="Last Name*"  ng-model="registerData.lastname" name="lastname" id="lastname" >
-        </label>   
-    
-      
-        <label class="item item-input">
-          <span class="input-label">Gender*</span>
-        <div class="button-bar">
-          <label class="item item-radio">
-            <input name="gender" type="radio" value="man" ng-model="registerData.gender" checked>
-            <div class="item-content icon-left ion-male">&nbsp;Male</div>
-            <i class="radio-icon ion-checkmark"></i>
-          </label>    
-          <label class="item item-radio">
-            <input name="gender" type="radio" value="women"  ng-model="registerData.gender" checked>
-            <div class="item-content icon-left ion-female">&nbsp;FeMale</div>
-            <i class="radio-icon ion-checkmark"></i>
-          </label>    
-        </div>
-        </label>
-        
-        <label class="item item-input">
-          <span class="input-label">Password*</span>
-          <input type="password" placeholder="Password*" name="password" id="password" ng-model="registerData.password">
-        </label> 
-        
-        <label class="item item-input">
-          <span class="input-label">Confirm*</span>
-          <input type="password" placeholder="Confirm Password*" name="confirmation" id="confirmation" ng-model="registerData.confirmation">
-        </label>    
-        
-        <label class="item">
-          <button class="button button-full button-assertive" type="submit">Submit</button>
-        </label>      
-      </form>          
-      </div>
-    </ion-content>
-    <!-- Tab 2 content -->
-  </ion-tab>  
-  <ion-tab title="Close" icon="ion-android-close"  ng-click="modal.hide()">
-    <!-- Tab 3 content -->
-  </ion-tab>    
-</ion-tabs>
-</div>
+                        <form ng-submit="doLogin()" id="login-form">
+                            <label class="item item-input">
+                                <span class="input-label">Email</span>
+                                <input type="email" placeholder="Email" ng-model="loginData.username">
+                            </label>
+                            <label class="item item-input">
+                                <span class="input-label">Password</span>
+                                <input type="password" placeholder="password" ng-model="loginData.password">
+                            </label>
+                            <label class="item">
+                                <button class="button button-full button-assertive" type="submit">Log in</button>
+                            </label>
+                        </form>
+                    </div>
+                </ion-content>
+                <!-- Tab 1 content -->
+            </ion-tab>
+
+            <ion-tab title="Register" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">
+                <ion-content>
+                    <div class="list account-create padding">
+                        <h2>New Customer</h2>
+
+                        <!-- 短信验证.form__field -->
+                        <label class="item item-input">
+                            <span class="input-label">Mobile Number*</span>
+                            <input type="tel"
+                                   placeholder="Input your mobile number"
+                                   ng-model="registerData.mobile">
+                        </label>
+                        <label class="item item-input">
+                            <span class="input-label">Validation Code*</span>
+                            <input type="text" placeholder="Validation Code*"
+                                   ng-model="registerData.validation_Code">
+                        </label>
+                        <label class="item">
+                            <button class="button button-outline button-assertive"
+                                    value="Get Validation Code"
+                                    ng-click="getValidationCode()"
+                                    ng-disabled="validationCodeDisabled">
+                                <b ng-if="validationCodeDisabled">
+                                    [{{validationCode}}]Wait...({{validateSeconds}}s)
+                                </b>
+                                <b ng-if="!validationCodeDisabled">
+                                    Get Validation Code
+                                </b>
+                            </button>
+                        </label>
+                        <!-- end 短信验证.form__field -->
+
+                        <div class="item item-divider">
+                        </div>
+                        <label class="item item-input">
+                            <span class="input-label">Email Address*</span>
+                            <input type="text" placeholder="Email Address*"
+                                   ng-model="registerData.email">
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">First Name*</span>
+                            <input type="text" placeholder="First Name*"
+                                   ng-model="registerData.firstname">
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">Last Name*</span>
+                            <input type="text" placeholder="Last Name*"
+                                   ng-model="registerData.lastname">
+                        </label>
+
+
+                        <label class="item item-input">
+                            <span class="input-label">Gender*</span>
+
+                            <label class="item item-radio">
+                                <input name="gender" type="radio" value="man"
+                                       ng-model="registerData.gender"
+                                       checked>
+                                <span class="item-content icon-left ion-male">&nbsp;Male</span>
+                            </label>
+                            <label class="item item-radio">
+                                <input name="gender" type="radio" value="women"
+                                       ng-model="registerData.gender"
+                                       checked>
+                                <span class="item-content icon-left ion-female">&nbsp;FeMale</span>
+                            </label>
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">Password*</span>
+                            <input type="password" placeholder="Password*"
+                                   ng-model="registerData.password">
+                        </label>
+
+                        <label class="item item-input">
+                            <span class="input-label">Confirm*</span>
+                            <input type="password" placeholder="Confirm Password*"
+                                   ng-model="registerData.confirmation">
+                        </label>
+
+                        <label class="item">
+                            <button class="button button-full button-assertive"
+                                    ng-click="doRegister()">Submit</button>
+                        </label>
+                    </div>
+                </ion-content>
+                <!-- Tab 2 content -->
+            </ion-tab>
+            <ion-tab title="Close" icon="ion-android-close" ng-click="modal.hide()">
+                <!-- Tab 3 content -->
+            </ion-tab>
+        </ion-tabs>
+    </div>
 </ion-modal-view>
