@@ -40,20 +40,25 @@
         <ion-content class="menus-content">
             <ion-list>
                   <a nav-clear menu-close href="#app/lists"
-                  	class="button button-full button-assertive icon icon-left ion-ios-home-outline"><span class="padding-horizontal">Home</span>
+                  	class="button button-full button-assertive icon icon-left ion-ios-home-outline">
+                      <span class="padding-horizontal">Home</span>
                   </a>
                 <span ng-if="user">
-                  <a nav-clear menu-close href=""
-                  	class="button button-full button-light icon icon-left ion-ios-cloud-outline"><span class="padding-horizontal">My Account</span>
+                  <a nav-clear menu-close href="#app/frame/account"
+                  	class="button button-full button-light icon icon-left ion-ios-cloud-outline">
+                      <span class="padding-horizontal">My Account</span>
+                  </a>
+                  <a nav-clear menu-close href="#app/frame/order"
+                  	class="button button-full button-light icon icon-left ion-ios-list-outline">
+                      <span class="padding-horizontal">My Orders</span>
                   </a>
                   <a nav-clear menu-close href=""
-                  	class="button button-full button-light icon icon-left ion-ios-list-outline"><span class="padding-horizontal">My Order</span>
+                  	class="button button-full button-light icon icon-left ion-ios-location-outline">
+                      <span class="padding-horizontal">My Address Book</span>
                   </a>
                   <a nav-clear menu-close href=""
-                  	class="button button-full button-light icon icon-left ion-ios-location-outline"><span class="padding-horizontal">My Address Book</span>
-                  </a>
-                  <a nav-clear menu-close href=""
-                  	class="button button-full button-light icon icon-left ion-android-favorite-outline"><span class="padding-horizontal">My Wishlish</span>
+                  	class="button button-full button-light icon icon-left ion-android-favorite-outline">
+                      <span class="padding-horizontal">My Wishlish</span>
                   </a>         
                   <div class="item item-divider"></div>
                 </span>
