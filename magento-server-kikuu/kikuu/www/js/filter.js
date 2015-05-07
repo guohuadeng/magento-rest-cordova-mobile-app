@@ -5,4 +5,10 @@ angular.module('app.filters', [])
                 product.final_price_with_tax) /
                 product.regular_price_with_tax) + '%';
         };
+    })
+
+    .filter('price', function () {
+        return function (price) {
+            return ~~price;
+        };
     });

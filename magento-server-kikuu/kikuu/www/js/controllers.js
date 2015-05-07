@@ -13,15 +13,18 @@ angular.module('app.controllers', [])
         };
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
-            $scope.menus = [{
-                cmd: 'daily_sale',
-                name: 'Daily Sale',
-                class_name: 'one-line'
-            }, {
-                cmd: 'best_seller',
-                name: 'New Arrival',
-                class_name: 'one-line'
-            }].concat(menus);
+            $scope.menus = [
+                {
+                    cmd: 'daily_sale',
+                    name: 'Daily Sale',
+                    class_name: 'one-line'
+                },
+                {
+                    cmd: 'best_seller',
+                    name: 'New Arrival',
+                    class_name: 'one-line'
+                }
+            ].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
         $scope.setCatalog = function (index) {
@@ -34,7 +37,7 @@ angular.module('app.controllers', [])
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/login.html', {
             scope: $scope,
-            focusFirstInput : true
+            focusFirstInput: true
         }).then(function (modal) {
             $scope.modal = modal;
             $scope.$broadcast('setLoginTab', 1);
@@ -46,9 +49,9 @@ angular.module('app.controllers', [])
         };
 
         // Open the login modal
-        $scope.login = function () {					
-          $scope.modal.show();
-          $scope.$broadcast('setLoginTab');
+        $scope.login = function () {
+            $scope.modal.show();
+            $scope.$broadcast('setLoginTab');
         };
         // Open the register modal
         $scope.register = function () {
@@ -78,18 +81,18 @@ angular.module('app.controllers', [])
             }
         };
     })
-		
-    .controller('LoginCtrl', function ($scope, $rootScope, $ionicTabsDelegate) {			
-			$scope.selectTabWithIndex = function(index) {
-				$ionicTabsDelegate.select(index);
-			}		
+
+    .controller('LoginCtrl', function ($scope, $rootScope, $ionicTabsDelegate) {
+        $scope.selectTabWithIndex = function (index) {
+            $ionicTabsDelegate.select(index);
+        };
         $scope.$on('setLoginTab', function () {
-					$ionicTabsDelegate.select(0);
+            $ionicTabsDelegate.select(0);
         });
         $scope.$on('setRegisterTab', function () {
-					$ionicTabsDelegate.select(1);
+            $ionicTabsDelegate.select(1);
         });
-		})
+    })
 
     .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
         var getList = function (slide, type, callback) {
@@ -167,22 +170,22 @@ angular.module('app.controllers', [])
             });
         };
     })
-		//产品统一用这个名 Product
+    //产品统一用这个名 Product
     .controller('ProductCtrl', function ($scope, $stateParams) {
 
     })
-		//产品选项
+    //产品选项
     .controller('ProductOptionCtrl', function ($scope, $stateParams) {
 
     })
-		
+
     .controller('DetailCtrl', function ($scope, $stateParams) {
 
     })
 
     .controller('SearchCtrl', function ($scope, $location) {
         $scope.model = {};
-				//angular.element('#search-input').trigger('focus');
+        //angular.element('#search-input').trigger('focus');
         $scope.onSearch = function () {
             $location.path('app/search/' + $scope.model.text);
         };
