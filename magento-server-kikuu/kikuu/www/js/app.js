@@ -32,8 +32,7 @@ angular.module('app', [
                 url: '/login',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
+                        templateUrl: 'templates/login.html'
                     }
                 }
             })

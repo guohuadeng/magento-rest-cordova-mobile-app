@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, Config) {
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate) {
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
@@ -37,7 +37,7 @@ angular.module('app.controllers', [])
             focusFirstInput: true
         }).then(function (modal) {
             $scope.modal = modal;
-            $scope.$broadcast('setLoginTab', 1);
+            $ionicTabsDelegate.select(0);
         });
 
         // Triggered in the login modal to close it
@@ -48,12 +48,12 @@ angular.module('app.controllers', [])
         // Open the login modal
         $scope.login = function () {
             $scope.modal.show();
-            $scope.$broadcast('setLoginTab');
+            $ionicTabsDelegate.select(0);
         };
         // Open the register modal
         $scope.register = function () {
-            $scope.$broadcast('setRegisterTab');
             $scope.modal.show();
+            $ionicTabsDelegate.select(1);
         };
 
         // Perform the login action when the user submits the login form
@@ -77,20 +77,6 @@ angular.module('app.controllers', [])
                 navigator.app.exitApp();
             }
         };
-    })
-
-    .controller('LoginCtrl', function ($scope, $rootScope, $ionicTabsDelegate) {
-        $scope.selectTabWithIndex = function (index) {
-            $ionicTabsDelegate.select(index);
-        };
-        $scope.$on('setLoginTab', function () {
-            console.log('login');
-            $ionicTabsDelegate.select(0);
-        });
-        $scope.$on('setRegisterTab', function () {
-            console.log('register');
-            $ionicTabsDelegate.select(1);
-        });
     })
 
     .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
