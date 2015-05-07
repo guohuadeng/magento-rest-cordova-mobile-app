@@ -54,7 +54,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 		if ($id) {
 			try {
 				$cart->removeItem ( $id )->save ();
-				return $this->getCartInfoAction ();
+				echo json_encode(array('cart_info'=>$this->_getCartInformation(),'total'=>$this->_getCartTotal ()));
 			} catch ( Mage_Core_Exception $e ) {
 				echo json_encode ( $e->getMessage () );
 				// return $this->getCartInfoAction()
@@ -112,7 +112,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 			echo json_encode ( $e->getMessage () );
 			return false;
 		}
-		return $this->getCartInfoAction ();
+		echo json_encode(array('cart_info'=>$this->_getCartInformation(),'total'=>$this->_getCartTotal ()));
 	}
 	public function getTotalAction() {
 		echo json_encode ( $this->_getCartTotal () );

@@ -54,14 +54,6 @@ class SkyMazon_RestConnect_WishlistController extends Mage_Core_Controller_Front
 							$response ['message'] = $message;
 							
 							Mage::unregister ( 'wishlist' );
-							/*没用，有html转码错误，暂时关闭
-							$this->loadLayout ();
-							$toplink = $this->getLayout ()->getBlock ( 'top.links' )->toHtml ();
-							$sidebar_block = $this->getLayout ()->getBlock ( 'wishlist_sidebar' );
-							$sidebar = $sidebar_block->toHtml ();
-							$response ['toplink'] = $toplink;
-							$response ['sidebar'] = $sidebar;
-							*/
 						} catch ( Mage_Core_Exception $e ) {
 							$response ['status'] = 'ERROR';
 							$response ['message'] = $this->__ ( 'An error occurred while adding item to wishlist: %s', $e->getMessage () );
@@ -74,15 +66,17 @@ class SkyMazon_RestConnect_WishlistController extends Mage_Core_Controller_Front
 				}
 			}
 		}
-		echo $this->getResponse ()->setBody ( Mage::helper ( 'core' )->jsonEncode ( $response ) );
-		
+		// echo $this->getResponse ()->setBody ( Mage::helper ( 'core' )->jsonEncode ( $response ) );
+		echo json_encode ( $response );
 		return;
 	}
-	public function getWishlistAction(){
-		echo json_encode($this->_getWishlist()->getData());
+	public function getWishlistAction() {
+		echo json_encode ( $this->_getWishlist () );
 	}
 	protected function _getWishlist() {
 		$wishlist = Mage::registry ( 'wishlist' );
+		$baseCurrency = Mage::app ()->getStore ()->getBaseCurrency ()->getCode ();
+		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
 		if ($wishlist) {
 			return $wishlist;
 		}
@@ -96,8 +90,23 @@ class SkyMazon_RestConnect_WishlistController extends Mage_Core_Controller_Front
 			Mage::getSingleton ( 'wishlist/session' )->addException ( $e, Mage::helper ( 'wishlist' )->__ ( 'Cannot create wishlist.' ) );
 			return false;
 		}
-		
-		//var_dump($wishlist->getData());
-		return $wishlist;
+		$items = array ();
+		foreach ( $wishlist->getItemCollection () as $item ) {
+			$item = Mage::getModel ( 'catalog/product' )->setStoreId ( $item->getStoreId () )->load ( $item->getProductId () );
+			if ($item->getId ()) {
+				$items [] = array (
+						'name' => $item->getName (),
+						'entity_id' => $item->getId (),
+						'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $item->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+						'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $item->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
+						'sku' => $item->getSku () ,
+						'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol ()
+				);
+			}
+		}
+		return array (
+				'wishlist' => $wishlist->getData (),
+				'items' => $items 
+		);
 	}
 } 
