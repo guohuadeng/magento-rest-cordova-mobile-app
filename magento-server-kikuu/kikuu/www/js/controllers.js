@@ -8,6 +8,7 @@ angular.module('app.controllers', [])
                 $scope.$apply();
             });
         };
+        $scope.getUser();
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
             $scope.menus = [
