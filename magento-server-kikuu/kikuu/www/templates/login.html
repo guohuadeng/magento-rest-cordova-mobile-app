@@ -4,7 +4,7 @@
             <ion-tab title="Login" icon-on="ion-ios-unlocked" icon-off="ion-ios-unlocked-outline">
                 <ion-content>
                     <div class="list registered-users padding">
-                        <h2>Registered User</h2>
+                        <h3>Registered User</h3>
 
                         <form ng-submit="doLogin()" id="login-form">
                             <label class="item item-input">
@@ -27,7 +27,7 @@
             <ion-tab title="Register" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">
                 <ion-content>
                     <div class="list account-create padding">
-                        <h2>New Customer</h2>
+                        <h3>New Customer</h3>
 
                         <!-- 短信验证.form__field -->
                         <label class="item item-input">
@@ -46,12 +46,12 @@
                                     value="Get Validation Code"
                                     ng-click="getValidationCode()"
                                     ng-disabled="validationCodeDisabled">
-                                <b ng-if="validationCodeDisabled">
+                                <em ng-if="validationCodeDisabled">
                                     [{{validationCode}}]Wait...({{validateSeconds}}s)
-                                </b>
-                                <b ng-if="!validationCodeDisabled">
+                                </em>
+                                <em ng-if="!validationCodeDisabled">
                                     Get Validation Code
-                                </b>
+                                </em>
                             </button>
                         </label>
                         <!-- end 短信验证.form__field -->
@@ -79,20 +79,21 @@
 
                         <label class="item item-input">
                             <span class="input-label">Gender*</span>
-
                             <label class="item item-radio">
                                 <input name="gender" type="radio" value="man"
                                        ng-model="registerData.gender"
                                        checked>
-                                <span class="item-content icon-left ion-male">&nbsp;Male</span>
+                                <div class="item-content icon-left ion-male">&nbsp;Male</div>
+            <i class="radio-icon ion-checkmark"></i>
                             </label>
                             <label class="item item-radio">
                                 <input name="gender" type="radio" value="women"
                                        ng-model="registerData.gender"
                                        checked>
-                                <span class="item-content icon-left ion-female">&nbsp;FeMale</span>
+                                <div class="item-content icon-left ion-female">&nbsp;FeMale</div>
+            										<i class="radio-icon ion-checkmark"></i>
                             </label>
-                        </label>
+                        </label>                        
 
                         <label class="item item-input">
                             <span class="input-label">Password*</span>

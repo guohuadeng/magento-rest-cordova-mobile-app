@@ -6,6 +6,10 @@ angular.module('app.config', [])
         baseUrl: baseUrl,
         baseSite: baseSite,
         frames: {
+            personal: {
+                title: 'Persional Infomation',
+                src: baseSite + '/customer/account/edit'
+            },
             account: {
                 title: 'My Account',
                 src: baseSite + '/customer/account'
@@ -13,6 +17,14 @@ angular.module('app.config', [])
             order: {
                 title: 'My Orders',
                 src: baseSite + '/sales/order/history/'
+            },
+            address: {
+                title: 'My Address Book',
+                src: baseSite + '/customer/address'
+            },
+            wishlist: {
+                title: 'My Wishlist',
+                src: baseSite + '/wishlist'
             },
             cart: {
                 title: 'My Shopping Cart',
