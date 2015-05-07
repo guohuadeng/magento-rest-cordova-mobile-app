@@ -67,6 +67,7 @@ img	{
 .tabs	{
     border-bottom-width: 0px;
     border-top-width: 0px;
+	  background-color: #fff;
     }
 .tabs-top > .tabs, .tabs.tabs-top	{
     border-bottom-width: 1px;
@@ -140,6 +141,9 @@ img	{
     }
 .login-container .registered-users, .login-container .account-create{
   	top: 44px;
+    }
+.login-container .button{
+    float: right;
     }
 .account-create .item-radio .item-content {
     padding: 6px 34px 16px 16px

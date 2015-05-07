@@ -24,15 +24,15 @@
   	</div>
 		<!-- end img swiper -->
     <div class="card padding-horizontal">
-    <h4>Product Name {{result.name}}</h4>
+    <h4>{{product.name}}</h4>
     <div class="price-box">			
-				<span class="special-price">
-					<span class="price-label">Special Price</span>
-					<span class="price">Tsh&nbsp;92870</span>
-					&nbsp;
+				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax}}</span>
 				</span>
-				<span class="old-price">Tsh&nbsp;116088</span>
-			</div>      
+				<span class="old-price padding-horizontal">{{product.regular_price_with_tax}}</span>      
+      <p ng-if="product.is_in_stock" class="availability in-stock">Availability: <span>In stock</span></p>
+      <p ng-if="product.!is_in_stock" class="availability out-of-stock">Availability: <span>Out of stock</span></p>  
+		</div>      
+        
    		<div class="qty-holder">      
         <div class="item item-input-inset">
           <span class="input-label">Quantity*:</span>

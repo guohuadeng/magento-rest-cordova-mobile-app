@@ -55,7 +55,7 @@ angular.module('app', [
                 }
             })
             .state('app.productOption', { //这个是要以model显示的，临时这么处理看效果先
-                url: '/productOption/:productid',
+                url: '/productOption',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/productOption.html',

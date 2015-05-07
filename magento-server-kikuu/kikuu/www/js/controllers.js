@@ -177,9 +177,15 @@ angular.module('app.controllers', [])
     })
     //产品统一用这个名 Product-xx
     .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams) {
-        $rootScope.service.get('productDetail', {q: $stateParams.productid}, function (results) {
-            $scope.results = results;
+        $scope.productid = $stateParams.productid;
+        $rootScope.service.get('productDetail', {productid: $stateParams.productid}, function (results) {
+            $scope.product = results;
             $scope.$apply();
+						if (results.has_custom_options) {
+        				$rootScope.service.get('productOption', {productid: $stateParams.productid}, function (option) {
+            			$scope.productOption = option;							
+								});
+							}
         });
 
     })
