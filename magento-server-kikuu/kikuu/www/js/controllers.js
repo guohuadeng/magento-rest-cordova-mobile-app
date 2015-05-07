@@ -174,8 +174,12 @@ angular.module('app.controllers', [])
             });
         };
     })
-    //产品统一用这个名 Product
-    .controller('ProductCtrl', function ($scope, $stateParams) {
+    //产品统一用这个名 Product-xx
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams) {
+        $rootScope.service.get('productDetail', {q: $stateParams.productid}, function (results) {
+            $scope.results = results;
+            $scope.$apply();
+        });
 
     })
     //产品选项

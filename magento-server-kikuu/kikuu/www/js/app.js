@@ -45,17 +45,17 @@ angular.module('app', [
                     }
                 }
             })
-            .state('app.product', {
-                url: '/product',
+            .state('app.productDetail', {
+                url: '/productDetail/:productid',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/product.html',
-                        controller: 'ProductCtrl'
+                        templateUrl: 'templates/productDetail.html',
+                        controller: 'productDetailCtrl'
                     }
                 }
             })
             .state('app.productOption', { //这个是要以model显示的，临时这么处理看效果先
-                url: '/productOption',
+                url: '/productOption/:productid',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/productOption.html',

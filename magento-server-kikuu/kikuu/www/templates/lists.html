@@ -32,7 +32,7 @@
                         <ion-list class="products-grid {{slide.class_name}}">
                             <div class="product" ng-repeat="product in slide.lists">
                                 <div class="product-inner">
-                                    <a href="#app/product">
+                                    <a href="#app/productDetail/{{product.entity_id}}">
                                         <div class="product-image">
                                             <img class="lazy small-image"
                                                  src="{{product.image_url}}"
