@@ -6,7 +6,8 @@ function Service($rootScope, Config) {
         products: Config.baseUrl + '/restconnect/',
         login: Config.baseUrl + '/restconnect/customer/login',
         logout: Config.baseUrl + '/customer/account/logout',
-        search: Config.baseUrl + '/restconnect/search'
+        search: Config.baseUrl + '/restconnect/search',
+        product_detail: Config.baseUrl + '/restconnect/products/getproductdetail/productid/76'
         /*
         product_detail: defines.baseWeb + '/catalog/product/view/id/%s', //这个是直接详情页面
         product_rest: defines.baseApi + '/restconnect/products/getproductdetail/productid/%s',

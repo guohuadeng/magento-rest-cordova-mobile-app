@@ -1,8 +1,8 @@
 <ion-view view-title="Product Detail">
-  <ion-content>
+  <ion-content class="product-container">
 		<!-- img swiper -->
 		<div class="product-swiper-container">
-      <ion-slide-box show-pager="true" on-slide-changed="">
+      <ion-slide-box show-pager="true">
         <ion-slide>
           <img class="lazy small-image"
                src="img/ionic.png"
@@ -23,9 +23,9 @@
       </ion-slide-box>
   	</div>
 		<!-- end img swiper -->
-    <div class="card">
+    <div class="card padding-horizontal">
     <h4>Product Name</h4>
-    <div class="price-box padding-horizontal">			
+    <div class="price-box">			
 				<span class="special-price">
 					<span class="price-label">Special Price</span>
 					<span class="price">Tsh&nbsp;92870</span>
@@ -34,32 +34,66 @@
 				<span class="old-price">Tsh&nbsp;116088</span>
 			</div>      
    		<div class="qty-holder">      
-      <div class="item item-input-inset">
-      	<span class="input-label">Quantity*:</span>
-				<button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
-				<label class="item-input">
-        	<input type="number" name="qty" id="qty"  value="1" title="Qty">
-		    </label>
-				<button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
-  </div>    
-      </div>
-        
-        
-    <div class="item item-text-wrap">
-      <div class="tab-content" id="tab_description_tabbed_contents">    <h2>产品描述</h2>
-    <div class="std">
-        <p><span>The Magic Walker brand is geared towards the fashionable&lrm;,&lrm; modern women&lrm;;&lrm; tough and strong&lrm;,&lrm; who follows her own rules&lrm;.&lrm; This collection of denim jeans is versatile and made from high&lrm;-quality material&lrm;,&lrm; created to suit any personal taste&lrm;.&lrm;</span></p>
-<p class="strong mbs">Specifications of Blue Jeans</p>
-<p class="strong mbs"><span>SKU: &nbsp;TTTTTTT</span></p>
-<p class="strong mbs"><span>Main material: Denim</span></p>
-<p><img alt="" src="http://www.kikuu.com/media/wysiwyg/_-1_.png"><img alt="" src="http://www.kikuu.com/media/wysiwyg/_-1.png">&nbsp;</p>    </div>
-</div>
+        <div class="item item-input-inset">
+          <span class="input-label">Quantity*:</span>
+          <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
+          <label class="item-input">
+            <input type="number" name="qty" id="qty"  value="1" title="Qty">
+          </label>
+          <button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
+        </div>    
+      </div>      
+    </div>          
+              
+		<ion-tabs class="tabs-ligth tabs-standard">
+	    <ion-tab title="Description" id="tab_description_tabbed_contents">
+      	<div class="list padding">
+          <p>Brand:Iphone</p>
+          <p>Material quality:PC</p>
+          <p>Style:sketchy</p>
+          <p>Technology:Produce plastic articies by injection moulding</p>
+          <p>Colors:white,black,blue,Kitty with blue,Kitty with rose</p>
+          <p>Applicable models:Iphone5(5S),Iphone6(4.7-inch),Iphone6(5.5-inch)</p>
+          <p>&nbsp;</p>
+          <p><img alt="" src="http://www.kikuu.com/media/wysiwyg/QQ_20150425184706.jpg"></p>
+          <p>&nbsp;</p>
+          <p><img alt="" src="http://www.kikuu.com/media/wysiwyg/QQ_20150425184716.jpg"></p>    
+        </div>
+			</ion-tab>
+	    <ion-tab title="Additional" id="tab_description_tabbed_attribute">
+      	<div class="list padding">
+          <table class="data-table" id="product-attribute-specs-table">
+            <tbody>
+                      <tr class="first odd">
+                  <th class="label">Weight</th>
+                  <td class="data last">0.2200</td>
+              </tr>
+                      <tr class="last even">
+                  <th class="label">Color</th>
+                  <td class="data last">N/A</td>
+              </tr>
+                  </tbody>
+          </table>  
+        </div>
+			</ion-tab>
+	    <ion-tab title="Relate Product" id="tab_description_tabbed_attribute">
+      	<div class="list padding">
+          <table class="data-table" id="product-attribute-specs-table">
+            <tbody>
+                      <tr class="first odd">
+                  <th class="label">Weight</th>
+                  <td class="data last">0.2200</td>
+              </tr>
+                      <tr class="last even">
+                  <th class="label">Color</th>
+                  <td class="data last">N/A</td>
+              </tr>
+                  </tbody>
+          </table>  
+        </div>
+			</ion-tab>
+    </ion-tabs>      
       
-    </div>
-    <div class="item item-divider">
-      I'm a Footer in a Card!
-    </div>
-  </div>
   <p>&nbsp;</p>
   
   </ion-content>
