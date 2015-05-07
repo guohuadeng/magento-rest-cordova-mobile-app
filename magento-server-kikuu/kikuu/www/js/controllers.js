@@ -5,10 +5,7 @@ angular.module('app.controllers', [])
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
                 $scope.user = user;
-                if ($scope.user) {
-                    $scope.user.src = Config.baseUrl +
-                        '/media/customer' + $scope.user.avatar;
-                }
+                $scope.$apply();
             });
         };
         // 菜单处理
@@ -87,9 +84,11 @@ angular.module('app.controllers', [])
             $ionicTabsDelegate.select(index);
         };
         $scope.$on('setLoginTab', function () {
+            console.log('login');
             $ionicTabsDelegate.select(0);
         });
         $scope.$on('setRegisterTab', function () {
+            console.log('register');
             $ionicTabsDelegate.select(1);
         });
     })
