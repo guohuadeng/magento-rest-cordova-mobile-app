@@ -6,7 +6,13 @@ angular.module('app.filters', [])
                 product.regular_price_with_tax) + '%';
         };
     })
-
+		
+	.filter('unsafe', ['$sce', function ($sce) {
+			return function (val) {
+					return $sce.trustAsHtml(val);
+			};
+	}])
+	
     .filter('price', function () {
         return function (price) {
             return ~~price;
