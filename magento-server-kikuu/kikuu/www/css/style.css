@@ -20,10 +20,13 @@
     padding-right: 15px;
 }
 img	{
-    max-width: 100%;
+    max-width: 100%!important;
     }
 .checkbox input:before, .checkbox-icon:before	{
   border-radius: 4px; 
+  }
+em	{
+  padding-left:2px;
   }
 
 .none {
@@ -267,7 +270,9 @@ img	{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-
+.product-name a	{
+    color: #777;
+}
 .products-grid .product .product-addto-wrap {
     margin-top: 16px;
     clear: both;
@@ -375,14 +380,18 @@ img	{
   }
 /*end product detail swiper*/
 /*product cart*/
-.cart_block	{
-  }
-  
-.cart_block_left	{
+.add-to-cart	{
+  height: 55px;    
+  }  
+.add-to-cart .button	{
+	font-size: 1.4em;
+  line-height: 45px;
+  }  
+.add-to-cart-left	{
     width: 35%;
     }
 
-.cart_block_right{
+.add-to-cart-right{
     width: 63%;
     }
 .qty-holder .item-input{

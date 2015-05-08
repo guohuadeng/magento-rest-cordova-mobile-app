@@ -7,11 +7,19 @@ angular.module('app.filters', [])
         };
     })
 		
-	.filter('unsafe', ['$sce', function ($sce) {
-			return function (val) {
-					return $sce.trustAsHtml(val);
-			};
-	}])
+		.filter('unsafe', ['$sce', function ($sce) {
+				return function (val) {
+						return $sce.trustAsHtml(val);
+				};
+		}])
+		
+		.filter('minqty', function () {
+				return function (qty) {		
+					if (!qty) qty = 1;			
+					if ( qty < 1)	qty=1;
+						return qty;
+				};
+		})
 	
     .filter('price', function () {
         return function (price) {

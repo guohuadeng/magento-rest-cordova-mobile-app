@@ -25,18 +25,22 @@
 		<!-- end product base card -->  
 		<!-- product option-->       
     <div class="card">
+		<form method="post" id="product_addtocart_form">    
+      <div class="no-none">
+        <input type="hidden" name="product" value="{{product.entity_id}}">
+      </div>
    		<dl class="list product-option-container">
       	<div class="qty-holder">      
           <div class="item item-input-inset">
             <label class="item item-input">
-                <span class="input-label">Quantity:<span>
+                <span class="input-label">Quantity<span><em class="assertive">*</em>
             </label>
             <div class="button-bar">
-              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
+              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click="qty=qty-1"></button> 
               <label class="item-input">
-                <input type="number" name="qty" id="qty"  value="1" title="Qty">
+                <input type="number" name="qty" id="qty"  value="{{qty | minqty}}" title="Qty">
               </label>
-              <button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
+              <button class="button btn-plus ion-plus button-small button-outline button-light"  ng-click="qty=qty+1"></button> 
             </div>
           </div>    
       	</div>
@@ -46,7 +50,9 @@
             <div class="form__field" ng-switch-when="field">            
               <label class="item item-input">
                 <span class="input-label">
-              	{{option.custom_option_title}}&nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+              	{{option.custom_option_title}}
+                <em ng-if="option.is_require" class="assertive">*</em>
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
                 </span>
               </label>        
               <label class="item item-input padding-left">
@@ -60,10 +66,12 @@
               <label class="item item-input item-select">
                 <div class="input-label">
                 {{option.custom_option_title}}
+                <em ng-if="option.is_require==1" class="assertive">*</em>
                 </div>
                 <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
                   <option value="">-- Please Select --</option>
-                  <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
+                  <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">
+                  {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
                 </select>
               </label>
             </div>	                    
@@ -71,7 +79,10 @@
             
 					<!-- check option-->   
             <div class="form__field"  ng-switch-when="checkbox">	
-              <label class="item">{{option.custom_option_title}}</label>	
+              <label class="item">
+              	{{option.custom_option_title}}
+                <em ng-if="option.is_require==1" class="assertive">*</em>
+              </label>	
 	              <ul id="options-{{option.option_id}}-list" class="list padding-left"> 
                   <li class="item item-checkbox checkbox-dark" ng-repeat="item in option.custom_option_value">
                     <label for="options_{{item.option_id}}_{{$index+2}}
@@ -86,7 +97,10 @@
             
 					<!-- radio option--> 
             <div class="form__field"  ng-switch-when="radio">	            
-              <label class="item">{{option.custom_option_title}}</label>		
+              <label class="item">
+              	{{option.custom_option_title}}
+			          <em ng-if="option.is_require==1" class="assertive">*</em>
+              </label>		
               <div id="options-{{option.option_id}}-list" class="list padding-left">
                 <label class="item item-radio" ng-repeat="item in option.custom_option_value">
                   <input type="radio" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
@@ -103,10 +117,12 @@
             <div class="form__field" ng-switch-when="area">
               <label class="item">                      
                 <span class="input-label">
-              	{{option.custom_option_title}}&nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+              	{{option.custom_option_title}}                
+                <em ng-if="option.is_require==1" class="assertive">*</em>
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
                 </span>
                 <div class="item">
-                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]" rows="5" cols="25">
+                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]">
                 </textarea>         
                 </div>
               </label>  
@@ -140,7 +156,8 @@
           	File option not support          
           </div>
         </div>
-      </dl>   
+      </dl> 
+    </form>
     </div>
 		<!-- end product option-->  
               
@@ -168,8 +185,8 @@
   
   </ion-content>
   
-  <div class="bar bar-footer bar-stable cart_block">
-    <a class="button button-large cart_block_left button-outline button-assertive ion-android-cart">12</a>
-    <a class="button cart_block_right button-assertive">Add to Cart</a>
+  <div class="bar bar-footer bar-stable add-to-cart">
+    <a class="add-to-cart-left button button-outline button-assertive ion-android-cart" href="#app/frame/cart">&nbsp;{{items_qty}}</a>
+    <button class="button add-to-cart-right button-assertive" type="submit" ng-click="doCartAdd()">Add to Cart</button>  
   </div>
 </ion-view>

@@ -11,6 +11,14 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 		$summarycount = $cart->getSummaryCount ();
 		echo "{'summarycount':'" . $summarycount . "'}";
 	}
+	
+	public function getQtyAction() {			
+			$items_qty = floor(Mage::getModel('checkout/cart')->getQuote()->getItemsQty());
+			$result = '{"items_qty": "'  . $items_qty  . '"}';
+
+			echo $result;
+		}
+		
 	public function addAction() {
 		try {
 			$product_id = $this->getRequest ()->getParam ( 'product' );
@@ -41,8 +49,8 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 			echo $result;
 		} catch ( Exception $e ) {
 			$result = '{"result":"error"';
-			$result .= ', "message": "' . $e->getMessage () . '"}';
-			echo $result;
+			$result .= ', "message": "' . str_replace("\"","||",$e->getMessage ()) . '"}';
+			echo $result;			
 		}
 	}
 	public function getCartInfoAction() {
@@ -236,6 +244,7 @@ class SkyMazon_RestConnect_CartController extends Mage_Core_Controller_Front_Act
 		if (($messages = $cart->getQuote ()->getErrors ())) {
 			foreach ( $messages as $message ) {
 				if ($message) {
+					$message = str_replace("\"","||",$message);
 					$this->errors [] = $message->getText ();
 				}
 			}

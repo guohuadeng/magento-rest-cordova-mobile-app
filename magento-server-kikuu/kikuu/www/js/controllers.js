@@ -1,6 +1,16 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate, $timeout) {
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate,$ionicLoading, $timeout) {
+			
+				//取数据时的loading mask
+				$scope.showLoading = function() {
+					$ionicLoading.show({
+						template: 'Loading...'
+					});
+				};
+				$scope.hideLoading = function(){
+					$ionicLoading.hide();
+				};
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
@@ -32,6 +42,9 @@ angular.module('app.controllers', [])
         // Form data for the login modal
         $scope.loginData = {};
 
+        // Form data for the register modal
+        $scope.registerData = {};
+				
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/login.html', {
             scope: $scope,
@@ -68,7 +81,7 @@ angular.module('app.controllers', [])
                 $scope.modal.hide();
             });
         };
-
+				
         $scope.doLogout = function () {
             $rootScope.service.get('logout', $scope.getUser);
         };
@@ -89,7 +102,21 @@ angular.module('app.controllers', [])
         };
 
         $scope.doRegister = function () {
-
+						$scope.showLoading();
+            $rootScope.service.post('register', $scope.registerData, function (res) {
+                if (res[0]) {
+                    alert('Welcome! User register success.\n Please login.');
+		                $scope.doLogout();	
+		                $scope.login();	
+										$scope.hideLoading();
+                    return;
+                	}
+								else	{
+                    alert(res[2]);
+										$scope.hideLoading();
+                    return;								
+									}				
+            });
         };
 
         $scope.exit = function () {
@@ -98,7 +125,7 @@ angular.module('app.controllers', [])
             }
         };
     })
-
+					
     .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
         var getList = function (slide, type, callback) {
             if (type === 'load') {
@@ -181,6 +208,14 @@ angular.module('app.controllers', [])
         $scope.updateSlider = function() {
             $ionicSlideBoxDelegate.update();
         };
+				//取购物车商业品数量
+				$rootScope.service.get('cartGetQty', {
+						product: $stateParams.productid
+				}, function (res) {
+            $scope.items_qty = res.items_qty;
+						$scope.$apply();
+				});
+
         $rootScope.service.get('productDetail', {
             productid: $stateParams.productid
         }, function (results) {
@@ -203,6 +238,24 @@ angular.module('app.controllers', [])
             }
             $scope.$apply();
         });
+				
+        // Perform the add to cart
+        $scope.doCartAdd = function () {					
+						var queryString = $('#product_addtocart_form').formSerialize();
+            $rootScope.service.get('cartAdd', queryString, function (res) {
+                if (res.result == 'error') {
+                    alert(res.message);
+                    return;
+                }
+                if (res.result == 'success') {
+                    alert('Success');
+                		$scope.items_qty = res.items_qty;
+            				$scope.$apply();
+                    return;
+                }
+            });
+        };
+        // End Perform the add to cart
     })
     //产品选项
     .controller('ProductOptionCtrl', function ($scope, $stateParams) {
