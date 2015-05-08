@@ -70,17 +70,12 @@
                             ng-click="setCatalog($index)" >{{menu.name}}
                   </ion-item>
                 </span>
+                  <div class="item item-divider"></div>
                 <ion-item ng-if="!!user" nav-clear menu-close ng-click="doLogout()">
                     Logout
                 </ion-item>
                 <ion-item nav-clear menu-close ng-click="exit()">
                     Exit
-                </ion-item>
-                <ion-item nav-clear menu-close>
-                    <a nav-clear menu-close href="#app/product">Test Product Detail</a>
-                </ion-item>
-                <ion-item nav-clear menu-close>
-                    <a nav-clear menu-close href="#app/productOption">Test Product Option</a>
                 </ion-item>
             </ion-list>
         </ion-content>

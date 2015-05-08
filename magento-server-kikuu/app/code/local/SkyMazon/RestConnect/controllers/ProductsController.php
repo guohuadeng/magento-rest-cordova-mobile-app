@@ -60,7 +60,7 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 			$has_custom_options = true;
 		else
 			$has_custom_options = false;
-		
+		$addtionatt=$this->_getAditional();
 		$productdetail = array (
 				'entity_id' => $product->getId (),
 				'sku' => $product->getSku (),
@@ -76,7 +76,9 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 				'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'description' => nl2br ( $product->getDescription () ),
-				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () 
+				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () ,
+				'weight'=>$product->getWeight(),
+				'additional'=>$addtionatt
 		);
 		echo json_encode ( $productdetail );
 	}
@@ -93,9 +95,9 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 		}
 		echo json_encode ( $images );
 	}
-	public function getAditionalAction(array $excludeAttr = array()) {
+	public function _getAditional(array $excludeAttr = array()) {
 		$data = array ();
-		$productId = ( int ) $this->getRequest ()->getParam ( 'product' );
+		$productId = ( int ) $this->getRequest ()->getParam ( 'productid' );
 		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
 		$attributes = $product->getAttributes ();
 		foreach ( $attributes as $attribute ) {
@@ -119,6 +121,6 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 				}
 			}
 		}
-		echo var_dump($data);
+		return $data;
 	}
 } 

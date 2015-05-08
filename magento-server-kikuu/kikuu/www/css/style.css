@@ -22,6 +22,9 @@
 img	{
     max-width: 100%;
     }
+.checkbox input:before, .checkbox-icon:before	{
+  border-radius: 4px; 
+  }
 
 .none {
     display: none;
@@ -58,8 +61,9 @@ img	{
 }
 
 .title img {
-    max-height: 40px;
-    margin-top: 4px;
+    max-height: 32px;
+    height:60%;
+    vertical-align: text-bottom
 }
 .item-divider {
   min-height: 16px;
@@ -338,9 +342,6 @@ img	{
 /*product detail swiper*/
 .product-container .card	{
 	margin-top: 0;
-	margin-right: 0;
-	margin-left: 0;
-  margin: 0;
   }
   
 .product-container .shipping	{ 
@@ -384,19 +385,21 @@ img	{
 .cart_block_right{
     width: 63%;
     }
-.qty-holder{
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    }
 .qty-holder .item-input{
     float:right;
     border:none;
-    border-bottom: 1px solid #ddd;
     padding: 0px 5px 0px 5px;
-    width: 100px;
+    width: 50%;
+    }    
+.qty-holder .item{
+    margin-right: 1px;
+    margin-left: 1px;
+    }    
+.qty-holder .button-bar{
     }    
 .qty-holder .btn-minus{
+    border-right: 1px solid #ddd;
+    border-left: 1px solid #ddd;
     width: 60px;
     }    
 .qty-holder .btn-plus{
@@ -488,19 +491,21 @@ img	{
 }
 
 .product-option-container .item	{
-    padding-top: 2px;
-    padding-bottom: 2px;
     border-width: 0px;
+    margin-right: 10px;
   }
-.input-box input,
-.input-box select,
-.input-box textarea	{    
-    border:1px solid #ccc;
+.product-option-container input,
+.product-option-container select,
+.product-option-container textarea	{    
+    border-bottom:1px solid #ccc;
     color:#777;
     border-radius:3px;
     padding-top:0px;
     padding-bottom:0px;    
     }
-.input-box textarea,.input-box select[multiple],.input-box select[size]{
-    height: 5em;
+.product-option-container textarea,
+.product-option-container select[multiple],
+.product-option-container select[size]{
+    height: 4em;
+    width: 100%;
     }

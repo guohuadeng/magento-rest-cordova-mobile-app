@@ -20,31 +20,37 @@
       <div ng-if="product.!is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>  
 		</div>      
         
-   		<div class="qty-holder">      
-        <div class="item item-input-inset">
-          <span class="input-label">Quantity*:</span>
-          <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
-          <label class="item-input">
-            <input type="number" name="qty" id="qty"  value="1" title="Qty">
-          </label>
-          <button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
-        </div>    
-      </div>   
+   		   
     </div>     
 		<!-- end product base card -->  
-		<!-- product option-->   
+		<!-- product option-->       
+    <div class="card">
    		<dl class="list product-option-container">
-        <div ng-repeat="option in productOption"  ng-switch on="option.custom_option_type">          
+      	<div class="qty-holder">      
+          <div class="item item-input-inset">
+            <label class="item item-input">
+                <span class="input-label">Quantity:<span>
+            </label>
+            <div class="button-bar">
+              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click=""></button> 
+              <label class="item-input">
+                <input type="number" name="qty" id="qty"  value="1" title="Qty">
+              </label>
+              <button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
+            </div>
+          </div>    
+      	</div>
         
+        <div ng-repeat="option in productOption"  ng-switch on="option.custom_option_type">                  
 					<!-- field option-->   
             <div class="form__field" ng-switch-when="field">            
               <label class="item item-input">
                 <span class="input-label">
               	{{option.custom_option_title}}&nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
                 </span>
-              <div class="input-box">
+              </label>        
+              <label class="item item-input padding-left">
                 <input type="text" onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textfield textfield product-custom-option" name="options[{{option.option_id}}]" value="">
-                </div>
               </label>
             </div>	 
 					<!--end field option-->   
@@ -55,66 +61,72 @@
                 <div class="input-label">
                 {{option.custom_option_title}}
                 </div>
-                <div class="input-box">
-                  <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
-                    <option value="">-- Please Select --</option>
-                    <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
-                  </select>
-                </div>
+                <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
+                  <option value="">-- Please Select --</option>
+                  <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
+                </select>
               </label>
             </div>	                    
 					<!-- end drop_down option-->   
             
 					<!-- check option-->   
             <div class="form__field"  ng-switch-when="checkbox">	
-              <label class="item">{{option.custom_option_title}}</label>		
-                <div class="input-box">
-                  <ul id="options-{{option.option_id}}-list" class="list"> 
-                  <li class="item item-checkbox" ng-repeat="item in option.custom_option_value">
-                    <label for="options_{{item.option_id}}_2" class="checkbox">
-                    <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_2" value="{{item.option_type_id}}" price="{{item.price}}">
+              <label class="item">{{option.custom_option_title}}</label>	
+	              <ul id="options-{{option.option_id}}-list" class="list padding-left"> 
+                  <li class="item item-checkbox checkbox-dark" ng-repeat="item in option.custom_option_value">
+                    <label for="options_{{item.option_id}}_{{$index+2}}
+" class="checkbox">
+                    <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
                     </label>
                     {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
                   </li>
                   </ul>
-                </div>
             </div>          
 					<!--end check option-->   
             
-            <div class="form__field"  ng-switch-when="radio">	
-              <label class="form__label">{{option.custom_option_title}}</label>		
-              <dd>
-                <ul id="options-{{option.option_id}}-list" class="options-list">
-                  <li ng-repeat="item in option.custom_option_value">
-                    <input type="radio" class="radio product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_2" value="{{item.option_type_id}}" price="{{item.price}}">
-                      <label for="options_{{item.option_id}}_2">{{item.title}} <span class="price-notice">+<span class="price">{{product.symbol}}&nbsp;{{item.price}}</span></span></label>
-                  </li>
-                </ul>
-              </dd>
-            </div>	            
+					<!-- radio option--> 
+            <div class="form__field"  ng-switch-when="radio">	            
+              <label class="item">{{option.custom_option_title}}</label>		
+              <div id="options-{{option.option_id}}-list" class="list padding-left">
+                <label class="item item-radio" ng-repeat="item in option.custom_option_value">
+                  <input type="radio" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
+                    <div class="item-content" for="options_{{item.option_id}}_{{$index+2}}">
+                    	{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                    </div>
+                    <i class="radio-icon icon-left ion-checkmark"></i>
+                </label>
+              </div>
+            </div>	    
+					<!--end radio option-->   
             
+					<!-- area option--> 
+            <div class="form__field" ng-switch-when="area">
+              <label class="item">                      
+                <span class="input-label">
+              	{{option.custom_option_title}}&nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                </span>
+                <div class="item">
+                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]" rows="5" cols="25">
+                </textarea>         
+                </div>
+              </label>  
+            </div>	
+					<!--end area option-->        
+               
+					<!-- multiple option--,因为不美观，暂时不用             
             <div class="form__field"  ng-switch-when="multiple">	
-              <label class="form__label">{{option.custom_option_title}}</label>		
-                <dd>
+              <label class="item">{{option.custom_option_title}}</label>	
                   <div class="input-box">
                     <select name="options[{{option.option_id}}][]" id="select_{{option.option_id}}" class="multiselect product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
                     <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}} +{{product.symbol}}&nbsp;{{item.price}}</option>
                     </select>
                   </div>
-                </dd>
             </div>
+					<!--end multiple option--> 
             
-            <div class="form__field" ng-switch-when="area">
-              <label class="form__label">{{option.custom_option_title}}</label>
-              <span class="price-notice">+<span class="price">{{product.symbol}}&nbsp;{{option.price}}</span></span>
-              <dd>
-                <div class="input-box">
-                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]" rows="5" cols="25">
-                </textarea>         
-                </div>
-              </dd>	
-            </div>	      
-            
+          <div class="item input-box"  ng-switch-when="multiple">
+          	Multiple option not support, Please use check option
+          </div>
           <div class="item input-box"  ng-switch-when="date">
           	Date option not support
           </div>
@@ -129,57 +141,30 @@
           </div>
         </div>
       </dl>   
+    </div>
 		<!-- end product option-->  
               
 		<ion-tabs class="tabs-ligth tabs-standard">
 	    <ion-tab title="Description" id="tab_description_tabbed_contents">
       	<div class="list padding">
-          <p>Brand:Iphone</p>
-          <p>Material quality:PC</p>
-          <p>Style:sketchy</p>
-          <p>Technology:Produce plastic articies by injection moulding</p>
-          <p>Colors:white,black,blue,Kitty with blue,Kitty with rose</p>
-          <p>Applicable models:Iphone5(5S),Iphone6(4.7-inch),Iphone6(5.5-inch)</p>
-          <p>&nbsp;</p>
-          <p><img alt="" src="http://www.kikuu.com/media/wysiwyg/QQ_20150425184706.jpg"></p>
-          <p>&nbsp;</p>
-          <p><img alt="" src="http://www.kikuu.com/media/wysiwyg/QQ_20150425184716.jpg"></p>    
+        {{product.description}}
         </div>
 			</ion-tab>
 	    <ion-tab title="Additional" id="tab_description_tabbed_attribute">
       	<div class="list padding">
-          <table class="data-table" id="product-attribute-specs-table">
-            <tbody>
-                      <tr class="first odd">
-                  <th class="label">Weight</th>
-                  <td class="data last">0.2200</td>
-              </tr>
-                      <tr class="last even">
-                  <th class="label">Color</th>
-                  <td class="data last">N/A</td>
-              </tr>
-                  </tbody>
-          </table>  
-        </div>
-			</ion-tab>
-	    <ion-tab title="Relate Product" id="tab_description_tabbed_attribute">
-      	<div class="list padding">
-          <table class="data-table" id="product-attribute-specs-table">
-            <tbody>
-                      <tr class="first odd">
-                  <th class="label">Weight</th>
-                  <td class="data last">0.2200</td>
-              </tr>
-                      <tr class="last even">
-                  <th class="label">Color</th>
-                  <td class="data last">N/A</td>
-              </tr>
-                  </tbody>
-          </table>  
+          <div class="row">
+            <div class="col">Weight</div>
+            <div class="col col-75">{{product.weight}}&nbsp;g</div>
+          </div>
+          <div class="row" ng-repeat="item in product.additional">
+            <div class="col">{{item.label}}</div>
+            <div class="col col-75">{{item.value}}</div>
+          </div>
         </div>
 			</ion-tab>
     </ion-tabs>      
       
+  <p>&nbsp;</p>
   <p>&nbsp;</p>
   
   </ion-content>
