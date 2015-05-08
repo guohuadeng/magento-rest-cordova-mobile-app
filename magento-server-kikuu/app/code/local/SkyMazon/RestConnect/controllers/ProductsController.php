@@ -56,6 +56,12 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 		$currentCurrency = Mage::app ()->getStore ()->getCurrentCurrencyCode ();
 		$productid = $this->getRequest ()->getParam ( 'productid' );
 		$product = Mage::getModel ( "catalog/product" )->load ( $productid );
+		
+		$storeUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA); 
+		$description =  nl2br ( $product->getDescription () );
+		$description = str_replace("{{media url=\"",$storeUrl,$description);
+		$description = str_replace("\"}}","",$description);
+		
 		if ($product->getOptions ())
 			$has_custom_options = true;
 		else
@@ -75,7 +81,8 @@ class SkyMazon_RestConnect_ProductsController extends Mage_Core_Controller_Front
 				'has_custom_options' => $has_custom_options,
 				'regular_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
 				'final_price_with_tax' => number_format ( Mage::helper ( 'directory' )->currencyConvert ( $product->getSpecialPrice (), $baseCurrency, $currentCurrency ), 2, '.', '' ),
-				'description' => nl2br ( $product->getDescription () ),
+				'storeUrl' => $storeUrl,
+				'description' => $description,
 				'symbol' => Mage::app ()->getLocale ()->currency ( Mage::app ()->getStore ()->getCurrentCurrencyCode () )->getSymbol () ,
 				'weight'=>$product->getWeight(),
 				'additional'=>$addtionatt
