@@ -1,16 +1,4 @@
 #! /bin/bash
 
-rm -rf android/Kikuu/assets/www
-rm -rf android/Kikuu/res/drawable-*
-
-mkdir -p android/Kikuu/assets/www
-
-rsync -avz --exclude=_notes magento-server-kikuu/kikuuapp3/ android/Kikuu/assets/www
-rsync -avz android/crosswalk-assets-www/ android/Kikuu/assets/www
-
-rsync -avz doc/icons/icon.png android/Kikuu/res/drawable/icon.png
-rsync -avz doc/icons/screen.png android/Kikuu/res/drawable/screen.png
-
-node version.js
-
-./android/Kikuu/cordova/build --release
+cd magento-server-kikuu/kikuu
+ionic build android
