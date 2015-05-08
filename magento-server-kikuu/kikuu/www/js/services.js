@@ -8,7 +8,8 @@ function Service($rootScope, Config) {
         logout: Config.baseUrl + '/customer/account/logout',
         search: Config.baseUrl + '/restconnect/search',
         productDetail: Config.baseUrl + '/restconnect/products/getproductdetail',
-        productOption: Config.baseUrl + 'restconnect/products/getcustomoption'
+        productImg: Config.baseUrl + '/restconnect/products/getPicLists',
+        productOption: Config.baseUrl + '/restconnect/products/getcustomoption'
         /*
         product_detail: defines.baseWeb + '/catalog/product/view/id/%s', //这个是直接详情页面
         product_rest: defines.baseApi + '/restconnect/products/getproductdetail/productid/%s',

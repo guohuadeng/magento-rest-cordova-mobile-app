@@ -340,7 +340,11 @@ img	{
 	margin-top: 0;
 	margin-right: 0;
 	margin-left: 0;
-  margin:0;
+  }
+  
+.product-container .shipping	{ 
+  float: right;
+  color: #8a8a8a;
   }
 
 .product-container .tabs	{
@@ -360,7 +364,7 @@ img	{
 	width: auto;
 }
 .product-swiper-container .slider-pager {
-  background: rgba(240,240,240, .2);
+  /*background: rgba(240,240,240, .2);*/
   padding: 2px 0px 22px 0px;
 	bottom: 2px;
 }
@@ -398,7 +402,7 @@ img	{
     width: 60px;
     } 
 #qty {
-    text-align: center;
+    text-align: right;
     }
 /*
 /*end product cart*/
