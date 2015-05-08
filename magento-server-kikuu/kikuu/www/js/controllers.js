@@ -182,12 +182,11 @@ angular.module('app.controllers', [])
             $scope.product = results;
 						
 						$rootScope.service.get('productImg', {product: $stateParams.productid}, function (lists) {
-            			$scope.lists = lists;							
-								});
-								
+            			$scope.productImg = lists;							
+								});								
 						if (results.has_custom_options) {
-        				$rootScope.service.get('productOption', {productid: $stateParams.productid}, function (option) {
-            			$scope.productOption = option;							
+        				$rootScope.service.get('productOption', {productid: $stateParams.productid}, function (lists) {
+            			$scope.productOption = lists;							
 								});
 							}
             $scope.$apply();
