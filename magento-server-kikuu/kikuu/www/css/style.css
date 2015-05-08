@@ -340,6 +340,7 @@ img	{
 	margin-top: 0;
 	margin-right: 0;
 	margin-left: 0;
+  margin: 0;
   }
   
 .product-container .shipping	{ 
@@ -485,3 +486,21 @@ img	{
     /* background-color: rgba(238, 238, 238, .9);*/
     z-index:99;
 }
+
+.product-option-container .item	{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-width: 0px;
+  }
+.input-box input,
+.input-box select,
+.input-box textarea	{    
+    border:1px solid #ccc;
+    color:#777;
+    border-radius:3px;
+    padding-top:0px;
+    padding-bottom:0px;    
+    }
+.input-box textarea,.input-box select[multiple],.input-box select[size]{
+    height: 5em;
+    }

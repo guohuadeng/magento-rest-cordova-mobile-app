@@ -3,12 +3,13 @@
 		<!-- img swiper -->
 		<div class="product-swiper-container">
       <ion-slide-box delegate-handle="image-viewer" show-pager="true">
-        <ion-slide ng-repeat="img in lists">
+        <ion-slide ng-repeat="img in productImg">
         	<img src="{{img.url}}">
         </ion-slide>
       </ion-slide-box>
   	</div>
 		<!-- end img swiper -->
+		<!-- product base card -->  
     <div class="card padding-horizontal">
     <h4>{{product.name}}</h4>
     <div class="price-box">			
@@ -28,8 +29,107 @@
           </label>
           <button class="button btn-plus ion-plus button-small button-outline button-light" ng-click=""></button> 
         </div>    
-      </div>      
-    </div>          
+      </div>   
+    </div>     
+		<!-- end product base card -->  
+		<!-- product option-->   
+   		<dl class="list product-option-container">
+        <div ng-repeat="option in productOption"  ng-switch on="option.custom_option_type">          
+        
+					<!-- field option-->   
+            <div class="form__field" ng-switch-when="field">            
+              <label class="item item-input">
+                <span class="input-label">
+              	{{option.custom_option_title}}&nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                </span>
+              <div class="input-box">
+                <input type="text" onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textfield textfield product-custom-option" name="options[{{option.option_id}}]" value="">
+                </div>
+              </label>
+            </div>	 
+					<!--end field option-->   
+                    
+					<!-- drop_down option-->   
+            <div class="form__field" ng-switch-when="drop_down">            
+              <label class="item item-input item-select">
+                <div class="input-label">
+                {{option.custom_option_title}}
+                </div>
+                <div class="input-box">
+                  <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
+                    <option value="">-- Please Select --</option>
+                    <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
+                  </select>
+                </div>
+              </label>
+            </div>	                    
+					<!-- end drop_down option-->   
+            
+					<!-- check option-->   
+            <div class="form__field"  ng-switch-when="checkbox">	
+              <label class="item">{{option.custom_option_title}}</label>		
+                <div class="input-box">
+                  <ul id="options-{{option.option_id}}-list" class="list"> 
+                  <li class="item item-checkbox" ng-repeat="item in option.custom_option_value">
+                    <label for="options_{{item.option_id}}_2" class="checkbox">
+                    <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_2" value="{{item.option_type_id}}" price="{{item.price}}">
+                    </label>
+                    {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                  </li>
+                  </ul>
+                </div>
+            </div>          
+					<!--end check option-->   
+            
+            <div class="form__field"  ng-switch-when="radio">	
+              <label class="form__label">{{option.custom_option_title}}</label>		
+              <dd>
+                <ul id="options-{{option.option_id}}-list" class="options-list">
+                  <li ng-repeat="item in option.custom_option_value">
+                    <input type="radio" class="radio product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_2" value="{{item.option_type_id}}" price="{{item.price}}">
+                      <label for="options_{{item.option_id}}_2">{{item.title}} <span class="price-notice">+<span class="price">{{product.symbol}}&nbsp;{{item.price}}</span></span></label>
+                  </li>
+                </ul>
+              </dd>
+            </div>	            
+            
+            <div class="form__field"  ng-switch-when="multiple">	
+              <label class="form__label">{{option.custom_option_title}}</label>		
+                <dd>
+                  <div class="input-box">
+                    <select name="options[{{option.option_id}}][]" id="select_{{option.option_id}}" class="multiselect product-custom-option" title="" multiple="multiple" onchange="opConfig.reloadPrice()">
+                    <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">{{item.title}} +{{product.symbol}}&nbsp;{{item.price}}</option>
+                    </select>
+                  </div>
+                </dd>
+            </div>
+            
+            <div class="form__field" ng-switch-when="area">
+              <label class="form__label">{{option.custom_option_title}}</label>
+              <span class="price-notice">+<span class="price">{{product.symbol}}&nbsp;{{option.price}}</span></span>
+              <dd>
+                <div class="input-box">
+                <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]" rows="5" cols="25">
+                </textarea>         
+                </div>
+              </dd>	
+            </div>	      
+            
+          <div class="item input-box"  ng-switch-when="date">
+          	Date option not support
+          </div>
+          <div class="item input-box"  ng-switch-when="date_time">
+          	DateTime option not support          
+          </div>
+          <div class="item input-box"  ng-switch-when="time">
+          	Time option not support
+          </div>
+          <div class="item input-box"  ng-switch-when="file">
+          	File option not support          
+          </div>
+        </div>
+      </dl>   
+		<!-- end product option-->  
               
 		<ion-tabs class="tabs-ligth tabs-standard">
 	    <ion-tab title="Description" id="tab_description_tabbed_contents">
