@@ -37,9 +37,9 @@ angular.module('app.controllers', [])
             scope: $scope,
             focusFirstInput: true
         }).then(function (modal) {
-            $scope.modal = modal;
-            $ionicTabsDelegate.select(0);
-        });
+                $scope.modal = modal;
+                $ionicTabsDelegate.select(0);
+            });
 
         // Triggered in the login modal to close it
         $scope.closeLogin = function () {
@@ -176,22 +176,33 @@ angular.module('app.controllers', [])
         };
     })
     //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicSlideBoxDelegate,$timeout) {
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicSlideBoxDelegate) {
         $scope.productid = $stateParams.productid;
-        $rootScope.service.get('productDetail', {productid: $stateParams.productid}, function (results) {
+        $scope.updateSlider = function() {
+            $ionicSlideBoxDelegate.update();
+        };
+        $rootScope.service.get('productDetail', {
+            productid: $stateParams.productid
+        }, function (results) {
             $scope.product = results;
-						
-						$rootScope.service.get('productImg', {product: $stateParams.productid}, function (lists) {
-            			$scope.productImg = lists;							
-								});								
-						if (results.has_custom_options) {
-        				$rootScope.service.get('productOption', {productid: $stateParams.productid}, function (lists) {
-            			$scope.productOption = lists;							
-								});
-							}
+
+            $rootScope.service.get('productImg', {
+                product: $stateParams.productid
+            }, function (lists) {
+                $scope.productImg = lists;
+                $scope.$apply();
+            });
+
+            if (results.has_custom_options) {
+                $rootScope.service.get('productOption', {
+                    productid: $stateParams.productid
+                }, function (option) {
+                    $scope.productOption = option;
+                    $scope.$apply();
+                });
+            }
             $scope.$apply();
         });
-				$ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
     })
     //产品选项
     .controller('ProductOptionCtrl', function ($scope, $stateParams) {

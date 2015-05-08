@@ -1,10 +1,10 @@
 <ion-view view-title="Product Detail">
   <ion-content class="product-container">
-		<!-- img swiper -->
-		<div class="product-swiper-container">
+	<!-- img swiper -->
+    <div class="product-swiper-container">
       <ion-slide-box delegate-handle="image-viewer" show-pager="true">
-        <ion-slide ng-repeat="img in productImg">
-        	<img src="{{img.url}}">
+        <ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">
+        	<img ng-src="{{img.url}}">
         </ion-slide>
       </ion-slide-box>
   	</div>
@@ -17,7 +17,7 @@
 				</span>
 				<span class="old-price padding-horizontal">{{product.regular_price_with_tax}}</span>      
       <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><span class="shipping">Free Shipping</span></div>
-      <div ng-if="product.!is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>  
+      <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
 		</div>      
         
    		   
@@ -97,9 +97,9 @@
                 </label>
               </div>
             </div>	    
-					<!--end radio option-->   
-            
-					<!-- area option--> 
+					<!--end radio option-->
+
+					<!-- area option-->
             <div class="form__field" ng-switch-when="area">
               <label class="item">                      
                 <span class="input-label">

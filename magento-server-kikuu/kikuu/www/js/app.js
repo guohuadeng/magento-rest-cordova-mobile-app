@@ -113,6 +113,6 @@ angular.module('app', [
                     });
                 }
             }
-        }				
-				
+        }
+
     });
