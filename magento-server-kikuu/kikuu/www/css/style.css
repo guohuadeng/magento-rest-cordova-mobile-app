@@ -194,7 +194,7 @@ em	{
 .products-grid.one-line .product  {
     margin-top: 10px;
     text-align: center;
-    padding: 0;
+    padding: 0 10px 0 10px;
     position: relative;
     width: 100%;
     min-height: 250px;
