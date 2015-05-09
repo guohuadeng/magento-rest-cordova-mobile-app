@@ -422,9 +422,11 @@ em	{
     border-right: 1px solid #ddd;
     border-left: 1px solid #ddd;
     width: 60px;
+    height: 40px;
     }    
 .qty-holder .btn-plus{
     width: 60px;
+    height: 40px;
     } 
 #qty {
     text-align: right;
