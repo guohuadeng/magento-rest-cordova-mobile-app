@@ -1,5 +1,5 @@
-var baseUrl = 'http://demo.sunpop.cn/en',
-    baseSite = 'http://demo.sunpop.cn/m';
+var baseUrl = 'http://www.kikuu.com/en',
+    baseSite = 'http://www.kikuu.com/m';
 
 angular.module('app.config', [])
     .constant('Config', {
