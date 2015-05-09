@@ -1,4 +1,5 @@
 #! /bin/bash
 
+node version.js
 cd magento-server-kikuu/kikuu
-ionic build android
+ionic build android --release
