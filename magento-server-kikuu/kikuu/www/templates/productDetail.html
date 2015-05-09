@@ -16,7 +16,7 @@
 				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax}}</span>
 				</span>
 				<span class="old-price padding-horizontal">{{product.regular_price_with_tax}}</span>      
-      <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><span class="shipping">Free Shipping</span></div>
+      <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><em class="shipping">Free Shipping</em></div>
       <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
 		</div>      
         
