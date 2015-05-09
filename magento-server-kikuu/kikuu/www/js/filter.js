@@ -13,6 +13,7 @@ angular.module('app.filters', [])
 				};
 		}])
 		
+		/* 手机前端有问题，暂时停用
 		.filter('minqty', function () {
 				return function (qty) {		
 					if (!qty) qty = 1;			
@@ -20,6 +21,7 @@ angular.module('app.filters', [])
 						return qty;
 				};
 		})
+		*/
 	
     .filter('price', function () {
         return function (price) {

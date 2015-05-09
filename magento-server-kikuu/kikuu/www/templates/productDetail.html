@@ -36,11 +36,11 @@
                 <span class="input-label">Quantity<span><em class="assertive">*</em>
             </label>
             <div class="button-bar">
-              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click="qty=qty-1"></button> 
+              <button class="button btn-minus ion-minus button-small button-outline button-light" ng-click="qtyMinus()"></button> 
               <label class="item-input">
-                <input type="number" name="qty" id="qty"  value="{{qty | minqty}}" title="Qty">
+                <input type="text" name="qty" id="qty" ng-model="qty" min=1 title="Qty">
               </label>
-              <button class="button btn-plus ion-plus button-small button-outline button-light"  ng-click="qty=qty+1"></button> 
+              <button class="button btn-plus ion-plus button-small button-outline button-light"  ng-click="qtyAdd()"></button> 
             </div>
           </div>    
       	</div>

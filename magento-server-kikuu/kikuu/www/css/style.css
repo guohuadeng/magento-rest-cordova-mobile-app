@@ -64,12 +64,13 @@ em	{
 }
 
 .title img {
-    max-height: 32px;
+    max-height: 28px;
     height:70%;
     vertical-align: text-bottom
 }
 .item-divider {
-  min-height: 16px;
+  min-height: 8px;
+  padding-top: 0px;
   }
 .tabs	{
     border-bottom-width: 0px;
@@ -129,7 +130,7 @@ em	{
 }
 .menus-content .button {
     margin-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom: -1px;
     text-align: left;
 }
 .menus-content a.button.icon:before {
@@ -176,7 +177,7 @@ em	{
     min-width: 10px;
     min-height: 10px;
     padding: 2px;
-    top: 4px;
+    top: 3px;
     filter:alpha(opacity=90); 
           -moz-opacity:0.9; 
           -khtml-opacity: 0.9; 
@@ -362,7 +363,7 @@ em	{
   }
   
 .product-container .shipping	{ 
-  float: right;
+	padding-left: 10px;
   color: #8a8a8a;
   }
 
@@ -413,8 +414,6 @@ em	{
     width: 50%;
     }    
 .qty-holder .item{
-    margin-right: 1px;
-    margin-left: 1px;
     }    
 .qty-holder .button-bar{
     }    

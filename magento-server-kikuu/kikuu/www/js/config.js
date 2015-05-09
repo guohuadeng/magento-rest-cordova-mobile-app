@@ -1,5 +1,12 @@
+var isRelease = 1; //改环境图省事，设置为0则为开发环境，1为生产
+
 var baseUrl = 'http://www.kikuu.com/en',
     baseSite = 'http://www.kikuu.com/m';
+
+if (isRelease == 0 )	{
+	baseUrl = 'http://demo.sunpop.cn/en',
+  baseSite = 'http://demo.sunpop.cn/m';
+}
 
 angular.module('app.config', [])
     .constant('Config', {

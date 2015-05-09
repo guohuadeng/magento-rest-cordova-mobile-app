@@ -103,7 +103,7 @@ angular.module('app.controllers', [])
 
         $scope.doRegister = function () {
 						$scope.showLoading();
-            $rootScope.service.post('register', $scope.registerData, function (res) {
+            $rootScope.service.get('register', $scope.registerData, function (res) {
                 if (res[0]) {
                     alert('Welcome! User register success.\n Please login.');
 		                $scope.doLogout();	
@@ -205,8 +205,16 @@ angular.module('app.controllers', [])
     //产品统一用这个名 Product-xx
     .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicSlideBoxDelegate) {
         $scope.productid = $stateParams.productid;
+        $scope.qty = 1;
         $scope.updateSlider = function() {
             $ionicSlideBoxDelegate.update();
+        };
+        $scope.qtyAdd = function() {
+	        $scope.qty = $scope.qty + 1;
+        };
+        $scope.qtyMinus = function() {
+					if ($scope.qty > 1)
+		        $scope.qty = $scope.qty - 1;
         };
 				//取购物车商业品数量
 				$rootScope.service.get('cartGetQty', {
@@ -242,6 +250,10 @@ angular.module('app.controllers', [])
         // Perform the add to cart
         $scope.doCartAdd = function () {					
 						var queryString = $('#product_addtocart_form').formSerialize();
+						if (!($scope.qty > 1))	{
+							$scope.qty = 1 ;
+            	$scope.$apply();
+						}
             $rootScope.service.get('cartAdd', queryString, function (res) {
                 if (res.result == 'error') {
                     alert(res.message);

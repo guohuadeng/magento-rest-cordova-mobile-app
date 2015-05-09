@@ -3,18 +3,16 @@
         <ion-list class="products-grid one-line">
             <div class="product" ng-repeat="product in results">
                 <div class="product-inner">
-                    <a>
+                    <a href="#app/productDetail/{{product.entity_id}}">
                         <div class="product-image">
-                            <img class="lazy small-image"
-                                 src="{{product.image_url}}"
-                                 data-original="{{product.image_url}}"
+                            <img src="{{product.image_url}}"
                                  alt="{{product.name}}">
                         </div>
                     </a>
 
                     <div class="product-info">
                         <div class="product-name">
-                            <a href="">{{product.name}}</a>
+                            {{product.name}}
                         </div>
 
                         <div class="product-price">
@@ -22,11 +20,11 @@
                                 <span class="special-price">
                                     <span class="special-price">
                                         <span class="price">
-                                            Tsh{{product.final_price_with_tax | price}}
+                                            {{product.symbol}}{{product.final_price_with_tax | price}}
                                         </span>
                                         &nbsp;
                                         <span class="old-price">
-                                            Tsh{{product.regular_price_with_tax | price}}
+                                            {{product.symbol}}{{product.regular_price_with_tax | price}}
                                         </span>
                                     </span>
                                 </span>
