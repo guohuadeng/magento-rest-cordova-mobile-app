@@ -3,7 +3,7 @@
         <img src="img/logo.png">
     </ion-nav-title>
     <ion-nav-buttons side="left">
-        <button class="button button-icon ion-android-menu" menu-toggle="left"></button>
+        <button class="button button-icon ion-android-menu" menu-toggle="left"><span ng-if="!user" class="badge badge-assertive"></span></button>
         <a href="#app/search" class="button button-icon ion-android-search"></a>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
