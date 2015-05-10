@@ -7,6 +7,10 @@ if (isRelease == 0 )	{
 	baseUrl = 'http://demo.sunpop.cn/en',
   baseSite = 'http://demo.sunpop.cn/m';
 }
+if (isRelease == -1 )	{
+	baseUrl = 'http://lvee.sunpop.cn/en',
+  baseSite = 'http://lvee.sunpop.cn/m';
+}
 
 angular.module('app.config', [])
     .constant('Config', {

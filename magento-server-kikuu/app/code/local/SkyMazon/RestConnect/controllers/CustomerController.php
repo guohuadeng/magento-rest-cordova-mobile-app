@@ -82,10 +82,18 @@ class SkyMazon_RestConnect_CustomerController extends Mage_Core_Controller_Front
 		if (isset ( $params ['isSubscribed'] )) {
 			$customer->setIsSubscribed ( 1 );
 		}
+		if( (null==Mage::app ()->getRequest ()->getParam ('password') ) || (null==Mage::app ()->getRequest ()->getParam ('email')) ){
+			echo json_encode ( array (
+					false,
+					'0x1100',
+					'empty password or email.'
+			) );
+			return ;
+		}
 		$customer->getGroupId ();
 		try {
-			$customer->setPassword ( $params ['pwd'] );
-			$customer->setConfirmation ( $this->getRequest ()->getPost ( 'confirmation', $params ['pwd'] ) );
+			$customer->setPassword ( $params ['password'] );
+			$customer->setConfirmation ( $this->getRequest ()->getPost ( 'confirmation', $params ['password'] ) );
 			$customer->setData ( 'email', $params ['email'] );
 			$customer->setData ( 'firstname', $params ['firstname'] );
 			$customer->setData ( 'lastname', $params ['lastname'] );
