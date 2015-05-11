@@ -27,11 +27,13 @@ angular.module('app.controllers', [])
                     name: 'Daily Sale',
                     class_name: 'one-line'
                 },
+								/* 客户要求，去掉New Arrival
                 {
                     cmd: 'best_seller',
                     name: 'New Arrival',
                     class_name: 'one-line'
                 }
+								*/
             ].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
