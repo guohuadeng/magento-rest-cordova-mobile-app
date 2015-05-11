@@ -19,7 +19,7 @@ button.button span,.pager li >a:hover,.pager li >a:focus,.pager .pages .current,
 .pager li >a:hover,.pager li >a:focus,.pager .pages .current,.sorter .view-mode strong i,.sorter .view-mode a:hover i,.data-table button.button:hover > span,.link-cart:hover,.item:hover .details-area .actions a.addtocart,.col-main .category-products .products-list li.item .details-area .actions a.addtocart,.cart .crosssell button.button:hover > span,.cart .discount h2:hover:before,.cart .shipping h2:hover:before,.btn-primary,i.ajax-loader,#narrow-by-list dd .swatch-link:hover .swatch-label,.configurable-swatch-list .hover .swatch-link,.configurable-swatch-list .selected .swatch-link,.swatch-link:hover,.block-layered-nav #narrow-by-list ol.swatches li a:hover .layered-navigation-swatch,.product-image-area .actions a.addtocart,.opc-wrapper-opc #opc-review-block,#newsletter_popup
 {border-color:#ef473a}
 .form-wrap,#form-validate,.option-detail .item-options,.header-container.type2,.header-container.type4,.fixed-header .menu >li.menu-full-width .nav-sublist-dropdown,.main-nav .menu >li.menu-full-width .nav-sublist-dropdown,.fixed-header .menu >li.menu-static-width .nav-sublist-dropdown,.main-nav .menu >li.menu-static-width .nav-sublist-dropdown,.block.block-subscribe.home-sidebar-block,.product-tabs>ul li.active,.history .featured-box .box-content,.homepage-grid-banner .ribbon:before,.owl-banner-carousel .content.type2 h2,.featured-box .box-content,.cms-index-index .testimonial-arrow-down,#success-message-container,.checkout-progress li.active,.form-wrap,#form-validate,#login-form,.tab-item.tab-item-active
-{border-top-color:#ef473a}
+{border-top-color:#ef473a!important}
 .topCartContent:before,.availability-only span,.availability-only a,.prev-next-products .product-nav .product-pop:before
 {border-bottom-color:#ef473a}
 .opc-wrapper-opc #opc-review-block:before
@@ -28,12 +28,12 @@ button.button span,.pager li >a:hover,.pager li >a:focus,.pager .pages .current,
 {
     border-left-color:#ef473a}
 @media (max-width: 1199px){
-    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a}
+    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a!important}
 }
 @media (max-width: 991px){
     .header-container.type5 .top-links-icon,.header-container.type5 .top-links-icon a{color:#ef473a}
-    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a}
+    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a!important}
 }
 @media (max-width: 767px){
-    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a}
+    .owl-banner-carousel .content.type2 h2{border-top-color:#ef473a!important}
 }
