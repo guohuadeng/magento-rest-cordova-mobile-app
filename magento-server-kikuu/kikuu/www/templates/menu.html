@@ -16,10 +16,7 @@
         <ion-header-bar class="menus bar-light">
           <span ng-if="!user">
             <h3 class="padding">
-              <span class="ion-person"></span>
-              <span class="padding-left">
-                <em menu-close ng-click="login()">Login</em>&nbsp;|&nbsp;<em menu-close ng-click="register()">Register</em>
-              </span>
+                <em class="ion-person padding-left" menu-close ng-click="login()">&nbsp;Login</em>&nbsp;|&nbsp;<em menu-close ng-click="register()">Register</em>
             </h3>
           </span>
           <span ng-if="user">
