@@ -28,7 +28,9 @@ img	{
 em	{
   padding-left:2px;
   }
-
+.spinner-android	{
+  stroke: #ef473a;
+  }
 .none {
     display: none;
 }
