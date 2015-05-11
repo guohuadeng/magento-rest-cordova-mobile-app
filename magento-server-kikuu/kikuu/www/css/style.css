@@ -126,7 +126,7 @@ em	{
 .tab-item	{
     background-color: #fff;
     border-top:2px solid #ef473a;
-    border-bottom:0px;
+    border-bottom:0px solid #fff;
     border-width:3px 1px 0 1px;
     border-radius:5px 5px 0 0;
     margin-right:1px;
