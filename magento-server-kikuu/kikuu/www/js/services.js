@@ -1,6 +1,8 @@
 function Service($rootScope, Config) {
 
     var api = {
+        website: Config.baseUrl + '/restconnect/store/websiteinfo',
+        store: Config.baseUrl + '/restconnect/store/storeinfo',
         user: Config.baseUrl + '/restconnect/customer/status',
         menus: Config.baseUrl + '/restconnect/?cmd=menu',
         products: Config.baseUrl + '/restconnect/',
