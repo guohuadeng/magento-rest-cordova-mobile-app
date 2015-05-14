@@ -36,6 +36,14 @@ angular.module('app', [
                     }
                 }
             })
+            .state('app.setting', {
+                url: '/setting',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/setting.html'
+                    }
+                }
+            })
             .state('app.lists', {
                 url: '/lists',
                 views: {

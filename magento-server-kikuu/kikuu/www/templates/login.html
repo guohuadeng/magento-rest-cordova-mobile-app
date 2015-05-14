@@ -29,6 +29,23 @@
                 	<form ng-submit="doRegister()" method="post" id="form-validate">
                     <div class="list account-create padding">
                         <h3>New Customer</h3>
+                        <label class="item">Country/Region</label>
+                        <label class="item item-radio">
+                          <input type="radio" id="store_group_id" name="store_group_id" value="1" checked="checked">
+                          <div class="item-content">
+                          <span class="padding-horizontal">Tanzania</span>
+                          <img src="img/flags/Tanzania.png" height="18">
+                          </div>
+                          <i class="radio-icon ion-checkmark"></i>
+                        </label>
+                        <label class="item item-radio">
+                          <input type="radio" id="store_group_id" name="store_group_id" value="3" disabled="disabled">
+                          <div class="item-content">
+                          <span class="padding-horizontal">Ethiopia</span>
+                          <img src="img/flags/Ethiopia.png" height="18">
+                          </div>
+                          <i class="radio-icon ion-checkmark"></i>
+                        </label>                            
 
                         <!-- 短信验证.form__field -->
                         <label class="item item-input">
@@ -38,7 +55,7 @@
                                    ng-model="registerData.default_mobile_number">
                         </label>
                         <label class="item item-input">
-                            <span class="input-label">Validation Code*</span>
+                            <span class="input-label">Validcode*</span>
                             <input type="text" placeholder="Validation Code*"
                                    ng-model="registerData.validation_Code">
                         </label>

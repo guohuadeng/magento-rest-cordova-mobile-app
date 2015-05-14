@@ -11,6 +11,13 @@ angular.module('app.controllers', [])
 				$scope.hideLoading = function(){
 					$ionicLoading.hide();
 				};
+        // 网站列表信息
+        $scope.getWebsite = function () {
+            $rootScope.service.get('website', function (website) {
+                $scope.website = website;
+                $scope.$apply();
+            });
+        };
         // 用户信息
         $scope.getUser = function () {
             $rootScope.service.get('user', function (user) {
