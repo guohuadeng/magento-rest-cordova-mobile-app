@@ -10,7 +10,6 @@ s.*.*
 
 # Dw Sync
 dwsync.xml
-*.xml
 
 # Windows image file caches
 Thumbs.db
@@ -58,4 +57,3 @@ Temporary Items
 
 # IDEA
 .idea
-*.xml

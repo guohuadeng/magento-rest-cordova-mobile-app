@@ -4,12 +4,12 @@ var baseUrl = 'http://www.kikuu.com/en',
     baseSite = 'http://www.kikuu.com/m';
 
 if (isRelease == 0 )	{
-	baseUrl = 'http://demo.sunpop.cn/en',
-  baseSite = 'http://demo.sunpop.cn/m';
+	baseUrl = 'http://demo.sunpop.cn/en';
+    baseSite = 'http://demo.sunpop.cn/m';
 }
 if (isRelease == -1 )	{
-	baseUrl = 'http://lvee.sunpop.cn/en',
-  baseSite = 'http://lvee.sunpop.cn/m';
+	baseUrl = 'http://lvee.sunpop.cn/en';
+    baseSite = 'http://lvee.sunpop.cn/m';
 }
 
 angular.module('app.config', [])
