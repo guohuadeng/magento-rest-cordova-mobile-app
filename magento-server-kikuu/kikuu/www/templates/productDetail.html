@@ -13,9 +13,9 @@
     <div class="card padding-horizontal">
     <h4>{{product.name}}</h4>
     <div class="price-box">			
-				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax}}</span>
+				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax | number:0}}</span>
 				</span>
-				<span class="old-price padding-horizontal">{{product.regular_price_with_tax}}</span>      
+				<span class="old-price padding-horizontal">{{product.regular_price_with_tax | number:0}}</span>      
       <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><em class="shipping">Free Shipping</em></div>
       <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
 		</div>      
@@ -52,7 +52,7 @@
                 <span class="input-label">
               	{{option.custom_option_title}}
                 <em ng-if="option.is_require" class="assertive">*</em>
-                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price | number:0}}&nbsp;
                 </span>
               </label>        
               <label class="item item-input padding-left">
@@ -71,7 +71,7 @@
                 <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
                   <option value="">-- Please Select --</option>
                   <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">
-                  {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}</option>
+                  {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price | number:0}}</option>
                 </select>
               </label>
             </div>	                    
@@ -89,7 +89,7 @@
 " class="checkbox">
                     <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
                     </label>
-                    {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                    {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price | number:0}}
                   </li>
                   </ul>
             </div>          
@@ -106,7 +106,7 @@
                   <input type="radio" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
                     <div class="item-content" for="options_{{item.option_id}}_{{$index+2}}">
                     	{{item.title}}&nbsp; 
-                      <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
+                      <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
                     </div>
                     <i class="radio-icon icon-left ion-checkmark"></i>
                 </label>
@@ -120,7 +120,7 @@
                 <span class="input-label">
               	{{option.custom_option_title}}                
                 <em ng-if="option.is_require==1" class="assertive">*</em>
-                &nbsp;+{{product.symbol}}&nbsp;{{option.price}}&nbsp;
+                &nbsp;+{{product.symbol}}&nbsp;{{option.price | number:0}}&nbsp;
                 </span>
                 <div class="item">
                 <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]">
