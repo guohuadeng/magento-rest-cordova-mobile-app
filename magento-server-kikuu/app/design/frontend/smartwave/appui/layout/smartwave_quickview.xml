@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <block type="quickview/topJs"/>
+            <action method="addJs"><script>smartwave/jquery/plugins/etalage/jquery.etalage.min.js</script></action>
+            <action method="addJs"><script>smartwave/jquery/plugins/etalage/jquery.zoom.min.js</script></action>
+            <action method="addItem"><type>js_css</type><name>smartwave/jquery/plugins/etalage/etalage.css</name></action>
+        </reference>
+    </default>
+    <quickview_index_view>
+        <update handle="catalog_product_view" />
+        <remove name="header" />
+        <remove name="footer" />
+        <!-- Mage_Catalog -->
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/empty.phtml</template>
+            </action>
+        </reference>
+        <reference name="content">
+            <remove name="product.info.upsell" />
+            <remove name="product.info.additional" />
+            <remove name="product.description" />
+            <remove name="product.attributes" />
+            <remove name="product.info.extrahint" />
+        </reference>
+        <reference name="product.info.media">
+            <action method="setTemplate">
+                <template>smartwave/quickview/page/media.phtml</template>
+            </action>
+            <remove name="smartwave_sharetool" />
+        </reference>
+    </quickview_index_view>
+</layout>

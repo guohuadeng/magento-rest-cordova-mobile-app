@@ -25,6 +25,7 @@ img	{
     
 .item img	{
     vertical-align: text-bottom;
+    float: right;
     }
     
 .checkbox input:before, .checkbox-icon:before	{

@@ -3,14 +3,5 @@
 <file name="SkyMazon_RestConnect.xml" server="skymazon.sunpop.cn" local="130736653122228318" remote="130717251000000000" Dst="0" />
 <file name="SkyMazon_RestConnect.xml" server="120.24.88.210" local="130736995681959039" remote="130717251000000000" Dst="0" />
 <file name="SkyMazon_RestConnect.xml" server="207.226.141.198" local="130736995681959039" remote="130737004200000000" Dst="0" />
-<file name="Kancart_MobileApi.xml" server="demo.sunpop.cn" local="130746583800000000" remote="130746583800000000" Dst="0" />
-<file name="Amasty_Base.xml" server="demo.sunpop.cn" local="130750345460412517" remote="130750345200000000" Dst="0" />
-<file name="Amasty_Customerattr.xml" server="demo.sunpop.cn" local="130756373822479581" remote="130756387200000000" Dst="0" />
-<file name="Aschroder_SMTPPro.xml" server="demo.sunpop.cn" local="130749460200000000" remote="130749460200000000" Dst="0" />
 <file name="SkyMazon_RestConnect.xml" server="demo.sunpop.cn" local="130753981681816569" remote="130753981200000000" Dst="0" />
-<file name="Smartwave_All.xml" server="demo.sunpop.cn" local="130750345283130875" remote="130750344600000000" Dst="0" />
-<file name="Amasty_Base.xml" server="www.kikuu.com" local="130750387142678546" remote="130750386600000000" Dst="0" />
-<file name="Amasty_Customerattr.xml" server="www.kikuu.com" local="130756373822479581" remote="130756387200000000" Dst="0" />
-<file name="Smartwave_All.xml" server="www.kikuu.com" local="130750387282983974" remote="130750386600000000" Dst="0" />
-<file name="Smartwave_Ajaxcart.xml" server="demo.sunpop.cn" local="130749460200000000" remote="130749460200000000" Dst="0" />
 </dwsync>

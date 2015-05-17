@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+		<reference name="head">
+			<block type="core/template" name="sticky_header">
+                <action method="setTemplate" ifconfig="porto_settings/header/sticky_header"><template>page/html/sticky_header.phtml</template></action>
+            </block>
+		</reference>
+        <block type="megamenu/toggle"></block>
+        <reference name="header">
+            <block type="core/template" name="mobile.nav" template="smartwave/megamenu/html/mobilemenu.phtml" />
+        </reference>
+    </default>    
+</layout>

@@ -25,6 +25,10 @@ angular.module('app.config', [])
                 title: 'My Account',
                 src: baseSite + '/customer/account'
             },
+            account: {
+                title: 'My Reward',
+                src: 'http://demo-extension.magestore.com/sandbox/reward-points/platinum/index.php/autologin/demo'
+            },
             order: {
                 title: 'My Orders',
                 src: baseSite + '/sales/order/history/'

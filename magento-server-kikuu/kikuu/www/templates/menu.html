@@ -50,6 +50,10 @@
                   	class="button button-full button-light icon icon-left ion-ios-cloud-outline">
                       <span class="padding-horizontal">My Account</span>
                   </a>
+                  <a menu-toggle="left" href="http://demo-extension.magestore.com/sandbox/reward-points/platinum/index.php/autologin/demo"
+                  	class="button button-full button-light icon icon-left ion-ios-cloud-outline">
+                      <span class="padding-horizontal">My Reward</span>
+                  </a>
                   <a menu-toggle="left" href="#app/frame/order"
                   	class="button button-full button-light icon icon-left ion-ios-list-outline">
                       <span class="padding-horizontal">My Orders</span>
@@ -73,8 +77,7 @@
                   </ion-item>
                 </span>
                 <div class="item item-divider"></div>
-                <a menu-toggle="left" href="#app/setting"
-                  class="item icon icon-left ion-ios-gear-outline">
+                <a menu-toggle="left" href="#app/setting" class="item icon icon-left ion-ios-gear-outline">
                     <span class="padding-horizontal">Setting</span>
                   <img src="img/flags/Tanzania.png" height="18">
                 </a> 
@@ -82,7 +85,7 @@
                   class="item icon icon-left ion-log-out">
                     <span class="padding-horizontal">Logout</span>
                 </a> 
-                <a menu-close ng-if="!!user" ng-click="exit()"
+                <a menu-close ng-click="exit()"
                   class="item icon icon-left ion-android-exit">
                     <span class="padding-horizontal">Exit</span>
                 </a> 

@@ -105,7 +105,8 @@
                 <label class="item item-radio" ng-repeat="item in option.custom_option_value">
                   <input type="radio" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
                     <div class="item-content" for="options_{{item.option_id}}_{{$index+2}}">
-                    	{{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price}}
+                    	{{item.title}}&nbsp; 
+                      <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price}}</em>
                     </div>
                     <i class="radio-icon icon-left ion-checkmark"></i>
                 </label>

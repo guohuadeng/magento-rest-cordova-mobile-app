@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * zeonsolutions inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.zeonsolutions.com/shop/license-enterprise.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * This package designed for Magento ENTERPRISE edition
+ * =================================================================
+ * zeonsolutions does not guarantee correct work of this extension
+ * on any other Magento edition except Magento ENTERPRISE edition.
+ * zeonsolutions does not provide extension support in case of
+ * incorrect edition usage.
+ * =================================================================
+ *
+ * @category   design
+ * @package    base_default
+ * @version    0.0.1
+ * @copyright  @copyright Copyright (c) 2013 zeonsolutions.Inc. (http://www.zeonsolutions.com)
+ * @license    http://www.zeonsolutions.com/shop/license-enterprise.txt
+ */
+-->
+<layout version="0.1.0">
+	<!--<cms_index_index>
+		<reference name="content">
+			<block type="zeon_manufacturer/home" name="home_manufacturers_list"> 
+				<action method="setTemplate" ifconfig="zeon_manufacturer/general/is_enabled">
+					<template>zeon/manufacturer/home.phtml</template>
+				</action>
+			</block> 
+	    </reference>
+	</cms_index_index>-->
+    <manufacturer_index_index>
+        <label>Manufacturers</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="zeon_manufacturer/list" name="manufacturers_list" as="manufacturers" template="zeon/manufacturer/list.phtml"/>
+        </reference>
+    </manufacturer_index_index>
+    <manufacturer_index_view translate="label">
+       <label>Manufacturer View (Any)</label>
+       <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <action method="setLayoutCode"><name>two_columns_left</name></action>
+        </reference>
+        <reference name="content">
+            <block type="zeon_manufacturer/view" name="manufacturer_info" template="zeon/manufacturer/view.phtml" >
+	            <block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+	                <block type="page/html_pager" name="product_list_toolbar_pager"/>
+	                <!-- The following code shows how to set your own pager increments -->
+	                <!--
+	                    <action method="setDefaultListPerPage"><limit>4</limit></action>
+	                    <action method="setDefaultGridPerPage"><limit>9</limit></action>
+	                    <action method="addPagerLimit"><mode>list</mode><limit>2</limit></action>
+	                    <action method="addPagerLimit"><mode>list</mode><limit>4</limit></action>
+	                    <action method="addPagerLimit"><mode>list</mode><limit>6</limit></action>
+	                    <action method="addPagerLimit"><mode>list</mode><limit>8</limit></action>
+	                    <action method="addPagerLimit" translate="label"><mode>list</mode><limit>all</limit><label>All</label></action>
+	                -->
+	            </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            </block>
+        </reference>
+        <reference name="left">
+            <block type="zeon_manufacturer/left" name="manufacturers_list" before="-" template="zeon/manufacturer/left.phtml" />
+        </reference>
+    </manufacturer_index_view>
+</layout>
