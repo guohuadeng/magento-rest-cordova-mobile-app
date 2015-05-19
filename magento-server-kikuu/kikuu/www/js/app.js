@@ -20,7 +20,11 @@ angular.module('app', [
         Service($rootScope, Config);
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
+				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
+				$ionicConfigProvider.scrolling.jsScrolling(false);
+				$ionicConfigProvider.tabs.position(top);
+				
         $stateProvider
             .state('app', {
                 url: '/app',
