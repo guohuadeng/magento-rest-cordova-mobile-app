@@ -1,7 +1,7 @@
 // Ionic Starter App
 // 'app' is the name of this angular module (also set in a <body> attribute in index.html)
 angular.module('app', [
-        'ionic', 'tabSlideBox',
+        'ionic', 'ngMaterial',
         'app.config', 'app.controllers',
         'app.filters'
     ])

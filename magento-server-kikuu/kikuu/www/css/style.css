@@ -13,6 +13,11 @@
     display: none;
 }
 
+/* tabs */
+.md-default-theme {
+    height: 100%;
+}
+
 .container	{
     margin-right: auto;
     margin-left: auto;

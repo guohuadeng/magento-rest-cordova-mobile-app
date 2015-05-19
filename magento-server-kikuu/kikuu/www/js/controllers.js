@@ -1,16 +1,15 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate,$ionicLoading, $timeout) {
-			
-				//取数据时的loading mask
-				$scope.showLoading = function() {
-					$ionicLoading.show({
-						template: 'Loading...'
-					});
-				};
-				$scope.hideLoading = function(){
-					$ionicLoading.hide();
-				};
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate, $ionicLoading, $timeout) {
+        //取数据时的loading mask
+        $scope.showLoading = function () {
+            $ionicLoading.show({
+                template: 'Loading...'
+            });
+        };
+        $scope.hideLoading = function () {
+            $ionicLoading.hide();
+        };
         // 网站列表信息
         $scope.getWebsite = function () {
             $rootScope.service.get('website', function (website) {
@@ -34,13 +33,13 @@ angular.module('app.controllers', [])
                     name: 'Daily Sale',
                     class_name: 'one-line'
                 },
-								/* 客户要求，去掉New Arrival
-                {
-                    cmd: 'best_seller',
-                    name: 'New Arrival',
-                    class_name: 'one-line'
-                }
-								*/
+                /* 客户要求，去掉New Arrival
+                 {
+                 cmd: 'best_seller',
+                 name: 'New Arrival',
+                 class_name: 'one-line'
+                 }
+                 */
             ].concat(menus);
             $scope.$broadcast('menusData', $scope.menus);
         });
@@ -53,7 +52,7 @@ angular.module('app.controllers', [])
 
         // Form data for the register modal
         $scope.registerData = {};
-				
+
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/login.html', {
             scope: $scope,
@@ -90,7 +89,7 @@ angular.module('app.controllers', [])
                 $scope.modal.hide();
             });
         };
-				
+
         $scope.doLogout = function () {
             $rootScope.service.get('logout', $scope.getUser);
         };
@@ -111,20 +110,20 @@ angular.module('app.controllers', [])
         };
 
         $scope.doRegister = function () {
-						$scope.showLoading();
+            $scope.showLoading();
             $rootScope.service.get('register', $scope.registerData, function (res) {
                 if (res[0]) {
                     alert('Welcome! User register success.\n Please login.');
-		                $scope.doLogout();	
-		                $scope.login();	
-										$scope.hideLoading();
+                    $scope.doLogout();
+                    $scope.login();
+                    $scope.hideLoading();
                     return;
-                	}
-								else	{
+                }
+                else {
                     alert(res[2]);
-										$scope.hideLoading();
-                    return;								
-									}				
+                    $scope.hideLoading();
+                    return;
+                }
             });
         };
 
@@ -134,34 +133,34 @@ angular.module('app.controllers', [])
             }
         };
     })
-					
-    .controller('ListsCtrl', function ($scope, $rootScope, $ionicSlideBoxDelegate) {
-        var getList = function (slide, type, callback) {
+
+    .controller('ListsCtrl', function ($scope, $rootScope) {
+        var getList = function (tab, type, callback) {
             if (type === 'load') {
-                slide.page++;
+                tab.page++;
             } else {
-                slide.page = 1;
+                tab.page = 1;
             }
 
             var params = {
                 limit: 10,
-                page: slide.page,
-                cmd: slide.cmd || 'catalog'
+                page: tab.page,
+                cmd: tab.cmd || 'catalog'
             };
-            if (slide.category_id) {
-                params.categoryid = +slide.category_id;
+            if (tab.category_id) {
+                params.categoryid = +tab.category_id;
             }
             $rootScope.service.get('products', params, function (lists) {
                 if (type === 'load') {
                     if (lists) {
-                        slide.lists = slide.lists.concat(lists);
+                        tab.lists = tab.lists.concat(lists);
                     } else {
-                        slide.loadOver = true;
+                        tab.loadOver = true;
                     }
                 } else {
-                    slide.lists = lists;
+                    tab.lists = lists;
                 }
-                slide.hasInit = true;
+                tab.hasInit = true;
                 $scope.$apply();
                 if (typeof callback === 'function') {
                     callback();
@@ -169,44 +168,35 @@ angular.module('app.controllers', [])
             });
         };
 
-        $scope.update = function () {
-            $ionicSlideBoxDelegate.update();
-            setTimeout(function () {
-                $ionicSlideBoxDelegate.slide(0);
-            }, 10);
-        };
-        $scope.$on('ngRepeatFinished', function () {
-            $scope.update();
-        });
-
-        // 根据菜单生成 slides
+        // 根据菜单生成 tabs
         $scope.$on('menusData', function (e, menus) {
             $scope.menus = menus;
-            $scope.slides = menus.slice(0);
+            $scope.tabs = menus.slice(0);
             $scope.$apply();
+            $scope.selectedIndex = 0;
         });
         $scope.$on('setCatalog', function (e, index) {
-            $ionicSlideBoxDelegate.slide(index);
+            $scope.selectedIndex = index;
         });
-        $scope.onSlideMove = function (data) {
-            if (isNaN(data.index)) {
+        $scope.$watch('selectedIndex', function () {
+            if (!$scope.tabs) {
                 return;
             }
-            var slide = $scope.slides[data.index];
+            var tab = $scope.tabs[$scope.selectedIndex];
 
-            if (slide.hasInit) {
+            if (tab.hasInit) {
                 return;
             }
-            getList(slide, 'refresh');
-        };
+            getList(tab, 'refresh');
+        });
 
         $scope.doRefresh = function (index) {
-            getList($scope.slides[index], 'refresh', function () {
+            getList($scope.tabs[index], 'refresh', function () {
                 $scope.$broadcast('scroll.refreshComplete');
             });
         };
         $scope.loadMore = function (index) {
-            getList($scope.slides[index], 'load', function () {
+            getList($scope.tabs[index], 'load', function () {
                 $scope.$broadcast('scroll.infiniteScrollComplete');
             });
         };
@@ -215,23 +205,23 @@ angular.module('app.controllers', [])
     .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicSlideBoxDelegate) {
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
-        $scope.updateSlider = function() {
+        $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.update();
         };
-        $scope.qtyAdd = function() {
-	        $scope.qty = $scope.qty + 1;
+        $scope.qtyAdd = function () {
+            $scope.qty = $scope.qty + 1;
         };
-        $scope.qtyMinus = function() {
-					if ($scope.qty > 1)
-		        $scope.qty = $scope.qty - 1;
+        $scope.qtyMinus = function () {
+            if ($scope.qty > 1)
+                $scope.qty = $scope.qty - 1;
         };
-				//取购物车商业品数量
-				$rootScope.service.get('cartGetQty', {
-						product: $stateParams.productid
-				}, function (res) {
+        //取购物车商业品数量
+        $rootScope.service.get('cartGetQty', {
+            product: $stateParams.productid
+        }, function (res) {
             $scope.items_qty = res.items_qty;
-						$scope.$apply();
-				});
+            $scope.$apply();
+        });
 
         $rootScope.service.get('productDetail', {
             productid: $stateParams.productid
@@ -255,14 +245,14 @@ angular.module('app.controllers', [])
             }
             $scope.$apply();
         });
-				
+
         // Perform the add to cart
-        $scope.doCartAdd = function () {					
-						var queryString = $('#product_addtocart_form').formSerialize();
-						if (!($scope.qty > 1))	{
-							$scope.qty = 1 ;
-            	$scope.$apply();
-						}
+        $scope.doCartAdd = function () {
+            var queryString = $('#product_addtocart_form').formSerialize();
+            if (!($scope.qty > 1)) {
+                $scope.qty = 1;
+                $scope.$apply();
+            }
             $rootScope.service.get('cartAdd', queryString, function (res) {
                 if (res.result == 'error') {
                     alert(res.message);
@@ -270,8 +260,8 @@ angular.module('app.controllers', [])
                 }
                 if (res.result == 'success') {
                     alert('Success');
-                		$scope.items_qty = res.items_qty;
-            				$scope.$apply();
+                    $scope.items_qty = res.items_qty;
+                    $scope.$apply();
                     return;
                 }
             });

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.kikuu.android" version="2.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.kikuu.android" version="2.0.13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>kikuu</name>
   <description>Kikuu app.</description>
   <author email="wenzhixin2010@gmail.com" href="http://wenzhixin.net.cn">Zhixin Wen</author>
