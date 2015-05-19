@@ -46,6 +46,12 @@ angular.module('app.controllers', [])
         $scope.setCatalog = function (index) {
             $scope.$broadcast('setCatalog', index);
         };
+        $scope.$on('selectedIndex', function (e, index) {
+            $scope.selectedIndex = index;
+        });
+        $scope.getActiveClass = function (index) {
+            return $scope.selectedIndex === index;
+        };
 
         // Form data for the login modal
         $scope.loginData = {};
@@ -183,6 +189,8 @@ angular.module('app.controllers', [])
                 return;
             }
             var tab = $scope.tabs[$scope.selectedIndex];
+
+            $scope.$emit('selectedIndex', $scope.selectedIndex);
 
             if (tab.hasInit) {
                 return;

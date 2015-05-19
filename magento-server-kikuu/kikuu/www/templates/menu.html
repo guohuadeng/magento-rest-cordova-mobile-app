@@ -42,7 +42,9 @@
         <ion-content class="menus-content">
             <ion-list>
                   <a nav-clear menu-close href="#app/lists"
-                  	class="button button-full button-assertive icon icon-left ion-ios-home-outline">
+                     ng-click="setCatalog(0)"
+                     ng-class="{'button-assertive': getActiveClass(0)}"
+                  	 class="button button-full button-light icon icon-left ion-ios-home-outline">
                       <span class="padding-horizontal">Home</span>
                   </a>
                 <span ng-if="user">
@@ -69,11 +71,12 @@
                   <div class="item item-divider"></div>
                 </span>
                 <span ng-repeat="menu in menus" ng-switch on="menu.name">    
-                	<span ng-switch-when="Daily Sale"></span>    
+                  <span ng-switch-when="Daily Sale"></span>
                   <span ng-switch-when="New Arrival"></span>
                   <ion-item ng-switch-default nav-clear menu-close
+                            ng-class="{'active': getActiveClass($index)}"
                             href="#app/lists"
-                            ng-click="setCatalog($index)" >{{menu.name}}
+                            ng-click="setCatalog($index)">{{menu.name}}
                   </ion-item>
                 </span>
                 <div class="item item-divider"></div>
