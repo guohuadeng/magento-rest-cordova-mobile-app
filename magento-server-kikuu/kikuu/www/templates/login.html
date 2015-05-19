@@ -1,6 +1,6 @@
 <ion-modal-view>
     <div class="login-container">
-        <ion-tabs class="tabs-stable tabs-top tabs-icon-left pane tabs-standard">
+        <ion-tabs class="tabs-stable tabs-icon-left pane tabs-top tabs-standard">
             <ion-tab title="Login" icon-on="ion-ios-unlocked" icon-off="ion-ios-unlocked-outline">
                 <ion-content>
                     <div class="list registered-users padding">
@@ -18,6 +18,9 @@
                             <label class="item">
                                 <button class="button button-full button-assertive" type="submit">Log in</button>
                             </label>
+                            <div class="padding">
+                            <a ng-click="getPassword();">Forgot Your Password?</a>
+                            </div>
                         </form>
                     </div>
                 </ion-content>
@@ -25,6 +28,7 @@
             </ion-tab>
 
             <ion-tab title="Register" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">
+            	<ion-scroll>
                 <ion-content>
                 	<form ng-submit="doRegister()" method="post" id="form-validate">
                     <div class="list account-create padding">
@@ -132,6 +136,7 @@
                     </div>
                   </form>
                 </ion-content>
+              </ion-scroll>
                 <!-- Tab 2 content -->
             </ion-tab>
             <ion-tab title="Close" icon="ion-android-close" ng-click="modal.hide()">

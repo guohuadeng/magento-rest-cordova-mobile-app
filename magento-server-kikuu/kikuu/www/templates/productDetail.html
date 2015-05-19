@@ -1,26 +1,24 @@
 <ion-view view-title="Product Detail">
   <ion-content class="product-container">
-	<!-- img swiper -->
-    <div class="product-swiper-container">
-      <ion-slide-box delegate-handle="image-viewer" show-pager="true">
-        <ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">
-        	<img ng-src="{{img.url}}">
-        </ion-slide>
-      </ion-slide-box>
-  	</div>
-		<!-- end img swiper -->
 		<!-- product base card -->  
     <div class="card padding-horizontal">
-    <h4>{{product.name}}</h4>
-    <div class="price-box">			
-				<span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax | number:0}}</span>
-				</span>
-				<span class="old-price padding-horizontal">{{product.regular_price_with_tax | number:0}}</span>      
-      <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><em class="shipping">Free Shipping</em></div>
-      <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
-		</div>      
-        
-   		   
+			<!-- img swiper -->
+      <div class="product-swiper-container">
+        <ion-slide-box delegate-handle="image-viewer" show-pager="true">
+          <ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">
+            <img ng-src="{{img.url}}">
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+      <!-- end img swiper -->
+      <h4>{{product.name}}</h4>
+      <div class="price-box">			
+          <span class="special-price"><span class="price">{{product.symbol}}&nbsp;{{product.final_price_with_tax | number:0}}</span>
+          </span>
+          <span class="old-price padding-horizontal">{{product.regular_price_with_tax | number:0}}</span>      
+        <div ng-if="product.is_in_stock" class="availability in-stock"><span>Availability: In stock</span><em class="shipping">Free Shipping</em></div>
+        <div ng-if="!product.is_in_stock" class="availability out-of-stock"><span>Availability: Out of stock</span></div>
+      </div>
     </div>     
 		<!-- end product base card -->  
 		<!-- product option-->       
@@ -48,7 +46,8 @@
                 <span class="input-label">
               	{{option.custom_option_title}}
                 <em ng-if="option.is_require" class="assertive">*</em>
-                &nbsp;+{{product.symbol}}&nbsp;{{option.price | number:0}}&nbsp;
+                &nbsp;+{{product.symbol}}&nbsp;
+                <em ng-if="option.price > 0">+{{product.symbol}}&nbsp;{{option.price | number:0}}</em>
                 </span>
               </label>        
               <label class="item item-input padding-left">
@@ -67,7 +66,9 @@
                 <select name="options[{{option.option_id}}]" id="select_{{option.option_id}}" class="select-dark product-custom-option validation-failed" title="" onchange="opConfig.reloadPrice()">
                   <option value="">-- Please Select --</option>
                   <option ng-repeat="item in option.custom_option_value" value="{{item.option_type_id}}" price="{{item.price}}">
-                  {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price | number:0}}</option>
+                  {{item.title}}&nbsp;
+                  <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
+                  </option>
                 </select>
               </label>
             </div>	                    
@@ -85,7 +86,8 @@
 " class="checkbox">
                     <input type="checkbox" class="product-custom-option" onclick="opConfig.reloadPrice()" name="options[{{item.option_id}}][]" id="options_{{item.option_id}}_{{$index+2}}" value="{{item.option_type_id}}" price="{{item.price}}">
                     </label>
-                    {{item.title}}&nbsp;+{{product.symbol}}&nbsp;{{item.price | number:0}}
+                    {{item.title}}&nbsp;
+                    <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
                   </li>
                   </ul>
             </div>          
@@ -115,8 +117,8 @@
               <label class="item">                      
                 <span class="input-label">
               	{{option.custom_option_title}}                
-                <em ng-if="option.is_require==1" class="assertive">*</em>
-                &nbsp;+{{product.symbol}}&nbsp;{{option.price | number:0}}&nbsp;
+                <em ng-if="option.is_require==1" class="assertive">*</em>&nbsp;
+                <em ng-if="item.price > 0">+{{product.symbol}}&nbsp;{{item.price | number:0}}</em>
                 </span>
                 <div class="item">
                 <textarea onchange="opConfig.reloadPrice()" id="options_{{option.option_id}}_text" class="form__textarea product-custom-option" name="options[{{option.option_id}}]">
@@ -157,29 +159,15 @@
     </form>
     </div>
 		<!-- end product option-->  
-              
-		<ion-tabs class="tabs-ligth tabs-standard">
-	    <ion-tab title="Description" id="tab_description_tabbed_contents">
-      	<div class="list padding"  ng-bind-html="product.description | unsafe">
-        </div>
-			</ion-tab>
-	    <ion-tab title="Additional" id="tab_description_tabbed_attribute">
-      	<div class="list padding">
-          <div class="row">
-            <div class="col">Weight</div>
-            <div class="col col-75">{{product.weight}}&nbsp;g</div>
-          </div>
-          <div class="row" ng-repeat="item in product.additional">
-            <div class="col">{{item.label}}</div>
-            <div class="col col-75">{{item.value}}</div>
-          </div>
-        </div>
-			</ion-tab>
-    </ion-tabs>      
-      
+		<!-- product descript--> 
+    <div class="card padding-horizontal">
+    <h5>Product Descript</h5>
+    </div>      
+    <div class="padding"  ng-bind-html="product.description | unsafe">
+    </div>        
   <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  
+  <p>&nbsp;</p>     
+		<!-- end product descript-->    
   </ion-content>
   
   <div class="bar bar-footer bar-stable add-to-cart">
