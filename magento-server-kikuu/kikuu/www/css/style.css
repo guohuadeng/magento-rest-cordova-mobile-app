@@ -440,6 +440,9 @@ em	{
   max-height: 100%; 
   background-color: #FFF;
   }
+.popupFullscreen .popup-head	{
+  border-bottom: 0px solid #eee;
+  }
 .popupFullscreen .popup .popup-body	{
   height: 100%; 
   }
