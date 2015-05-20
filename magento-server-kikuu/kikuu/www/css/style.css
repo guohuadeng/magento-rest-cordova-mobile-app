@@ -492,7 +492,7 @@ em {
 
 .popupFullscreen .popup-buttons {
     position: fixed;
-    bottom: 30px;
+    bottom: 10px;
     width: 100%;
 }
 
@@ -503,6 +503,10 @@ em {
 .popupFullscreen .slider-slide {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+img .fullwidth {
+    width: 100% !important;
+    height: auto;
 }
 
 .product-swiper-container .slider-pager {
