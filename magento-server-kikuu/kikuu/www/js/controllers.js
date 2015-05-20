@@ -232,7 +232,7 @@ angular.module('app.controllers', [])
             }
 
             var params = {
-                limit: 10,
+                limit: 20,
                 page: tab.page,
                 cmd: tab.cmd || 'catalog'
             };
