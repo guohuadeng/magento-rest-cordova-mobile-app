@@ -88,6 +88,30 @@ angular.module('app.controllers', [])
 				 };
 
 			//end 各种弹出信息
+			
+        //首次欢迎页
+        $scope.welcome = function ()	{	
+					var myt = '<ion-slide-box show-pager="false">'
+							+'<ion-slide><img class="fullwidth" ng-src="img/spash1.png"></ion-slide>'
+							+'<ion-slide><img class="fullwidth" ng-src="img/spash2.png"></ion-slide>'
+							+'<ion-slide><img class="fullwidth" ng-src="img/spash3.png"></ion-slide>'
+							+'</ion-slide-box>';
+					// An elaborate, custom popup
+					var myPopup = $ionicPopup.show({
+						template: myt,
+						title: 'Welcome to Kikuu',
+						cssClass: 'popupFullscreen',
+						scope: $scope,
+						buttons: [
+							{ text: 'Enter Kikuu',
+								type: 'button-energized'},
+						]
+					});
+					myPopup.then(function(res) {
+						console.log('Tapped!', res);
+					});				
+				};
+				//end 首次欢迎页
         // 网站列表信息
         $scope.getWebsite = function () {
             $rootScope.service.get('website', function (website) {
@@ -317,12 +341,7 @@ angular.module('app.controllers', [])
 					});
 					myPopup.then(function(res) {
 						console.log('Tapped!', res);
-					});
-					$timeout(function() {
-						 myPopup.close(); //close the popup after 3 seconds for some reason
-					}, 30000);
-				 
-					
+					});				
 				};
 				//end 全屏幕图片
         $scope.qtyAdd = function () {

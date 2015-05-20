@@ -443,6 +443,11 @@ em	{
 .popupFullscreen .popup .popup-body	{
   height: 100%; 
   }
+.popupFullscreen .popup-buttons	{
+	position: fixed;
+  bottom: 10px;
+  width: 100%;  
+  }
 .popupFullscreen .slider-pager	{
   bottom: 0px; 
   }
