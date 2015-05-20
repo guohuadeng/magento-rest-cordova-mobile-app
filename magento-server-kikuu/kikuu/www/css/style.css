@@ -1,4 +1,4 @@
-84@font-face {
+@font-face {
     font-family: 'Open Sans';
     src: url('../fonts/opensans-regular-webfont.eot');
     src: url('../fonts/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -431,6 +431,24 @@ em	{
 .product-swiper-container img {
 	height: 240px;
 	width: auto;
+}
+.popupFullscreen 	{
+  }
+.popupFullscreen .popup	{
+	width: 100%!important;
+  height: 100%!important; 
+  max-height: 100%; 
+  background-color: #FFF;
+  }
+.popupFullscreen .popup .popup-body	{
+  height: 100%; 
+  }
+.popupFullscreen .slider-pager	{
+  bottom: 0px; 
+  }
+.popupFullscreen .slider-slide {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .product-swiper-container .slider-pager {
   /*background: rgba(240,240,240, .2);*/

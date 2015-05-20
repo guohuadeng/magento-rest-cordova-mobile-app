@@ -13,26 +13,39 @@ angular.module('app.controllers', [])
 				
 				//各种弹出信息				
 				// Triggered on a button click, or some other target
-				$scope.showPopup = function() {
+				$scope.showPopupForgotPwd = function(_title,_content) {
 					$scope.data = {}
 				
 					// An elaborate, custom popup
 					var myPopup = $ionicPopup.show({
-						template: '<input type="password" ng-model="data.wifi">',
-						title: 'Enter Wi-Fi Password',
-						subTitle: 'Please use normal things',
+						template: '<input class="padding-left" type="text" ng-model="registerData.email">',
+						title: 'Enter your email',
+						subTitle: 'This would take a little longer. Please wait...',
 						scope: $scope,
 						buttons: [
 							{ text: 'Cancel' },
 							{
-								text: '<b>Save</b>',
-								type: 'button-positive',
+								text: '<b>Submit</b>',
+								type: 'button-assertive',
 								onTap: function(e) {
-									if (!$scope.data.wifi) {
+									if (!$scope.registerData.email) {
 										//don't allow the user to close unless he enters wifi password
 										e.preventDefault();
-									} else {
-										return $scope.data.wifi;
+									} else {					
+					            $scope.showLoading();																	
+											$rootScope.service.get('forgotpwd', $scope.registerData, function (res) {
+													if (res.code == '0x0000') {
+															$scope.showAlert('Success', res.message);
+           										$scope.hideLoading();
+															return;
+													}
+													else  {
+															$scope.showAlert('Alert!','Error code:' + res.code + '</br>' + res.message );
+           										$scope.hideLoading();
+															return;
+													}		
+											});										
+										return $scope.registerData.email;
 									}
 								}
 							}
@@ -43,17 +56,19 @@ angular.module('app.controllers', [])
 					});
 					$timeout(function() {
 						 myPopup.close(); //close the popup after 3 seconds for some reason
-					}, 3000);
+					}, 30000);
 				 };
 				 // A confirm dialog
-				 $scope.showConfirm = function() {
+				 $scope.showConfirmExit = function() {
 					 var confirmPopup = $ionicPopup.confirm({
-						 title: 'Consume Ice Cream',
-						 template: 'Are you sure you want to eat this ice cream?'
+						 title: 'Confirm',
+						 template: 'Are you sure to exit the Kikuu App?',
+						 okType: 'button-assertive'
 					 });
 					 confirmPopup.then(function(res) {
 						 if(res) {
-							 console.log('You are sure');
+							 console.log('You are exit');
+               navigator.app.exitApp();
 						 } else {
 							 console.log('You are not sure');
 						 }
@@ -61,10 +76,11 @@ angular.module('app.controllers', [])
 				 };
 				
 				 // An alert dialog
-				 $scope.showAlert = function() {
+				 $scope.showAlert  = function(_title,_content) {
 					 var alertPopup = $ionicPopup.alert({
-						 title: 'Don\'t eat that!',
-						 template: 'It might taste good'
+							title: _title,
+							template: _content,
+							okType: 'button-assertive',
 					 });
 					 alertPopup.then(function(res) {
 						 console.log('Thank you for not eating my delicious ice cream cone');
@@ -178,17 +194,22 @@ angular.module('app.controllers', [])
         };
 
         $scope.doRegister = function () {
+						if (!($scope.registerData.password == $scope.registerData.confirmation))	{
+								$scope.showAlert('Alert!', 'Please confirm you password!');
+								return;
+							};
             $scope.showLoading();
             $rootScope.service.get('register', $scope.registerData, function (res) {
                 if (res[0]) {
-                    alert('Welcome! User register success.\n Please login.');
+                    $scope.showAlert('Success!','Welcome! User register success.\n Please login.');
                     $scope.doLogout();
+                    $scope.loginData.username = $scope.registerData.email;
                     $scope.login();
                     $scope.hideLoading();
                     return;
                 }
                 else {
-                    alert(res[2]);
+                    $scope.showAlert('Alert!', res[2]);
                     $scope.hideLoading();
                     return;
                 }
@@ -272,12 +293,37 @@ angular.module('app.controllers', [])
         };
     })
     //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicSlideBoxDelegate) {
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate) {
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.update();
         };
+        //全屏幕图片
+        $scope.imageFullscreen = function ()	{	
+					$scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
+					var myt = '<ion-slide-box show-pager="true" active-slide="' 
+							+ $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><img class="fullwidth" ng-src="{{img.url}}"></ion-slide></ion-slide-box>';
+					// An elaborate, custom popup
+					var myPopup = $ionicPopup.show({
+						template: myt,
+						title: 'Image Viewer',
+						cssClass: 'popupFullscreen',
+						scope: $scope,
+						buttons: [
+							{ text: 'Close' },
+						]
+					});
+					myPopup.then(function(res) {
+						console.log('Tapped!', res);
+					});
+					$timeout(function() {
+						 myPopup.close(); //close the popup after 3 seconds for some reason
+					}, 30000);
+				 
+					
+				};
+				//end 全屏幕图片
         $scope.qtyAdd = function () {
             $scope.qty = $scope.qty + 1;
         };
@@ -325,11 +371,11 @@ angular.module('app.controllers', [])
             }
             $rootScope.service.get('cartAdd', queryString, function (res) {
                 if (res.result == 'error') {
-                    alert(res.message);
+                    $scope.showAlert('Alert!',res.message);
                     return;
                 }
                 if (res.result == 'success') {
-                    alert('Success');
+                    $scope.showAlert('Success',res.items_qty +'&nbsp;items already in your cart.');
                     $scope.items_qty = res.items_qty;
                     $scope.$apply();
                     return;

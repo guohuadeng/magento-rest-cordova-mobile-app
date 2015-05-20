@@ -4,6 +4,7 @@ function Service($rootScope, Config) {
         website: Config.baseUrl + '/restconnect/store/websiteinfo',
         store: Config.baseUrl + '/restconnect/store/storeinfo',
         user: Config.baseUrl + '/restconnect/customer/status',
+				forgotpwd: Config.baseUrl + '/restconnect/customer/forgotpwd',
         menus: Config.baseUrl + '/restconnect/?cmd=menu',
         products: Config.baseUrl + '/restconnect/',
         login: Config.baseUrl + '/restconnect/customer/login',

@@ -19,7 +19,7 @@
                                 <button class="button button-full button-assertive" type="submit">Log in</button>
                             </label>
                             <div class="padding">
-                            <a ng-click="getPassword();">Forgot Your Password?</a>
+                            <a ng-click="showPopupForgotPwd();">Forgot Your Password?</a>
                             </div>
                         </form>
                     </div>
@@ -28,7 +28,6 @@
             </ion-tab>
 
             <ion-tab title="Register" icon-on="ion-ios-personadd" icon-off="ion-ios-personadd-outline">
-            	<ion-scroll style="width: 100%; height: 95%">
                 <ion-content>
                 	<form ng-submit="doRegister()" method="post" id="form-validate">
                     <div class="list account-create padding">
@@ -136,7 +135,6 @@
                     </div>
                   </form>
                 </ion-content>
-              </ion-scroll>
                 <!-- Tab 2 content -->
             </ion-tab>
             <ion-tab title="Close" icon="ion-android-close" ng-click="modal.hide()">

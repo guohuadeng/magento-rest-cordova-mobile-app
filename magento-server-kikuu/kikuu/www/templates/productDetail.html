@@ -6,7 +6,7 @@
       <div class="product-swiper-container">
         <ion-slide-box delegate-handle="image-viewer" show-pager="true">
           <ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">
-            <img ng-src="{{img.url}}">
+            <img ng-src="{{img.url}}" ng-click="imageFullscreen()">
           </ion-slide>
         </ion-slide-box>
       </div>
