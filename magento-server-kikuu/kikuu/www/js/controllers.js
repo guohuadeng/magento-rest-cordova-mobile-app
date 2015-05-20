@@ -327,7 +327,7 @@ angular.module('app.controllers', [])
         //全屏幕图片
         $scope.imageFullscreen = function ()	{	
 					$scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-					var myt = '<ion-slide-box show-pager="true" active-slide="' 
+					var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="true" active-slide="' 
 							+ $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><img class="fullwidth" ng-src="{{img.url}}"></ion-slide></ion-slide-box>';
 					// An elaborate, custom popup
 					var myPopup = $ionicPopup.show({
