@@ -178,7 +178,7 @@ em	{
     font-size: 0.8em;
     position: absolute;
     top: 16px;
-    padding-left: 60px;
+    left: 50px;
     line-height: 1em;
 }
 .menus-content .button {

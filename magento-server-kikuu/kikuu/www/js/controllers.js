@@ -296,6 +296,7 @@ angular.module('app.controllers', [])
     .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate) {
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
+        $scope.showShare = true;
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.update();
         };
