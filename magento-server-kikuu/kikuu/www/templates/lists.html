@@ -10,7 +10,7 @@
         <a href="#app/search" class="button button-icon ion-android-search"></a>
         <a href="#app/frame/cart" class="button button-icon ion-android-cart"></a>
     </ion-nav-buttons>
-    <ion-content scroll="false">
+    <ion-content scroll="true">
         <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
             <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
                 <md-content class="md-padding">
@@ -59,7 +59,7 @@
                             </div>
                         </ion-list>
                         <ion-infinite-scroll
-                                ng-if="tab.hasInit && !tab.loadOver"
+                                ng-if="tab.hasInit"
                                 on-infinite="loadMore($index)"
                                 distance="10%">
                         </ion-infinite-scroll>
