@@ -58,6 +58,46 @@ angular.module('app.controllers', [])
                 myPopup.close(); //close the popup after 3 seconds for some reason
             }, 30000);
         };
+        $scope.showLogin = function () {
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                templateUrl: 'templates/login.html',
+                title: 'Login',
+								cssClass: 'login-container',
+                scope: $scope,
+                buttons: [
+                    { text: 'Cancel' },
+                    {
+                        text: '<b>Login</b>',
+                        type: 'button-assertive',
+                        onTap: function (e) {
+                            if (!$scope.registerData.email) {
+                                //don't allow the user to close unless he enters wifi password
+                                e.preventDefault();
+                            } else {
+                                $scope.showLoading();
+                                $rootScope.service.get('forgotpwd', $scope.registerData, function (res) {
+                                    if (res.code == '0x0000') {
+                                        $scope.showAlert('Success', res.message);
+                                        $scope.hideLoading();
+                                        return;
+                                    }
+                                    else {
+                                        $scope.showAlert('Alert!', 'Error code:' + res.code + '</br>' + res.message);
+                                        $scope.hideLoading();
+                                        return;
+                                    }
+                                });
+                                return $scope.registerData.email;
+                            }
+                        }
+                    }
+                ]
+            });
+            myPopup.then(function (res) {
+                console.log('Tapped!', res);
+            });
+        };
         // A confirm dialog
         $scope.showConfirmExit = function () {
             var confirmPopup = $ionicPopup.confirm({
@@ -184,12 +224,10 @@ angular.module('app.controllers', [])
         // Open the login modal
         $scope.login = function () {
             $scope.modal.show();
-            $ionicTabsDelegate.select(0);
         };
         // Open the register modal
         $scope.register = function () {
-            $scope.modal.show();
-            $ionicTabsDelegate.select(1);
+            $scope.modal.hide();
         };
 
         // Perform the login action when the user submits the login form
@@ -437,6 +475,10 @@ angular.module('app.controllers', [])
             $scope.results = results;
             $scope.$apply();
         });
+    })
+    //login选项
+    .controller('LoginCtrl', function ($scope, $ionicPopup) {
+
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {

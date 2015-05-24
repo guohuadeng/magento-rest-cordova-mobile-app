@@ -162,8 +162,9 @@ em {
     border-bottom: 0px solid #fff !important;
 }
 
-.login-container ion-scroll {
+.login-container  .popup {
     position: relative;
+	width: 100%;
 }
 
 /* menus */

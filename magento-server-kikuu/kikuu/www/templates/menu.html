@@ -20,7 +20,7 @@
         <ion-header-bar class="menus bar-light">
           <span ng-if="!user">
             <h3 class="padding">
-                <em class="ion-person padding-left" menu-close ng-click="login()">&nbsp;Login</em>&nbsp;|&nbsp;<em menu-close ng-click="register()">Register</em>
+                <a class="ion-person padding-left" menu-close ng-click="login()">&nbsp;Login</a>&nbsp;|&nbsp;<em><a menu-toggle="left" ng-click="register()" href="#app/register">Register</a></em>
             </h3>
           </span>
           <span ng-if="user">
@@ -51,10 +51,6 @@
                   <a menu-toggle="left" href="#app/frame/account"
                   	class="button button-full button-light icon icon-left ion-ios-cloud-outline">
                       <span class="padding-horizontal">My Account</span>
-                  </a>
-                  <a menu-toggle="left" href="http://demo-extension.magestore.com/sandbox/reward-points/platinum/index.php/autologin/demo"
-                  	class="button button-full button-light icon icon-left ion-ios-cloud-outline">
-                      <span class="padding-horizontal">My Reward</span>
                   </a>
                   <a menu-toggle="left" href="#app/frame/order"
                   	class="button button-full button-light icon icon-left ion-ios-list-outline">

@@ -22,7 +22,7 @@ angular.module('app', [
 
     .config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
-				//$ionicConfigProvider.scrolling.jsScrolling(false);
+				$ionicConfigProvider.scrolling.jsScrolling(false);
 				$ionicConfigProvider.tabs.position(top);
 				
         $stateProvider
@@ -37,6 +37,14 @@ angular.module('app', [
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/login.html'
+                    }
+                }
+            })
+            .state('app.register', {
+                url: '/register',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/register.html'
                     }
                 }
             })
