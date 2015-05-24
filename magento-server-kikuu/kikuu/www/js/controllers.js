@@ -6,6 +6,12 @@ angular.module('app.controllers', [])
             $ionicLoading.show({
                 template: 'Loading...'
             });
+						/*
+            $timeout(function () {
+								$scope.showAlert('Alert!','Can not load data! Please check your network');
+                $ionicLoading.hide(); //close the popup after 3 seconds for some reason
+            }, 10000);
+						*/
         };
         $scope.hideLoading = function () {
             $ionicLoading.hide();
@@ -17,23 +23,25 @@ angular.module('app.controllers', [])
             $scope.data = {};
 
             // An elaborate, custom popup
-            var myPopup = $ionicPopup.show({
-                template: '<input class="padding-left" type="text" ng-model="registerData.email">',
+            var myPopup = $ionicPopup.prompt({
+                template: '<input autofocus class="padding-left" type="text" ng-model="loginData.username">',
                 title: 'Enter your email',
                 subTitle: 'This would take a little longer. Please wait...',
-                scope: $scope,
+								inputType: 'email',
+                scope: $scope,	
                 buttons: [
                     { text: 'Cancel' },
                     {
                         text: '<b>Submit</b>',
                         type: 'button-assertive',
                         onTap: function (e) {
-                            if (!$scope.registerData.email) {
+                            if (!$scope.loginData.username) {
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
+																$scope.loginData.email = $scope.loginData.username
                                 $scope.showLoading();
-                                $rootScope.service.get('forgotpwd', $scope.registerData, function (res) {
+                                $rootScope.service.get('forgotpwd', $scope.loginData, function (res) {
                                     if (res.code == '0x0000') {
                                         $scope.showAlert('Success', res.message);
                                         $scope.hideLoading();
@@ -209,8 +217,7 @@ angular.module('app.controllers', [])
 
         // Create the login modal that we will use later
         $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope,
-            focusFirstInput: true
+            scope: $scope
         }).then(function (modal) {
                 $scope.modal = modal;
                 $ionicTabsDelegate.select(0);
@@ -362,51 +369,22 @@ angular.module('app.controllers', [])
         };
     })
     //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $cordovaSocialSharing) {
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $cordovaSocialSharing) {	
+        $scope.showLoading();
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
         $scope.showShare = true;
-        $scope.onShare = function () {
-            $cordovaSocialSharing.share($scope.product.name, $scope.product.name, '', $scope.product.url_key);
-        };
         $scope.updateSlider = function () {
             $ionicSlideBoxDelegate.update();
         };
-        //全屏幕图片
-        $scope.imageFullscreen = function () {
-            $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="true" active-slide="'
-                + $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><img class="fullwidth" ng-src="{{img.url}}"></ion-slide></ion-slide-box>';
-            // An elaborate, custom popup
-            var myPopup = $ionicPopup.show({
-                template: myt,
-                title: 'Image Viewer',
-                cssClass: 'popupFullscreen',
-                scope: $scope,
-                buttons: [
-                    { text: 'Close' }
-                ]
-            });
-            myPopup.then(function (res) {
-                console.log('Tapped!', res);
-            });
-        };
-        //end 全屏幕图片
-        $scope.qtyAdd = function () {
-            $scope.qty = $scope.qty + 1;
-        };
-        $scope.qtyMinus = function () {
-            if ($scope.qty > 1)
-                $scope.qty = $scope.qty - 1;
-        };
-        //取购物车商业品数量
+        //取购物车商品数量
         $rootScope.service.get('cartGetQty', {
             product: $stateParams.productid
         }, function (res) {
             $scope.items_qty = res.items_qty;
             $scope.$apply();
         });
-
+        //取商品详情
         $rootScope.service.get('productDetail', {
             productid: $stateParams.productid
         }, function (results) {
@@ -418,7 +396,7 @@ angular.module('app.controllers', [])
                 $scope.productImg = lists;
                 $scope.$apply();
             });
-
+        	//取商品选项
             if (results.has_custom_options) {
                 $rootScope.service.get('productOption', {
                     productid: $stateParams.productid
@@ -428,8 +406,58 @@ angular.module('app.controllers', [])
                 });
             }
             $scope.$apply();
+        		$scope.hideLoading();
         });
+				//分享
+        $scope.onShare = function () {
+            $cordovaSocialSharing.share($scope.product.name, $scope.product.name, '', $scope.product.url_key);
+        };
+        //全屏幕图片
+        $scope.imageFullscreen = function () {
+            $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
+            var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="false" active-slide="'
+                + $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><img class="fullwidth" ng-src="{{img.url}}"></ion-slide></ion-slide-box>';
+            // An elaborate, custom popup
+            var myPopup = $ionicPopup.show({
+                template: myt,
+                title: '',
+                cssClass: 'popupFullscreen',
+                scope: $scope,
+                buttons: [
+                    {
+                        text: '< ',
+                        type: 'button-light',
+                        onTap: function (e) {
+														$ionicSlideBoxDelegate.previous();
+											      e.preventDefault();
+                            }
+                     },
+                    { text: 'Close' ,
+                        type: 'button-light',},
+                    { text: '>',
+                        type: 'button-light',
+                        onTap: function (e) {
+														$ionicSlideBoxDelegate.next();
+											      e.preventDefault();
+                            } 
+										}
+                ]
+            });
+            myPopup.then(function (res) {
+                console.log('Tapped!', res);
+            });
+        };
+        //end 全屏幕图片
 
+				//增减数量操作
+        $scope.qtyAdd = function () {
+            $scope.qty = $scope.qty + 1;
+        };
+        $scope.qtyMinus = function () {
+            if ($scope.qty > 1)
+                $scope.qty = $scope.qty - 1;
+        };
+				//end 增减数量操作
         // Perform the add to cart
         $scope.doCartAdd = function () {
             var queryString = $('#product_addtocart_form').formSerialize();

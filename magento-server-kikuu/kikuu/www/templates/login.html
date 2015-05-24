@@ -1,17 +1,18 @@
 <ion-modal-view view-title="Login - Registered User">
 
-      <ion-nav-bar class="bar-light">
-          <ion-nav-buttons side="left"> 
-			   	<h3>Login - Registered User</h3>
-          </ion-nav-buttons>   
-          <ion-nav-buttons side="right"> 
-            <a class="button button-icon ion-close-round" ng-click="modal.hide()"></a>
-          </ion-nav-buttons>   
-      </ion-nav-bar>
+  <ion-nav-bar class="bar-light">
+      <ion-nav-buttons side="left"> 
+      <h3>Login - Registered User</h3>
+      </ion-nav-buttons>   
+      <ion-nav-buttons side="right"> 
+        <a class="button button-icon ion-close-round" ng-click="modal.hide()"></a>
+      </ion-nav-buttons>   
+  </ion-nav-bar>
             
+  <ion-content overflow-scroll="false">
     <div class="login-container">
 			<div class="list padding">
-      <h3>Login - Registered User</h3>
+      <h3>&nbsp;</h3>
       <form ng-submit="doLogin()" id="login-form">
           <label class="item item-input">
               <span class="input-label">Email</span>
@@ -29,9 +30,10 @@
           </div>
       </form>
           <div class="button-bar">
-              <button class="button button-full button-light" ng-click="modal.hide()" type="cancel">Cancel</button>
-              <button class="button button-full button-assertive"  ng-click="doLogin()" type="submit">Log in</button>
+              <button class="button button-full button-stable" ng-click="modal.hide()" type="cancel">Cancel</button>
+              <button class="button button-full button-assertive"  ng-click="doLogin()" type="submit">Login</button>
           </div>
 		</div>
 	</div>
+  </ion-content>>
 </ion-modal-view>

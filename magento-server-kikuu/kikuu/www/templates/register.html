@@ -1,108 +1,108 @@
 <ion-view view-title="New Customer">
-    <ion-content overflow-scroll="false" scroll="true">
-                	<form ng-submit="doRegister()" method="post" id="form-validate">
-                    <div class="list account-create padding">
-                        <label class="item">Country/Region</label>
-                        <label class="item item-radio">
-                          <input type="radio" id="store_group_id" name="store_group_id" value="1" checked="checked">
-                          <div class="item-content">
-                          <span class="padding-horizontal">Tanzania</span>
-                          <img src="img/flags/Tanzania.png" height="18">
-                          </div>
-                          <i class="radio-icon ion-checkmark"></i>
-                        </label>
-                        <label class="item item-radio">
-                          <input type="radio" id="store_group_id" name="store_group_id" value="3" disabled="disabled">
-                          <div class="item-content">
-                          <span class="padding-horizontal">Ethiopia</span>
-                          <img src="img/flags/Ethiopia.png" height="18">
-                          </div>
-                          <i class="radio-icon ion-checkmark"></i>
-                        </label>                            
-
-                        <!-- 短信验证.form__field -->
-                        <label class="item item-input">
-                            <span class="input-label">Mobile*</span>
-                            <input type="tel"
-                                   placeholder="Input your mobile number"
-                                   ng-model="registerData.default_mobile_number">
-                        </label>
-                        <label class="item item-input">
-                            <span class="input-label">Validcode*</span>
-                            <input type="text" placeholder="Validation Code*"
-                                   ng-model="registerData.validation_Code">
-                        </label>
-                        <label class="item">
-                            <button class="button button-outline button-assertive"
-                                    value="Get Validation Code"
-                                    ng-click="getValidationCode()"
-                                    ng-disabled="validationCodeDisabled">
-                                <em ng-if="validationCodeDisabled">
-                                    [{{validationCode}}]Wait...({{validateSeconds}}s)
-                                </em>
-                                <em ng-if="!validationCodeDisabled">
-                                    Get Validation Code
-                                </em>
-                            </button>
-                        </label>
-                        <!-- end 短信验证.form__field -->
-
-                        <div class="item item-divider">
-                        </div>
-                        <label class="item item-input">
-                            <span class="input-label">Email*</span>
-                            <input type="text" placeholder="Email*"
-                                   ng-model="registerData.email">
-                        </label>
-
-                        <label class="item item-input">
-                            <span class="input-label">First Name*</span>
-                            <input type="text" placeholder="First Name*"
-                                   ng-model="registerData.firstname">
-                        </label>
-
-                        <label class="item item-input">
-                            <span class="input-label">Last Name*</span>
-                            <input type="text" placeholder="Last Name*"
-                                   ng-model="registerData.lastname">
-                        </label>
-
-
-                        <label class="item item-input">
-                            <span class="input-label">Gender*</span>
-                            <label class="item item-radio">
-                                <input name="gender" type="radio" value="1"
-                                       ng-model="registerData.gender"
-                                       checked>
-                                <div class="item-content icon-left ion-male">&nbsp;Male</div>
-            <i class="radio-icon ion-checkmark"></i>
-                            </label>
-                            <label class="item item-radio">
-                                <input name="gender" type="radio" value="2"
-                                       ng-model="registerData.gender"
-                                       checked>
-                                <div class="item-content icon-left ion-female">&nbsp;FeMale</div>
-            										<i class="radio-icon ion-checkmark"></i>
-                            </label>
-                        </label>                        
-
-                        <label class="item item-input">
-                            <span class="input-label">Password*</span>
-                            <input type="password" placeholder="Password*"
-                                   ng-model="registerData.password">
-                        </label>
-
-                        <label class="item item-input">
-                            <span class="input-label">Confirm*</span>
-                            <input type="password" placeholder="Confirm Password*"
-                                   ng-model="registerData.confirmation">
-                        </label>
-
-                        <label class="item">
-                            <button class="button button-full button-assertive"
-                                     type="submit">Submit</button>
-                        </label>
-                    </div>
-                  </form>
-                </ion-content>
+	<ion-content overflow-scroll="false" scroll="true">
+  <form ng-submit="doRegister()" method="post" id="form-validate">
+    <div class="list account-create padding">
+        <label class="item">Country/Region</label>
+        <label class="item item-radio">
+          <input type="radio" id="store_group_id" name="store_group_id" value="1" checked="checked">
+          <div class="item-content">
+          <span class="padding-horizontal">Tanzania</span>
+          <img src="img/flags/Tanzania.png" height="18">
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" id="store_group_id" name="store_group_id" value="3" disabled="disabled">
+          <div class="item-content">
+          <span class="padding-horizontal">Ethiopia</span>
+          <img src="img/flags/Ethiopia.png" height="18">
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>                            
+  
+        <!-- 短信验证.form__field -->
+        <label class="item item-input">
+            <span class="input-label">Mobile*</span>
+            <input type="tel"
+                   placeholder="Input your mobile number"
+                   ng-model="registerData.default_mobile_number">
+        </label>
+        <label class="item item-input">
+            <span class="input-label">Validcode*</span>
+            <input type="text" placeholder="Validation Code*"
+                   ng-model="registerData.validation_Code">
+        </label>
+        <label class="item">
+            <button class="button button-outline button-assertive"
+                    value="Get Validation Code"
+                    ng-click="getValidationCode()"
+                    ng-disabled="validationCodeDisabled">
+                <em ng-if="validationCodeDisabled">
+                    [{{validationCode}}]Wait...({{validateSeconds}}s)
+                </em>
+                <em ng-if="!validationCodeDisabled">
+                    Get Validation Code
+                </em>
+            </button>
+        </label>
+        <!-- end 短信验证.form__field -->
+  
+        <div class="item item-divider">
+        </div>
+        <label class="item item-input">
+            <span class="input-label">Email*</span>
+            <input type="text" placeholder="Email*"
+                   ng-model="registerData.email">
+        </label>
+  
+        <label class="item item-input">
+            <span class="input-label">First Name*</span>
+            <input type="text" placeholder="First Name*"
+                   ng-model="registerData.firstname">
+        </label>
+  
+        <label class="item item-input">
+            <span class="input-label">Last Name*</span>
+            <input type="text" placeholder="Last Name*"
+                   ng-model="registerData.lastname">
+        </label>
+  
+  
+        <label class="item item-input">
+            <span class="input-label">Gender*</span>
+            <label class="item item-radio">
+                <input name="gender" type="radio" value="1"
+                       ng-model="registerData.gender"
+                       checked>
+                <div class="item-content icon-left ion-male">&nbsp;Male</div>
+  <i class="radio-icon ion-checkmark"></i>
+            </label>
+            <label class="item item-radio">
+                <input name="gender" type="radio" value="2"
+                       ng-model="registerData.gender"
+                       checked>
+                <div class="item-content icon-left ion-female">&nbsp;FeMale</div>
+                <i class="radio-icon ion-checkmark"></i>
+            </label>
+        </label>                        
+  
+        <label class="item item-input">
+            <span class="input-label">Password*</span>
+            <input type="password" placeholder="Password*"
+                   ng-model="registerData.password">
+        </label>
+  
+        <label class="item item-input">
+            <span class="input-label">Confirm*</span>
+            <input type="password" placeholder="Confirm Password*"
+                   ng-model="registerData.confirmation">
+        </label>
+  
+        <label class="item">
+            <button class="button button-full button-assertive"
+                     type="submit">Submit</button>
+        </label>
+    </div>
+  </form>
+  </ion-content>
 </ion-view>
