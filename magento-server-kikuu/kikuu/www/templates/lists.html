@@ -61,7 +61,8 @@
                         <ion-infinite-scroll
                                 ng-if="tab.hasInit && !tab.loadOver"
                                 on-infinite="loadMore($index)"
-                                distance="10%">
+                                overflow-scroll="true"
+                                distance="15%">
                         </ion-infinite-scroll>
                     </ion-scroll>
                 </md-content>
