@@ -10,11 +10,10 @@
         <a href="#app/search" class="button button-icon ion-android-search"></a>
         <a href="#app/frame/cart" class="button button-icon ion-android-cart"></a>
     </ion-nav-buttons>
-    <ion-content scroll="false">
+    <ion-content scroll="true">
         <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
             <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
                 <md-content class="md-padding">
-                    <ion-scroll style="height:100%">
                         <ion-refresher
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">
@@ -63,77 +62,8 @@
                                 on-infinite="loadMore($index)"
                                 distance="10%">
                         </ion-infinite-scroll>
-                    </ion-scroll>
                 </md-content>
             </md-tab>
         </md-tabs>
-    </ion-content>
-    <!--<ion-content scroll="false">-->
-        <!--<tab-slide-box>-->
-            <!--<div class="tsb-icons header-slide">-->
-                <!--<div class="tsb-ic-wrp">-->
-                    <!--<ion-scroll direction="x" class="tsb-hscroll">-->
-                        <!--<a ng-repeat="menu in menus" href="javascript:;" on-finish-render="update()">-->
-                            <!--{{menu.name}}-->
-                        <!--</a>-->
-                    <!--</ion-scroll>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<ion-slide-box show-pager="false" active-slide="activeSlide"-->
-                           <!--on-slide-changed="slideHasChanged($index)">-->
-                <!--<ion-slide ng-repeat="slide in slides" style="height:100%">-->
-                    <!--<ion-scroll style="height:95%">-->
-                        <!--<ion-refresher-->
-                                <!--pulling-text="Pull to refresh..."-->
-                                <!--on-refresh="doRefresh($index)">-->
-                        <!--</ion-refresher>-->
-                        <!--<ion-list class="products-grid {{slide.class_name}}">-->
-                            <!--<div class="product" ng-repeat="product in slide.lists">-->
-                                <!--<div class="product-inner">-->
-                                    <!--<a href="#app/productDetail/{{product.entity_id}}">-->
-                                        <!--<div class="product-image">-->
-                                            <!--<img src="{{product.image_url}}"-->
-                                                 <!--alt="{{product.name}}">-->
-                                        <!--</div>-->
-                                    <!--</a>-->
-
-                                    <!--<div class="product-info">-->
-                                        <!--<div class="product-name">-->
-                                            <!--{{product.name}}-->
-                                        <!--</div>-->
-
-                                        <!--<div class="product-price">-->
-                                            <!--<div class="price-box">-->
-                                                <!--<span class="special-price">-->
-                                                    <!--<span class="special-price">-->
-                                                        <!--<span class="price">-->
-                                                            <!--{{product.symbol}}{{product.final_price_with_tax | number:0}}-->
-                                                        <!--</span>-->
-                                                        <!--&nbsp;-->
-                                                        <!--<span class="old-price">-->
-                                                            <!--{{product.symbol}}{{product.regular_price_with_tax | number:0}}-->
-                                                        <!--</span>-->
-                                                    <!--</span>-->
-                                                <!--</span>-->
-                                                <!--<span class="discount {{price_percent_class}}">-->
-                                                    <!--<span class="price">-->
-                                                        <!--{{product | discount}}-->
-                                                    <!--</span>-->
-                                                <!--</span>-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</ion-list>-->
-                        <!--<ion-infinite-scroll-->
-                                <!--ng-if="slide.hasInit && !slide.loadOver"-->
-                                <!--on-infinite="loadMore($index)"-->
-                                <!--distance="10%">-->
-                        <!--</ion-infinite-scroll>-->
-                    <!--</ion-scroll>-->
-                <!--</ion-slide>-->
-            <!--</ion-slide-box>-->
-        <!--</tab-slide-box>-->
     </ion-content>
 </ion-view>
