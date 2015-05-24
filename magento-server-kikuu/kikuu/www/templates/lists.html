@@ -59,7 +59,7 @@
                             </div>
                         </ion-list>
                         <ion-infinite-scroll
-                                ng-if="tab.hasInit"
+                                ng-if="tab.hasInit && !tab.loadOver"
                                 on-infinite="loadMore($index)"
                                 distance="10%">
                         </ion-infinite-scroll>
