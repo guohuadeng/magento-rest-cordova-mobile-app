@@ -14,7 +14,7 @@
         <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
             <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
                 <md-content class="md-padding">
-                    <ion-scroll style="height:100%">
+                    <ion-scroll style="height:100%" overflow-scroll="true">
                         <ion-refresher
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">
@@ -61,7 +61,6 @@
                         <ion-infinite-scroll
                                 ng-if="tab.hasInit && !tab.loadOver"
                                 on-infinite="loadMore($index)"
-                                overflow-scroll="true"
                                 distance="15%">
                         </ion-infinite-scroll>
                     </ion-scroll>
