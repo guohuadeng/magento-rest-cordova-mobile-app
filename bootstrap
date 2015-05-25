@@ -4,6 +4,7 @@ node version.js
 cd magento-server-kikuu/kikuu
 ionic build android --release
 
+rm kikuu-unsigned.apk kikuu.apk 
 cp platforms/android/build/outputs/apk/android-armv7-release-unsigned.apk kikuu-unsigned.apk
 jarsigner -verbose -keystore platforms/android/kikuu.keystore -storepass kikuu123 -keypass kikuu123 kikuu-unsigned.apk kikuuAndroid
 zipalign -f -v 4 kikuu-unsigned.apk kikuu.apk
