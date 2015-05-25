@@ -315,6 +315,7 @@ angular.module('app.controllers', [])
             if (tab.category_id) {
                 params.categoryid = +tab.category_id;
             }
+						$scope.showLoading();
             $rootScope.service.get('products', params, function (lists) {
                 if (type === 'load') {
                     if (lists) {
@@ -331,6 +332,10 @@ angular.module('app.controllers', [])
                     callback();
                 }
             });
+						
+            $timeout(function () {
+						$scope.hideLoading();							
+            }, 500);
         };
 
         // 根据菜单生成 tabs
