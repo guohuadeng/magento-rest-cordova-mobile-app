@@ -14,7 +14,7 @@
         <md-tabs md-selected="selectedIndex" md-stretch-tabs="never" md-border-bottom>
             <md-tab ng-repeat="tab in tabs" label="{{tab.name}}">
                 <md-content class="md-padding">
-                    <ion-scroll style="height:100%" overflow-scroll="true">
+                    <ion-scroll style="height:100%" overflow-scroll="true" locking="true">
                         <ion-refresher
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">

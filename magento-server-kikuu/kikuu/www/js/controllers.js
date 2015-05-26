@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicTabsDelegate, $ionicLoading, $ionicPopup, $timeout) {
+    .controller('AppCtrl', function ($scope, $rootScope, $ionicModal, $ionicSlideBoxDelegate, $ionicTabsDelegate, $ionicLoading, $ionicPopup, $timeout) {
         //取数据时的loading mask
         $scope.showLoading = function () {
             $ionicLoading.show({
@@ -372,7 +372,7 @@ angular.module('app.controllers', [])
         };
     })
     //产品统一用这个名 Product-xx
-    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate, $cordovaSocialSharing) {	
+    .controller('productDetailCtrl', function ($scope, $rootScope, $stateParams, $ionicPopup, $ionicSlideBoxDelegate,$ionicScrollDelegate, $cordovaSocialSharing) {	
         $scope.showLoading();
         $scope.productid = $stateParams.productid;
         $scope.qty = 1;
@@ -418,8 +418,14 @@ angular.module('app.controllers', [])
         //全屏幕图片
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="false" active-slide="'
-                + $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><a href="#"><img class="fullwidth" ng-src="{{img.url}}"></a></ion-slide></ion-slide-box>';
+            var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="true" active-slide="'
+                + $ionicSlideBoxDelegate.currentIndex() 
+								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">'
+								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
+								+'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
+								+'<span></span>'
+								+'</ion-scroll>'
+								+'</ion-slide></ion-slide-box>';
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,
@@ -446,6 +452,18 @@ angular.module('app.controllers', [])
 										}
                 ]
             });
+						var toggle = 0;
+						$scope.zoomProductImg = function ()	{
+							if (toggle==0) {
+								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(2);
+								toggle = 1;
+							}
+							else if (toggle==1) {
+								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
+								toggle = 0;
+							}							
+							};
+						(document.getElementById('zoomImg')).style.width = (screen.width) + "px";
             myPopup.then(function (res) {
                 console.log('Tapped!', res);
             });
@@ -488,10 +506,6 @@ angular.module('app.controllers', [])
 
     })
 
-    .controller('DetailCtrl', function ($scope, $stateParams) {
-
-    })
-
     .controller('SearchCtrl', function ($scope, $location) {
         $scope.model = {};
         //angular.element('#search-input').trigger('focus');
@@ -507,9 +521,9 @@ angular.module('app.controllers', [])
             $scope.$apply();
         });
     })
-    //login选项
-    .controller('LoginCtrl', function ($scope, $ionicPopup) {
-
+    //register选项
+    .controller('registerCtrl', function ($scope, $rootScope) {
+        $scope.registerData = {};
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {
