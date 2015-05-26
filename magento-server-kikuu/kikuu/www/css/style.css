@@ -222,19 +222,31 @@ em {
 
 /* end menus */
 /* login and register */
+
+.login-container .popup {
+    width: 100% !important;
+    height: 80%;
+    max-height: 320px;
+    background-color: #FFF;
+}
+
+.login-container .popup-buttons {
+    top: 160px;
+    position: relative;
+}
 .login-container .tab-nav {
     top: 0px;
 }
 
-.login-container .registered-users, .login-container .account-create {
+.login-container .registered-users, .login-container .register-container {
     top: 44px;
 }
 
-.login-container .button {
+.login-container .button,.register-container .button {
     float: right;
 }
 
-.account-create .item-radio .item-content {
+.register-container .item-radio .item-content {
     padding: 6px 34px 16px 16px
 }
 

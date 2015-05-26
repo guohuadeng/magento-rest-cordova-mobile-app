@@ -22,7 +22,7 @@ angular.module('app', [
 
     .config(function ($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
-				$ionicConfigProvider.scrolling.jsScrolling(false);
+				$ionicConfigProvider.scrolling.jsScrolling(true);
 				$ionicConfigProvider.tabs.position(top);
 				
         $stateProvider

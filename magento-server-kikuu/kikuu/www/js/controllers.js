@@ -68,40 +68,35 @@ angular.module('app.controllers', [])
         };
         $scope.showLogin = function () {
             // An elaborate, custom popup
+						$scope.loginData.password = '';
+						$scope.$apply();
             var myPopup = $ionicPopup.show({
                 templateUrl: 'templates/login.html',
-                title: 'Login',
+                title: 'Login - Registered User',
 								cssClass: 'login-container',
                 scope: $scope,
                 buttons: [
                     { text: 'Cancel' },
                     {
-                        text: '<b>Login</b>',
+                        text: 'Login',
                         type: 'button-assertive',
                         onTap: function (e) {
-                            if (!$scope.registerData.email) {
+                            if (!$scope.loginData.username) {
                                 //don't allow the user to close unless he enters wifi password
                                 e.preventDefault();
                             } else {
-                                $scope.showLoading();
-                                $rootScope.service.get('forgotpwd', $scope.registerData, function (res) {
-                                    if (res.code == '0x0000') {
-                                        $scope.showAlert('Success', res.message);
-                                        $scope.hideLoading();
-                                        return;
-                                    }
-                                    else {
-                                        $scope.showAlert('Alert!', 'Error code:' + res.code + '</br>' + res.message);
-                                        $scope.hideLoading();
-                                        return;
-                                    }
-                                });
+																$scope.doLogin();
                                 return $scope.registerData.email;
                             }
                         }
                     }
                 ]
             });
+						$scope.hideLogin = function () {
+									console.log('login close');
+									myPopup.close();
+									return $scope.loginData.username;
+						};
             myPopup.then(function (res) {
                 console.log('Tapped!', res);
             });
@@ -238,19 +233,24 @@ angular.module('app.controllers', [])
         };
 
         // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
+        $scope.doLogin = function () {					
+            $scope.showLoading();
             $rootScope.service.get('login', $scope.loginData, function (res) {
                 if (res.code || res.message) {
-                    alert(res.message || res.code);
+                    $scope.showAlert('Alert!',res.message || res.code);			
+				            $scope.hideLoading();
                     return;
                 }
                 $scope.user = res;
                 $scope.modal.hide();
-            });
+		            $scope.hideLoading();
+            });								
         };
 
-        $scope.doLogout = function () {
+        $scope.doLogout = function () {				
+            $scope.showLoading();
             $rootScope.service.get('logout', $scope.getUser);
+            $timeout($scope.hideLoading(), 1000);
         };
 
         $scope.validationCodeDisabled = false;

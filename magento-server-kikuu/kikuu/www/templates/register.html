@@ -1,7 +1,7 @@
 <ion-view view-title="New Customer">
-	<ion-content overflow-scroll="false">
+	<ion-content overflow-scroll="false" class="register-container">
   <form ng-submit="doRegister()" method="post" id="form-validate">
-    <div class="list account-create padding">
+    <div class="list padding">
         <label class="item">Country/Region</label>
         <label class="item item-radio">
           <input type="radio" id="store_group_id" name="store_group_id" value="1" checked="checked">
@@ -23,7 +23,7 @@
         <!-- 短信验证.form__field -->
         <label class="item item-input">
             <span class="input-label">Mobile*</span>
-            <input type="tel"
+            <input autofocus type="tel"
                    placeholder="Input your mobile number"
                    ng-model="registerData.default_mobile_number">
         </label>
