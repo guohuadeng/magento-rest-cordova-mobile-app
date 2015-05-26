@@ -503,7 +503,7 @@ em {
     vertical-align:middle;
 }
 .fullwidth {
-    width: 100%;
+    width: 100%!important;
     vertical-align:middle;
     height: auto;
 }
