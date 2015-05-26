@@ -45,7 +45,6 @@ md-tabs-canvas {
 
 .md-tab.md-active, .md-tab.md-focused {
     color: #000 !important;
-    line-height: 20px;
 }
 
 md-tabs-content-wrapper {
