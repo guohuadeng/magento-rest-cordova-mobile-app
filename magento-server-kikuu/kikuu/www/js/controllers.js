@@ -418,7 +418,7 @@ angular.module('app.controllers', [])
         //全屏幕图片
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="true" active-slide="'
+            var myt = '<ion-slide-box delegate-handle="image-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
                 + $ionicSlideBoxDelegate.currentIndex() 
 								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">'
 								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
@@ -452,18 +452,21 @@ angular.module('app.controllers', [])
 										}
                 ]
             });
-						var toggle = 0;
+						var toggle = 1;
 						$scope.zoomProductImg = function ()	{
-							if (toggle==0) {
-								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(2);
-								toggle = 1;
-							}
-							else if (toggle==1) {
-								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);
-								toggle = 0;
-							}							
+								if (toggle==1) {
+									toggle = 2;
+									$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
+								}
+								else if (toggle==2) {
+									toggle = 1;
+									$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(toggle);
+								}							
 							};
-						(document.getElementById('zoomImg')).style.width = (screen.width) + "px";
+						$scope.noZoom = function ()	{
+								$ionicScrollDelegate.$getByHandle('image-scroll').zoomTo(1);							
+							}
+							
             myPopup.then(function (res) {
                 console.log('Tapped!', res);
             });
