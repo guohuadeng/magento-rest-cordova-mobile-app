@@ -419,7 +419,7 @@ angular.module('app.controllers', [])
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
             var myt = '<ion-slide-box delegate-handle="image-viewer" show-pager="false" active-slide="'
-                + $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><img class="fullwidth" ng-src="{{img.url}}"></ion-slide></ion-slide-box>';
+                + $ionicSlideBoxDelegate.currentIndex() + '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()"><a href="#"><img class="fullwidth" ng-src="{{img.url}}"></a></ion-slide></ion-slide-box>';
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,

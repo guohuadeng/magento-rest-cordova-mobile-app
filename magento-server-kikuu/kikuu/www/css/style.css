@@ -475,7 +475,15 @@ em {
 
 .popupFullscreen {
 }
+.popupFullscreen a{
+    display:inline-block;
+    text-align:center;
+    vertical-align:middle;
+}
 
+.popupFullscreen a img{
+    vertical-align:middle;
+}
 .popupFullscreen .popup {
     width: 100% !important;
     height: 100% !important;
@@ -497,6 +505,9 @@ em {
     width: 100%;
 }
 
+.popupFullscreen .slider {
+    height: 80%;
+}
 .popupFullscreen .slider-pager {
     bottom: 0px;
 }
@@ -505,7 +516,7 @@ em {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-img .fullwidth {
+.fullwidth {
     width: 100% !important;
     height: auto;
 }
