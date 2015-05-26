@@ -2,7 +2,7 @@
  * Copyright 2014 Drifty Co.
  * http://drifty.com/
  *
- * Ionic, v1.0.0-rc.4
+ * Ionic, v1.0.0-nightly-1310
  * A powerful HTML5 mobile app framework.
  * http://ionicframework.com/
  *
@@ -1160,9 +1160,45 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
     /**
      * @ngdoc method
      * @name $ionicHistory#goBack
+     * @param {number=} backCount Optional negative integer setting how many views to go
+     * back. By default it'll go back one view by using the value `-1`. To go back two
+     * views you would use `-2`. If the number goes farther back than the number of views
+     * in the current history's stack then it'll go to the first view in the current history's
+     * stack. If the number is zero or greater then it'll do nothing. It also does not
+     * cross history stacks, meaning it can only go as far back as the current history.
      * @description Navigates the app to the back view, if a back view exists.
      */
-    goBack: function() {
+    goBack: function(backCount) {
+      if (isDefined(backCount) && backCount !== -1) {
+        if (backCount > -1) return;
+
+        var currentHistory = viewHistory.histories[this.currentHistoryId()];
+        var newCursor = currentHistory.cursor + backCount + 1;
+        if (newCursor < 1) {
+          newCursor = 1;
+        }
+
+        currentHistory.cursor = newCursor;
+        setNavViews(currentHistory.stack[newCursor].viewId);
+
+        var cursor = newCursor - 1;
+        var clearStateIds = [];
+        var fwdView = getViewById(currentHistory.stack[cursor].forwardViewId);
+        while (fwdView) {
+          clearStateIds.push(fwdView.stateId || fwdView.viewId);
+          cursor++;
+          if (cursor >= currentHistory.stack.length) break;
+          fwdView = getViewById(currentHistory.stack[cursor].forwardViewId);
+        }
+
+        var self = this;
+        if (clearStateIds.length) {
+          $timeout(function() {
+            self.clearCache(clearStateIds);
+          }, 600);
+        }
+      }
+
       viewHistory.backView && viewHistory.backView.go();
     },
 
@@ -1217,10 +1253,10 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
      * @description Removes all cached views within every {@link ionic.directive:ionNavView}.
      * This both removes the view element from the DOM, and destroy it's scope.
      */
-    clearCache: function() {
+    clearCache: function(stateIds) {
       $timeout(function() {
         $ionicNavViewDelegate._instances.forEach(function(instance) {
-          instance.clearCache();
+          instance.clearCache(stateIds);
         });
       });
     },
@@ -1379,8 +1415,8 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
     }
   });
 
-  $rootScope.$ionicGoBack = function() {
-    $ionicHistory.goBack();
+  $rootScope.$ionicGoBack = function(backCount) {
+    $ionicHistory.goBack(backCount);
   };
 
   // Set the document title when a new view is shown
@@ -1498,6 +1534,15 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * instance. Basically, any forward views are reset each time. Set this config to `true` to have
  * forward views cached and not reset on each load.
  * @param {boolean} value
+ * @returns {boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @name $ionicConfigProvider#scrolling.jsScrolling
+ * @description  Whether to use JS or Native scrolling. Defaults to JS scrolling. Setting this to
+ * `false` has the same effect as setting each `ion-content` to have `overflow-scroll='true'`.
+ * @param {boolean} value Defaults to `true`
  * @returns {boolean}
  */
 
@@ -1756,6 +1801,14 @@ IonicModule
 
   });
 
+  // Windows Phone
+  // -------------------------
+  setPlatformConfig('windowsphone', {
+    //scrolling: {
+    //  jsScrolling: false
+    //}
+  });
+
 
   provider.transitions = {
     views: {},
@@ -1804,7 +1857,7 @@ IonicModule
 
     function setStyles(ctrl, opacity, titleX, backTextX) {
       var css = {};
-      css[ionic.CSS.TRANSITION_DURATION] = d.shouldAnimate ? '' : 0;
+      css[ionic.CSS.TRANSITION_DURATION] = d.shouldAnimate ? '' : '0ms';
       css.opacity = opacity === 1 ? '' : opacity;
 
       ctrl.setCss('buttons-left', css);
@@ -2019,7 +2072,14 @@ IonicModule
   provider.$get = function() {
     return provider;
   };
-});
+})
+// Fix for URLs in Cordova apps on Windows Phone
+// http://blogs.msdn.com/b/msdn_answers/archive/2015/02/10/
+// running-cordova-apps-on-windows-and-windows-phone-8-1-using-ionic-angularjs-and-other-frameworks.aspx
+.config(['$compileProvider', function($compileProvider) {
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|tel|ftp|mailto|file|ghttps?|ms-appx|x-wmapp0):/);
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|tel|ftp|file|blob|ms-appx|x-wmapp0):|data:image\//);
+}]);
 
 
 var LOADING_TPL =
@@ -2364,7 +2424,9 @@ function($rootScope, $ionicBody, $compile, $timeout, $ionicPlatform, $ionicTempl
      *  - `{string=}` `animation` The animation to show & hide with.
      *    Default: 'slide-in-up'
      *  - `{boolean=}` `focusFirstInput` Whether to autofocus the first input of
-     *    the modal when shown.  Default: false.
+     *    the modal when shown. Will only show the keyboard on iOS, to force the keyboard to show
+     *    on Android, please use the [Ionic keyboard plugin](https://github.com/driftyco/ionic-plugin-keyboard#keyboardshow).
+     *    Default: false.
      *  - `{boolean=}` `backdropClickToClose` Whether to close the modal on clicking the backdrop.
      *    Default: true.
      *  - `{boolean=}` `hardwareBackButtonClose` Whether the modal can be closed using the hardware
@@ -2388,6 +2450,10 @@ function($rootScope, $ionicBody, $compile, $timeout, $ionicPlatform, $ionicTempl
         $log.error('Cannot call ' + self.viewType + '.show() after remove(). Please create a new ' + self.viewType + ' instance.');
         return $$q.when();
       }
+
+      // on iOS, clicks will sometimes bleed through/ghost click on underlying
+      // elements
+      $ionicClickBlock.show(600);
 
       var modalEl = jqLite(self.modalEl);
 
@@ -2416,7 +2482,6 @@ function($rootScope, $ionicBody, $compile, $timeout, $ionicPlatform, $ionicTempl
         };
         ionic.on('resize', self._onWindowResize, window);
       }
-
 
       modalEl.addClass('ng-enter active')
              .removeClass('ng-leave ng-leave-active');
@@ -5298,7 +5363,8 @@ function($scope, $attrs, $element, $timeout) {
     $timeout(function() {
       if (self.jsScrolling) self.scrollView.resize();
       // only check bounds again immediately if the page isn't cached (scroll el has height)
-      if (self.scrollView.__container && self.scrollView.__container.offsetHeight > 0) {
+      if ((self.jsScrolling && self.scrollView.__container && self.scrollView.__container.offsetHeight > 0) ||
+      !self.jsScrolling) {
         self.checkBounds();
       }
     }, 30, false);
@@ -6229,18 +6295,32 @@ function($scope, $element, $attrs, $compile, $controller, $ionicNavBarDelegate, 
   };
 
 
-  self.clearCache = function() {
+  self.clearCache = function(stateIds) {
     var viewElements = $element.children();
-    var viewElement, viewScope;
+    var viewElement, viewScope, x, l, y, eleIdentifier;
 
-    for (var x = 0, l = viewElements.length; x < l; x++) {
+    for (x = 0, l = viewElements.length; x < l; x++) {
       viewElement = viewElements.eq(x);
+
+      if (stateIds) {
+        eleIdentifier = viewElement.data(DATA_ELE_IDENTIFIER);
+
+        for (y = 0; y < stateIds.length; y++) {
+          if (eleIdentifier === stateIds[y]) {
+            $ionicViewSwitcher.destroyViewEle(viewElement);
+          }
+        }
+        continue;
+      }
+
       if (navViewAttr(viewElement) == VIEW_STATUS_CACHED) {
         $ionicViewSwitcher.destroyViewEle(viewElement);
+
       } else if (navViewAttr(viewElement) == VIEW_STATUS_ACTIVE) {
         viewScope = viewElement.scope();
         viewScope && viewScope.$broadcast('$ionicView.clearCache');
       }
+
     }
   };
 
@@ -6972,12 +7052,11 @@ function($scope,
         return;
       }
       var curElm = elm;
-      var scrollLeft = 0, scrollTop = 0, levelsClimbed = 0;
+      var scrollLeft = 0, scrollTop = 0;
       do {
         if (curElm !== null) scrollLeft += curElm.offsetLeft;
         if (curElm !== null) scrollTop += curElm.offsetTop;
         curElm = curElm.offsetParent;
-        levelsClimbed++;
       } while (curElm.attributes != self.element.attributes && curElm.offsetParent);
       scrollView.scrollTo(scrollLeft, scrollTop, !!shouldAnimate);
     });
@@ -7852,7 +7931,11 @@ function($scope, $attrs, $ionicSideMenuDelegate, $ionicPlatform, $ionicBody, $io
     var spinnerName, spinner;
 
     this.init = function() {
-      spinnerName = $attrs.icon || ionic.Platform.platform();
+      var override = null;
+      if (ionic.Platform.platform() === 'windowsphone') {
+        override = 'android';
+      }
+      spinnerName = $attrs.icon || override || ionic.Platform.platform();
       spinner = spinners[spinnerName];
       if (!spinner) {
         spinnerName = 'ios';
@@ -7949,7 +8032,7 @@ function($scope, $element, $ionicHistory) {
       self.deselect(tab);
       //Try to select a new tab if we're removing a tab
       if (self.tabs.length === 1) {
-        //do nothing if there are no other tabs to select
+        //Do nothing if there are no other tabs to select
       } else {
         //Select previous tab if it's the last tab, else select next tab
         var newTabIndex = tabIndex === self.tabs.length - 1 ? tabIndex - 1 : tabIndex + 1;
@@ -8249,7 +8332,9 @@ IonicModule
         'ng-disabled': attr.ngDisabled,
         'ng-true-value': attr.ngTrueValue,
         'ng-false-value': attr.ngFalseValue,
-        'ng-change': attr.ngChange
+        'ng-change': attr.ngChange,
+        'ng-required': attr.ngRequired,
+        'required': attr.required
       }, function(value, name) {
         if (isDefined(value)) {
           input.attr(name, value);
@@ -9275,6 +9360,9 @@ function RepeatManagerFactory($rootScope, $window, $$rAF) {
  * directive, and infinite scrolling with the {@link ionic.directive:ionInfiniteScroll}
  * directive.
  *
+ * If there is any dynamic content inside the ion-content, be sure to call `.resize()` with {@link ionic.service:$ionicScrollDelegate}
+ * after the content has been added.
+ *
  * Be aware that this directive gets its own child scope. If you do not understand why this
  * is important, you can read [https://docs.angularjs.org/guide/scope](https://docs.angularjs.org/guide/scope).
  *
@@ -9286,7 +9374,7 @@ function RepeatManagerFactory($rootScope, $window, $$rAF) {
  * of the content.  Defaults to true on iOS, false on Android.
  * @param {boolean=} scroll Whether to allow scrolling of content.  Defaults to true.
  * @param {boolean=} overflow-scroll Whether to use overflow-scrolling instead of
- * Ionic scroll.
+ * Ionic scroll. See {@link ionic.provider:$ionicConfigProvider} to set this as the global default.
  * @param {boolean=} scrollbar-x Whether to show the horizontal scrollbar. Default true.
  * @param {boolean=} scrollbar-y Whether to show the vertical scrollbar. Default true.
  * @param {string=} start-x Initial horizontal scroll position. Default 0.
@@ -9323,6 +9411,13 @@ function($timeout, $controller, $ionicBind, $ionicConfig) {
         element.append(innerElement);
       } else {
         element.addClass('scroll-content-false');
+      }
+
+      var nativeScrolling = attr.overflowScroll === "true" || !$ionicConfig.scrolling.jsScrolling();
+
+      // collection-repeat requires JS scrolling
+      if (nativeScrolling) {
+        nativeScrolling = !element[0].querySelector('[collection-repeat]');
       }
 
       return { pre: prelink };
@@ -9370,7 +9465,8 @@ function($timeout, $controller, $ionicBind, $ionicConfig) {
         } else {
           var scrollViewOptions = {};
 
-          if (attr.overflowScroll === "true" || !$ionicConfig.scrolling.jsScrolling()) {
+          // determined in compile phase above
+          if (nativeScrolling) {
             // use native scrolling
             $element.addClass('overflow-scroll');
 
@@ -10877,7 +10973,7 @@ IonicModule
       }
 
       if (!tAttrs.ngClick) {
-        buttonEle.setAttribute('ng-click', '$ionicGoBack($event)');
+        buttonEle.setAttribute('ng-click', '$ionicGoBack()');
       }
 
       buttonEle.className = 'button back-button hide buttons ' + (tElement.attr('class') || '');
@@ -11578,7 +11674,9 @@ IonicModule
           'ng-value': attr.ngValue,
           'ng-model': attr.ngModel,
           'ng-disabled': attr.ngDisabled,
-          'ng-change': attr.ngChange
+          'ng-change': attr.ngChange,
+          'ng-required': attr.ngRequired,
+          'required': attr.required
       }, function(value, name) {
         if (isDefined(value)) {
             input.attr(name, value);
@@ -12134,9 +12232,9 @@ IonicModule
  * - {@link ionic.directive:exposeAsideWhen}
  *
  * @usage
- * To use side menus, add an `<ion-side-menus>` parent element,
- * an `<ion-side-menu-content>` for the center content,
- * and one or more `<ion-side-menu>` directives.
+ * To use side menus, add an `<ion-side-menus>` parent element. This will encompass all pages that have a
+ * side menu, and have at least 2 child elements: 1 `<ion-side-menu-content>` for the center content,
+ * and one or more `<ion-side-menu>` directives for each side menu(left/right) that you wish to place.
  *
  * ```html
  * <ion-side-menus>
@@ -12151,6 +12249,10 @@ IonicModule
  *   <!-- Right menu -->
  *   <ion-side-menu side="right">
  *   </ion-side-menu>
+ *
+ *   <ion-side-menu-content>
+ *   <!-- Main content, usually <ion-nav-view> -->
+ *   </ion-side-menu-content>
  * </ion-side-menus>
  * ```
  * ```js
@@ -13065,7 +13167,9 @@ function($timeout, $ionicConfig) {
         'ng-disabled': attr.ngDisabled,
         'ng-true-value': attr.ngTrueValue,
         'ng-false-value': attr.ngFalseValue,
-        'ng-change': attr.ngChange
+        'ng-change': attr.ngChange,
+        'ng-required': attr.ngRequired,
+        'required': attr.required
       }, function(value, name) {
         if (isDefined(value)) {
           input.attr(name, value);
