@@ -16,7 +16,7 @@ class SkyMazon_RestConnect_StoreController extends Mage_Core_Controller_Front_Ac
 					$basicinfo [$sk]['webside'][$key]['view'][$oo] = array (
 							'name' => $_store->getName (),
 							'store_id' => $_store->getStoreId (),
-							'store_url' => $_store->getHomeUrl (),
+							'store_url' => $_store->getUrl (),
 							'store_code'=>$_store->getCode(),
 							'sort_order' => $_store->getSortOrder(),
 							'is_active' =>$_store->getIsActive()
