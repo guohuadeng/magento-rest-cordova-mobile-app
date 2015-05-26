@@ -333,9 +333,7 @@ angular.module('app.controllers', [])
                 }
             });
 						
-            $timeout(function () {
-						$scope.hideLoading();							
-            }, 500);
+						$scope.hideLoading();		
         };
 
         // 根据菜单生成 tabs
