@@ -24,6 +24,8 @@ angular.module('app', [
 				$ionicConfigProvider.backButton.text('Back').icon('ion-chevron-left');
 				$ionicConfigProvider.scrolling.jsScrolling(true);
 				$ionicConfigProvider.tabs.position(top);
+				$ionicConfigProvider.form.checkbox('square');
+				$ionicConfigProvider.views.transition('none');  //('fade-in')
 				
         $stateProvider
             .state('app', {

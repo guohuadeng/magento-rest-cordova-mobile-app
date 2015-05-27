@@ -65,10 +65,6 @@ md-tabs-content-wrapper {
     float: right;
 }
 
-.checkbox input:before, .checkbox-icon:before {
-    border-radius: 4px;
-}
-
 em {
     padding-left: 2px;
 }
@@ -284,6 +280,9 @@ em {
 }
 
 /* 特殊处理：一栏 #dailySale  #bestSeller */
+.products-grid.one-line  {
+    height: 338px;
+}
 .products-grid.one-line .product {
     margin-top: 10px;
     text-align: center;
@@ -315,7 +314,7 @@ em {
 .one-line .product .discount {
     position: absolute;
     left: 0px;
-    top: -7px;
+    top: 3px;
     font-size: 90%;
 }
 
@@ -522,6 +521,7 @@ em {
 
 .popupFullscreen .popup .popup-body {
     height: 100%;
+	padding: 10px 0 10px 0;
 }
 
 .popupFullscreen .popup-buttons {

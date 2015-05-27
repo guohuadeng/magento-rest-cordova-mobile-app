@@ -178,11 +178,15 @@ angular.module('app.controllers', [])
         $scope.getUser();
         // 菜单处理
         $rootScope.service.get('menus', function (menus) {
+					angular.forEach(menus, function(data){
+						//data.item_height = '235';
+						});
             $scope.menus = [
                 {
                     cmd: 'daily_sale',
                     name: 'Daily Sale',
-                    class_name: 'one-line'
+                    class_name: 'one-line',
+                    item_height: '338'
                 }
                 /* 客户要求，去掉New Arrival
                  {

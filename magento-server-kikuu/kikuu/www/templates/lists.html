@@ -19,45 +19,92 @@
                                 pulling-text="Pull to refresh..."
                                 on-refresh="doRefresh($index)">
                         </ion-refresher>
-                        <ion-list class="products-grid {{tab.class_name}}">
-                            <div class="product" ng-repeat="product in tab.lists">
-                                <div class="product-inner">
-                                    <a href="#app/productDetail/{{product.entity_id}}">
-                                        <div class="product-image">
-                                            <img src="{{product.image_url}}"
-                                                 alt="{{product.name}}">
-                                        </div>
-                                    </a>
-
-                                    <div class="product-info">
-                                        <div class="product-name">
-                                            {{product.name}}
-                                        </div>
-
-                                        <div class="product-price">
-                                            <div class="price-box">
-                                            <span class="special-price">
-                                                <span class="special-price">
-                                                    <span class="price">
-                                                        {{product.symbol}}{{product.final_price_with_tax | number:0}}
-                                                    </span>
-                                                    &nbsp;
-                                                    <span class="old-price">
-                                                        {{product.regular_price_with_tax | number:0}}
-                                                    </span>
-                                                </span>
-                                            </span>
-                                            <span class="discount {{price_percent_class}}">
-                                                <span class="price">
-                                                    {{product | discount}}
-                                                </span>
-                                            </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ion-list>
+                        <!-- 单列大图 -->
+                        <div ng-if="tab.class_name=='one-line'">
+                          <ion-list class="products-grid one-line">
+                              <div class="product" collection-repeat="product in tab.lists" collection-item-height="338">
+                                  <div class="product-inner">
+                                      <a href="#app/productDetail/{{product.entity_id}}">
+                                          <div class="product-image">
+                                              <img src="{{product.image_url}}"
+                                                   alt="{{product.name}}">
+                                          </div>
+                                      </a>
+  
+                                      <div class="product-info">
+                                          <div class="product-name">
+                                              {{product.name}}
+                                          </div>
+  
+                                          <div class="product-price">
+                                              <div class="price-box">
+                                              <span class="special-price">
+                                                  <span class="special-price">
+                                                      <span class="price">
+                                                          {{product.symbol}}{{product.final_price_with_tax | number:0}}
+                                                      </span>
+                                                      &nbsp;
+                                                      <span class="old-price">
+                                                          {{product.regular_price_with_tax | number:0}}
+                                                      </span>
+                                                  </span>
+                                              </span>
+                                              <span class="discount {{price_percent_class}}">
+                                                  <span class="price">
+                                                      {{product | discount}}
+                                                  </span>
+                                              </span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </ion-list>
+                          </div>
+                        <!-- end 单列大图 -->
+                        <!-- 双列 -->
+                        <div ng-if="tab.is_active">
+                          <ion-list class="products-grid">
+                              <div class="product" ng-repeat="product in tab.lists" collection-item-height="235">
+                                  <div class="product-inner">
+                                      <a href="#app/productDetail/{{product.entity_id}}">
+                                          <div class="product-image">
+                                              <img src="{{product.image_url}}"
+                                                   alt="{{product.name}}">
+                                          </div>
+                                      </a>
+  
+                                      <div class="product-info">
+                                          <div class="product-name">
+                                              {{product.name}}
+                                          </div>
+  
+                                          <div class="product-price">
+                                              <div class="price-box">
+                                              <span class="special-price">
+                                                  <span class="special-price">
+                                                      <span class="price">
+                                                          {{product.symbol}}{{product.final_price_with_tax | number:0}}
+                                                      </span>
+                                                      &nbsp;
+                                                      <span class="old-price">
+                                                          {{product.regular_price_with_tax | number:0}}
+                                                      </span>
+                                                  </span>
+                                              </span>
+                                              <span class="discount {{price_percent_class}}">
+                                                  <span class="price">
+                                                      {{product | discount}}
+                                                  </span>
+                                              </span>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                            </ion-list>
+                          </div>
+                        <!-- end 双列 -->
                         <ion-infinite-scroll
                                 ng-if="tab.hasInit && !tab.loadOver"
                                 on-infinite="loadMore($index)"
