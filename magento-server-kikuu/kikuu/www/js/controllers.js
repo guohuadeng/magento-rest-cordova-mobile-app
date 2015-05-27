@@ -425,8 +425,8 @@ angular.module('app.controllers', [])
             var myt = '<ion-slide-box delegate-handle="image-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
                 + $ionicSlideBoxDelegate.currentIndex() 
 								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">'
-								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
-								+'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
+								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="height: 100%;">'
+								+'<img id="zoomImg" class="fullwidth" src="{{img.url}}"  on-double-tap="zoomProductImg()">'
 								+'<span></span>'
 								+'</ion-scroll>'
 								+'</ion-slide></ion-slide-box>';
