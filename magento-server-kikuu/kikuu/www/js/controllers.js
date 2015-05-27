@@ -142,7 +142,7 @@ angular.module('app.controllers', [])
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,
-                title: 'Welcome to Kikuu',
+                title: '',
                 cssClass: 'popupFullscreen',
                 scope: $scope,
                 buttons: [
