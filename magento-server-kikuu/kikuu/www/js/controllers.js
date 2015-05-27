@@ -382,7 +382,7 @@ angular.module('app.controllers', [])
         $scope.qty = 1;
         $scope.showShare = true;
         $scope.updateSlider = function () {
-            $ionicSlideBoxDelegate.update();
+					$ionicSlideBoxDelegate.$getByHandle('image-viewer').update();		
         };
         //取购物车商品数量
         $rootScope.service.get('cartGetQty', {
@@ -422,14 +422,16 @@ angular.module('app.controllers', [])
         //全屏幕图片
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-slide-box delegate-handle="image-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
+            var myt = '<ion-content>'
+								+'<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
                 + $ionicSlideBoxDelegate.currentIndex() 
-								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateSlider()">'
-								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="height: 100%;">'
-								+'<img id="zoomImg" class="fullwidth" src="{{img.url}}"  on-double-tap="zoomProductImg()">'
+								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
+								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
+								+'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
 								+'<span></span>'
 								+'</ion-scroll>'
 								+'</ion-slide></ion-slide-box>';
+								+'</ion-content>';
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,
@@ -453,9 +455,12 @@ angular.module('app.controllers', [])
 														$ionicSlideBoxDelegate.next();
 											      e.preventDefault();
                             } 
-										}
+										},
                 ]
             });
+						$scope.updateFullscreenSlider = function ()	{
+								$ionicSlideBoxDelegate.$getByHandle('image-fullscreen-viewer').update();							
+							};
 						var toggle = 1;
 						$scope.zoomProductImg = function ()	{
 								if (toggle==1) {
