@@ -217,8 +217,7 @@ em {
 
 .login-container .popup {
     width: 90%;
-    height: 80%;
-    max-height: 360px;
+    height: 340px;
     background-color: #FFF;
 }
 
