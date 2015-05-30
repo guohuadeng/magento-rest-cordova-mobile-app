@@ -126,7 +126,7 @@ angular.module('app.controllers', [])
                 okType: 'button-assertive'
             });
             alertPopup.then(function (res) {
-                console.log('Thank you for not eating my delicious ice cream cone');
+                console.log('title');
             });
         };
 
@@ -422,11 +422,11 @@ angular.module('app.controllers', [])
         //全屏幕图片
         $scope.imageFullscreen = function () {
             $scope.currentSlide = $ionicSlideBoxDelegate.currentIndex();
-            var myt = '<ion-content>'
+            var myt = '<ion-content overflow-scroll="true">'
 								+'<ion-slide-box delegate-handle="image-fullscreen-viewer" on-slide-changed="noZoom()" show-pager="true" active-slide="'
                 + $ionicSlideBoxDelegate.currentIndex() 
 								+ '"><ion-slide ng-repeat="img in productImg" ng-init="updateFullscreenSlider()">'
-								+'<ion-scroll delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
+								+'<ion-scroll overflow-scroll="true" delegate-handle="image-scroll" zooming="true" direction="xy" locking="false" scrollbar-x="false" scrollbar-y="false" min-zoom="1" id="scrolly"  style="width: 100%; height: 100%;">'
 								+'<img id="zoomImg" class="fullwidth" ng-src="{{img.url}}"  on-double-tap="zoomProductImg()">'
 								+'<span></span>'
 								+'</ion-scroll>'
@@ -435,7 +435,6 @@ angular.module('app.controllers', [])
             // An elaborate, custom popup
             var myPopup = $ionicPopup.show({
                 template: myt,
-                title: '',
                 cssClass: 'popupFullscreen',
                 scope: $scope,
                 buttons: [
@@ -535,7 +534,13 @@ angular.module('app.controllers', [])
     })
     //register选项
     .controller('registerCtrl', function ($scope, $rootScope) {
-        $scope.registerData = {};
+        $scope.registerData.default_mobile_number = '';
+        $scope.registerData.email = '';
+        $scope.registerData.firstname = '';
+        $scope.registerData.lastname = '';
+        $scope.registerData.gender = '';
+        $scope.registerData.password = '';
+        $scope.registerData.validation_code = '';
     })
 
     .controller('FrameCtrl', function ($scope, $sce, $stateParams, Config) {

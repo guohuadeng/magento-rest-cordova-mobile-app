@@ -513,6 +513,10 @@ em {
     background-color: #FFF;
 }
 
+.popupFullscreen .has-header {
+    top: 0px;
+}
+
 .popupFullscreen .popup-head {
     border-bottom: 0px solid #eee;
     padding: 0;
