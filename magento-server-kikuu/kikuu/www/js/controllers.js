@@ -134,7 +134,7 @@ angular.module('app.controllers', [])
 
         //首次欢迎页
         $scope.welcome = function () {
-            var myt = '<ion-slide-box show-pager="false">'
+            var myt = '<ion-slide-box show-pager="true">'
                 + '<ion-slide><img class="fullwidth" ng-src="img/spash1.png"></ion-slide>'
                 + '<ion-slide><img class="fullwidth" ng-src="img/spash2.png"></ion-slide>'
                 + '<ion-slide><img class="fullwidth" ng-src="img/spash3.png"></ion-slide>'
